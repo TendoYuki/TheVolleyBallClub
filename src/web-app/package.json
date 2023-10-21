@@ -1,0 +1,15 @@
+{
+  "name": "web-app",
+  "version": "1.0.0",
+  "description": "Website for a volleyball club",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "scss": "^0.2.4",
+    "webpack": "^5.89.0"
+  }
+}
