@@ -6,7 +6,7 @@ public class Main {
         System.out.println("Hello world!");
         try{
             Class.forName("com.mysql.jdbc.Driver");  
-            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/sonoo","root","root");  
+            DriverManager.getConnection("jdbc:mysql://localhost:3306/sonoo","root","root");  
         } catch (Exception e) {
             System.out.println(e);
         }
