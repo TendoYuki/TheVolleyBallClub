@@ -2,6 +2,12 @@
 
 ## Building
 
+Install necessary packages
+
+```bash
+npm i
+```
+
 For Development build
 
 ```bash
