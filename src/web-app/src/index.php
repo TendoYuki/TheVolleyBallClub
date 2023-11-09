@@ -7,5 +7,8 @@
 </head>
 <body>
     <div></div>
+    <?php
+        echo "Hi mom !";
+    ?>
 </body>
 </html>
