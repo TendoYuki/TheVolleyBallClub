@@ -3,7 +3,7 @@ package com.volleyball.club.database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class ConnectionManager {
+public class DBConnectionManager {
     private static final String DB_NAME = "volleyball_club";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "Pabloescobar";
