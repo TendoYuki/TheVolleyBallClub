@@ -1,5 +1,7 @@
 package com.volleyball.club.views;
 
-public class Training {
+import javax.swing.JPanel;
+
+public class Training extends JPanel{
     
 }

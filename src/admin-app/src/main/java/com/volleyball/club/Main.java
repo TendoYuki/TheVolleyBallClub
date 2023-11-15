@@ -17,5 +17,4 @@ public class Main extends JFrame{
         JFGui.setResizable(false);
         JFGui.setVisible(true);
     }
-
 }
