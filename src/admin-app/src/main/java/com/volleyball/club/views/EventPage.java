@@ -18,7 +18,6 @@ public class EventPage extends Page{
         }
     };
     private static JTable table;
-    private static ResultSet resSet;
 
     public EventPage(){
         super();
@@ -31,7 +30,7 @@ public class EventPage extends Page{
     
     public void loadResults(){
         String query = "SELECT * FROM event";
-        ResultSet stmt = DBConnectionManager.execQuery(query);
+        ResultSet resSet = DBConnectionManager.execQuery(query);
         defaultTable.setRowCount(0);
         String start="",end="",name="",desc="";
         try{
