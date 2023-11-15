@@ -6,7 +6,10 @@
       {
         "label": "[ ADMIN APP ] Build and run ",
         "type": "shell",
-        "command": ["mvn clean compile assembly:single;", "java -jar target/admin-app-1.0-SNAPSHOT-jar-with-dependencies.jar;"],
+        "command": "mvn clean compile assembly:single && java -jar target/admin-app-1.0-SNAPSHOT-jar-with-dependencies.jar",
+        "windows": {
+            "command": ["mvn clean compile assembly:single;", "java -jar target/admin-app-1.0-SNAPSHOT-jar-with-dependencies.jar;"],
+        },
         "options": {
           "cwd": "${workspaceFolder}/src/admin-app"
         },
