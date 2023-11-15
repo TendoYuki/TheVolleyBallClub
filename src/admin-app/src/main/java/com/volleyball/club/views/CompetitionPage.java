@@ -25,7 +25,7 @@ public class CompetitionPage extends Page{
         JScrollPane scroll = new JScrollPane(table);
         scroll.setMinimumSize(new Dimension(500, 500));
         add(scroll,BorderLayout.CENTER);
-        add(new JLabel("Event Page"), CENTER_ALIGNMENT);
+        add(new JLabel("Competition Page"), BorderLayout.NORTH);
         
     }
 

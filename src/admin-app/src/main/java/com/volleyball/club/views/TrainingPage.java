@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
 import com.volleyball.club.database.DBConnectionManager;
@@ -25,7 +26,7 @@ public class TrainingPage extends Page{
         JScrollPane scroll = new JScrollPane(table);
         scroll.setMinimumSize(new Dimension(500, 500));
         add(scroll,BorderLayout.CENTER);
-        add(new JLabel("Event Page"), CENTER_ALIGNMENT);
+        add(new JLabel("Training Page"), BorderLayout.NORTH);
     }
     
     public void loadResults(){
