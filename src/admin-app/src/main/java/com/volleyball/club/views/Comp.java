@@ -1,5 +1,7 @@
 package com.volleyball.club.views;
 
-public class Comp {
+import javax.swing.JPanel;
+
+public class Comp extends JPanel{
     
 }

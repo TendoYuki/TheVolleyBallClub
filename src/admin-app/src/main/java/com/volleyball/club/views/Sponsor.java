@@ -1,5 +1,7 @@
 package com.volleyball.club.views;
 
-public class Sponsor {
+import javax.swing.JPanel;
+
+public class Sponsor extends JPanel{
     
 }
