@@ -18,11 +18,6 @@ public class Main extends JFrame{
     public static void main(String[] args) {
         JFGui = new JFrame();
         Connection con = DBConnectionManager.getConnection();
-        JFGui.setSize(new Dimension(1024, 512));
-        JFGui.setLocationRelativeTo(null);
-        JFGui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        JFGui.setResizable(false);
-        JFGui.setVisible(true);
 
         NavbarModel navModel = new NavbarModel();
         Navbar navbar = new Navbar(navModel);
@@ -31,5 +26,11 @@ public class Main extends JFrame{
 
         JFGui.add(navbar, BorderLayout.NORTH);
         JFGui.add(new Event(), BorderLayout.CENTER);
+
+        JFGui.setSize(new Dimension(1024, 512));
+        JFGui.setLocationRelativeTo(null);
+        JFGui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JFGui.setResizable(false);
+        JFGui.setVisible(true);
     }
 }
