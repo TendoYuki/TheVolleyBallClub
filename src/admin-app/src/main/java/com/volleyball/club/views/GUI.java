@@ -9,8 +9,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 
+import com.volleyball.club.controllers.CompetitionPageController;
 import com.volleyball.club.controllers.EventPageController;
 import com.volleyball.club.controllers.NavigationController;
+import com.volleyball.club.controllers.SponsorPageController;
+import com.volleyball.club.controllers.TrainingPageController;
 import com.volleyball.club.models.NavbarModel;
 
 public class GUI extends JFrame{
@@ -40,6 +43,30 @@ public class GUI extends JFrame{
 
         eventMenu.addActionListener(new EventPageController(eventPage, this));
         navModel.addMenu(eventMenu);
+
+        /** ----------- COMPETITION PAGE ----------- */
+
+        JButton competitionMenu = new JButton("Competition");
+        CompetitionPage competitionPage = new CompetitionPage();
+
+        competitionMenu.addActionListener(new CompetitionPageController(competitionPage, this));
+        navModel.addMenu(competitionMenu);
+
+        /** ----------- SPONSOR PAGE ----------- */
+
+        JButton sponsorMenu = new JButton("Sponsor");
+        SponsorPage sponsorPage = new SponsorPage();
+
+        sponsorMenu.addActionListener(new SponsorPageController(sponsorPage, this));
+        navModel.addMenu(sponsorMenu);
+
+        /** ----------- TRAINING PAGE ----------- */
+
+        JButton trainingMenu = new JButton("Training");
+        TrainingPage trainingPage = new TrainingPage();
+
+        trainingMenu.addActionListener(new TrainingPageController(trainingPage, this));
+        navModel.addMenu(trainingMenu);
 
         /** ----------- CHANGING APP ICON ----------- */
 

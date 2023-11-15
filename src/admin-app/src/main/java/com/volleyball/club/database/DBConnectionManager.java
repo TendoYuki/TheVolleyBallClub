@@ -33,7 +33,7 @@ public class DBConnectionManager {
             System.out.println("Cococococo");
             return res;
         }catch(Exception e){
-            
+            System.out.println(e);
         }
         return null;
     }

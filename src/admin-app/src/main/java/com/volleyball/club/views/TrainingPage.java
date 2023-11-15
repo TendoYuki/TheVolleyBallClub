@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import com.volleyball.club.database.DBConnectionManager;
 
 public class TrainingPage extends Page{
-    private static DefaultTableModel defaultTable = new DefaultTableModel(new String[]{/* TODO : add different rows */}, 0){
+    private static DefaultTableModel defaultTable = new DefaultTableModel(new String[]{"Start","End"}, 0){
         public boolean Edit(int row, int column){
             return false;
         }
@@ -29,15 +29,15 @@ public class TrainingPage extends Page{
     }
     
     public void loadResults(){
-        String query = "SELECT * FROM partner";
+        String query = "SELECT * FROM training";
         ResultSet resSet = DBConnectionManager.execQuery(query);
         defaultTable.setRowCount(0);
-        String name="",logo="";
+        String start="",end="";
         try{
             while(resSet.next()){
-                name = resSet.getString("namePartner");
-                logo = resSet.getString("logoPartner");
-                defaultTable.addRow(new String[]{name,logo});
+                start = resSet.getString("startDateTimeTraining");
+                end = resSet.getString("endDateTimeTraining");
+                defaultTable.addRow(new String[]{start,end});
             }
         }catch(Exception e){
             System.out.println(e);

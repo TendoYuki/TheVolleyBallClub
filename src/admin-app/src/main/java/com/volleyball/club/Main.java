@@ -13,6 +13,5 @@ public class Main extends JFrame{
     public static void main(String[] args) {
         JFGui = new GUI();
         Connection con = DBConnectionManager.getConnection();
-        JFGui.switchActivePage(new SponsorPage());
     }
 }
