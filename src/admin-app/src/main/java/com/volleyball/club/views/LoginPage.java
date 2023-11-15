@@ -70,14 +70,14 @@ public class LoginPage extends Page{
         String query = "SELECT * FROM admin";
         ResultSet resSet = DBConnectionManager.execQuery(query);
         String password = TFPassword.getText();
-        String login = TFLogin.getText().toLowerCase();
+        String login = TFLogin.getText();
         System.out.println(password);
         System.out.println(login);
         String dbLogin="",dbPassword="";
         boolean connected = false;
         try{
             while(resSet.next()){
-                dbLogin = resSet.getString("loginAdmin").toLowerCase();
+                dbLogin = resSet.getString("loginAdmin");
                 dbPassword = resSet.getString("passwordAdmin");
                 if(login.equals(dbLogin.toLowerCase()) && password.equals(dbPassword)) connected = true;
             }
@@ -88,6 +88,4 @@ public class LoginPage extends Page{
         revalidate();
         repaint();
     }
-
-
 }

@@ -30,7 +30,6 @@ public class DBConnectionManager {
         try{
             Statement stmt = con.createStatement();
             res = stmt.executeQuery(query);
-            System.out.println("Cococococo");
             return res;
         }catch(Exception e){
             System.out.println(e);

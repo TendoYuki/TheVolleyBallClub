@@ -36,7 +36,6 @@ public class EventPage extends Page{
         try{
             while(resSet.next()){
                 start = resSet.getString("startDateTime");
-                System.out.println(resSet.getString("idEvent"));
                 end = resSet.getString("endDateTime");
                 name = resSet.getString("nameEvent");
                 desc = resSet.getString("descEvent");
