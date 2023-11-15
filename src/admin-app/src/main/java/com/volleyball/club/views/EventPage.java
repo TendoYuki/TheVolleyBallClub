@@ -36,15 +36,15 @@ public class EventPage extends Page{
         String start="",end="",name="",desc="";
         try{
             while(resSet.next()){
-                start = resSet.getString("startDate Time");
+                start = resSet.getString("startDateTime");
                 System.out.println(resSet.getString("idEvent"));
-                end = resSet.getString("endDate Time");
+                end = resSet.getString("endDateTime");
                 name = resSet.getString("nameEvent");
                 desc = resSet.getString("descEvent");
                 defaultTable.addRow(new String[]{start,end,name,desc});
             }
         }catch(Exception e){
-
+            System.out.println(e);
         }
         table.setModel(defaultTable);
         revalidate();
