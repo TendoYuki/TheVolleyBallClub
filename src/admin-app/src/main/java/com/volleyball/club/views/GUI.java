@@ -35,7 +35,7 @@ public class GUI extends JFrame{
 
         /** ----------- EVENT PAGE ----------- */
 
-        JMenu eventMenu = new JMenu("Event");
+        JButton eventMenu = new JButton("Event");
         EventPage eventPage = new EventPage();
 
         eventMenu.addActionListener(new EventPageController(eventPage, this));
