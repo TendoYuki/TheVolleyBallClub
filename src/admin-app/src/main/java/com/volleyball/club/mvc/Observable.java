@@ -17,7 +17,7 @@ public class Observable {
      * @param obs Observer to remove
      */
     public void removeObserver(Observer obs) {
-        if(!observers.contains(obs)) observers.remove(obs);
+        if(observers.contains(obs)) observers.remove(obs);
     }
     /**
      * Notifies every observer by calling their update method with the current observable passed as a parameter.

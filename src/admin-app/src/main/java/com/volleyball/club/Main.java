@@ -1,9 +1,14 @@
 package com.volleyball.club;
 
 import javax.swing.JFrame;
+import javax.swing.JMenu;
 
 import com.volleyball.club.database.DBConnectionManager;
+import com.volleyball.club.models.NavbarModel;
+import com.volleyball.club.views.Navbar;
+import java.lang.Thread;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.sql.Connection;
 
@@ -17,5 +22,12 @@ public class Main extends JFrame{
         JFGui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JFGui.setResizable(false);
         JFGui.setVisible(true);
+
+        NavbarModel navModel = new NavbarModel();
+        Navbar navbar = new Navbar(navModel);
+        navModel.addObserver(navbar);
+        navModel.addMenu(new JMenu("Login"));
+
+        JFGui.add(navbar, BorderLayout.NORTH);
     }
 }
