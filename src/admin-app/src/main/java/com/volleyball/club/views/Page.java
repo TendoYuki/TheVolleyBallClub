@@ -4,7 +4,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Page extends JPanel{
-    public  Page(){
+    public Page(){
+        super();
         setSize(1024,512);
         setVisible(true);
         add(new JLabel("Hhahahahahhaha"));
