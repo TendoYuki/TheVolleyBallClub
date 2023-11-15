@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 
+import com.volleyball.club.controllers.EventPageController;
 import com.volleyball.club.controllers.NavigationController;
 import com.volleyball.club.models.NavbarModel;
 
@@ -35,9 +36,9 @@ public class GUI extends JFrame{
         /** ----------- EVENT PAGE ----------- */
 
         JMenu eventMenu = new JMenu("Event");
-        Event eventPage = new Event();
+        EventPage eventPage = new EventPage();
 
-        eventMenu.addActionListener(new NavigationController(eventPage, this));
+        eventMenu.addActionListener(new EventPageController(eventPage, this));
         navModel.addMenu(eventMenu);
 
         /** ----------- CHANGING APP ICON ----------- */

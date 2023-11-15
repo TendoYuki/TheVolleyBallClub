@@ -19,4 +19,8 @@ public class NavigationController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         gui.switchActivePage(page);
     }
+
+    public Page getPage() {
+        return page;
+    }
 }

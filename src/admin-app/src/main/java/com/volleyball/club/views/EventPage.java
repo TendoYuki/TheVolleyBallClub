@@ -11,7 +11,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.volleyball.club.database.DBConnectionManager;
 
-public class Event extends Page{
+public class EventPage extends Page{
     private static DefaultTableModel defaultTable = new DefaultTableModel(new String[]{"Start","End","Name","Description"}, 0){
         public boolean Edit(int row, int column){
             return false;
@@ -19,7 +19,7 @@ public class Event extends Page{
     };
     private static ResultSet resSet;
 
-    public Event(){
+    public EventPage(){
         super();
         add(new JLabel("Event Page"), CENTER_ALIGNMENT);
     }

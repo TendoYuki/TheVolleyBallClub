@@ -7,7 +7,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class Sponsor extends Page{
+public class SponsorPage extends Page{
     private static DefaultTableModel defaultTable = new DefaultTableModel(new String[]{/* TODO : add different rows */}, 0){
         public boolean Edit(int row, int column){
             return false;
@@ -15,7 +15,7 @@ public class Sponsor extends Page{
     };
     private static ResultSet resSet;
 
-    public Sponsor(){
+    public SponsorPage(){
         super();
 
         // TODO : Fill resSet
