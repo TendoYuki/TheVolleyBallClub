@@ -17,10 +17,15 @@ public class EventPage extends Page{
             return false;
         }
     };
+    private static JTable table;
     private static ResultSet resSet;
 
     public EventPage(){
         super();
+        table = new JTable(defaultTable);
+        JScrollPane scroll = new JScrollPane(table);
+        scroll.setMinimumSize(new Dimension(500, 500));
+        add(scroll,BorderLayout.CENTER);
         add(new JLabel("Event Page"), CENTER_ALIGNMENT);
     }
     
@@ -41,9 +46,8 @@ public class EventPage extends Page{
         }catch(Exception e){
 
         }
-        JTable Table = new JTable(defaultTable);
-        JScrollPane scroll = new JScrollPane(Table);
-        scroll.setMinimumSize(new Dimension(500, 500));
-        add(scroll,BorderLayout.CENTER);
+        table.setModel(defaultTable);
+        revalidate();
+        repaint();
     }
 }
