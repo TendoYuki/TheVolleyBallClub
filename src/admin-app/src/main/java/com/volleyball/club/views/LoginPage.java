@@ -44,6 +44,7 @@ public class LoginPage extends Page{
         add(TFPassword, gc);
 
         JButton BTNSignIn = new JButton("Sign in");
+        BTNSignIn.setFocusPainted(false);
         gc.gridy = 2;
         gc.gridx = 0;
         add(BTNSignIn, gc);

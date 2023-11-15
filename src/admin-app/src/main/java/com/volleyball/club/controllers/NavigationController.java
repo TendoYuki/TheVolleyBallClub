@@ -1,15 +1,12 @@
 package com.volleyball.club.controllers;
 
-import javax.swing.event.MenuEvent;
-import javax.swing.event.MenuListener;
-
 import com.volleyball.club.views.GUI;
-import com.volleyball.club.views.LoginPage;
 import com.volleyball.club.views.Page;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
-public class NavigationController extends MouseAdapter {
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class NavigationController implements ActionListener {
     private Page page;
     private GUI gui;
 
@@ -19,8 +16,7 @@ public class NavigationController extends MouseAdapter {
     }
     
     @Override
-    public void mouseClicked(MouseEvent e) {
-        super.mouseClicked(e);
+    public void actionPerformed(ActionEvent e) {
         gui.switchActivePage(page);
     }
 }
