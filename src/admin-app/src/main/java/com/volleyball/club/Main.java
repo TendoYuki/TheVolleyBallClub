@@ -14,6 +14,7 @@ public class Main extends JFrame{
         Connection con = DBConnectionManager.getConnection();
         JFGui.setSize(new Dimension(1024, 512));
         JFGui.setLocationRelativeTo(null);
+        JFGui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JFGui.setResizable(false);
         JFGui.setVisible(true);
     }
