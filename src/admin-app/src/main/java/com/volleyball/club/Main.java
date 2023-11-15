@@ -36,7 +36,6 @@ public class Main extends JFrame{
         JFGui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         String filePath = new File("").getAbsolutePath();
-        System.out.println(filePath + "/../../public/logo.png");
         JFGui.setIconImage((new ImageIcon(filePath + "/../../public/logo.png")).getImage());
         JFGui.setResizable(false);
         JFGui.setVisible(true);
