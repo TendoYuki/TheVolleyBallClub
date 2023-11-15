@@ -18,7 +18,7 @@ public class Event extends Page{
 
     public Event(){
         super();
-        add(new JLabel("Quoicoubeh"), CENTER_ALIGNMENT);
+        add(new JLabel("Event Page"), CENTER_ALIGNMENT);
 
         // TODO : Fill resSet
 

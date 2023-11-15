@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 
+
 import com.volleyball.club.controllers.NavigationController;
 import com.volleyball.club.models.NavbarModel;
 
@@ -24,6 +25,7 @@ public class GUI extends JFrame{
 
         JMenu loginMenu = new JMenu("Login");
         LoginPage loginPage = new LoginPage();
+
 
         loginMenu.addMouseListener(new NavigationController(loginPage, this));
         navModel.addMenu(loginMenu);
