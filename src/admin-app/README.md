@@ -2,6 +2,8 @@
 
 ## Building
 
+Note : Maven must be installed before compiling
+
 ```java
 mvn clean compile assembly:single 
 ```

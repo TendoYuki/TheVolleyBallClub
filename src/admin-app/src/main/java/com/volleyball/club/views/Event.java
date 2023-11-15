@@ -3,6 +3,7 @@ package com.volleyball.club.views;
 import java.awt.Dimension;
 import java.sql.ResultSet;
 
+import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -17,6 +18,7 @@ public class Event extends Page{
 
     public Event(){
         super();
+        add(new JLabel("Quoicoubeh"), CENTER_ALIGNMENT);
 
         // TODO : Fill resSet
 
