@@ -1,5 +1,5 @@
 package com.volleyball.club.views;
 
-public class Competiton extends View{
+public class Competiton extends Page{
     
 }
