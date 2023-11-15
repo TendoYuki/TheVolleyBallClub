@@ -5,6 +5,7 @@ import javax.swing.JMenu;
 
 import com.volleyball.club.database.DBConnectionManager;
 import com.volleyball.club.models.NavbarModel;
+import com.volleyball.club.views.Event;
 import com.volleyball.club.views.Navbar;
 import java.lang.Thread;
 
@@ -29,5 +30,6 @@ public class Main extends JFrame{
         navModel.addMenu(new JMenu("Login"));
 
         JFGui.add(navbar, BorderLayout.NORTH);
+        JFGui.add(new Event(), BorderLayout.CENTER);
     }
 }
