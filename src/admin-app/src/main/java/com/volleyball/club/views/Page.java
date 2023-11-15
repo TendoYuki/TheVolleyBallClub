@@ -8,6 +8,6 @@ public class Page extends JPanel{
         super();
         setSize(1024,512);
         setVisible(true);
-        add(new JLabel("Hhahahahahhaha"));
+        add(new JLabel("Page fonctionnelle"));
     }
 }
