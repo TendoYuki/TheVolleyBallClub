@@ -1,38 +1,51 @@
 package com.volleyball.club.views;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.sql.ResultSet;
 
+import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import com.volleyball.club.database.DBConnectionManager;
+
 public class CompetitionPage extends Page{
-    private static DefaultTableModel defaultTable = new DefaultTableModel(new String[]{/* TODO : add different rows */}, 0){
+    private static DefaultTableModel defaultTable = new DefaultTableModel(new String[]{"Start","End"}, 0){
         public boolean Edit(int row, int column){
             return false;
         }
     };
-    private static ResultSet resSet;
+    private static JTable table;
 
     public CompetitionPage(){
         super();
+        table = new JTable(defaultTable);
+        JScrollPane scroll = new JScrollPane(table);
+        scroll.setMinimumSize(new Dimension(500, 500));
+        add(scroll,BorderLayout.CENTER);
+        add(new JLabel("Event Page"), CENTER_ALIGNMENT);
+        
+    }
 
-        // TODO : Fill resSet
-
+    public void loadResults(){
+        String query = "SELECT * FROM competition";
+        ResultSet resSet = DBConnectionManager.execQuery(query);
         defaultTable.setRowCount(0);
+        String start="",end="";
         try{
             while(resSet.next()){
-                // TODO : add different rows
-                defaultTable.addRow(new String[]{/* TODO : add different rows */});
+                start = resSet.getString("startDateTimeCompetition");
+                end = resSet.getString("endDateTimeCompetition");
+                defaultTable.addRow(new String[]{start,end});
             }
         }catch(Exception e){
-
+            System.out.println(e);
         }
-        
-        JTable Table = new JTable(defaultTable);
-        JScrollPane scroll = new JScrollPane(Table);
-        scroll.setMinimumSize(new Dimension(500, 500));
+        table.setModel(defaultTable);
+        revalidate();
+        repaint();
     }
     
 }
