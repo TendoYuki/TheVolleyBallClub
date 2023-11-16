@@ -2,6 +2,8 @@ package com.volleyball.club.views;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 
 import javax.swing.ImageIcon;
@@ -15,7 +17,10 @@ import com.volleyball.club.controllers.EventPageController;
 import com.volleyball.club.controllers.NavigationController;
 import com.volleyball.club.controllers.SponsorPageController;
 import com.volleyball.club.controllers.TrainingPageController;
+import com.volleyball.club.login.LoginManager;
 import com.volleyball.club.models.NavbarModel;
+import com.volleyball.club.mvc.Observable;
+import com.volleyball.club.mvc.Observer;
 
 public class GUI extends JFrame{
     private Page activePage = null;
@@ -34,8 +39,28 @@ public class GUI extends JFrame{
         loginMenuBarBTN.setFocusPainted(false);
         LoginPage loginPage = new LoginPage(this);
 
+        JButton logoutMenuBarBTN = new JButton("Log out");
+        logoutMenuBarBTN.setFocusPainted(false);
+
         loginMenuBarBTN.addActionListener(new NavigationController(loginPage, this));
+        logoutMenuBarBTN.addActionListener(new NavigationController(loginPage, this));
+        logoutMenuBarBTN.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LoginManager.getInstance().deauthentify();
+            }
+        });
         navModel.addMenu(loginMenuBarBTN);
+
+        LoginManager.getInstance().addObserver(new Observer() {
+            @Override
+            public void update(Observable observable) {
+                if(LoginManager.getInstance().isConnected())
+                    navModel.replaceMenu(loginMenuBarBTN, logoutMenuBarBTN);
+                else 
+                    navModel.replaceMenu(logoutMenuBarBTN, loginMenuBarBTN);
+            }
+        });
 
         /** ----------- EVENT PAGE ----------- */
 

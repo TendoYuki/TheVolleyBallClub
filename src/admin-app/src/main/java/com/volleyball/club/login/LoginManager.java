@@ -9,17 +9,18 @@ import java.sql.SQLException;
 import com.volleyball.club.database.DBConnectionManager;
 import com.volleyball.club.login.exceptions.IncorrectLoginException;
 import com.volleyball.club.login.exceptions.IncorrectPasswordException;
+import com.volleyball.club.mvc.Observable;
 
-public class LoginController {
+public class LoginManager extends Observable{
     private boolean isConnected = false;
-    private static LoginController instance = new LoginController();
+    private static LoginManager instance = new LoginManager();
     private static final String PASSWORD_SALT = "jefYY3Hkd73H";
 
-    private LoginController() {
+    private LoginManager() {
         
     }
 
-    public static LoginController getInstance() {
+    public static LoginManager getInstance() {
         return instance;
     }
 
@@ -73,9 +74,18 @@ public class LoginController {
             }
             if(!loginCorrect) throw new IncorrectLoginException();
             isConnected = true;
+            updateObservers();
         } catch (SQLException e) {
             System.out.println(e);
         }
+    }
+
+    /**
+     * Deauthentifies the current admin if logged in
+     */
+    public void deauthentify() {
+        isConnected = false;
+        updateObservers();
     }
 
     /**

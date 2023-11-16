@@ -9,7 +9,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
-import com.volleyball.club.login.LoginController;
+import com.volleyball.club.login.LoginManager;
 import com.volleyball.club.login.exceptions.IncorrectLoginException;
 import com.volleyball.club.login.exceptions.IncorrectPasswordException;
 
@@ -73,7 +73,7 @@ public class LoginPage extends Page{
 
     public void connect(){
         try{
-            LoginController.getInstance().authentify(TFLogin.getText(),String.copyValueOf(TFPassword.getPassword()));
+            LoginManager.getInstance().authentify(TFLogin.getText(),String.copyValueOf(TFPassword.getPassword()));
         }
         catch(IncorrectLoginException e){
             JOptionPane.showMessageDialog(frame, "Login incorrect","Error", JOptionPane.ERROR_MESSAGE);
