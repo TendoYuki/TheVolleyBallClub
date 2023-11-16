@@ -2,29 +2,34 @@ package com.volleyball.club.views;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
-import com.volleyball.club.database.DBConnectionManager;
+import com.volleyball.club.login.LoginController;
+import com.volleyball.club.login.exceptions.IncorrectLoginException;
+import com.volleyball.club.login.exceptions.IncorrectPasswordException;
 
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.ResultSet;
 import java.awt.GridBagConstraints;
 
 public class LoginPage extends Page{
-        JLabel LLogin ;
-        JLabel LPassword;
+    private JLabel LLogin ;
+    private JLabel LPassword;
 
-        JPasswordField TFPassword;
-        JTextField TFLogin;
+    private JPasswordField TFPassword;
+    private JTextField TFLogin;
+    private JFrame frame;
 
-    public LoginPage() {
+    public LoginPage(JFrame frame) {
         super();
+        this.frame = frame;
         setLayout(new GridBagLayout());
         
         Border padding = BorderFactory.createEmptyBorder(50, 250, 50, 250);
@@ -66,46 +71,28 @@ public class LoginPage extends Page{
         add(BTNSignIn, gc);
     }
 
-    /**
-     * Transform a buffer of character to a string object
-     * @param buffer Char buffer to convert
-     * @return String of the char buffer
-     */
-    private String charBufferToString(char[] buffer) {
-        String ret = "";
-        for(char c: buffer) ret += c;
-        return ret;
-    }
-
     public void connect(){
-        String query = "SELECT * FROM admin";
-        ResultSet resSet = DBConnectionManager.execQuery(query);
-        String password = charBufferToString(TFPassword.getPassword());
-        String login = TFLogin.getText();
-        System.out.println(password);
-        System.out.println(login);
-        String dbLogin="",dbPassword="";
-        boolean connected = false;
         try{
-            while(resSet.next()){
-                dbLogin = resSet.getString("loginAdmin");
-                dbPassword = resSet.getString("passwordAdmin");
-                if(login.equals(dbLogin.toLowerCase())){
-                    throw new IncorrectLoginException();
-                }
-                if(password.equals(dbPassword)){
-                    throw new IncorrectPasswordException();
-                }
-                connected = true;
-            }
-        }catch(IncorrectLoginException e){
-            System.out.println(e);
-        }catch(IncorrectPasswordException e){
-            System.out.println(e);
-        }catch(Exception e){
-            System.out.println(e);
+            LoginController.getInstance().authentify(TFLogin.getText(),String.copyValueOf(TFPassword.getPassword()));
         }
-        System.out.println("Connected : " + connected);
+        catch(IncorrectLoginException e){
+            JOptionPane.showMessageDialog(frame, "Login incorrect","Error", JOptionPane.ERROR_MESSAGE);
+            TFLogin.setText("");
+            TFPassword.setText("");
+            return;
+        }
+        catch(IncorrectPasswordException e){
+            JOptionPane.showMessageDialog(frame, "Password incorrect","Error", JOptionPane.ERROR_MESSAGE);
+            TFPassword.setText("");
+            return;
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return;
+        }
+        JOptionPane.showMessageDialog(frame, "Logged in","Info", JOptionPane.INFORMATION_MESSAGE);
+        TFLogin.setText("");
+        TFPassword.setText("");
         revalidate();
         repaint();
     }

@@ -32,7 +32,7 @@ public class GUI extends JFrame{
 
         JButton loginMenuBarBTN = new JButton("Login");
         loginMenuBarBTN.setFocusPainted(false);
-        LoginPage loginPage = new LoginPage();
+        LoginPage loginPage = new LoginPage(this);
 
         loginMenuBarBTN.addActionListener(new NavigationController(loginPage, this));
         navModel.addMenu(loginMenuBarBTN);
