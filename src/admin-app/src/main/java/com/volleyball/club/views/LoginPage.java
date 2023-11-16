@@ -79,8 +79,18 @@ public class LoginPage extends Page{
             while(resSet.next()){
                 dbLogin = resSet.getString("loginAdmin");
                 dbPassword = resSet.getString("passwordAdmin");
-                if(login.equals(dbLogin.toLowerCase()) && password.equals(dbPassword)) connected = true;
+                if(login.equals(dbLogin.toLowerCase())){
+                    throw new IncorrectLoginException();
+                }
+                if(password.equals(dbPassword)){
+                    throw new IncorrectPasswordException();
+                }
+                connected = true;
             }
+        }catch(IncorrectLoginException e){
+            System.out.println(e);
+        }catch(IncorrectPasswordException e){
+            System.out.println(e);
         }catch(Exception e){
             System.out.println(e);
         }
