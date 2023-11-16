@@ -5,10 +5,13 @@ import java.awt.Dimension;
 import java.sql.ResultSet;
 
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import com.github.lgooddatepicker.components.DatePicker;
+import com.github.lgooddatepicker.components.TimePicker;
 import com.volleyball.club.database.DBConnectionManager;
 
 public class CompetitionPage extends Page{
@@ -23,10 +26,16 @@ public class CompetitionPage extends Page{
 
     public CompetitionPage(){
         super();
+        TimePicker tp = new TimePicker();
+        DatePicker cp = new DatePicker();
+        JPanel tdisplay = new JPanel();
+        tdisplay.add(tp);
+        tdisplay.add(cp);
         table = new JTable(defaultTable);
         JScrollPane scroll = new JScrollPane(table);
         scroll.setMinimumSize(new Dimension(500, 500));
         add(scroll,BorderLayout.CENTER);
+        add(tdisplay,BorderLayout.SOUTH);
         add(new JLabel("Competition Page"), BorderLayout.NORTH);
         
     }
