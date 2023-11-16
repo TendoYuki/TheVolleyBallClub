@@ -35,7 +35,7 @@
       {
         "label": "[ ADMIN APP ] Run ",
         "type": "shell",
-        "command": "java -jar target/admin-app-1.0-SNAPSHOT-jar-with-dependencies.jar",
+        "command": "exec -a admin-app-volley java -jar target/admin-app-1.0-SNAPSHOT-jar-with-dependencies.jar",
         "windows": {
             "command": ["java -jar target/admin-app-1.0-SNAPSHOT-jar-with-dependencies.jar;"],
         },
@@ -45,7 +45,13 @@
         "group": "build",
         "presentation": {
           "reveal": "always"
-        }
+        },
+        "problemMatcher": [],
+        "runOptions": {
+            "instanceLimit": 999
+        },
+        "dependsOn": ["[ ADMIN APP ] Kill"],
+        "dependsOrder": "sequence"
       },
       {
         "label": "[ ADMIN APP ] Build ",
