@@ -6,18 +6,11 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.sql.ResultSet;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
-import javax.swing.table.DefaultTableModel;
-
-import com.volleyball.club.database.DBConnectionManager;
 
 public class HomePage extends Page{
 
@@ -38,6 +31,5 @@ public class HomePage extends Page{
         logo.setIcon(new ImageIcon(dimg));
 
         add(logo, BorderLayout.CENTER);
-    
     }
 }
