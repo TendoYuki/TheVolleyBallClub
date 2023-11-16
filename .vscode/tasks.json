@@ -18,13 +18,27 @@
           "reveal": "always"
         }
       },
-
       {
         "label": "[ ADMIN APP ] Run ",
         "type": "shell",
         "command": "java -jar target/admin-app-1.0-SNAPSHOT-jar-with-dependencies.jar",
         "windows": {
             "command": ["java -jar target/admin-app-1.0-SNAPSHOT-jar-with-dependencies.jar;"],
+        },
+        "options": {
+          "cwd": "${workspaceFolder}/src/admin-app"
+        },
+        "group": "build",
+        "presentation": {
+          "reveal": "always"
+        }
+      },
+      {
+        "label": "[ ADMIN APP ] Build ",
+        "type": "shell",
+        "command": "mvn clean compile assembly:single",
+        "windows": {
+            "command": ["mvn clean compile assembly:single;"],
         },
         "options": {
           "cwd": "${workspaceFolder}/src/admin-app"
