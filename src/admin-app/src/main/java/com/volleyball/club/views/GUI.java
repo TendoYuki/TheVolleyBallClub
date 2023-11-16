@@ -56,18 +56,6 @@ public class GUI extends JFrame{
         });
         navModel.addMenu(loginMenuBarBTN);
 
-        LoginManager.getInstance().addObserver(new Observer() {
-            @Override
-            public void update(Observable observable) {
-                if(LoginManager.getInstance().isConnected()){
-                    navModel.replaceMenu(loginMenuBarBTN, logoutMenuBarBTN);
-                    switchActivePage(homePage);
-                }
-                else{
-                    navModel.replaceMenu(logoutMenuBarBTN, loginMenuBarBTN);
-                }
-            }
-        });
 
         /** ----------- EVENT PAGE ----------- */
 
@@ -77,7 +65,6 @@ public class GUI extends JFrame{
 
         eventMenu.add(eventMenuViewBTN);
         eventMenuViewBTN.addActionListener(new EventPageController(eventPage, this));
-        navModel.addMenu(eventMenu);
 
         /** ----------- COMPETITION PAGE ----------- */
 
@@ -87,7 +74,6 @@ public class GUI extends JFrame{
 
         competitionMenu.add(competitionMenuViewBTN);
         competitionMenuViewBTN.addActionListener(new CompetitionPageController(competitionPage, this));
-        navModel.addMenu(competitionMenu);
 
         /** ----------- SPONSOR PAGE ----------- */
 
@@ -97,7 +83,6 @@ public class GUI extends JFrame{
 
         sponsorMenu.add(sponsorMenuViewBTN);
         sponsorMenuViewBTN.addActionListener(new SponsorPageController(sponsorPage, this));
-        navModel.addMenu(sponsorMenu);
 
         /** ----------- TRAINING PAGE ----------- */
 
@@ -107,16 +92,40 @@ public class GUI extends JFrame{
 
         trainingMenu.add(trainingMenuViewBTN);
         trainingMenuViewBTN.addActionListener(new TrainingPageController(trainingPage, this));
-        navModel.addMenu(trainingMenu);
-        
 
         /** ----------- CHANGING APP ICON ----------- */
 
         String filePath = new File("").getAbsolutePath();
         setIconImage((new ImageIcon(filePath + "/../../public/logo.png")).getImage());
 
+
+        /** ----------- LOGGING LISTENING ------------ */
+
+         LoginManager.getInstance().addObserver(new Observer() {
+            @Override
+            public void update(Observable observable) {
+                if(LoginManager.getInstance().isConnected()){
+                    navModel.replaceMenu(loginMenuBarBTN, logoutMenuBarBTN);
+                    switchActivePage(homePage);
+                    navModel.addMenu(eventMenu);
+                    navModel.addMenu(competitionMenu);
+                    navModel.addMenu(sponsorMenu);
+                    navModel.addMenu(trainingMenu);
+
+                }
+                else{
+                    navModel.replaceMenu(logoutMenuBarBTN, loginMenuBarBTN);
+                    navModel.removeMenu(eventMenu);
+                    navModel.removeMenu(competitionMenu);
+                    navModel.removeMenu(sponsorMenu);
+                    navModel.removeMenu(trainingMenu);
+                }
+            }
+        });
+
         /** ----------- SETTING UP GUI PREFERENCES ----------- */
 
+        switchActivePage(homePage);
         setSize(new Dimension(1024, 512));
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
