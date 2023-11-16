@@ -26,6 +26,7 @@ public class GUI extends JFrame{
     private Page activePage = null;
 
     public GUI() {
+        super("Volleyball Club Admin Dashboard");
         /** ----------- NAVBAR INITIALIZATION ----------- */
 
         NavbarModel navModel = new NavbarModel();

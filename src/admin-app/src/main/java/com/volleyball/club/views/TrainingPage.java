@@ -43,7 +43,7 @@ public class TrainingPage extends Page{
             }
         }catch(Exception e){
             System.out.println(e);
-        }
+        } 
         table.setModel(defaultTable);
         revalidate();
         repaint();

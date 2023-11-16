@@ -4,9 +4,17 @@
     "version": "2.0.0",
     "tasks": [
       {
+        "label": "[ ADMIN APP ] Kill",
+        "type": "shell",
+        "command": "pkill -KILL -f admin-app-volley && exit 0",
+        "windows": {
+          "command": [";"]
+        }
+      },
+      {
         "label": "[ ADMIN APP ] Build and run ",
         "type": "shell",
-        "command": "mvn clean compile assembly:single && java -jar target/admin-app-1.0-SNAPSHOT-jar-with-dependencies.jar",
+        "command": ["mvn clean compile assembly:single;", "exec -a admin-app-volley java -jar target/admin-app-1.0-SNAPSHOT-jar-with-dependencies.jar;"],
         "windows": {
             "command": ["mvn clean compile assembly:single;", "java -jar target/admin-app-1.0-SNAPSHOT-jar-with-dependencies.jar;"],
         },
@@ -16,7 +24,13 @@
         "group": "build",
         "presentation": {
           "reveal": "always"
-        }
+        },
+        "problemMatcher": [],
+        "runOptions": {
+            "instanceLimit": 999
+        },
+        "dependsOn": ["[ ADMIN APP ] Kill"],
+        "dependsOrder": "sequence"
       },
       {
         "label": "[ ADMIN APP ] Run ",
