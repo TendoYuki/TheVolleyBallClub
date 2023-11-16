@@ -25,7 +25,7 @@ public class EventPage extends Page{
         super();
         table = new JTable(defaultTable);
         JScrollPane scroll = new JScrollPane(table);
-        scroll.setMinimumSize(new Dimension(500, 500));
+        scroll.setMinimumSize(new Dimension(700, 500));
         add(scroll,BorderLayout.CENTER);
         add(new JLabel("Event Page"), BorderLayout.NORTH);
     }
