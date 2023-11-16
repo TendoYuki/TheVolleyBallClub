@@ -13,8 +13,10 @@ import com.volleyball.club.database.DBConnectionManager;
 
 public class EventPage extends Page{
     private static DefaultTableModel defaultTable = new DefaultTableModel(new String[]{"Start","End","Name","Description"}, 0){
-        public boolean Edit(int row, int column){
-            return false;
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            // Make all id cells non-editable
+            return column != 0;
         }
     };
     private static JTable table;
