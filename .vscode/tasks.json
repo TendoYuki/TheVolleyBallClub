@@ -33,6 +33,21 @@
         "presentation": {
           "reveal": "always"
         }
+      },
+      {
+        "label": "[ ADMIN APP ] Build ",
+        "type": "shell",
+        "command": "mvn clean compile assembly:single",
+        "windows": {
+            "command": ["mvn clean compile assembly:single;"],
+        },
+        "options": {
+          "cwd": "${workspaceFolder}/src/admin-app"
+        },
+        "group": "build",
+        "presentation": {
+          "reveal": "always"
+        }
       }
     ]
   }
