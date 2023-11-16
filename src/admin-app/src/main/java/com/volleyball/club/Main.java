@@ -4,14 +4,10 @@ import javax.swing.JFrame;
 
 import com.volleyball.club.database.DBConnectionManager;
 import com.volleyball.club.views.GUI;
-import com.volleyball.club.views.SponsorPage;
-
-import java.sql.Connection;
 
 public class Main extends JFrame{
-    private static GUI JFGui;
     public static void main(String[] args) {
-        JFGui = new GUI();
-        Connection con = DBConnectionManager.getConnection();
+        new GUI();
+        DBConnectionManager.getConnection();
     }
 }

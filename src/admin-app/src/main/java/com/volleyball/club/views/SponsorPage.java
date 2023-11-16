@@ -13,8 +13,10 @@ import com.volleyball.club.database.DBConnectionManager;
 
 public class SponsorPage extends Page{
     private static DefaultTableModel defaultTable = new DefaultTableModel(new String[]{"Name","Logo"}, 0){
-        public boolean Edit(int row, int column){
-            return false;
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            // Make all id cells non-editable
+            return column != 0;
         }
     };
     private static JTable table;

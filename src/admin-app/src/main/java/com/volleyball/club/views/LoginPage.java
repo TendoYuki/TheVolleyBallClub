@@ -66,10 +66,21 @@ public class LoginPage extends Page{
         add(BTNSignIn, gc);
     }
 
+    /**
+     * Transform a buffer of character to a string object
+     * @param buffer Char buffer to convert
+     * @return String of the char buffer
+     */
+    private String charBufferToString(char[] buffer) {
+        String ret = "";
+        for(char c: buffer) ret += c;
+        return ret;
+    }
+
     public void connect(){
         String query = "SELECT * FROM admin";
         ResultSet resSet = DBConnectionManager.execQuery(query);
-        String password = TFPassword.getText();
+        String password = charBufferToString(TFPassword.getPassword());
         String login = TFLogin.getText();
         System.out.println(password);
         System.out.println(login);

@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 import com.volleyball.club.controllers.CompetitionPageController;
 import com.volleyball.club.controllers.EventPageController;
@@ -38,34 +39,42 @@ public class GUI extends JFrame{
 
         /** ----------- EVENT PAGE ----------- */
 
-        JButton eventMenu = new JButton("Event");
+        JMenu eventMenu = new JMenu("Events");
+        JMenuItem eventMenuViewBTN = new JMenuItem("View");
         EventPage eventPage = new EventPage();
 
-        eventMenu.addActionListener(new EventPageController(eventPage, this));
+        eventMenu.add(eventMenuViewBTN);
+        eventMenuViewBTN.addActionListener(new EventPageController(eventPage, this));
         navModel.addMenu(eventMenu);
 
         /** ----------- COMPETITION PAGE ----------- */
 
-        JButton competitionMenu = new JButton("Competition");
+        JMenu competitionMenu = new JMenu("Competitions");
+        JMenuItem competitionMenuViewBTN = new JMenuItem("View");
         CompetitionPage competitionPage = new CompetitionPage();
 
-        competitionMenu.addActionListener(new CompetitionPageController(competitionPage, this));
+        competitionMenu.add(competitionMenuViewBTN);
+        competitionMenuViewBTN.addActionListener(new CompetitionPageController(competitionPage, this));
         navModel.addMenu(competitionMenu);
 
         /** ----------- SPONSOR PAGE ----------- */
 
-        JButton sponsorMenu = new JButton("Sponsor");
+        JMenu sponsorMenu = new JMenu("Sponsors");
+        JMenuItem sponsorMenuViewBTN = new JMenuItem("View");
         SponsorPage sponsorPage = new SponsorPage();
 
-        sponsorMenu.addActionListener(new SponsorPageController(sponsorPage, this));
+        sponsorMenu.add(sponsorMenuViewBTN);
+        sponsorMenuViewBTN.addActionListener(new SponsorPageController(sponsorPage, this));
         navModel.addMenu(sponsorMenu);
 
         /** ----------- TRAINING PAGE ----------- */
 
-        JButton trainingMenu = new JButton("Training");
+        JMenu trainingMenu = new JMenu("Trainings");
+        JMenuItem trainingMenuViewBTN = new JMenuItem("View");
         TrainingPage trainingPage = new TrainingPage();
 
-        trainingMenu.addActionListener(new TrainingPageController(trainingPage, this));
+        trainingMenu.add(trainingMenuViewBTN);
+        trainingMenuViewBTN.addActionListener(new TrainingPageController(trainingPage, this));
         navModel.addMenu(trainingMenu);
 
         /** ----------- CHANGING APP ICON ----------- */
