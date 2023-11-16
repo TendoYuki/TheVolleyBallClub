@@ -33,6 +33,10 @@ public class GUI extends JFrame{
         navModel.addObserver(navbar);
         add(navbar, BorderLayout.NORTH);
 
+        /** ----------- HOME PAGE ----------- */
+
+        HomePage homePage = new HomePage();
+
         /** ----------- LOGIN PAGE ----------- */
 
         JButton loginMenuBarBTN = new JButton("Login");
@@ -55,10 +59,13 @@ public class GUI extends JFrame{
         LoginManager.getInstance().addObserver(new Observer() {
             @Override
             public void update(Observable observable) {
-                if(LoginManager.getInstance().isConnected())
+                if(LoginManager.getInstance().isConnected()){
                     navModel.replaceMenu(loginMenuBarBTN, logoutMenuBarBTN);
-                else 
+                    switchActivePage(homePage);
+                }
+                else{
                     navModel.replaceMenu(logoutMenuBarBTN, loginMenuBarBTN);
+                }
             }
         });
 
@@ -101,6 +108,7 @@ public class GUI extends JFrame{
         trainingMenu.add(trainingMenuViewBTN);
         trainingMenuViewBTN.addActionListener(new TrainingPageController(trainingPage, this));
         navModel.addMenu(trainingMenu);
+        
 
         /** ----------- CHANGING APP ICON ----------- */
 
