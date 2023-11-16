@@ -2,8 +2,11 @@ package com.volleyball.club.views;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -31,6 +34,15 @@ public class CompetitionPage extends Page{
         JPanel tdisplay = new JPanel();
         tdisplay.add(tp);
         tdisplay.add(cp);
+        JButton submit = new JButton("submit");
+        submit.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                System.out.println("Time :" + tp.getTime());
+                System.out.println("Date :" + cp.getDate());
+            }
+        });
+        tdisplay.add(submit);
         table = new JTable(defaultTable);
         JScrollPane scroll = new JScrollPane(table);
         scroll.setMinimumSize(new Dimension(500, 500));
@@ -45,6 +57,7 @@ public class CompetitionPage extends Page{
         ResultSet resSet = DBConnectionManager.execQuery(query);
         defaultTable.setRowCount(0);
         String start="",end="";
+        JButton delete = new JButton("delete");
         try{
             while(resSet.next()){
                 start = resSet.getString("startDateTimeCompetition");
