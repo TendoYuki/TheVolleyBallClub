@@ -28,8 +28,6 @@ public class SponsorPage extends Page{
         scroll.setMinimumSize(new Dimension(500, 500));
         add(scroll,BorderLayout.CENTER);
         add(new JLabel("Sponsor Page"), BorderLayout.NORTH);
-
-
     }
     
     public void loadResults(){
