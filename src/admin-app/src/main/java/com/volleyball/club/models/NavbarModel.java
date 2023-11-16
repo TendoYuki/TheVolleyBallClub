@@ -57,7 +57,7 @@ public class NavbarModel extends Observable{
      * Removes a menu from the navbar
      * @param menu Menu to remove
      */
-    public void removeMenu(JMenu menu) {
+    public void removeMenu(Component menu) {
         // Avoid removing if already inside menus
         if(!menus.contains(menu)) return;
         
