@@ -23,7 +23,7 @@ public class EditorActions extends JPanel{
         cancelBtn = new JButton("Cancel");
         cancelBtn.setBackground(new Color(156, 156, 156));
 
-        Insets btnBorders = new Insets(15, 5, 0, 0);
+        Insets btnBorders = new Insets(0, 5, 0, 0);
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.anchor = GridBagConstraints.FIRST_LINE_START;
