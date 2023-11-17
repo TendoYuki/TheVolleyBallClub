@@ -1,11 +1,9 @@
 package com.volleyball.club.views.trainings;
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -13,11 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
-import com.github.lgooddatepicker.components.DatePicker;
-import com.github.lgooddatepicker.components.TimePicker;
 import com.volleyball.club.database.DBConnectionManager;
-import com.volleyball.club.elements.DateTimePicker;
 import com.volleyball.club.views.Page;
 
 public class TrainingPage extends Page{
@@ -33,14 +27,13 @@ public class TrainingPage extends Page{
 
     public TrainingPage(){
         super();
-        
         JPanel tdisplay = new JPanel();
         tdisplay.add(new TrainingEditPage());
         JButton submit = new JButton("submit");
         submit.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                // System.out.println("DateTime :" + dtp.getDateTime());
+
             }
         });
         tdisplay.add(submit);
@@ -83,7 +76,6 @@ public class TrainingPage extends Page{
         }catch(Exception e){
             System.out.println(e);
         } 
-        // add(delete);
         table.setModel(defaultTable);
         revalidate();
         repaint();

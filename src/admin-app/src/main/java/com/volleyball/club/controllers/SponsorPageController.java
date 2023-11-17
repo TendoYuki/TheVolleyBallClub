@@ -2,8 +2,8 @@ package com.volleyball.club.controllers;
 
 import java.awt.event.ActionEvent;
 
-import com.volleyball.club.views.SponsorPage;
 import com.volleyball.club.views.GUI;
+import com.volleyball.club.views.sponsors.SponsorPage;
 
 public class SponsorPageController extends NavigationController {
 

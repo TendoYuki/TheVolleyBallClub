@@ -2,8 +2,8 @@ package com.volleyball.club.controllers;
 
 import java.awt.event.ActionEvent;
 
-import com.volleyball.club.views.EventPage;
 import com.volleyball.club.views.GUI;
+import com.volleyball.club.views.events.EventPage;
 
 public class EventPageController extends NavigationController {
 

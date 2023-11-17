@@ -22,6 +22,8 @@ import com.volleyball.club.models.NavbarModel;
 import com.volleyball.club.mvc.Observable;
 import com.volleyball.club.mvc.Observer;
 import com.volleyball.club.views.competitions.CompetitionPage;
+import com.volleyball.club.views.events.EventPage;
+import com.volleyball.club.views.sponsors.SponsorPage;
 import com.volleyball.club.views.trainings.TrainingPage;
 
 public class GUI extends JFrame{

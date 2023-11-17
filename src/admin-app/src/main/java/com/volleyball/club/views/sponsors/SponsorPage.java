@@ -1,4 +1,4 @@
-package com.volleyball.club.views.competitions;
+package com.volleyball.club.views.sponsors;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -14,21 +14,21 @@ import javax.swing.table.DefaultTableModel;
 import com.volleyball.club.database.DBConnectionManager;
 import com.volleyball.club.views.Page;
 
-public class CompetitionPage extends Page{
-    private static DefaultTableModel defaultTable = new DefaultTableModel(new String[]{"ID","Start","End"}, 0){
+public class SponsorPage extends Page{
+    private static DefaultTableModel defaultTable = new DefaultTableModel(new String[]{"ID","Name","Logo"},0){
         @Override
         public boolean isCellEditable(int row, int column) {
             // Make all id cells non-editable
             return column != 0;
         }
     };
-
+    
     private static JTable table;
 
-    public CompetitionPage(){
+    public SponsorPage(){
         super();
         JPanel tdisplay = new JPanel();
-        tdisplay.add(new CompetitionEditPage());
+        tdisplay.add(new SponsorEditPage());
         JButton submit = new JButton("submit");
         submit.addActionListener(new ActionListener(){
             @Override
@@ -42,14 +42,14 @@ public class CompetitionPage extends Page{
         scroll.setMinimumSize(new Dimension(500, 500));
         add(scroll,BorderLayout.CENTER);
         add(tdisplay,BorderLayout.SOUTH);
-        add(new JLabel("Competition Page"), BorderLayout.NORTH);
+        add(new JLabel("Sponsor Page"), BorderLayout.NORTH);
     }
-
+    
     public void loadResults(){
-        String query = "SELECT * FROM competition";
+        String query = "SELECT * FROM partner";
         ResultSet resSet = DBConnectionManager.execQuery(query);
         defaultTable.setRowCount(0);
-        String start="",end="", id="";
+        String name="",logo="", id="";
         JButton delete = new JButton("delete");
         delete.addActionListener(new ActionListener() {
             @Override
@@ -68,14 +68,14 @@ public class CompetitionPage extends Page{
         });
         try{
             while(resSet.next()){
-                start = resSet.getString("startDateTimeCompetition");
-                end = resSet.getString("endDateTimeCompetition");
-                id = resSet.getString("idCompetition");
-                defaultTable.addRow(new String[]{id,start,end});
+                name = resSet.getString("namePartner");
+                logo = resSet.getString("logoPartner");
+                id = resSet.getString("idPartner");
+                defaultTable.addRow(new String[]{id,name,logo});
             }
         }catch(Exception e){
             System.out.println(e);
-        }
+        } 
         table.setModel(defaultTable);
         revalidate();
         repaint();

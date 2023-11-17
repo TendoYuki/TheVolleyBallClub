@@ -1,4 +1,4 @@
-package com.volleyball.club.views.competitions;
+package com.volleyball.club.views.events;
 
 import java.awt.GridBagConstraints;
 
@@ -9,7 +9,7 @@ import com.volleyball.club.elements.EditorSection;
 import com.volleyball.club.elements.EditorType;
 import com.volleyball.club.views.EditPage;
 
-public class CompetitionEditPage extends EditPage{
+public class EventEditPage extends EditPage{
 
     JLabel startDTLabel;
     DateTimePicker startDTPicker;
@@ -17,7 +17,7 @@ public class CompetitionEditPage extends EditPage{
     JLabel endDTLabel;
     DateTimePicker endDTPicker;
 
-    public CompetitionEditPage() {
+    public EventEditPage() {
         super();
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.ipady = 15;
@@ -33,5 +33,17 @@ public class CompetitionEditPage extends EditPage{
         gbc.gridx = 0;
         gbc.gridy = 1;
         add(es2, gbc);
+        
+        EditorSection es3 = new EditorSection("Name", "Change the name of the event", EditorType.TEXT_FIELD);
+
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        add(es3, gbc);
+        
+        EditorSection es4 = new EditorSection("Description", "Change the description of the event", EditorType.TEXT_AREA);
+
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        add(es4, gbc);
     }
 }
