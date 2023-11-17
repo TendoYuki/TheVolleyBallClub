@@ -19,6 +19,10 @@ public class TrainingEditPage extends EditPage{
 
     JLabel endDTLabel;
     DateTimePicker endDTPicker;
+    
+    EditorSection es1;
+    EditorSection es2;
+
 
     public TrainingEditPage() {
         super();
@@ -28,15 +32,16 @@ public class TrainingEditPage extends EditPage{
         
         EmptyBorder esMargin = new EmptyBorder(new Insets(0, 0, 15, 0));
 
-        EditorSection es1 = new EditorSection("Start Date Time", "Select the training's starting date and time", EditorType.DATE_TIME);
+        es1 = new EditorSection("Start Date Time", "Select the training's starting date and time", EditorType.DATE_TIME);
         es1.setBorder(esMargin);
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.weighty = 0;
         add(es1, gbc);
 
-        EditorSection es2 = new EditorSection("End Date Time", "Select the training's ending date and time", EditorType.DATE_TIME);
-        es1.setBorder(esMargin);
+        es2 = new EditorSection("End Date Time", "Select the training's ending date and time", EditorType.DATE_TIME);
+        es2.setBorder(esMargin);
+        
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.weighty = 0;
@@ -49,4 +54,14 @@ public class TrainingEditPage extends EditPage{
         gbc.weightx = 1;
         add(ea, gbc);
     }
+
+    public void changeStart(String s){
+        es1.setValue(s);
+    }
+
+
+    public void changeEnd(String e){
+        es2.setValue(e);
+    }
+    
 }

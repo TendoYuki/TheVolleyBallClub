@@ -5,6 +5,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.sql.ResultSet;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -14,6 +15,8 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.MouseEvent;
+
 
 import com.volleyball.club.database.DBConnectionManager;
 import com.volleyball.club.views.Page;
@@ -46,6 +49,8 @@ public class TrainingPage extends Page{
         gbc.gridy = 0;
         add(new JLabel("Training Page", SwingConstants.CENTER), gbc);
 
+        TrainingEditPage tep = new TrainingEditPage();
+        
         setBorder(new EmptyBorder(new Insets(10, 10, 10, 10)));
         JButton submit = new JButton("submit");
         submit.addActionListener(new ActionListener(){
@@ -55,6 +60,13 @@ public class TrainingPage extends Page{
             }
         });
         table = new JTable(defaultTable);
+        table.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent arg0) {
+                tep.changeStart((String)defaultTable.getValueAt(table.getSelectedRow(), 1));
+                tep.changeEnd((String)defaultTable.getValueAt(table.getSelectedRow(), 2));
+            }
+        });
         JScrollPane scroll = new JScrollPane(table);
 
 
@@ -72,7 +84,7 @@ public class TrainingPage extends Page{
         gbc.gridwidth=1;
         gbc.gridx = 1;
         gbc.gridy = 1;
-        add(new TrainingEditPage(),gbc);
+        add(tep,gbc);
     }
     
     public void loadResults(){

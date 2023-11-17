@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 
 import javax.swing.ImageIcon;
@@ -94,7 +96,6 @@ public class GUI extends JFrame{
         JMenu trainingMenu = new JMenu("Trainings");
         JMenuItem trainingMenuViewBTN = new JMenuItem("View");
         TrainingPage trainingPage = new TrainingPage();
-
         trainingMenu.add(trainingMenuViewBTN);
         trainingMenuViewBTN.addActionListener(new TrainingPageController(trainingPage, this));
 
