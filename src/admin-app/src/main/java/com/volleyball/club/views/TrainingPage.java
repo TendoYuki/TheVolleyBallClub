@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.TimePicker;
 import com.volleyball.club.database.DBConnectionManager;
+import com.volleyball.club.elements.DateTimePicker;
 
 public class TrainingPage extends Page{
     private static DefaultTableModel defaultTable = new DefaultTableModel(new String[]{"ID","Start","End"},0){
@@ -31,17 +32,15 @@ public class TrainingPage extends Page{
 
     public TrainingPage(){
         super();
-        TimePicker tp = new TimePicker();
-        DatePicker cp = new DatePicker();
+        DateTimePicker dtp = new DateTimePicker();
+        
         JPanel tdisplay = new JPanel();
-        tdisplay.add(tp);
-        tdisplay.add(cp);
+        tdisplay.add(dtp);
         JButton submit = new JButton("submit");
         submit.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                System.out.println("Time :" + tp.getTime());
-                System.out.println("Date :" + cp.getDate());
+                System.out.println("DateTime :" + dtp.getDateTime());
             }
         });
         tdisplay.add(submit);

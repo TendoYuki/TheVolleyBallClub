@@ -1,4 +1,4 @@
-package com.volleyball.club.views;
+package com.volleyball.club.views.competitions;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -16,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.TimePicker;
 import com.volleyball.club.database.DBConnectionManager;
+import com.volleyball.club.views.Page;
 
 public class CompetitionPage extends Page{
     private static DefaultTableModel defaultTable = new DefaultTableModel(new String[]{"Start","End"}, 0){

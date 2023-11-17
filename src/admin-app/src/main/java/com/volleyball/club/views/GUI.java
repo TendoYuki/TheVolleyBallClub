@@ -21,6 +21,7 @@ import com.volleyball.club.login.LoginManager;
 import com.volleyball.club.models.NavbarModel;
 import com.volleyball.club.mvc.Observable;
 import com.volleyball.club.mvc.Observer;
+import com.volleyball.club.views.competitions.CompetitionPage;
 
 public class GUI extends JFrame{
     private Page activePage = null;
