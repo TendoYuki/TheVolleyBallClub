@@ -1,4 +1,4 @@
-package com.volleyball.club.views.competitions;
+package com.volleyball.club.views.sponsors;
 
 import java.awt.GridBagConstraints;
 
@@ -9,7 +9,7 @@ import com.volleyball.club.elements.EditorSection;
 import com.volleyball.club.elements.EditorType;
 import com.volleyball.club.views.EditPage;
 
-public class CompetitionEditPage extends EditPage{
+public class SponsorEditPage extends EditPage{
 
     JLabel startDTLabel;
     DateTimePicker startDTPicker;
@@ -17,21 +17,21 @@ public class CompetitionEditPage extends EditPage{
     JLabel endDTLabel;
     DateTimePicker endDTPicker;
 
-    public CompetitionEditPage() {
+    public SponsorEditPage() {
         super();
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.ipady = 15;
         
-        EditorSection es1 = new EditorSection("Start Date Time", "Select the training's starting date and time", EditorType.DATE_TIME);
+        EditorSection es1 = new EditorSection("Name", "Change the name of the sponsor", EditorType.TEXT_FIELD);
 
         gbc.gridx = 0;
         gbc.gridy = 0;
         add(es1, gbc);
 
-        EditorSection es2 = new EditorSection("End Date Time", "Select the training's ending date and time", EditorType.DATE_TIME);
+        // EditorSection es2 = new EditorSection("End Date Time", "Select the training's ending date and time", EditorType.DATE_TIME);
 
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        add(es2, gbc);
+        // gbc.gridx = 0;
+        // gbc.gridy = 1;
+        // add(es2, gbc);
     }
 }

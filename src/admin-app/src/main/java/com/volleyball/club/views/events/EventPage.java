@@ -1,51 +1,45 @@
-package com.volleyball.club.views;
-
+package com.volleyball.club.views.events;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
-import com.github.lgooddatepicker.components.DatePicker;
-import com.github.lgooddatepicker.components.TimePicker;
 import com.volleyball.club.database.DBConnectionManager;
+import com.volleyball.club.views.Page;
 
 public class EventPage extends Page{
-    private static DefaultTableModel defaultTable = new DefaultTableModel(new String[]{"Start","End","Name","Description"}, 0){
+    private static DefaultTableModel defaultTable = new DefaultTableModel(new String[]{"ID","Start","End","Name","Description"},0){
         @Override
         public boolean isCellEditable(int row, int column) {
             // Make all cells non-editable
             return false;
         }
     };
+    
     private static JTable table;
 
     public EventPage(){
         super();
-        TimePicker tp = new TimePicker();
-        DatePicker cp = new DatePicker();
         JPanel tdisplay = new JPanel();
-        tdisplay.add(tp);
-        tdisplay.add(cp);
+        tdisplay.add(new EventEditPage());
         JButton submit = new JButton("submit");
         submit.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                System.out.println("Time :" + tp.getTime());
-                System.out.println("Date :" + cp.getDate());
+
             }
         });
         tdisplay.add(submit);
         table = new JTable(defaultTable);
         JScrollPane scroll = new JScrollPane(table);
-        scroll.setMinimumSize(new Dimension(700, 500));
+        scroll.setMinimumSize(new Dimension(500, 500));
         add(scroll,BorderLayout.CENTER);
         add(tdisplay,BorderLayout.SOUTH);
         add(new JLabel("Event Page"), BorderLayout.NORTH);
@@ -55,18 +49,35 @@ public class EventPage extends Page{
         String query = "SELECT * FROM event";
         ResultSet resSet = DBConnectionManager.execQuery(query);
         defaultTable.setRowCount(0);
-        String start="",end="",name="",desc="";
+        String start="",end="", id="",name="",desc="";
+        JButton delete = new JButton("delete");
+        delete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                int res = JOptionPane.showConfirmDialog(null,"Etes-vous sur ?");
+
+                if(res == JOptionPane.YES_OPTION){
+                    System.out.println("YES OPTION SELECTED");
+                    int selectedRow = table.getSelectedRow();
+                    if(selectedRow != -1){
+                        String id = (String)defaultTable.getValueAt(selectedRow, 0);
+                        System.out.println(id);
+                    }
+                }
+            }
+        });
         try{
             while(resSet.next()){
                 start = resSet.getString("startDateTime");
                 end = resSet.getString("endDateTime");
                 name = resSet.getString("nameEvent");
                 desc = resSet.getString("descEvent");
-                defaultTable.addRow(new String[]{start,end,name,desc});
+                id = resSet.getString("idPartner");
+                defaultTable.addRow(new String[]{id,start,end,name,desc});
             }
         }catch(Exception e){
             System.out.println(e);
-        }
+        } 
         table.setModel(defaultTable);
         revalidate();
         repaint();

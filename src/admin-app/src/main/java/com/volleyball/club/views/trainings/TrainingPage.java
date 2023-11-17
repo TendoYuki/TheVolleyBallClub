@@ -1,11 +1,9 @@
 package com.volleyball.club.views.trainings;
-
 import java.awt.BorderLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -37,7 +35,7 @@ public class TrainingPage extends Page{
         submit.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                // System.out.println("DateTime :" + dtp.getDateTime());
+
             }
         });
         table = new JTable(defaultTable);
@@ -78,7 +76,6 @@ public class TrainingPage extends Page{
         }catch(Exception e){
             System.out.println(e);
         } 
-        // add(delete);
         table.setModel(defaultTable);
         revalidate();
         repaint();
