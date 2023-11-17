@@ -1,7 +1,7 @@
 package com.volleyball.club.views.trainings;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
@@ -9,23 +9,21 @@ import java.sql.ResultSet;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import com.github.lgooddatepicker.components.DatePicker;
-import com.github.lgooddatepicker.components.TimePicker;
 import com.volleyball.club.database.DBConnectionManager;
-import com.volleyball.club.elements.DateTimePicker;
 import com.volleyball.club.views.Page;
 
 public class TrainingPage extends Page{
     private static DefaultTableModel defaultTable = new DefaultTableModel(new String[]{"ID","Start","End"},0){
         @Override
         public boolean isCellEditable(int row, int column) {
-            // Make all id cells non-editable
-            return column != 0;
+            // Make all cells non-editable
+            return false;
         }
     };
     
@@ -33,9 +31,8 @@ public class TrainingPage extends Page{
 
     public TrainingPage(){
         super();
-        
-        JPanel tdisplay = new JPanel();
-        tdisplay.add(new TrainingEditPage());
+        setLayout(new BorderLayout());
+        setBorder(new EmptyBorder(new Insets(10, 10, 10, 10)));
         JButton submit = new JButton("submit");
         submit.addActionListener(new ActionListener(){
             @Override
@@ -43,13 +40,11 @@ public class TrainingPage extends Page{
                 // System.out.println("DateTime :" + dtp.getDateTime());
             }
         });
-        tdisplay.add(submit);
         table = new JTable(defaultTable);
         JScrollPane scroll = new JScrollPane(table);
-        scroll.setMinimumSize(new Dimension(500, 500));
         add(scroll,BorderLayout.CENTER);
-        add(tdisplay,BorderLayout.SOUTH);
-        add(new JLabel("Training Page"), BorderLayout.NORTH);
+        add(new TrainingEditPage(),BorderLayout.EAST);
+        add(new JLabel("Training Page", SwingConstants.CENTER), BorderLayout.NORTH);
     }
     
     public void loadResults(){

@@ -15,8 +15,8 @@ public class SponsorPage extends Page{
     private static DefaultTableModel defaultTable = new DefaultTableModel(new String[]{"Name","Logo"}, 0){
         @Override
         public boolean isCellEditable(int row, int column) {
-            // Make all id cells non-editable
-            return column != 0;
+            // Make all cells non-editable
+            return false;
         }
     };
     private static JTable table;

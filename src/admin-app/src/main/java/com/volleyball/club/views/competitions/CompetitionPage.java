@@ -13,8 +13,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import com.github.lgooddatepicker.components.DatePicker;
-import com.github.lgooddatepicker.components.TimePicker;
 import com.volleyball.club.database.DBConnectionManager;
 import com.volleyball.club.views.Page;
 
@@ -22,8 +20,8 @@ public class CompetitionPage extends Page{
     private static DefaultTableModel defaultTable = new DefaultTableModel(new String[]{"Start","End"}, 0){
         @Override
         public boolean isCellEditable(int row, int column) {
-            // Make all id cells non-editable
-            return column != 0;
+            // Make all cells non-editable
+            return false;
         }
     };
     private static JTable table;
