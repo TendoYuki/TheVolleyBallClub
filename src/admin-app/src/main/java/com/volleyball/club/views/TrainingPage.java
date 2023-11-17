@@ -33,7 +33,6 @@ public class TrainingPage extends Page{
     public TrainingPage(){
         super();
         DateTimePicker dtp = new DateTimePicker();
-        
         JPanel tdisplay = new JPanel();
         tdisplay.add(dtp);
         JButton submit = new JButton("submit");

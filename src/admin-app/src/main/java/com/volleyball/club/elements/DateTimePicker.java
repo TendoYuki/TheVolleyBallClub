@@ -1,5 +1,8 @@
 package com.volleyball.club.elements;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import javax.swing.JPanel;
 
 import com.github.lgooddatepicker.components.DatePicker;
@@ -22,6 +25,12 @@ public class DateTimePicker extends JPanel{
     }
 
     public void setDateTime(String dateTime) {
-        // TODO : dt splitting
+        String[] parts = dateTime.split(" ");
+        String date = parts[0];
+        String time = parts[1];
+        LocalDate ld = LocalDate.parse(date);
+        LocalTime lt = LocalTime.parse(time);
+        timePicker.setTime(lt);
+        datePicker.setDate(ld);
     }
 }
