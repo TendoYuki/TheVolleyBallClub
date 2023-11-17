@@ -57,7 +57,6 @@ public class CompetitionPage extends Page{
         ResultSet resSet = DBConnectionManager.execQuery(query);
         defaultTable.setRowCount(0);
         String start="",end="";
-        JButton delete = new JButton("delete");
         try{
             while(resSet.next()){
                 start = resSet.getString("startDateTimeCompetition");
