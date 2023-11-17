@@ -1,5 +1,7 @@
 package com.volleyball.club.views.trainings;
 import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,7 +31,21 @@ public class TrainingPage extends Page{
 
     public TrainingPage(){
         super();
-        setLayout(new BorderLayout());
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+
+        gbc.weightx = 0;
+        gbc.weighty = 0;
+        gbc.fill = GridBagConstraints.BOTH;
+
+
+        gbc.gridwidth=2;
+        gbc.weightx = 1;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        add(new JLabel("Training Page", SwingConstants.CENTER), gbc);
+
         setBorder(new EmptyBorder(new Insets(10, 10, 10, 10)));
         JButton submit = new JButton("submit");
         submit.addActionListener(new ActionListener(){
@@ -40,9 +56,23 @@ public class TrainingPage extends Page{
         });
         table = new JTable(defaultTable);
         JScrollPane scroll = new JScrollPane(table);
-        add(scroll,BorderLayout.CENTER);
-        add(new TrainingEditPage(),BorderLayout.EAST);
-        add(new JLabel("Training Page", SwingConstants.CENTER), BorderLayout.NORTH);
+
+
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        gbc.gridwidth=1;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        add(scroll,gbc);
+
+
+        gbc.weightx = 0;
+        gbc.weighty = 1;
+        gbc.gridheight=GridBagConstraints.REMAINDER;
+        gbc.gridwidth=1;
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        add(new TrainingEditPage(),gbc);
     }
     
     public void loadResults(){
