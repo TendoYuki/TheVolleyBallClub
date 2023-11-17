@@ -2,8 +2,8 @@ package com.volleyball.club.controllers;
 
 import java.awt.event.ActionEvent;
 
-import com.volleyball.club.views.TrainingPage;
 import com.volleyball.club.views.GUI;
+import com.volleyball.club.views.trainings.TrainingPage;
 
 public class TrainingPageController extends NavigationController {
 
