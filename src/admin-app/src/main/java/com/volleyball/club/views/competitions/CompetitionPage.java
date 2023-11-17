@@ -30,17 +30,14 @@ public class CompetitionPage extends Page{
 
     public CompetitionPage(){
         super();
-        TimePicker tp = new TimePicker();
-        DatePicker cp = new DatePicker();
         JPanel tdisplay = new JPanel();
-        tdisplay.add(tp);
-        tdisplay.add(cp);
+        tdisplay.add(new CompetitionEditPage());
         JButton submit = new JButton("submit");
         submit.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                System.out.println("Time :" + tp.getTime());
-                System.out.println("Date :" + cp.getDate());
+                // System.out.println("Time :" + tp.getTime());
+                // System.out.println("Date :" + cp.getDate());
             }
         });
         tdisplay.add(submit);
