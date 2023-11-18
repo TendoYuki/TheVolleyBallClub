@@ -1,5 +1,4 @@
 package com.volleyball.club.views.trainings;
-import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -9,7 +8,6 @@ import java.awt.event.MouseAdapter;
 import java.sql.ResultSet;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
