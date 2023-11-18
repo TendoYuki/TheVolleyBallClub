@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -45,5 +46,17 @@ public class EditorActions extends JPanel{
         gbc.weightx = 1;
         gbc.gridwidth=GridBagConstraints.REMAINDER;
         add(cancelBtn, gbc);
+    }
+
+    public void addOnSaveActionListener(ActionListener al) {
+        saveBtn.addActionListener(al);
+    }
+
+    public void addOnCancelActionListener(ActionListener al) {
+        cancelBtn.addActionListener(al);
+    }
+
+    public void addOnDeleteActionListener(ActionListener al) {
+        deleteBtn.addActionListener(al);
     }
 }

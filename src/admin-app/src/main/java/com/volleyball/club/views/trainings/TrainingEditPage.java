@@ -4,8 +4,10 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
 
+import com.volleyball.club.controllers.EditorActionController;
 import com.volleyball.club.elements.DateTimePicker;
 import com.volleyball.club.elements.EditorActions;
 import com.volleyball.club.elements.EditorSection;
@@ -53,6 +55,28 @@ public class TrainingEditPage extends EditPage{
         gbc.weighty = 1;
         gbc.weightx = 1;
         add(ea, gbc);
+        EditorActionController eac = new EditorActionController(ea) {
+            @Override
+            public void onCancel() {
+                System.out.println("cancel");
+            }
+            @Override
+            public void onDelete() {
+                int res = JOptionPane.showConfirmDialog(null,"Do you really want to delete this entry","Delete", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if(res == JOptionPane.YES_OPTION){
+                    System.out.println("YES");
+                    // int selectedRow = table.getSelectedRow();
+                    // if(selectedRow != -1){
+                    //     String id = (String)defaultTable.getValueAt(selectedRow, 0);
+                    //     System.out.println(id);
+                    // }
+                }
+            }
+            @Override
+            public void onSave() {
+                System.out.println("save");
+            }
+        };
     }
 
     public void changeStart(String s){

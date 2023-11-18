@@ -92,22 +92,6 @@ public class TrainingPage extends Page{
         ResultSet resSet = DBConnectionManager.execQuery(query);
         defaultTable.setRowCount(0);
         String start="",end="", id="";
-        JButton delete = new JButton("delete");
-        delete.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                int res = JOptionPane.showConfirmDialog(null,"Etes-vous sur ?");
-
-                if(res == JOptionPane.YES_OPTION){
-                    System.out.println("YES OPTION SELECTED");
-                    int selectedRow = table.getSelectedRow();
-                    if(selectedRow != -1){
-                        String id = (String)defaultTable.getValueAt(selectedRow, 0);
-                        System.out.println(id);
-                    }
-                }
-            }
-        });
         try{
             while(resSet.next()){
                 start = resSet.getString("startDateTimeTraining");
