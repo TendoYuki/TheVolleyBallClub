@@ -62,7 +62,13 @@ public class TrainingEditPage extends EditPage{
             }
             @Override
             public void onDelete() {
-                int res = JOptionPane.showConfirmDialog(null,"Do you really want to delete this entry","Delete", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                int res = JOptionPane.showConfirmDialog(
+                    null,
+                    "Do you really want to delete this entry",
+                    "Delete",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE
+                );
                 if(res == JOptionPane.YES_OPTION){
                     System.out.println("YES");
                     // int selectedRow = table.getSelectedRow();
