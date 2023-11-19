@@ -7,21 +7,38 @@ import javax.swing.JPanel;
 
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.TimePicker;
+
 import com.volleyball.club.datetime.DateTime;
 
+/**
+ * Date time picker element allowing to pick a date and time
+ */
 public class DateTimePicker extends JPanel{
+    /** Time picker element */
     private TimePicker timePicker;
+    /** Date picker element */
     private DatePicker datePicker;
+    /** Minimum date time of the date and time element */
     private DateTime minimumDateTime;
+    /** Maximum date time of the date and time element */
     private DateTime maximumDateTime;
+    /** Whether or not the input is made by the end user */
     private boolean manualInput = true;
 
+    /**
+     * Creates a date time picker with boundaries
+     * @param minmumDateTime Maximum allowed date
+     * @param maximumDateTime Minimum allowed date
+     */
     public DateTimePicker(DateTime minmumDateTime, DateTime maximumDateTime) {
         this();
         this.minimumDateTime = minmumDateTime;
         this.maximumDateTime = maximumDateTime;
     }
 
+    /**
+     * Creates a date time picker without boundaries
+     */
     public DateTimePicker() {
         super();
         timePicker = new TimePicker();
@@ -61,8 +78,8 @@ public class DateTimePicker extends JPanel{
     }
 
     /**
-     * Returns the current selected datetime of the picker
-     * @return
+     * Returns the currently selected datetime of the picker
+     * @return Currently selected datetime of the picker
      */
     public DateTime getDateTime() {
         return new DateTime(datePicker.getDate(), timePicker.getTime());
@@ -87,18 +104,34 @@ public class DateTimePicker extends JPanel{
         manualInput = true;
     }
 
+    /**
+     * Returns the minimum date time allowed
+     * @return Minimum date time allowed
+     */
     public DateTime getMinimumDateTime() {
         return minimumDateTime;
     }
 
+    /**
+     * Changes the minimum date time allowed
+     * @param minmumDateTime
+     */
     public void setMinimumDateTime(DateTime minmumDateTime) {
         this.minimumDateTime = minmumDateTime;
     }
 
+    /**
+     * Returns the maximum date time allowed
+     * @return
+     */
     public DateTime getMaximumDateTime() {
         return maximumDateTime;
     }
 
+    /**
+     * Changes the maximum date time allowed
+     * @param maximumDateTime
+     */
     public void setMaximumDateTime(DateTime maximumDateTime) {
         this.maximumDateTime = maximumDateTime;
     } 

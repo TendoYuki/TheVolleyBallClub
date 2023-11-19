@@ -11,15 +11,24 @@ import com.volleyball.club.login.exceptions.IncorrectLoginException;
 import com.volleyball.club.login.exceptions.IncorrectPasswordException;
 import com.volleyball.club.observation.Observable;
 
+/**
+ * Singleton class handling the authentification logic of the app
+ */
 public class LoginManager extends Observable{
+    /** Indicates whether or not an admin user is logged in */
     private boolean isConnected = false;
+    /** Instance of the singleton class */
     private static LoginManager instance = new LoginManager();
+    /** Salted used for the password hashing process */
     private static final String PASSWORD_SALT = "jefYY3Hkd73H";
 
-    private LoginManager() {
-        
-    }
+    /** Avoid constructing the manager */
+    private LoginManager() { }
 
+    /**
+     * Gets the instance of the login manager
+     * @return Instance of the login manager
+     */
     public static LoginManager getInstance() {
         return instance;
     }

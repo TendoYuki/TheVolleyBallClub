@@ -11,6 +11,9 @@ import com.volleyball.club.observation.Observer;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 
+/**
+ * Generic editable section that has a name and a description
+ */
 public abstract class EditorSection extends JPanel implements Observer{
     private JLabel descLabel;
     private JLabel nameLabel;

@@ -5,11 +5,22 @@ import java.time.LocalTime;
 
 import com.volleyball.club.datetime.exceptions.InvalidDateTimeFormatException;
 
+/**
+ * Class representing a Date and Time, its comparable and can parse string containing
+ * datetimes in the format YYYY-MM-DD HH:mm:ss
+ */
 public class DateTime implements Comparable<DateTime>{
     
+    /** Local date */
     private LocalDate ld;
+    /** Local time */
     private LocalTime lt;
 
+    /**
+     * Creates a datetime from a localdate and a localtime
+     * @param ld Local Date
+     * @param lt Local Time
+     */
     public DateTime(LocalDate ld, LocalTime lt) {
         this.ld = ld;
         this.lt = lt;
@@ -95,6 +106,7 @@ public class DateTime implements Comparable<DateTime>{
      * Returns -1 if before other,
      * Returns 0 if equals
      * Returns 1 if after other
+     * @param other Compared to
      */
     @Override
     public int compareTo(DateTime other) {

@@ -3,6 +3,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -47,26 +49,28 @@ public class EventPage extends Page{
     
     public void loadResults(){
         String query = "SELECT * FROM event";
-        ResultSet resSet = DBConnectionManager.execQuery(query);
-        defaultTable.setRowCount(0);
-        String start="",end="", id="",name="",desc="";
-        JButton delete = new JButton("delete");
-        delete.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                int res = JOptionPane.showConfirmDialog(null,"Etes-vous sur ?");
+        Connection con = DBConnectionManager.getConnection();
+        try {
+            PreparedStatement stmt = con.prepareStatement(query);
+            ResultSet resSet = stmt.executeQuery();
+            defaultTable.setRowCount(0);
+            String start="",end="", id="",name="",desc="";
+            JButton delete = new JButton("delete");
+            delete.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent arg0) {
+                    int res = JOptionPane.showConfirmDialog(null,"Etes-vous sur ?");
 
-                if(res == JOptionPane.YES_OPTION){
-                    System.out.println("YES OPTION SELECTED");
-                    int selectedRow = table.getSelectedRow();
-                    if(selectedRow != -1){
-                        String id = (String)defaultTable.getValueAt(selectedRow, 0);
-                        System.out.println(id);
+                    if(res == JOptionPane.YES_OPTION){
+                        System.out.println("YES OPTION SELECTED");
+                        int selectedRow = table.getSelectedRow();
+                        if(selectedRow != -1){
+                            String id = (String)defaultTable.getValueAt(selectedRow, 0);
+                            System.out.println(id);
+                        }
                     }
                 }
-            }
-        });
-        try{
+            });
             while(resSet.next()){
                 start = resSet.getString("startDateTime");
                 end = resSet.getString("endDateTime");
@@ -75,9 +79,9 @@ public class EventPage extends Page{
                 id = resSet.getString("idPartner");
                 defaultTable.addRow(new String[]{id,start,end,name,desc});
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
-        } 
+        }
         table.setModel(defaultTable);
         revalidate();
         repaint();

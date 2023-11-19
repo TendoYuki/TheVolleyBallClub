@@ -1,15 +1,21 @@
 package com.volleyball.club.elements.editor;
 
-import java.awt.Component;
-
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import java.awt.GridBagConstraints;
 
+/**
+ * Editor section that has an editable text field 
+ */
 public abstract class EditorSectionTextField extends EditorSection {
-    private Component editorComponent;
+    /** Text field */
+    private JTextField editorComponent;
 
+    /**
+     * Creates a new editor section with text field
+     * @param name Name of the section
+     * @param description Description of the section
+     */
     public EditorSectionTextField(String name, String description) {
         super(name, description);
         editorComponent = new JTextField();
@@ -24,7 +30,7 @@ public abstract class EditorSectionTextField extends EditorSection {
 
     @Override
     public void setValue(Object newValue) {
-        ((JTextArea)editorComponent).setText((String)newValue);
+        ((JTextField)editorComponent).setText((String)newValue);
     }
 
     @Override

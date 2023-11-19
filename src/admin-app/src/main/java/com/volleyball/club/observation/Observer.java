@@ -1,5 +1,6 @@
 package com.volleyball.club.observation;
 
+/** Interface that can observe an observable class */
 public interface Observer {
     /**
      * Called by the observable when its value changes

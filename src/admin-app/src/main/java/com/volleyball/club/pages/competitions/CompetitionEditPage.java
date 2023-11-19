@@ -2,19 +2,11 @@ package com.volleyball.club.pages.competitions;
 
 import java.awt.GridBagConstraints;
 
-import javax.swing.JLabel;
-
-import com.volleyball.club.elements.DateTimePicker;
 import com.volleyball.club.pages.EditPage;
 
+/** Edition page of the competitions */
 public class CompetitionEditPage extends EditPage{
-
-    JLabel startDTLabel;
-    DateTimePicker startDTPicker;
-
-    JLabel endDTLabel;
-    DateTimePicker endDTPicker;
-
+    /** Creates an edition page for the competitions */
     public CompetitionEditPage() {
         super();
         GridBagConstraints gbc = new GridBagConstraints();

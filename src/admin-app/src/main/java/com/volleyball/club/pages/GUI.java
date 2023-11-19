@@ -30,9 +30,12 @@ import com.volleyball.club.pages.sponsors.SponsorPageController;
 import com.volleyball.club.pages.trainings.TrainingPage;
 import com.volleyball.club.pages.trainings.TrainingPageController;
 
+/** Main gui of the client */
 public class GUI extends JFrame{
+    /** Currently displayed page */
     private Page activePage = null;
 
+    /** Creates and initializes the main gui of the client */
     public GUI() {
         super("Volleyball Club Admin Dashboard");
         /** ----------- NAVBAR INITIALIZATION ----------- */

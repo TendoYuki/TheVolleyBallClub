@@ -7,6 +7,7 @@ import java.util.List;
 import com.volleyball.club.observation.Observable;
 
 public class NavbarModel extends Observable{
+    /** List of all menus contained in the model */
     private List<Component> menus = new ArrayList<Component>(); 
 
     /**

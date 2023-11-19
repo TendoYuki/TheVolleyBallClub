@@ -6,9 +6,20 @@ import java.awt.event.ActionListener;
 import com.volleyball.club.datetime.DateTime;
 import com.volleyball.club.elements.DateTimePicker;
 
+/**
+ * Editor section that has an editable datetime field 
+ */
 public abstract class EditorSectionDateTime extends EditorSection {
+    /** Datetime picker */
     private DateTimePicker editorComponent;
 
+    /**
+     * Creates a new editor section with datetime field
+     * @param name Name of the section
+     * @param description Description of the section
+     * @param minimumDateTime Minimum datetime that is selectable
+     * @param maximumDateTime Maximum datetime that is selectable
+     */
     public EditorSectionDateTime(String name, String description, DateTime minimumDateTime, DateTime maximumDateTime) {
         super(name, description);
 

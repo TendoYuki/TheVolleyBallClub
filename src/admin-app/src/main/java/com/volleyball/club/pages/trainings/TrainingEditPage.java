@@ -7,8 +7,6 @@ import java.sql.PreparedStatement;
 
 import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
-
 
 import com.volleyball.club.controllers.EditorActionController;
 import com.volleyball.club.database.DBConnectionManager;
@@ -18,12 +16,21 @@ import com.volleyball.club.elements.editor.EditorSectionDateTime;
 import com.volleyball.club.observation.Observable;
 import com.volleyball.club.pages.EditPage;
 
+/** Edition page of the trainings */
 public class TrainingEditPage extends EditPage{
 
-    private EditorSectionDateTime es1;
-    private EditorSectionDateTime es2;
+    /** Editor section of the start time of the training */
+    private EditorSectionDateTime startTimeEditorSection;
+    /** Editor section of the start end of the training */
+    private EditorSectionDateTime endTimeEditorSection;
 
-    public TrainingEditPage(TrainingPage trainingPage, DefaultTableModel defaultTableModel, TrainingModel model, TrainingModel backupModel) {
+    /**
+     * Creates a new training edition page
+     * @param trainingPage Linked training page 
+     * @param model Model to edit
+     * @param backupModel Backup of the model to edit before edition
+     */
+    public TrainingEditPage(TrainingPage trainingPage, TrainingModel model, TrainingModel backupModel) {
         super();
 
         setBorder(new EmptyBorder(new Insets(0, 20, 0, 20)));
@@ -31,7 +38,7 @@ public class TrainingEditPage extends EditPage{
         EmptyBorder esMargin = new EmptyBorder(new Insets(0, 0, 15, 0));
         gbc.anchor = GridBagConstraints.FIRST_LINE_START;
 
-        es1 = new EditorSectionDateTime(
+        startTimeEditorSection = new EditorSectionDateTime(
             "Start Date Time",
             "Select the training's starting date and time",
             null,
@@ -43,18 +50,18 @@ public class TrainingEditPage extends EditPage{
                 setValue(((TrainingModel)observable).getStartDateTime());
             }
         };
-        es1.addModifyListener(arg0 -> {
-            model.setStartDateTime((DateTime)es1.getValue());
+        startTimeEditorSection.addModifyListener(arg0 -> {
+            model.setStartDateTime((DateTime)startTimeEditorSection.getValue());
             model.updateObservers();
         });
 
-        es1.setBorder(esMargin);
+        startTimeEditorSection.setBorder(esMargin);
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.weighty = 0;
-        add(es1, gbc);
+        add(startTimeEditorSection, gbc);
 
-        es2 = new EditorSectionDateTime(
+        endTimeEditorSection = new EditorSectionDateTime(
             "End Date Time",
             "Select the training's ending date and time",
             model.getStartDateTime(),
@@ -67,17 +74,17 @@ public class TrainingEditPage extends EditPage{
                 setValue(null);
             }
         };
-        es2.addModifyListener(arg0 -> {
-            model.setEndDateTime((DateTime)es2.getValue());
+        endTimeEditorSection.addModifyListener(arg0 -> {
+            model.setEndDateTime((DateTime)endTimeEditorSection.getValue());
             model.updateObservers();
         });
         
 
-        es2.setBorder(esMargin);
+        endTimeEditorSection.setBorder(esMargin);
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.weighty = 0;
-        add(es2, gbc);
+        add(endTimeEditorSection, gbc);
 
         EditorActions ea = new EditorActions();
         gbc.gridx = 0;
@@ -128,8 +135,8 @@ public class TrainingEditPage extends EditPage{
                         "endDateTimeTraining=? "+
                         "WHERE idTraining=?;"
                     );
-                    stmt.setString(1, es1.getValue().toString());
-                    stmt.setString(2, es2.getValue().toString());
+                    stmt.setString(1, startTimeEditorSection.getValue().toString());
+                    stmt.setString(2, endTimeEditorSection.getValue().toString());
                     stmt.setInt(3, model.getID());
                     stmt.execute();
                     trainingPage.loadResults();
@@ -139,13 +146,13 @@ public class TrainingEditPage extends EditPage{
             }
         };
 
-        model.addObserver(es1);
-        model.addObserver(es2);
+        model.addObserver(startTimeEditorSection);
+        model.addObserver(endTimeEditorSection);
     }
 
     @Override
     public void clear() {
-        es1.clear();
-        es2.clear();
+        startTimeEditorSection.clear();
+        endTimeEditorSection.clear();
     }
 }

@@ -3,6 +3,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -18,7 +20,11 @@ import com.volleyball.club.datetime.DateTime;
 import com.volleyball.club.datetime.exceptions.InvalidDateTimeFormatException;
 import com.volleyball.club.pages.Page;
 
+/**
+ * Training page displaying all trainings 
+ */
 public class TrainingPage extends Page{
+    /** Model of the table containing all trainings */
     private static DefaultTableModel defaultTable = new DefaultTableModel(new String[]{"ID","Start","End"},0){
         @Override
         public boolean isCellEditable(int row, int column) {
@@ -27,11 +33,16 @@ public class TrainingPage extends Page{
         }
     };
     
+    /** Table to display the model */
     private static JTable table;
+    /** Model of the currently selected row */
     private TrainingModel trainingModel = new TrainingModel();
+    /** Backup model of the currently selected row, used for cancel logic */
     private TrainingModel backupModel = new TrainingModel();
+    /** Edition page of the trainings */
     private TrainingEditPage trainingEditPage;
 
+    /** Creates a new training page */
     public TrainingPage(){
         super();
         setLayout(new GridBagLayout());
@@ -51,7 +62,7 @@ public class TrainingPage extends Page{
         setBorder(new EmptyBorder(new Insets(10, 10, 10, 10)));
         table = new JTable(defaultTable);
 
-        trainingEditPage = new TrainingEditPage(this, defaultTable, trainingModel, backupModel);
+        trainingEditPage = new TrainingEditPage(this, trainingModel, backupModel);
 
         table.addMouseListener(new MouseAdapter() {
             @Override
@@ -94,22 +105,25 @@ public class TrainingPage extends Page{
         add(trainingEditPage,gbc);
     }
     
+    /** Loads the database inside of the table model */
     public void loadResults(){
-        ResultSet resSet = DBConnectionManager.execQuery(
-            "SELECT * FROM training ORDER BY startDateTimeTraining;"
-        );
-        defaultTable.setRowCount(0);
-        String start="",end="", id="";
-        try{
-            while(resSet.next()){
+        Connection con = DBConnectionManager.getConnection();
+        try {
+            PreparedStatement stmt = con.prepareStatement(
+                "SELECT * FROM training ORDER BY startDateTimeTraining;"
+            );
+            ResultSet resSet = stmt.executeQuery();
+            defaultTable.setRowCount(0);
+            String start="",end="", id="";
+            while(resSet.next()){   
                 start = resSet.getString("startDateTimeTraining");
                 end = resSet.getString("endDateTimeTraining");
-                id = resSet.getString("idTraining");
+                id = resSet.getString("idTraining"); 
                 defaultTable.addRow(new String[]{id,start,end});
             }
-        }catch(Exception e){
+        } catch(Exception e) {
             System.out.println(e);
-        } 
+        }
         table.setModel(defaultTable);
     }
 

@@ -2,18 +2,24 @@ package com.volleyball.club.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
 
-
-
+/**
+ * Class that manages the connection to the database
+ */
 public class DBConnectionManager {
+    /** Name of the database */
     private static final String DB_NAME = "volleyball_club";
+    /** Username of a user having admin privilege */
     private static final String USERNAME = "root";
+    /** Password of a user having admib privilege */
     private static final String PASSWORD = "Pabloescobar";
+    /** Connection static instance */
     private static Connection con = getConnection();
     
-
+    /**
+     * Returns the connection to the database
+     * @return Connection to the database
+     */
     public static Connection getConnection() {
         if(con != null) return con;
         try{
@@ -23,18 +29,5 @@ public class DBConnectionManager {
             System.out.println(e);
         }
         return con;
-    }
-
-    public static ResultSet execQuery(String query){
-        ResultSet res;
-        try{
-            Statement stmt = con.createStatement();
-            res = stmt.executeQuery(query);
-            return res;
-        }catch(Exception e){
-            System.out.println(e);
-        }
-        return null;
-    }
-    
+    }  
 }

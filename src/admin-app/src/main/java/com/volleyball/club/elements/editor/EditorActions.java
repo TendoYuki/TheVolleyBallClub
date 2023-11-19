@@ -9,11 +9,18 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+/**
+ * Editor action element that has a delete save and cancel button with listeners
+ */
 public class EditorActions extends JPanel{
+    /** Save button element */
     private JButton saveBtn;
+    /** Delete button element */
     private JButton deleteBtn;
+    /** Cancel button element */
     private JButton cancelBtn;
 
+    /** Creates an editor action element */
     public EditorActions() {
         super();
         setLayout(new GridBagLayout());
@@ -48,13 +55,25 @@ public class EditorActions extends JPanel{
         add(cancelBtn, gbc);
     }
 
+    /**
+     * Adds an action listener called when the editor has its save button pressed
+     * @param al Action listener 
+     */
     public void addOnSaveActionListener(ActionListener al) {
         saveBtn.addActionListener(al);
     }
 
+    /**
+     * Adds an action listener called when the editor has its cancel button pressed
+     * @param al Action listener 
+     */
     public void addOnCancelActionListener(ActionListener al) {
         cancelBtn.addActionListener(al);
     }
+    /**
+     * Adds an action listener called when the editor has its delete button pressed
+     * @param al Action listener 
+     */
 
     public void addOnDeleteActionListener(ActionListener al) {
         deleteBtn.addActionListener(al);

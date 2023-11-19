@@ -3,7 +3,9 @@ package com.volleyball.club.observation;
 import java.util.List;
 import java.util.ArrayList;
 
+/** Generic observable class */
 public abstract class Observable {
+    /** List of all observers */
     private List<Observer> observers = new ArrayList<Observer>();
     /**
      * Adds an observer to its list

@@ -1,14 +1,21 @@
 package com.volleyball.club.elements.editor;
 
-import java.awt.Component;
-
 import javax.swing.JTextArea;
 
 import java.awt.GridBagConstraints;
 
+/**
+ * Editor section that has an editable text area 
+ */
 public abstract class EditorSectionTextArea extends EditorSection {
-    private Component editorComponent;
+    /** Text area */
+    private JTextArea editorComponent;
 
+    /**
+     * Creates a new editor section with text area
+     * @param name Name of the section
+     * @param description Description of the section
+     */
     public EditorSectionTextArea(String name, String description) {
         super(name, description);
         editorComponent = new JTextArea();
