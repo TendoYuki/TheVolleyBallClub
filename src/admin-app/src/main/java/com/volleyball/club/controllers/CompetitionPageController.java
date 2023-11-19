@@ -1,7 +1,5 @@
 package com.volleyball.club.controllers;
 
-import java.awt.event.ActionEvent;
-
 import com.volleyball.club.views.GUI;
 import com.volleyball.club.views.competitions.CompetitionPage;
 
@@ -12,8 +10,7 @@ public class CompetitionPageController extends NavigationController {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        super.actionPerformed(e);
+    public void onPageSelected() {
         ((CompetitionPage)getPage()).loadResults();
     }
 }

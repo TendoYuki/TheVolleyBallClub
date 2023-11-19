@@ -14,9 +14,10 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.MouseEvent;
-
+import java.lang.Integer;
 
 import com.volleyball.club.database.DBConnectionManager;
+import com.volleyball.club.views.DateTime;
 import com.volleyball.club.views.Page;
 
 public class TrainingPage extends Page{
@@ -29,6 +30,8 @@ public class TrainingPage extends Page{
     };
     
     private static JTable table;
+    private TrainingModel trainingModel = new TrainingModel();
+    private TrainingModel backupModel = new TrainingModel();
 
     public TrainingPage(){
         super();
@@ -40,34 +43,38 @@ public class TrainingPage extends Page{
         gbc.weighty = 0;
         gbc.fill = GridBagConstraints.BOTH;
 
-
         gbc.gridwidth=2;
         gbc.weightx = 1;
         gbc.gridx = 0;
         gbc.gridy = 0;
         add(new JLabel("Training Page", SwingConstants.CENTER), gbc);
-
-        TrainingEditPage tep = new TrainingEditPage();
         
         setBorder(new EmptyBorder(new Insets(10, 10, 10, 10)));
-        JButton submit = new JButton("submit");
-        submit.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-
-            }
-        });
         table = new JTable(defaultTable);
+
+        TrainingEditPage trainingEditPage = new TrainingEditPage(this, defaultTable, trainingModel, backupModel);
+
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent arg0) {
-                tep.changeStart((String)defaultTable.getValueAt(table.getSelectedRow(), 1));
-                tep.changeEnd((String)defaultTable.getValueAt(table.getSelectedRow(), 2));
+                int id = Integer.valueOf((String)defaultTable.getValueAt(table.getSelectedRow(), 0));
+                String startDateTime = (String)defaultTable.getValueAt(table.getSelectedRow(), 1);
+                String endDateTime = (String)defaultTable.getValueAt(table.getSelectedRow(), 2);
+
+                // Changes the model with the new current one and notifies the view to update
+                trainingModel.setEndDateTime(new DateTime(endDateTime));
+                trainingModel.setStartDateTime(new DateTime(startDateTime));
+                trainingModel.setID(id);
+                trainingModel.updateObservers();
+
+                // Changes the backup model with the new current one
+                backupModel.setEndDateTime(new DateTime(endDateTime));
+                backupModel.setStartDateTime(new DateTime(startDateTime));
+                backupModel.setID(id);
             }
         });
+
         JScrollPane scroll = new JScrollPane(table);
-
-
         gbc.weightx = 1;
         gbc.weighty = 1;
         gbc.gridwidth=1;
@@ -75,19 +82,19 @@ public class TrainingPage extends Page{
         gbc.gridy = 1;
         add(scroll,gbc);
 
-
         gbc.weightx = 0;
         gbc.weighty = 1;
         gbc.gridheight=GridBagConstraints.REMAINDER;
         gbc.gridwidth=1;
         gbc.gridx = 1;
         gbc.gridy = 1;
-        add(tep,gbc);
+        add(trainingEditPage,gbc);
     }
     
     public void loadResults(){
-        String query = "SELECT * FROM training";
-        ResultSet resSet = DBConnectionManager.execQuery(query);
+        ResultSet resSet = DBConnectionManager.execQuery(
+            "SELECT * FROM training ORDER BY startDateTimeTraining;"
+        );
         defaultTable.setRowCount(0);
         String start="",end="", id="";
         try{

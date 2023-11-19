@@ -14,7 +14,8 @@ import javax.swing.JMenuItem;
 
 import com.volleyball.club.controllers.CompetitionPageController;
 import com.volleyball.club.controllers.EventPageController;
-import com.volleyball.club.controllers.NavigationController;
+import com.volleyball.club.controllers.HomePageController;
+import com.volleyball.club.controllers.LoginPageController;
 import com.volleyball.club.controllers.SponsorPageController;
 import com.volleyball.club.controllers.TrainingPageController;
 import com.volleyball.club.login.LoginManager;
@@ -41,24 +42,31 @@ public class GUI extends JFrame{
         /** ----------- HOME PAGE ----------- */
 
         HomePage homePage = new HomePage();
+        HomePageController homePageController = new HomePageController(homePage, this);
 
         /** ----------- LOGIN PAGE ----------- */
 
+
+        LoginPage loginPage = new LoginPage(this);
+        LoginPageController loginPageController = new LoginPageController(loginPage, this);
+
         JButton loginMenuBarBTN = new JButton("Login");
         loginMenuBarBTN.setFocusPainted(false);
-        LoginPage loginPage = new LoginPage(this);
 
         JButton logoutMenuBarBTN = new JButton("Log out");
         logoutMenuBarBTN.setFocusPainted(false);
 
-        loginMenuBarBTN.addActionListener(new NavigationController(loginPage, this));
-        logoutMenuBarBTN.addActionListener(new NavigationController(loginPage, this));
+        loginMenuBarBTN.addActionListener(loginPageController);
+        logoutMenuBarBTN.addActionListener(homePageController);
+
+        // Deauthentification logic
         logoutMenuBarBTN.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 LoginManager.getInstance().deauthentify();
             }
         });
+
         navModel.addMenu(loginMenuBarBTN);
 
 
