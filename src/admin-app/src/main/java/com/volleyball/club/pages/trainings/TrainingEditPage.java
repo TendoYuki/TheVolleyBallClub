@@ -71,7 +71,6 @@ public class TrainingEditPage extends EditPage{
             public void update(Observable observable) {
                 setMinimumDateTime(((TrainingModel)observable).getStartDateTime());
                 setValue(((TrainingModel)observable).getEndDateTime());
-                setValue(null);
             }
         };
         endTimeEditorSection.addModifyListener(arg0 -> {

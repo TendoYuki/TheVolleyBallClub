@@ -27,6 +27,8 @@ import com.volleyball.club.pages.login.LoginPage;
 import com.volleyball.club.pages.login.LoginPageController;
 import com.volleyball.club.pages.sponsors.SponsorPage;
 import com.volleyball.club.pages.sponsors.SponsorPageController;
+import com.volleyball.club.pages.trainings.TrainingCreatePage;
+import com.volleyball.club.pages.trainings.TrainingCreatePageController;
 import com.volleyball.club.pages.trainings.TrainingPage;
 import com.volleyball.club.pages.trainings.TrainingPageController;
 
@@ -89,6 +91,7 @@ public class GUI extends JFrame{
 
         JMenu competitionMenu = new JMenu("Competitions");
         JMenuItem competitionMenuViewBTN = new JMenuItem("View");
+        JMenuItem competitionMenuNewBTN = new JMenuItem("New");
         CompetitionPage competitionPage = new CompetitionPage();
 
         competitionMenu.add(competitionMenuViewBTN);
@@ -107,9 +110,13 @@ public class GUI extends JFrame{
 
         JMenu trainingMenu = new JMenu("Trainings");
         JMenuItem trainingMenuViewBTN = new JMenuItem("View");
+        JMenuItem trainingMenuNewBTN = new JMenuItem("New");
         TrainingPage trainingPage = new TrainingPage();
+        TrainingCreatePage trainingCreatePage = new TrainingCreatePage();
         trainingMenu.add(trainingMenuViewBTN);
+        trainingMenu.add(trainingMenuNewBTN);
         trainingMenuViewBTN.addActionListener(new TrainingPageController(trainingPage, this));
+        trainingMenuNewBTN.addActionListener(new TrainingCreatePageController(trainingCreatePage, this));
 
         /** ----------- CHANGING APP ICON ----------- */
 

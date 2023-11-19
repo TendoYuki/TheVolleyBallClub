@@ -37,7 +37,7 @@ public class DateTime implements Comparable<DateTime>{
             String date = parts[0];
             String time = parts[1];
             this.ld = LocalDate.parse(date);
-            if(lt != null) this.lt = LocalTime.parse(time).truncatedTo(ChronoUnit.SECONDS);
+            this.lt = LocalTime.parse(time).truncatedTo(ChronoUnit.SECONDS);
         } catch (Exception e) {
             throw new InvalidDateTimeFormatException();
         }

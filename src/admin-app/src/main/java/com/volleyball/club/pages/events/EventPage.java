@@ -76,7 +76,7 @@ public class EventPage extends Page{
                 end = resSet.getString("endDateTime");
                 name = resSet.getString("nameEvent");
                 desc = resSet.getString("descEvent");
-                id = resSet.getString("idPartner");
+                id = resSet.getString("idEvent");
                 defaultTable.addRow(new String[]{id,start,end,name,desc});
             }
         } catch (Exception e) {
