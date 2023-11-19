@@ -1,4 +1,4 @@
-package com.volleyball.club.mvc;
+package com.volleyball.club.observation;
 
 import java.util.List;
 import java.util.ArrayList;

@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import com.volleyball.club.database.DBConnectionManager;
 import com.volleyball.club.login.exceptions.IncorrectLoginException;
 import com.volleyball.club.login.exceptions.IncorrectPasswordException;
-import com.volleyball.club.mvc.Observable;
+import com.volleyball.club.observation.Observable;
 
 public class LoginManager extends Observable{
     private boolean isConnected = false;

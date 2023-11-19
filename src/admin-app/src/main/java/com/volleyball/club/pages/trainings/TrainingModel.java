@@ -1,7 +1,7 @@
 package com.volleyball.club.pages.trainings;
 
 import com.volleyball.club.datetime.DateTime;
-import com.volleyball.club.mvc.Observable;
+import com.volleyball.club.observation.Observable;
 
 public class TrainingModel extends Observable{
 

@@ -1,4 +1,4 @@
-package com.volleyball.club.mvc;
+package com.volleyball.club.observation;
 
 public interface Observer {
     /**

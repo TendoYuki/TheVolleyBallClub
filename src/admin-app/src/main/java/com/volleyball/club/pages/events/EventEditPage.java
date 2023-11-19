@@ -44,4 +44,8 @@ public class EventEditPage extends EditPage{
         // gbc.gridy = 3;
         // add(es4, gbc);
     }
+    @Override
+    public void clear() {
+        
+    }
 }

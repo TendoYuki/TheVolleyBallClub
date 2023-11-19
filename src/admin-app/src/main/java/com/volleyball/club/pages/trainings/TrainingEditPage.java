@@ -15,7 +15,7 @@ import com.volleyball.club.database.DBConnectionManager;
 import com.volleyball.club.datetime.DateTime;
 import com.volleyball.club.elements.editor.EditorActions;
 import com.volleyball.club.elements.editor.EditorSectionDateTime;
-import com.volleyball.club.mvc.Observable;
+import com.volleyball.club.observation.Observable;
 import com.volleyball.club.pages.EditPage;
 
 public class TrainingEditPage extends EditPage{
@@ -144,9 +144,8 @@ public class TrainingEditPage extends EditPage{
         model.addObserver(es1);
         model.addObserver(es2);
     }
-    /**
-     * Clears the edit pages's fields
-     */
+
+    @Override
     public void clear() {
         es1.clear();
         es2.clear();

@@ -3,8 +3,8 @@ package com.volleyball.club.elements.navbar;
 import javax.swing.JMenuBar;
 
 import com.volleyball.club.models.NavbarModel;
-import com.volleyball.club.mvc.Observable;
-import com.volleyball.club.mvc.Observer;
+import com.volleyball.club.observation.Observable;
+import com.volleyball.club.observation.Observer;
 
 public class Navbar extends JMenuBar implements Observer{
     private void updateMenus(NavbarModel model) {

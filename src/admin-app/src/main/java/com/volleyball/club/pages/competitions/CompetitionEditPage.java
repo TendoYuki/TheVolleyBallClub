@@ -32,4 +32,8 @@ public class CompetitionEditPage extends EditPage{
         // gbc.gridy = 1;
         // add(es2, gbc);
     }
+    @Override
+    public void clear() {
+        
+    }
 }

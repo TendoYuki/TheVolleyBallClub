@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import com.volleyball.club.mvc.Observer;
+import com.volleyball.club.observation.Observer;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
