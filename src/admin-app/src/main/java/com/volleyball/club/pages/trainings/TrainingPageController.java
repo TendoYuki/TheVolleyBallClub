@@ -10,6 +10,7 @@ public class TrainingPageController extends NavigationController {
 
     @Override
     public void onPageSelected() {
+        ((TrainingPage)getPage()).clearEditor();
         ((TrainingPage)getPage()).loadResults();
     }
 }

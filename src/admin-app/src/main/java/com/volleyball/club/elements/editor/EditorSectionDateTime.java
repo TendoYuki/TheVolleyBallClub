@@ -28,6 +28,13 @@ public abstract class EditorSectionDateTime extends EditorSection {
         ((DateTimePicker)editorComponent).setDateTime((DateTime)newValue);
     }
 
+    /**
+     * Clears the datetime picker's fields
+     */
+    public void clear() {
+        editorComponent.clear();
+    }
+
     @Override
     public Object getValue() {
         return ((DateTimePicker)editorComponent).getDateTime();

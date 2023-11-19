@@ -62,8 +62,11 @@ public class TrainingEditPage extends EditPage{
         ) {
             @Override
             public void update(Observable observable) {
+                System.out.println("zfezf");
                 setMinimumDateTime(((TrainingModel)observable).getStartDateTime());
                 setValue(((TrainingModel)observable).getEndDateTime());
+                setValue(null);
+
             }
         };
         es2.addModifyListener(arg0 -> {
@@ -140,5 +143,12 @@ public class TrainingEditPage extends EditPage{
 
         model.addObserver(es1);
         model.addObserver(es2);
+    }
+    /**
+     * Clears the edit pages's fields
+     */
+    public void clear() {
+        es1.clear();
+        es2.clear();
     }
 }

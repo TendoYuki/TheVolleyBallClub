@@ -69,6 +69,14 @@ public class DateTimePicker extends JPanel{
     }
 
     /**
+     * Clears the datetime picker's fields
+     */
+    public void clear() {
+        datePicker.clear();
+        timePicker.clear();
+    }
+
+    /**
      * Sets the current selected datetime of the picker
      * @param dateTime
      */

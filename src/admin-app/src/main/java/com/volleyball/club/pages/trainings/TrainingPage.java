@@ -30,6 +30,7 @@ public class TrainingPage extends Page{
     private static JTable table;
     private TrainingModel trainingModel = new TrainingModel();
     private TrainingModel backupModel = new TrainingModel();
+    private TrainingEditPage trainingEditPage;
 
     public TrainingPage(){
         super();
@@ -50,7 +51,7 @@ public class TrainingPage extends Page{
         setBorder(new EmptyBorder(new Insets(10, 10, 10, 10)));
         table = new JTable(defaultTable);
 
-        TrainingEditPage trainingEditPage = new TrainingEditPage(this, defaultTable, trainingModel, backupModel);
+        trainingEditPage = new TrainingEditPage(this, defaultTable, trainingModel, backupModel);
 
         table.addMouseListener(new MouseAdapter() {
             @Override
@@ -110,7 +111,12 @@ public class TrainingPage extends Page{
             System.out.println(e);
         } 
         table.setModel(defaultTable);
-        revalidate();
-        repaint();
+    }
+
+    /**
+     * Clears the editor's fields
+     */
+    public void clearEditor() {
+        trainingEditPage.clear();
     }
 }
