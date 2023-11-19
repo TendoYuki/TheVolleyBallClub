@@ -14,7 +14,8 @@ import java.awt.event.MouseEvent;
 import java.lang.Integer;
 
 import com.volleyball.club.database.DBConnectionManager;
-import com.volleyball.club.pages.DateTime;
+import com.volleyball.club.datetime.DateTime;
+import com.volleyball.club.datetime.exceptions.InvalidDateTimeFormatException;
 import com.volleyball.club.pages.Page;
 
 public class TrainingPage extends Page{
@@ -58,16 +59,20 @@ public class TrainingPage extends Page{
                 String startDateTime = (String)defaultTable.getValueAt(table.getSelectedRow(), 1);
                 String endDateTime = (String)defaultTable.getValueAt(table.getSelectedRow(), 2);
 
-                // Changes the model with the new current one and notifies the view to update
-                trainingModel.setEndDateTime(new DateTime(endDateTime));
-                trainingModel.setStartDateTime(new DateTime(startDateTime));
-                trainingModel.setID(id);
-                trainingModel.updateObservers();
+                try {
+                    // Changes the model with the new current one and notifies the view to update
+                    trainingModel.setEndDateTime(new DateTime(endDateTime));
+                    trainingModel.setStartDateTime(new DateTime(startDateTime));
+                    trainingModel.setID(id);
+                    trainingModel.updateObservers();
 
-                // Changes the backup model with the new current one
-                backupModel.setEndDateTime(new DateTime(endDateTime));
-                backupModel.setStartDateTime(new DateTime(startDateTime));
-                backupModel.setID(id);
+                    // Changes the backup model with the new current one
+                    backupModel.setEndDateTime(new DateTime(endDateTime));
+                    backupModel.setStartDateTime(new DateTime(startDateTime));
+                    backupModel.setID(id);
+                } catch (InvalidDateTimeFormatException e) {
+                    System.out.println(e);
+                }
             }
         });
 

@@ -3,6 +3,8 @@ package com.volleyball.club.datetime;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import com.volleyball.club.datetime.exceptions.InvalidDateTimeFormatException;
+
 public class DateTime implements Comparable<DateTime>{
     
     private LocalDate ld;
@@ -17,12 +19,16 @@ public class DateTime implements Comparable<DateTime>{
      * Creates a datetime using the following format YYYY-MM-DD HH:mm:ss
      * @param dateTime Datetime string
      */
-    public DateTime(String dateTime) {
-        String[] parts = dateTime.split(" ");
-        String date = parts[0];
-        String time = parts[1];
-        this.ld = LocalDate.parse(date);
-        this.lt = LocalTime.parse(time);
+    public DateTime(String dateTime) throws InvalidDateTimeFormatException{
+        try {
+            String[] parts = dateTime.split(" ");
+            String date = parts[0];
+            String time = parts[1];
+            this.ld = LocalDate.parse(date);
+            this.lt = LocalTime.parse(time);
+        } catch (Exception e) {
+            throw new InvalidDateTimeFormatException();
+        }
     }
     
     /**
