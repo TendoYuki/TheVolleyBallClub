@@ -58,8 +58,8 @@ public class DateTimePicker extends JPanel{
      */
     private void checkValidity() {
         if(!manualInput) return;
-        if(datePicker.getDate() == null || timePicker.getTime() == null) return;
-        
+        if(datePicker.getDate() == null) return;
+
         DateTime dateTime = new DateTime(datePicker.getDate(), timePicker.getTime());
 
         // Checks if the date is before the upper bound

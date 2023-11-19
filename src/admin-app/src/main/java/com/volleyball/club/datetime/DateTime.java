@@ -2,6 +2,7 @@ package com.volleyball.club.datetime;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 
 import com.volleyball.club.datetime.exceptions.InvalidDateTimeFormatException;
 
@@ -23,7 +24,7 @@ public class DateTime implements Comparable<DateTime>{
      */
     public DateTime(LocalDate ld, LocalTime lt) {
         this.ld = ld;
-        this.lt = lt;
+        if(lt != null) this.lt = lt.truncatedTo(ChronoUnit.SECONDS);
     }
     
     /**
@@ -36,7 +37,7 @@ public class DateTime implements Comparable<DateTime>{
             String date = parts[0];
             String time = parts[1];
             this.ld = LocalDate.parse(date);
-            this.lt = LocalTime.parse(time);
+            if(lt != null) this.lt = LocalTime.parse(time).truncatedTo(ChronoUnit.SECONDS);
         } catch (Exception e) {
             throw new InvalidDateTimeFormatException();
         }
@@ -49,7 +50,7 @@ public class DateTime implements Comparable<DateTime>{
      */
     public DateTime(String date, String time) {
         this.ld = LocalDate.parse(date);
-        this.lt = LocalTime.parse(time);
+        this.lt = LocalTime.parse(time).truncatedTo(ChronoUnit.SECONDS);
     }
 
     /**
@@ -58,7 +59,10 @@ public class DateTime implements Comparable<DateTime>{
      */
     public DateTime(DateTime dateTime) {
         this.ld = LocalDate.parse(dateTime.getLocalDate().toString());
-        this.lt = LocalTime.parse(dateTime.getLocalTime().toString());
+        if(lt != null)
+            this.lt = LocalTime.parse(
+                dateTime.getLocalTime().toString()
+            ).truncatedTo(ChronoUnit.SECONDS);
     }
 
     /**
@@ -111,11 +115,23 @@ public class DateTime implements Comparable<DateTime>{
     @Override
     public int compareTo(DateTime other) {
         int date = ld.compareTo(other.ld);
-        return date != 0 ? date : lt.compareTo(other.lt) ;
+        if(lt != null) return date != 0 ? date : lt.compareTo(other.lt) ;
+        else return date;
     }
     
     @Override
     public String toString() {
-        return ld.toString() + " " + lt.toString();
+        if(lt != null)
+            return ld.toString() + " " + lt.toString();
+        else 
+            return ld.toString();
+    }
+    
+    /**
+     * Creates a new datetime from the current local date and time
+     * @return Current date and time
+     */
+    public static DateTime now() {
+        return new DateTime(LocalDate.now(), LocalTime.now().truncatedTo(ChronoUnit.SECONDS));
     }
 }
