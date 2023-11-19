@@ -1,4 +1,4 @@
-package com.volleyball.club.views;
+package com.volleyball.club.pages;
 
 import javax.swing.JPanel;
 

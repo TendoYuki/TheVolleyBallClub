@@ -1,7 +1,7 @@
-package com.volleyball.club.controllers;
+package com.volleyball.club.pages.competitions;
 
-import com.volleyball.club.views.GUI;
-import com.volleyball.club.views.competitions.CompetitionPage;
+import com.volleyball.club.controllers.NavigationController;
+import com.volleyball.club.pages.GUI;
 
 public class CompetitionPageController extends NavigationController {
 

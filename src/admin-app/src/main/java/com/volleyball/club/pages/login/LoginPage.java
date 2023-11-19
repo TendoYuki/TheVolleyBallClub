@@ -1,4 +1,4 @@
-package com.volleyball.club.views;
+package com.volleyball.club.pages.login;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -12,6 +12,7 @@ import javax.swing.border.Border;
 import com.volleyball.club.login.LoginManager;
 import com.volleyball.club.login.exceptions.IncorrectLoginException;
 import com.volleyball.club.login.exceptions.IncorrectPasswordException;
+import com.volleyball.club.pages.Page;
 
 import java.awt.GridBagLayout;
 import java.awt.Insets;

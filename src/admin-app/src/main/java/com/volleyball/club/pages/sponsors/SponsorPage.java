@@ -1,4 +1,4 @@
-package com.volleyball.club.views.events;
+package com.volleyball.club.pages.sponsors;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -12,10 +12,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import com.volleyball.club.database.DBConnectionManager;
-import com.volleyball.club.views.Page;
+import com.volleyball.club.pages.Page;
 
-public class EventPage extends Page{
-    private static DefaultTableModel defaultTable = new DefaultTableModel(new String[]{"ID","Start","End","Name","Description"},0){
+public class SponsorPage extends Page{
+    private static DefaultTableModel defaultTable = new DefaultTableModel(new String[]{"ID","Name","Logo"},0){
         @Override
         public boolean isCellEditable(int row, int column) {
             // Make all cells non-editable
@@ -25,10 +25,10 @@ public class EventPage extends Page{
     
     private static JTable table;
 
-    public EventPage(){
+    public SponsorPage(){
         super();
         JPanel tdisplay = new JPanel();
-        tdisplay.add(new EventEditPage());
+        tdisplay.add(new SponsorEditPage());
         JButton submit = new JButton("submit");
         submit.addActionListener(new ActionListener(){
             @Override
@@ -42,14 +42,14 @@ public class EventPage extends Page{
         scroll.setMinimumSize(new Dimension(500, 500));
         add(scroll,BorderLayout.CENTER);
         add(tdisplay,BorderLayout.SOUTH);
-        add(new JLabel("Event Page"), BorderLayout.NORTH);
+        add(new JLabel("Sponsor Page"), BorderLayout.NORTH);
     }
     
     public void loadResults(){
-        String query = "SELECT * FROM event";
+        String query = "SELECT * FROM partner";
         ResultSet resSet = DBConnectionManager.execQuery(query);
         defaultTable.setRowCount(0);
-        String start="",end="", id="",name="",desc="";
+        String name="",logo="", id="";
         JButton delete = new JButton("delete");
         delete.addActionListener(new ActionListener() {
             @Override
@@ -68,12 +68,10 @@ public class EventPage extends Page{
         });
         try{
             while(resSet.next()){
-                start = resSet.getString("startDateTime");
-                end = resSet.getString("endDateTime");
-                name = resSet.getString("nameEvent");
-                desc = resSet.getString("descEvent");
+                name = resSet.getString("namePartner");
+                logo = resSet.getString("logoPartner");
                 id = resSet.getString("idPartner");
-                defaultTable.addRow(new String[]{id,start,end,name,desc});
+                defaultTable.addRow(new String[]{id,name,logo});
             }
         }catch(Exception e){
             System.out.println(e);

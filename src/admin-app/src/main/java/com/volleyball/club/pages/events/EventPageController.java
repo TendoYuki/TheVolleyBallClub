@@ -1,7 +1,7 @@
-package com.volleyball.club.controllers;
+package com.volleyball.club.pages.events;
 
-import com.volleyball.club.views.GUI;
-import com.volleyball.club.views.events.EventPage;
+import com.volleyball.club.controllers.NavigationController;
+import com.volleyball.club.pages.GUI;
 
 public class EventPageController extends NavigationController {
 

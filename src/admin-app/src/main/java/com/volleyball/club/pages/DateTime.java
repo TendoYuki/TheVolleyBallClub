@@ -1,4 +1,4 @@
-package com.volleyball.club.views;
+package com.volleyball.club.pages;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

@@ -1,4 +1,4 @@
-package com.volleyball.club.views;
+package com.volleyball.club.pages.homepage;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -11,6 +11,8 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+import com.volleyball.club.pages.Page;
 
 public class HomePage extends Page{
 

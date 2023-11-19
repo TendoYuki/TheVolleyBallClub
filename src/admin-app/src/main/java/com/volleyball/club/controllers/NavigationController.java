@@ -1,10 +1,10 @@
 package com.volleyball.club.controllers;
 
-import com.volleyball.club.views.GUI;
-import com.volleyball.club.views.Page;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import com.volleyball.club.pages.GUI;
+import com.volleyball.club.pages.Page;
 
 public abstract class NavigationController implements ActionListener {
     private Page page;

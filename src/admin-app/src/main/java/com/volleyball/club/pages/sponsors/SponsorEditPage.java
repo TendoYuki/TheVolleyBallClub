@@ -1,12 +1,11 @@
-package com.volleyball.club.views.sponsors;
+package com.volleyball.club.pages.sponsors;
 
 import java.awt.GridBagConstraints;
 
 import javax.swing.JLabel;
 
 import com.volleyball.club.elements.DateTimePicker;
-import com.volleyball.club.elements.EditorSection;
-import com.volleyball.club.views.EditPage;
+import com.volleyball.club.pages.EditPage;
 
 public class SponsorEditPage extends EditPage{
 

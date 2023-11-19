@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.TimePicker;
-import com.volleyball.club.views.DateTime;
+import com.volleyball.club.pages.DateTime;
 
 public class DateTimePicker extends JPanel{
     private TimePicker timePicker;

@@ -1,12 +1,9 @@
-package com.volleyball.club.views.trainings;
+package com.volleyball.club.pages.trainings;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.sql.ResultSet;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -17,8 +14,8 @@ import java.awt.event.MouseEvent;
 import java.lang.Integer;
 
 import com.volleyball.club.database.DBConnectionManager;
-import com.volleyball.club.views.DateTime;
-import com.volleyball.club.views.Page;
+import com.volleyball.club.pages.DateTime;
+import com.volleyball.club.pages.Page;
 
 public class TrainingPage extends Page{
     private static DefaultTableModel defaultTable = new DefaultTableModel(new String[]{"ID","Start","End"},0){

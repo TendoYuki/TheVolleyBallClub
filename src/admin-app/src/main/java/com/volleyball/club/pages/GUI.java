@@ -1,4 +1,4 @@
-package com.volleyball.club.views;
+package com.volleyball.club.pages;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -12,20 +12,22 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-import com.volleyball.club.controllers.CompetitionPageController;
-import com.volleyball.club.controllers.EventPageController;
-import com.volleyball.club.controllers.HomePageController;
-import com.volleyball.club.controllers.LoginPageController;
-import com.volleyball.club.controllers.SponsorPageController;
-import com.volleyball.club.controllers.TrainingPageController;
 import com.volleyball.club.login.LoginManager;
 import com.volleyball.club.models.NavbarModel;
 import com.volleyball.club.mvc.Observable;
 import com.volleyball.club.mvc.Observer;
-import com.volleyball.club.views.competitions.CompetitionPage;
-import com.volleyball.club.views.events.EventPage;
-import com.volleyball.club.views.sponsors.SponsorPage;
-import com.volleyball.club.views.trainings.TrainingPage;
+import com.volleyball.club.pages.competitions.CompetitionPage;
+import com.volleyball.club.pages.competitions.CompetitionPageController;
+import com.volleyball.club.pages.events.EventPage;
+import com.volleyball.club.pages.events.EventPageController;
+import com.volleyball.club.pages.homepage.HomePage;
+import com.volleyball.club.pages.homepage.HomePageController;
+import com.volleyball.club.pages.login.LoginPage;
+import com.volleyball.club.pages.login.LoginPageController;
+import com.volleyball.club.pages.sponsors.SponsorPage;
+import com.volleyball.club.pages.sponsors.SponsorPageController;
+import com.volleyball.club.pages.trainings.TrainingPage;
+import com.volleyball.club.pages.trainings.TrainingPageController;
 
 public class GUI extends JFrame{
     private Page activePage = null;

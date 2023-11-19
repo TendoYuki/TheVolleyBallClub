@@ -1,4 +1,4 @@
-package com.volleyball.club.views.trainings;
+package com.volleyball.club.pages.trainings;
 
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -15,8 +15,8 @@ import com.volleyball.club.database.DBConnectionManager;
 import com.volleyball.club.elements.EditorActions;
 import com.volleyball.club.elements.EditorSectionDateTime;
 import com.volleyball.club.mvc.Observable;
-import com.volleyball.club.views.DateTime;
-import com.volleyball.club.views.EditPage;
+import com.volleyball.club.pages.DateTime;
+import com.volleyball.club.pages.EditPage;
 
 public class TrainingEditPage extends EditPage{
 

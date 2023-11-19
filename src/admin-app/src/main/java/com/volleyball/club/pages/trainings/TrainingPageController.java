@@ -1,7 +1,7 @@
-package com.volleyball.club.controllers;
+package com.volleyball.club.pages.trainings;
 
-import com.volleyball.club.views.GUI;
-import com.volleyball.club.views.trainings.TrainingPage;
+import com.volleyball.club.controllers.NavigationController;
+import com.volleyball.club.pages.GUI;
 
 public class TrainingPageController extends NavigationController {
     public TrainingPageController(TrainingPage page, GUI gui) {
