@@ -62,7 +62,6 @@ public class TrainingEditPage extends EditPage{
         ) {
             @Override
             public void update(Observable observable) {
-                System.out.println("zfezf");
                 setMinimumDateTime(((TrainingModel)observable).getStartDateTime());
                 setValue(((TrainingModel)observable).getEndDateTime());
                 setValue(null);
