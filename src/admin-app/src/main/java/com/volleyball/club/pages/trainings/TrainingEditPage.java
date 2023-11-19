@@ -65,7 +65,6 @@ public class TrainingEditPage extends EditPage{
                 setMinimumDateTime(((TrainingModel)observable).getStartDateTime());
                 setValue(((TrainingModel)observable).getEndDateTime());
                 setValue(null);
-
             }
         };
         es2.addModifyListener(arg0 -> {
