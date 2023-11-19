@@ -1,9 +1,10 @@
-package com.volleyball.club.elements;
+package com.volleyball.club.elements.editor;
 
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionListener;
 
 import com.volleyball.club.datetime.DateTime;
+import com.volleyball.club.elements.DateTimePicker;
 
 public abstract class EditorSectionDateTime extends EditorSection {
     private DateTimePicker editorComponent;

@@ -1,4 +1,4 @@
-package com.volleyball.club.pages;
+package com.volleyball.club.elements.navbar;
 
 import javax.swing.JMenuBar;
 

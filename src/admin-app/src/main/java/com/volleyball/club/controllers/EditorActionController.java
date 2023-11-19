@@ -3,7 +3,7 @@ package com.volleyball.club.controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import com.volleyball.club.elements.EditorActions;
+import com.volleyball.club.elements.editor.EditorActions;
 
 public abstract class EditorActionController {
     private EditorActions editorActions;

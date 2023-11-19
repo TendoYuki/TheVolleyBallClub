@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
+import com.volleyball.club.elements.navbar.Navbar;
 import com.volleyball.club.login.LoginManager;
 import com.volleyball.club.models.NavbarModel;
 import com.volleyball.club.mvc.Observable;

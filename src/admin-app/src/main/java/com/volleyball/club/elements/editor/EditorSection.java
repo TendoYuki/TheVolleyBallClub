@@ -1,4 +1,4 @@
-package com.volleyball.club.elements;
+package com.volleyball.club.elements.editor;
 
 import java.awt.Color;
 
