@@ -1,88 +1,136 @@
 package com.volleyball.club.pages.competitions;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.MouseAdapter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.MouseEvent;
+import java.lang.Integer;
 
 import com.volleyball.club.database.DBConnectionManager;
+import com.volleyball.club.datetime.DateTime;
+import com.volleyball.club.datetime.exceptions.InvalidDateTimeFormatException;
 import com.volleyball.club.pages.Page;
 
+/**
+ * Competition page displaying all competitions 
+ */
 public class CompetitionPage extends Page{
-    private static DefaultTableModel defaultTable = new DefaultTableModel(new String[]{"ID","Start","End"}, 0){
+    /** Model of the table containing all competitions */
+    private static DefaultTableModel defaultTable = new DefaultTableModel(new String[]{"ID","Start","End"},0){
         @Override
         public boolean isCellEditable(int row, int column) {
             // Make all cells non-editable
             return false;
         }
     };
-
+    
+    /** Table to display the model */
     private static JTable table;
+    /** Model of the currently selected row */
+    private CompetitionModel competitionModel = new CompetitionModel();
+    /** Backup model of the currently selected row, used for cancel logic */
+    private CompetitionModel backupModel = new CompetitionModel();
+    /** Edition page of the competitions */
+    private CompetitionEditPage competitionEditPage;
 
+    /** Creates a new competition page */
     public CompetitionPage(){
         super();
-        JPanel tdisplay = new JPanel();
-        tdisplay.add(new CompetitionEditPage());
-        JButton submit = new JButton("submit");
-        submit.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
 
+        gbc.weightx = 0;
+        gbc.weighty = 0;
+        gbc.fill = GridBagConstraints.BOTH;
+
+        gbc.gridwidth=2;
+        gbc.weightx = 1;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        add(new JLabel("Competition Page", SwingConstants.CENTER), gbc);
+        
+        setBorder(new EmptyBorder(new Insets(10, 10, 10, 10)));
+        table = new JTable(defaultTable);
+
+        competitionEditPage = new CompetitionEditPage(this, competitionModel, backupModel);
+
+        table.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent arg0) {
+                int id = Integer.valueOf((String)defaultTable.getValueAt(table.getSelectedRow(), 0));
+                String startDateTime = (String)defaultTable.getValueAt(table.getSelectedRow(), 1);
+                String endDateTime = (String)defaultTable.getValueAt(table.getSelectedRow(), 2);
+
+                try {
+                    // Changes the model with the new current one and notifies the view to update
+                    competitionModel.setEndDateTime(new DateTime(endDateTime));
+                    competitionModel.setStartDateTime(new DateTime(startDateTime));
+                    competitionModel.setID(id);
+                    competitionModel.updateObservers();
+
+                    // Changes the backup model with the new current one
+                    backupModel.setEndDateTime(new DateTime(endDateTime));
+                    backupModel.setStartDateTime(new DateTime(startDateTime));
+                    backupModel.setID(id);
+                } catch (InvalidDateTimeFormatException e) {
+                    System.out.println(e);
+                }
             }
         });
-        tdisplay.add(submit);
-        table = new JTable(defaultTable);
-        JScrollPane scroll = new JScrollPane(table);
-        scroll.setMinimumSize(new Dimension(500, 500));
-        add(scroll,BorderLayout.CENTER);
-        add(tdisplay,BorderLayout.SOUTH);
-        add(new JLabel("Competition Page"), BorderLayout.NORTH);
-    }
 
+        JScrollPane scroll = new JScrollPane(table);
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        gbc.gridwidth=1;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        add(scroll,gbc);
+
+        gbc.weightx = 0;
+        gbc.weighty = 1;
+        gbc.gridheight=GridBagConstraints.REMAINDER;
+        gbc.gridwidth=1;
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        add(competitionEditPage,gbc);
+    }
+    
+    /** Loads the database inside of the table model */
     public void loadResults(){
-        String query = "SELECT * FROM competition";
         Connection con = DBConnectionManager.getConnection();
         try {
-            PreparedStatement stmt = con.prepareStatement(query);
+            PreparedStatement stmt = con.prepareStatement(
+                "SELECT * FROM competition ORDER BY startDateTimeCompetition;"
+            );
             ResultSet resSet = stmt.executeQuery();
             defaultTable.setRowCount(0);
             String start="",end="", id="";
-            JButton delete = new JButton("delete");
-            delete.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent arg0) {
-                    int res = JOptionPane.showConfirmDialog(null,"Etes-vous sur ?");
-
-                    if(res == JOptionPane.YES_OPTION){
-                        System.out.println("YES OPTION SELECTED");
-                        int selectedRow = table.getSelectedRow();
-                        if(selectedRow != -1){
-                            String id = (String)defaultTable.getValueAt(selectedRow, 0);
-                            System.out.println(id);
-                        }
-                    }
-                }
-            });
-            while(resSet.next()){
+            while(resSet.next()){   
                 start = resSet.getString("startDateTimeCompetition");
                 end = resSet.getString("endDateTimeCompetition");
-                id = resSet.getString("idCompetition");
+                id = resSet.getString("idCompetition"); 
                 defaultTable.addRow(new String[]{id,start,end});
             }
         } catch(Exception e) {
             System.out.println(e);
         }
         table.setModel(defaultTable);
-        revalidate();
-        repaint();
+    }
+
+    /**
+     * Clears the editor's fields
+     */
+    public void clearEditor() {
+        competitionEditPage.clear();
     }
 }

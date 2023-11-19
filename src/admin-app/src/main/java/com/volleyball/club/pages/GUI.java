@@ -17,6 +17,8 @@ import com.volleyball.club.login.LoginManager;
 import com.volleyball.club.models.NavbarModel;
 import com.volleyball.club.observation.Observable;
 import com.volleyball.club.observation.Observer;
+import com.volleyball.club.pages.competitions.CompetitionCreatePage;
+import com.volleyball.club.pages.competitions.CompetitionCreatePageController;
 import com.volleyball.club.pages.competitions.CompetitionPage;
 import com.volleyball.club.pages.competitions.CompetitionPageController;
 import com.volleyball.club.pages.events.EventPage;
@@ -93,9 +95,12 @@ public class GUI extends JFrame{
         JMenuItem competitionMenuViewBTN = new JMenuItem("View");
         JMenuItem competitionMenuNewBTN = new JMenuItem("New");
         CompetitionPage competitionPage = new CompetitionPage();
+        CompetitionCreatePage competitionCreatePage = new CompetitionCreatePage();
 
         competitionMenu.add(competitionMenuViewBTN);
+        competitionMenu.add(competitionMenuNewBTN);
         competitionMenuViewBTN.addActionListener(new CompetitionPageController(competitionPage, this));
+        competitionMenuNewBTN.addActionListener(new CompetitionCreatePageController(competitionCreatePage, this));
 
         /** ----------- SPONSOR PAGE ----------- */
 
@@ -113,6 +118,7 @@ public class GUI extends JFrame{
         JMenuItem trainingMenuNewBTN = new JMenuItem("New");
         TrainingPage trainingPage = new TrainingPage();
         TrainingCreatePage trainingCreatePage = new TrainingCreatePage();
+
         trainingMenu.add(trainingMenuViewBTN);
         trainingMenu.add(trainingMenuNewBTN);
         trainingMenuViewBTN.addActionListener(new TrainingPageController(trainingPage, this));
