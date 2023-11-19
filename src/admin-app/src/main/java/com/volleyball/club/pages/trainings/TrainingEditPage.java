@@ -12,10 +12,10 @@ import javax.swing.table.DefaultTableModel;
 
 import com.volleyball.club.controllers.EditorActionController;
 import com.volleyball.club.database.DBConnectionManager;
+import com.volleyball.club.datetime.DateTime;
 import com.volleyball.club.elements.EditorActions;
 import com.volleyball.club.elements.EditorSectionDateTime;
 import com.volleyball.club.mvc.Observable;
-import com.volleyball.club.pages.DateTime;
 import com.volleyball.club.pages.EditPage;
 
 public class TrainingEditPage extends EditPage{

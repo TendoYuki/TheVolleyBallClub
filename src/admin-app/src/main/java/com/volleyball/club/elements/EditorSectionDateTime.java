@@ -3,7 +3,7 @@ package com.volleyball.club.elements;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionListener;
 
-import com.volleyball.club.pages.DateTime;
+import com.volleyball.club.datetime.DateTime;
 
 public abstract class EditorSectionDateTime extends EditorSection {
     private DateTimePicker editorComponent;
