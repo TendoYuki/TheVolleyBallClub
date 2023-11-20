@@ -119,6 +119,9 @@ public class CompetitionResultModel extends Observable{
         this.clubCount = clubCount;
     }
 
+    /**
+     * Resets the model to its default state
+     */
     public void resetDefaultValues() {
         this.ID = -1;
         this.victoriesCount = 0;

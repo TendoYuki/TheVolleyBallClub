@@ -196,5 +196,8 @@ public class CompetitionResultPage extends Page{
         model.addObserver(rankSection);
     }
     
+    /**
+     * Clears the fields
+     */
     public void clear() { }
 }

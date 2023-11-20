@@ -9,7 +9,7 @@ import java.awt.GridBagConstraints;
 import java.awt.event.ActionListener;
 
 /**
- * Editor section that has an editable text field 
+ * Editor section that has an editable number field 
  */
 public abstract class EditorSectionNumberField extends EditorSection {
     /** Numeric field */
@@ -18,7 +18,7 @@ public abstract class EditorSectionNumberField extends EditorSection {
     private SpinnerNumberModel spinnerModel;
 
     /**
-     * Creates a new editor section with text field
+     * Creates a new editor section with number field
      * @param name Name of the section
      * @param description Description of the section
      * @param min Minimum value

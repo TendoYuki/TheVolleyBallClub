@@ -72,6 +72,7 @@ public abstract class EditorSectionDateTime extends EditorSection {
      * Adds a listener called when either the time or the date changes by user action
      * @param al Action listener
      */
+    @Override
     public void addModifyListener(ActionListener al) {
         editorComponent.addModifyListener(al);
     }

@@ -17,6 +17,7 @@ import com.volleyball.club.elements.editor.EditorSectionNumberField;
 import com.volleyball.club.observation.Observable;
 import com.volleyball.club.pages.CreatePage;
 
+/** Page that allows competition result creation */
 public class CompetitonResultCreatePage extends CreatePage{
     
     /** Editor section of the victories count */
@@ -207,6 +208,9 @@ public class CompetitonResultCreatePage extends CreatePage{
         model.addObserver(rankSection);
     }
     
+    /**
+     * Clears the fields
+     */
     public void clear() { 
 
     }

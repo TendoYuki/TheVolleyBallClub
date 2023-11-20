@@ -10,14 +10,14 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 /**
- * Editor action element that has a delete save and cancel button with listeners
+ * Editor action element for competitions that has a back save and cancel button with listeners
  */
 public class CompetitionResultEditorActions extends JPanel{
     /** Save button element */
     private JButton saveBtn;
-    /** Delete button element */
-    private JButton cancelBtn;
     /** Cancel button element */
+    private JButton cancelBtn;
+    /** Back button element */
     private JButton backBtn;
 
     /** Creates an editor action element */
@@ -71,7 +71,7 @@ public class CompetitionResultEditorActions extends JPanel{
         cancelBtn.addActionListener(al);
     }
     /**
-     * Adds an action listener called when the editor has its delete button pressed
+     * Adds an action listener called when the editor has its back button pressed
      * @param al Action listener 
      */
 
