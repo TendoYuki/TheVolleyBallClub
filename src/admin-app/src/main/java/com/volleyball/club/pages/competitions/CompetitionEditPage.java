@@ -5,6 +5,7 @@ import java.awt.Insets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
 
@@ -14,7 +15,9 @@ import com.volleyball.club.datetime.DateTime;
 import com.volleyball.club.elements.editor.EditorActions;
 import com.volleyball.club.elements.editor.EditorSectionDateTime;
 import com.volleyball.club.observation.Observable;
+import com.volleyball.club.observation.Observer;
 import com.volleyball.club.pages.EditPage;
+import com.volleyball.club.pages.GUI;
 
 /** Edition page of the competitions */
 public class CompetitionEditPage extends EditPage{
@@ -30,7 +33,7 @@ public class CompetitionEditPage extends EditPage{
      * @param model Model to edit
      * @param backupModel Backup of the model to edit before edition
      */
-    public CompetitionEditPage(CompetitionPage competitionPage, CompetitionModel model, CompetitionModel backupModel) {
+    public CompetitionEditPage(CompetitionPage competitionPage, CompetitionModel model, CompetitionModel backupModel, GUI gui) {
         super();
 
         setBorder(new EmptyBorder(new Insets(0, 20, 0, 20)));
@@ -88,7 +91,7 @@ public class CompetitionEditPage extends EditPage{
         EditorActions ea = new EditorActions();
         gbc.gridx = 0;
         gbc.gridy = 2;
-        gbc.weighty = 1;
+        gbc.weighty = 0;
         gbc.weightx = 1;
         add(ea, gbc);
 
@@ -144,6 +147,55 @@ public class CompetitionEditPage extends EditPage{
                 }
             }
         };
+        CompetitionResultPage competitionResultPage = new CompetitionResultPage(model.getResultModel(),gui, competitionPage);
+        CompetitionResultPageController competitionResultPageController = new CompetitionResultPageController(competitionResultPage, gui); 
+        
+        CompetitonResultCreatePage competitionCreateResultPage = new CompetitonResultCreatePage(model);
+        CompetitionCreateResultPageController competitionCreateResultPageController = new CompetitionCreateResultPageController(competitionCreateResultPage, gui); 
+
+        Insets btnBorders = new Insets(5, 5, 0, 0);
+        JButton addResultButton = new JButton("Add Competition Results");
+        addResultButton.addActionListener(competitionCreateResultPageController);
+        JButton viewResultButton = new JButton("View Competition Results");
+        viewResultButton.addActionListener(competitionResultPageController);
+
+        gbc.insets = btnBorders;
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.weighty = 1;
+        gbc.weightx = 1;
+        if(!model.hasResult()) {
+            remove(viewResultButton);
+            add(addResultButton, gbc);
+        }
+        else {
+            remove(addResultButton);
+            add(viewResultButton, gbc);
+        }
+        revalidate();
+        repaint();
+
+        model.addObserver(new Observer() {
+            @Override
+            public void update(Observable observable) {
+                gbc.insets = btnBorders;
+                gbc.gridx = 0;
+                gbc.gridy = 3;
+                gbc.weighty = 1;
+                gbc.weightx = 1;
+                CompetitionModel model = (CompetitionModel)observable;
+                if(!model.hasResult()) {
+                    remove(viewResultButton);
+                    add(addResultButton, gbc);
+                }
+                else {
+                    remove(addResultButton);
+                    add(viewResultButton, gbc);
+                }
+                revalidate();
+                repaint();
+            }
+        });
 
         model.addObserver(startTimeEditorSection);
         model.addObserver(endTimeEditorSection);

@@ -42,6 +42,7 @@ public abstract class EditorSectionDateTime extends EditorSection {
     /**
      * Clears the datetime picker's fields
      */
+    @Override
     public void clear() {
         editorComponent.clear();
     }

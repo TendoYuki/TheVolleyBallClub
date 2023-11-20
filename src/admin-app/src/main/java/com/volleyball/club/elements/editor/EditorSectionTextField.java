@@ -3,6 +3,9 @@ package com.volleyball.club.elements.editor;
 import javax.swing.JTextField;
 
 import java.awt.GridBagConstraints;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 /**
  * Editor section that has an editable text field 
@@ -36,6 +39,26 @@ public abstract class EditorSectionTextField extends EditorSection {
     @Override
     public Object getValue() {
         return ((JTextField)editorComponent).getText();
+    }
+
+    /**
+     * Adds a listener called when the value changes
+     * @param al ActionListener
+     */
+    @Override
+    public void addModifyListener(ActionListener al) {
+        editorComponent.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                super.keyTyped(e);
+                al.actionPerformed(null);
+            }
+        });
+    }
+
+    @Override
+    public void clear() {
+        editorComponent.setText("");
     }
 
 }

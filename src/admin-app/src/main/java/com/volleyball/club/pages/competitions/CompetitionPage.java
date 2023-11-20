@@ -18,6 +18,7 @@ import java.lang.Integer;
 import com.volleyball.club.database.DBConnectionManager;
 import com.volleyball.club.datetime.DateTime;
 import com.volleyball.club.datetime.exceptions.InvalidDateTimeFormatException;
+import com.volleyball.club.pages.GUI;
 import com.volleyball.club.pages.Page;
 
 /**
@@ -25,7 +26,7 @@ import com.volleyball.club.pages.Page;
  */
 public class CompetitionPage extends Page{
     /** Model of the table containing all competitions */
-    private static DefaultTableModel defaultTable = new DefaultTableModel(new String[]{"ID","Start","End"},0){
+    private static DefaultTableModel defaultTable = new DefaultTableModel(new String[]{"ID","Start","End", "ResultId"},0){
         @Override
         public boolean isCellEditable(int row, int column) {
             // Make all cells non-editable
@@ -43,7 +44,7 @@ public class CompetitionPage extends Page{
     private CompetitionEditPage competitionEditPage;
 
     /** Creates a new competition page */
-    public CompetitionPage(){
+    public CompetitionPage(GUI gui){
         super();
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -61,8 +62,10 @@ public class CompetitionPage extends Page{
         
         setBorder(new EmptyBorder(new Insets(10, 10, 10, 10)));
         table = new JTable(defaultTable);
-
-        competitionEditPage = new CompetitionEditPage(this, competitionModel, backupModel);
+        CompetitionResultModel competitionResultModel = new CompetitionResultModel();
+        competitionModel.setResultModel(competitionResultModel);
+        competitionEditPage = new CompetitionEditPage(this, competitionModel, backupModel, gui);
+        
 
         table.addMouseListener(new MouseAdapter() {
             @Override
@@ -70,12 +73,40 @@ public class CompetitionPage extends Page{
                 int id = Integer.valueOf((String)defaultTable.getValueAt(table.getSelectedRow(), 0));
                 String startDateTime = (String)defaultTable.getValueAt(table.getSelectedRow(), 1);
                 String endDateTime = (String)defaultTable.getValueAt(table.getSelectedRow(), 2);
+                String idResultStr = (String)defaultTable.getValueAt(table.getSelectedRow(), 3);
 
                 try {
                     // Changes the model with the new current one and notifies the view to update
+                    competitionModel.resetDefaultValues();
                     competitionModel.setEndDateTime(new DateTime(endDateTime));
                     competitionModel.setStartDateTime(new DateTime(startDateTime));
                     competitionModel.setID(id);
+
+                    if(idResultStr != null)  {
+                        Connection con = DBConnectionManager.getConnection();
+                        try {
+                            PreparedStatement stmt = con.prepareStatement(
+                                "SELECT * FROM result WHERE idResult=?;"
+                            );
+                            stmt.setString(1, idResultStr);
+                            ResultSet resSet = stmt.executeQuery();
+                            
+                            while(resSet.next()){   
+                                competitionResultModel.setClubCount(resSet.getInt("totalClubsCount"));
+                                competitionResultModel.setDefeatCount(resSet.getInt("defeatCount"));
+                                competitionResultModel.setRanking(resSet.getInt("ranking"));
+                                competitionResultModel.setVictoriesCount(resSet.getInt("victoriesCount"));
+                                competitionResultModel.setID(Integer.parseInt(idResultStr));
+                                competitionResultModel.updateObservers();
+                            }
+                        } catch(Exception e) {
+                            System.out.println(e);
+                        }
+                    }
+                    else {
+                        competitionResultModel.resetDefaultValues();
+                        competitionResultModel.updateObservers();
+                    }
                     competitionModel.updateObservers();
 
                     // Changes the backup model with the new current one
@@ -114,12 +145,13 @@ public class CompetitionPage extends Page{
             );
             ResultSet resSet = stmt.executeQuery();
             defaultTable.setRowCount(0);
-            String start="",end="", id="";
+            String start="",end="", id="", idResult="";
             while(resSet.next()){   
                 start = resSet.getString("startDateTimeCompetition");
                 end = resSet.getString("endDateTimeCompetition");
                 id = resSet.getString("idCompetition"); 
-                defaultTable.addRow(new String[]{id,start,end});
+                idResult = resSet.getString("Result_idResult"); 
+                defaultTable.addRow(new String[]{id,start,end,idResult});
             }
         } catch(Exception e) {
             System.out.println(e);

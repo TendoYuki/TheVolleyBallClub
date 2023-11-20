@@ -11,6 +11,8 @@ public class CompetitionModel extends Observable{
     private DateTime startDateTime;
     /** End datetime of the competition */
     private DateTime endDateTime;
+    /** Model of the competition's results*/
+    private CompetitionResultModel resultModel;
 
     /**
      * Creates a new competition model
@@ -18,7 +20,8 @@ public class CompetitionModel extends Observable{
      * @param startDateTime Start datetime of the competition
      * @param endDateTime End datetime of the competition
      */
-    public CompetitionModel(int ID, DateTime startDateTime, DateTime endDateTime) {
+    public CompetitionModel(int ID, DateTime startDateTime, DateTime endDateTime, CompetitionResultModel resultModel) {
+        this.resultModel = resultModel;
         this.ID = ID;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
@@ -36,9 +39,7 @@ public class CompetitionModel extends Observable{
 
     /** Creates an empty competition model */
     public CompetitionModel() {
-        this.ID = -1;
-        this.startDateTime = null;
-        this.endDateTime = null;
+        resetDefaultValues();
     }
 
     /**
@@ -64,6 +65,7 @@ public class CompetitionModel extends Observable{
     public DateTime getStartDateTime() {
         return startDateTime;
     }
+
 
     /**
      * Changes the start datetime of the competition stored in the model
@@ -94,5 +96,25 @@ public class CompetitionModel extends Observable{
         this.ID = -1;
         this.startDateTime = null;
         this.endDateTime = null;
+    }
+
+    /**
+     * Gets the results model
+     * @return results model
+     */
+    public CompetitionResultModel getResultModel() {
+        return resultModel;
+    }
+
+    public boolean hasResult() {
+        return resultModel.getID() != -1;
+    }
+
+    /**
+     * Changes the results model
+     * @param resultModel new result model
+     */
+    public void setResultModel(CompetitionResultModel resultModel) {
+        this.resultModel = resultModel;
     }
 }

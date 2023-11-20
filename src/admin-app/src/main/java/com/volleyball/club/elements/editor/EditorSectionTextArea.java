@@ -3,6 +3,9 @@ package com.volleyball.club.elements.editor;
 import javax.swing.JTextArea;
 
 import java.awt.GridBagConstraints;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 /**
  * Editor section that has an editable text area 
@@ -32,10 +35,25 @@ public abstract class EditorSectionTextArea extends EditorSection {
     public void setValue(Object newValue) {
         ((JTextArea)editorComponent).setText((String)newValue);
     }
-
+    
+    @Override
+    public void addModifyListener(ActionListener al) {
+        editorComponent.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                super.keyTyped(e);
+                al.actionPerformed(null);
+            }
+        });
+    }
     @Override
     public Object getValue() {
         return ((JTextArea)editorComponent).getText();
+    }
+
+    @Override
+    public void clear() {
+        editorComponent.setText("");
     }
 
 }

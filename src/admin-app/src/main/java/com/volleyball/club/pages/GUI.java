@@ -21,14 +21,11 @@ import com.volleyball.club.pages.competitions.CompetitionCreatePage;
 import com.volleyball.club.pages.competitions.CompetitionCreatePageController;
 import com.volleyball.club.pages.competitions.CompetitionPage;
 import com.volleyball.club.pages.competitions.CompetitionPageController;
-import com.volleyball.club.pages.events.EventPage;
-import com.volleyball.club.pages.events.EventPageController;
 import com.volleyball.club.pages.homepage.HomePage;
 import com.volleyball.club.pages.homepage.HomePageController;
 import com.volleyball.club.pages.login.LoginPage;
+
 import com.volleyball.club.pages.login.LoginPageController;
-import com.volleyball.club.pages.sponsors.SponsorPage;
-import com.volleyball.club.pages.sponsors.SponsorPageController;
 import com.volleyball.club.pages.trainings.TrainingCreatePage;
 import com.volleyball.club.pages.trainings.TrainingCreatePageController;
 import com.volleyball.club.pages.trainings.TrainingPage;
@@ -79,37 +76,20 @@ public class GUI extends JFrame{
 
         navModel.addMenu(loginMenuBarBTN);
 
-
-        /** ----------- EVENT PAGE ----------- */
-
-        JMenu eventMenu = new JMenu("Events");
-        JMenuItem eventMenuViewBTN = new JMenuItem("View");
-        EventPage eventPage = new EventPage();
-
-        eventMenu.add(eventMenuViewBTN);
-        eventMenuViewBTN.addActionListener(new EventPageController(eventPage, this));
-
         /** ----------- COMPETITION PAGE ----------- */
 
         JMenu competitionMenu = new JMenu("Competitions");
         JMenuItem competitionMenuViewBTN = new JMenuItem("View");
         JMenuItem competitionMenuNewBTN = new JMenuItem("New");
-        CompetitionPage competitionPage = new CompetitionPage();
+
+        CompetitionPage competitionPage = new CompetitionPage(this);
+        CompetitionPageController competitionPageController = new CompetitionPageController(competitionPage, this);
         CompetitionCreatePage competitionCreatePage = new CompetitionCreatePage();
 
         competitionMenu.add(competitionMenuViewBTN);
         competitionMenu.add(competitionMenuNewBTN);
-        competitionMenuViewBTN.addActionListener(new CompetitionPageController(competitionPage, this));
+        competitionMenuViewBTN.addActionListener(competitionPageController);
         competitionMenuNewBTN.addActionListener(new CompetitionCreatePageController(competitionCreatePage, this));
-
-        /** ----------- SPONSOR PAGE ----------- */
-
-        JMenu sponsorMenu = new JMenu("Sponsors");
-        JMenuItem sponsorMenuViewBTN = new JMenuItem("View");
-        SponsorPage sponsorPage = new SponsorPage();
-
-        sponsorMenu.add(sponsorMenuViewBTN);
-        sponsorMenuViewBTN.addActionListener(new SponsorPageController(sponsorPage, this));
 
         /** ----------- TRAINING PAGE ----------- */
 
@@ -138,17 +118,13 @@ public class GUI extends JFrame{
                 if(LoginManager.getInstance().isConnected()){
                     navModel.replaceMenu(loginMenuBarBTN, logoutMenuBarBTN);
                     switchActivePage(homePage);
-                    navModel.addMenu(eventMenu);
                     navModel.addMenu(competitionMenu);
-                    navModel.addMenu(sponsorMenu);
                     navModel.addMenu(trainingMenu);
 
                 }
                 else{
                     navModel.replaceMenu(logoutMenuBarBTN, loginMenuBarBTN);
-                    navModel.removeMenu(eventMenu);
                     navModel.removeMenu(competitionMenu);
-                    navModel.removeMenu(sponsorMenu);
                     navModel.removeMenu(trainingMenu);
                 }
             }

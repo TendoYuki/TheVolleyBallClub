@@ -9,6 +9,7 @@ import javax.swing.SwingConstants;
 import com.volleyball.club.observation.Observer;
 
 import java.awt.GridBagLayout;
+import java.awt.event.ActionListener;
 import java.awt.GridBagConstraints;
 
 /**
@@ -48,4 +49,12 @@ public abstract class EditorSection extends JPanel implements Observer{
      * @return Value of the editor section
      */
     public abstract Object getValue();
+
+    /**
+     * Clears the editor section
+     */
+    public abstract void clear();
+
+    /** Adds a listener for when the section's value changes */
+    public abstract void addModifyListener(ActionListener al);
 }
