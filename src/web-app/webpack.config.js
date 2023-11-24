@@ -8,6 +8,13 @@ module.exports = {
       path: path.resolve(__dirname, 'dist'),
       filename: 'app.js',
     },
+  
+    resolve: {
+      alias: {
+        "@Styles": path.resolve(__dirname, "src/styles"),
+        "@Public": path.resolve(__dirname, "../../public")
+      }
+    },
     module: {
       rules: [
         {

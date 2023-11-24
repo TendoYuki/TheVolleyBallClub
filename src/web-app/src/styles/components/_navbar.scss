@@ -1,0 +1,39 @@
+@import "@Styles/base";
+
+ul.navbar{
+    height: 5rem;
+    list-style: none;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    li{
+        margin-right: 1rem;
+        font-size: 1.1rem;
+        font-weight: 500;
+        font-family: $text-font;
+        position: relative;
+        a{
+            transition: color $medium-anim;
+            cursor: pointer;
+            &:hover{
+                color: $accent;
+            }
+        }
+        &.selected {
+            &::before{
+                position: absolute;
+                content: "";
+                width: 100%;
+                height: 0.1rem;
+                background-color: black;
+                bottom: -1rem;
+            }
+            &:hover{
+                &::before{
+                    transition: background-color $medium-anim;
+                    background-color: $accent;
+                }
+            }
+        }
+    }
+}

@@ -1,8 +1,9 @@
-html {
-    background-color: aqua;
-    div {
-        width: 10rem;
-        height: 10rem;
-        background-color: red;
-    }
+@import "base";
+@import "components";
+
+*{
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
 }
