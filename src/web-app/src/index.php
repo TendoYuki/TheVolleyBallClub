@@ -17,13 +17,6 @@
         <li><a>ESPACE ADHERENT</a></li>
         <li class="selected"><a>CONTACT</a></li>
     </ul>
-    <div class="text-field">
-        <input type="text" name="" id="" placeholder="Email">
-    </div>
-    <div class="text-field">
-        <input type="text" name="" id="" placeholder="Password">
-    </div>
-    <button class="btn filled">Click me</button>
 
     <div class="carrousel-wrapper">
         <div class="controls">
@@ -45,6 +38,13 @@
             <img src="public/3.jpg" alt="">
         </div>
     </div>
+    <div class="text-field">
+        <input type="text" name="" id="" placeholder="Email">
+    </div>
+    <div class="text-field">
+        <input type="text" name="" id="" placeholder="Password">
+    </div>
+    <button class="btn filled">Click me</button>
 
 </body>
 </html>
