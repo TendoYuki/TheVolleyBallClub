@@ -1,0 +1,103 @@
+@import "@Styles/base";
+
+.carrousel-wrapper{
+    width: 100vw;
+    height: 30rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    .controls{
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+        .prev, .next, .selectors{
+            height: 100%;
+        }
+        .selectors{
+            flex: 1;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            span{
+                width: 1rem;
+                height: 1rem;
+                margin: 0 .3rem .5rem .3rem;
+                border-radius: 50%;
+                background-color: $background-light;
+                position: relative;
+                cursor: pointer;
+                &::before{
+                    content: "";
+                    pointer-events: none;
+                    width: 62%;
+                    height: 62%;
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translateX(-50%) translateY(-50%);
+                    border-radius: 50%;
+                    background-color: transparent;
+                    transition: background $short-anim;
+                }
+                &.active{
+                    cursor: default;
+                    &::before{
+                        background-color: $accent;
+                    }
+                }
+            }
+        }
+
+        // TODO: Add listeners on these whole elements
+        .prev, .next{
+            width: 4rem;
+            position: relative;
+            cursor: pointer;
+            &:hover{
+                span{
+                    transform: translateX(-50%) translateY(-50%) scale(1.1);
+                }
+            }
+            span{
+                width: 2rem;
+                height: 2rem;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transition: transform $short-anim;
+                transform: translateX(-50%) translateY(-50%);
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+        }
+        .prev{
+            background: linear-gradient(90deg, rgba(0,0,0,0.3351541300113795) 0%, rgba(0,0,0,0.1782913849133403) 34%, rgba(0,0,0,0.05) 76%, rgba(0,0,0,0) 100%);
+            span{
+                background-image: url("@Public/symbols/arrow-left.svg");
+            }
+        }
+        .next{
+            background: linear-gradient(270deg, rgba(0,0,0,0.3351541300113795) 0%, rgba(0,0,0,0.1782913849133403) 34%, rgba(0,0,0,0.05) 76%, rgba(0,0,0,0) 100%);
+            span{
+                background-image: url("@Public/symbols/arrow-right.svg");
+            }
+        }
+    }
+    .images-container{
+        height: 100%;
+        position: absolute;
+        transition: left $long-anim ease-in-out;
+        left: 0px; // TODO: Modify this value to switch between images
+        display: flex;
+        img{
+            width: 100vw;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+}

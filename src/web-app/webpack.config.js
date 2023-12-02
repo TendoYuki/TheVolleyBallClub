@@ -40,5 +40,10 @@ module.exports = {
                 { from: "../../public", to: "public"}
             ],
         }),
+        new CopyPlugin({
+            patterns: [
+                { from: "src/components", to: "components"}
+            ],
+        }),
       ]
 };
