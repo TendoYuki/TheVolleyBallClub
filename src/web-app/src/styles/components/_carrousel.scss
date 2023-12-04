@@ -52,8 +52,6 @@
                 }
             }
         }
-
-        // TODO: Add listeners on these whole elements
         .prev, .next{
             width: 4rem;
             position: relative;
@@ -92,7 +90,7 @@
         height: 100%;
         position: absolute;
         transition: left $long-anim ease-in-out;
-        left: 0px; // TODO: Modify this value to switch between images
+        left: 0px;
         display: flex;
         img{
             width: 100vw;

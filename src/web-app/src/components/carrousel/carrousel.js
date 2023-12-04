@@ -6,6 +6,7 @@ document.querySelectorAll(".carrousel-wrapper").forEach(carrousel => {
     const selectors = carrousel.querySelector(".selectors");
     const selectorsArray = Array.from(selectors.children);
     const imagesContainer = carrousel.querySelector(".images-container");
+    const imagesArray = Array.from(imagesContainer.children);
     let updateInterval;
 
     // Index of the active image
@@ -50,7 +51,7 @@ document.querySelectorAll(".carrousel-wrapper").forEach(carrousel => {
      * N.B cannot overflow and will go back to the start of the array.
      */
     const nextImage = () => {
-        if(-getImageContainerLeftOffset() >= imagesContainer.getBoundingClientRect().width-getCarrouselWidth()) {
+        if(selectedImage >= imagesArray.length-1) {
             selectedImage = 0;
         } else {
             selectedImage++;
@@ -63,8 +64,8 @@ document.querySelectorAll(".carrousel-wrapper").forEach(carrousel => {
      * N.B cannot underflow and will go back to the end of the array.
      */
     const previousImage = () => {
-        if(getImageContainerLeftOffset() >= 0) {
-            selectedImage = selectorsArray.length-1;
+        if(selectedImage <= 0) {
+            selectedImage = imagesArray.length-1;
         } else {
             selectedImage--;
         }

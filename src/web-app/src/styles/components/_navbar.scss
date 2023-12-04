@@ -1,18 +1,35 @@
 @import "@Styles/base";
 
-ul.navbar{
+ul.navbar, ul.navbar .navbar-menu{
     height: 5rem;
     list-style: none;
     display: flex;
     justify-content: right;
     align-items: center;
+    $element-color: black;
+    .navbar-menu-opener{
+        display: none;
+        &:hover{
+            svg{
+                stroke: $accent;
+            }
+        }
+        svg{
+            cursor: pointer;
+            transition: stroke $short-anim;
+            stroke: $element-color;
+            height: 2rem;
+            width: 2rem;
+        }
+    }
     li{
-        margin-right: 1rem;
+        margin: 0 1rem;
         font-size: 1.1rem;
         font-weight: 500;
         font-family: $text-font;
         position: relative;
         a{
+            color: $element-color;
             transition: color $medium-anim;
             cursor: pointer;
             &:hover{
@@ -25,13 +42,66 @@ ul.navbar{
                 content: "";
                 width: 100%;
                 height: 0.1rem;
-                background-color: black;
+                background-color: $element-color;
                 bottom: -1rem;
             }
             &:hover{
                 &::before{
                     transition: background-color $medium-anim;
                     background-color: $accent;
+                }
+            }
+        }
+        &.left {
+            margin-right: auto;
+        }
+
+        &.logo {
+            img{
+                height: 3.5rem;
+            }
+        }
+    }
+}
+ul.navbar .navbar-menu {
+    transition: width $medium-anim;
+}
+@media (max-width: 900px) {
+    ul.navbar{
+        li {
+            display: none;
+        }
+        .navbar-menu-opener{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 11;
+            margin-right: auto;
+            margin-left: 2rem;
+        }
+        .navbar-menu {
+            position: absolute;
+            z-index: 10;
+            top: 0px;
+            left: 0px;
+            height: 100%;
+            display: flex;
+            width: 0vw;
+            height: 100vh;
+            align-items: flex-start;
+            justify-content: flex-start;
+            flex-direction: column;
+            background-color: white;
+            li:nth-of-type(1) {
+                margin: 6rem 0 0 2rem;
+            }
+            li {
+                margin: 2rem 0 0 2rem;
+            }
+            &.active {
+                width: 100vw;
+                li {
+                    display: block;
                 }
             }
         }
