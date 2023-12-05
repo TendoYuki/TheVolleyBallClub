@@ -1,4 +1,4 @@
-<script src="./components/navbar/navbar.js" defer></script>
+<script src="components/navbar/navbar.js" defer></script>
 <ul class="navbar">
     <ul class="navbar-menu">
         <li><a>ACCUEIL</a></li>

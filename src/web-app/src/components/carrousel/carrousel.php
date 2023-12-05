@@ -1,4 +1,4 @@
-<script src="./components/carrousel/carrousel.js" defer></script>
+<script src="components/carrousel/carrousel.js" defer></script>
 <div class="carrousel-wrapper">
     <div class="controls">
         <div class="prev">
