@@ -1,3 +1,5 @@
+<?php require_once("../../app-config.php") ?>
+
 <script src="/PHP/SAE-Volley/components/carrousel/carrousel.js" defer></script>
 
 <?php
@@ -7,7 +9,7 @@
             $this->images = $images;
         }
         public function display() {
-            $template = file_get_contents("components/carrousel/carrousel_template.php");
+            $template = file_get_contents(COMPONENTS."carrousel/carrousel_template.php");
             $span_str = "";
             foreach($this->images as $image) {
                 $span_str.="<span></span>";

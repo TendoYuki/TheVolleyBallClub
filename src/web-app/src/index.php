@@ -15,7 +15,7 @@
     <?php require("components/navbar/navbar.php") ?>
     <?php 
         require("components/carrousel/carrousel.php");
-        (new Carrousel(["public/1.jpg", "public/2.jpg", "public/3.jpg"]))->display();
+        (new Carrousel(["/PHP/SAE-Volley/public/1.jpg", "/PHP/SAE-Volley/public/2.jpg", "/PHP/SAE-Volley/public/3.jpg"]))->display();
     ?>
 
     <?php
