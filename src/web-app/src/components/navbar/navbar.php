@@ -1,7 +1,7 @@
 <script src="components/navbar/navbar.js" defer></script>
 <ul class="navbar">
     <ul class="navbar-menu">
-        <li><a>ACCUEIL</a></li>
+        <li><a href="index.php">ACCUEIL</a></li>
         <li><a>INFORMATIONS</a></li>
         <li><a>PLANNING</a></li>
         <li><a>CONNEXION</a></li>
