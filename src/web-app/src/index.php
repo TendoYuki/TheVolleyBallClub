@@ -13,7 +13,12 @@
 </head>
 <body>
     <?php require("components/navbar/navbar.php") ?>
-    <?php require("components/carrousel/carrousel.php") ?>
+    <?php 
+        require("components/carrousel/carrousel.php");
+        $carrousel = new Carrousel(["public/1.jpg", "public/2.jpg", "public/3.jpg"]);
+        $carrousel.display();
+    ?>
+
     <?php
     // <div class="text-field">
     //     <input type="text" name="" id="" placeholder="Email">

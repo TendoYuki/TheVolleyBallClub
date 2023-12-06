@@ -1,21 +1,22 @@
 <script src="components/carrousel/carrousel.js" defer></script>
-<div class="carrousel-wrapper">
-    <div class="controls">
-        <div class="prev">
-            <span></span>
-        </div>
-        <div class="selectors">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <div class="next">
-            <span></span>
-        </div>
-    </div>
-    <div class="images-container">
-        <img src="public/2.jpg" alt="">
-        <img src="public/1.jpg" alt="">
-        <img src="public/3.jpg" alt="">
-    </div>
-</div>
+
+<?php
+    class Carrousel{
+        private $images;
+        public function __construct($images) {
+            $this->images = $images;
+        }
+        public function display() {
+            $template = file_get_contents("carrousel_template.php");
+            foreach($this->images as $image) {
+                echo("<span></span>");
+            }
+            foreach($this->images as $image) {
+                echo(`<img src="$image" alt="">`);
+            }
+            $template = str_replace("{images_span_el_str}", "Title Here", $template);
+            $template = str_replace("{images_el_str}", "Username Here", $template);
+            echo($template);
+        }
+    }
+?>
