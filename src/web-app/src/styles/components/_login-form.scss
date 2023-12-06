@@ -1,0 +1,19 @@
+@import "@Styles/base";
+
+.login-form{
+    width: 40vw;
+    height: 50vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    border: 0.05rem solid $accent;
+    border-radius: $rounded-border-radius;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .text-field{
+        margin-bottom: 2rem;
+    }
+}

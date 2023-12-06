@@ -3,10 +3,14 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
-    entry: './src/app.js',
+    entry: {
+      app: './src/app.js',
+      "components/navbar/navbar": './src/components/navbar/navbar.js',
+      "components/carrousel/carrousel": './src/components/carrousel/carrousel.js'
+    },
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: 'app.js',
+      filename: '[name].js',
     },
   
     resolve: {
@@ -30,10 +34,21 @@ module.exports = {
         },
       ],
     },
-    plugins: [ 
-        new HtmlWebpackPlugin({
-            template: "./src/index.php",
-            filename: "index.php"
+    plugins: [
+        new CopyPlugin({
+            patterns: [
+                { from: "src/index.php", to: "index.php"}
+            ],
+        }),
+        new CopyPlugin({
+            patterns: [
+                { from: "src/app-config.php", to: "app-config.php"}
+            ],
+        }),
+        new CopyPlugin({
+            patterns: [
+                { from: "src/pages", to: "pages"}
+            ],
         }),
         new CopyPlugin({
             patterns: [

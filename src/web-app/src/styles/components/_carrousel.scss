@@ -61,7 +61,7 @@
                     transform: translateX(-50%) translateY(-50%) scale(1.1);
                 }
             }
-            span{
+            img{
                 width: 2rem;
                 height: 2rem;
                 position: absolute;
@@ -69,21 +69,14 @@
                 left: 50%;
                 transition: transform $short-anim;
                 transform: translateX(-50%) translateY(-50%);
-                background-repeat: no-repeat;
-                background-position: center;
+                align-content: center;
             }
         }
         .prev{
             background: linear-gradient(90deg, rgba(0,0,0,0.3351541300113795) 0%, rgba(0,0,0,0.1782913849133403) 34%, rgba(0,0,0,0.05) 76%, rgba(0,0,0,0) 100%);
-            span{
-                background-image: url("@Public/symbols/arrow-left.svg");
-            }
         }
         .next{
             background: linear-gradient(270deg, rgba(0,0,0,0.3351541300113795) 0%, rgba(0,0,0,0.1782913849133403) 34%, rgba(0,0,0,0.05) 76%, rgba(0,0,0,0) 100%);
-            span{
-                background-image: url("@Public/symbols/arrow-right.svg");
-            }
         }
     }
     .images-container{

@@ -1,4 +1,4 @@
-<script src="components/carrousel/carrousel.js" defer></script>
+<script src="/PHP/SAE-Volley/components/carrousel/carrousel.js" defer></script>
 
 <?php
     class Carrousel{
@@ -7,15 +7,17 @@
             $this->images = $images;
         }
         public function display() {
-            $template = file_get_contents("carrousel_template.php");
+            $template = file_get_contents("components/carrousel/carrousel_template.php");
+            $span_str = "";
             foreach($this->images as $image) {
-                echo("<span></span>");
+                $span_str.="<span></span>";
             }
+            $imgs_str = "";
             foreach($this->images as $image) {
-                echo(`<img src="$image" alt="">`);
+                $imgs_str.="<img src=\"$image\" alt=\"\">";
             }
-            $template = str_replace("{images_span_el_str}", "Title Here", $template);
-            $template = str_replace("{images_el_str}", "Username Here", $template);
+            $template = str_replace("{images_span_el_str}", $span_str, $template);
+            $template = str_replace("{images_el_str}", $imgs_str, $template);
             echo($template);
         }
     }
