@@ -7,8 +7,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="public/favicon.ico" type="image/x-icon">
-    <script src="app.js" defer></script>
+    <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon">
+    <script src="/app.js" defer></script>
     <script src="/components/navbar/navbar.js" defer></script>
     <title>Volleyball club</title>
 </head>

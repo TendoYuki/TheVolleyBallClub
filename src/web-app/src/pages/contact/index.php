@@ -1,4 +1,4 @@
-<?php require_once("../../app-config.php") ?>
+<?php require_once("/srv/http/endpoint/app-config.php") ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -8,9 +8,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="../../public/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon">
     <title>Contact</title>
-    <script defer src="../../app.js"></script>
+    <script defer src="/app.js"></script>
     <script src="/components/navbar/navbar.js" defer></script>
 </head>
 <body>
