@@ -1,11 +1,11 @@
-<script src="/PHP/SAE-Volley/components/navbar/navbar.js" defer></script>
+<script src="/components/navbar/navbar.js" defer></script>
 
 <ul class="navbar">
     <ul class="navbar-menu">
-        <li class="selected"><a href="/PHP/SAE-Volley/index.php">ACCUEIL</a></li>
+        <li class="selected"><a href="/index.php">ACCUEIL</a></li>
         <li><a>INFORMATIONS</a></li>
         <li><a>PLANNING</a></li>
-        <li><a href="/PHP/SAE-Volley/pages/connection/index.php">CONNEXION</a></li>
+        <li><a href="/pages/connection/index.php">CONNEXION</a></li>
         <li><a>CONTACT</a></li>
     </ul>
     <li class="navbar-menu-opener">

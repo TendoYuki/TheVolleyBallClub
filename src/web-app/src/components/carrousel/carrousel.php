@@ -1,6 +1,6 @@
-<?php require_once("../../app-config.php") ?>
+<?php require_once("/srv/http/endpoint/app-config.php") ?>
 
-<script src="/PHP/SAE-Volley/components/carrousel/carrousel.js" defer></script>
+<script src="/components/carrousel/carrousel.js" defer></script>
 
 <?php
     class Carrousel{
