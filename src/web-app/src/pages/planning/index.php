@@ -1,3 +1,4 @@
+<?php require_once("../../app-config.php") ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -7,17 +8,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="public/favicon.ico" type="image/x-icon">
-    <script src="app.js" defer></script>
+    <link rel="shortcut icon" href="../../public/favicon.ico" type="image/x-icon">
+    <title>Planning</title>
+    <script defer src="../../app.js"></script>
     <script src="/components/navbar/navbar.js" defer></script>
-    <title>Volleyball club</title>
 </head>
 <body>
     <ul class="navbar">
         <ul class="navbar-menu">
-            <li class="selected"><a href="/">ACCUEIL</a></li>
+            <li><a href="/">ACCUEIL</a></li>
             <li><a href="/pages/informations">INFORMATIONS</a></li>
-            <li><a href="/pages/planning">PLANNING</a></li>
+            <li class="selected"><a href="/pages/planning">PLANNING</a></li>
             <li><a href="/pages/connection">CONNEXION</a></li>
             <li><a href="/pages/contact">CONTACT</a></li>
         </ul>
@@ -27,19 +28,6 @@
             </svg>
         </li>
     </ul>
-    <?php 
-        require("components/carrousel/carrousel.php");
-        (new Carrousel(["/public/1.jpg", "/public/2.jpg", "/public/3.jpg"]))->display();
-    ?>
 
-    <?php
-    // <div class="text-field">
-    //     <input type="text" name="" id="" placeholder="Email">
-    // </div>
-    // <div class="text-field">
-    //     <input type="text" name="" id="" placeholder="Password">
-    // </div>
-    // <button class="btn filled">Click me</button>
-    ?>
 </body>
 </html>

@@ -9,20 +9,41 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="../../public/favicon.ico" type="image/x-icon">
-    <title>Volleyball club</title>
+    <title>Connexion</title>
     <script defer src="../../app.js"></script>
+    <script src="/components/navbar/navbar.js" defer></script>
 </head>
 <body>
-    <?php require(COMPONENTS."navbar/navbar.php") ?>
+    <ul class="navbar">
+        <ul class="navbar-menu">
+            <li><a href="/">ACCUEIL</a></li>
+            <li><a href="/pages/informations">INFORMATIONS</a></li>
+            <li><a href="/pages/planning">PLANNING</a></li>
+            <li class="selected"><a href="/pages/connection">CONNEXION</a></li>
+            <li><a href="/pages/contact">CONTACT</a></li>
+        </ul>
+        <li class="navbar-menu-opener">
+            <svg width="420" height="420" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M63.0022 210L357.002 210M63 333.5L357 333.5M63.0022 87L357.002 87" stroke-width="73" stroke-linecap="round"/>
+            </svg>
+        </li>
+    </ul>
 
     <div class="login-form">
-        <div class="text-field">
-            <input type="text" name="" id="" placeholder="Email">
+        <h1>Connexion</h1>
+        <form action="" method="post">
+            <div class="text-field">
+                <input type="text" name="" id="" placeholder="Email">
+            </div>
+            <div class="text-field">
+                <input type="password" name="" id="" placeholder="Mot de passe">
+            </div>
+            <button class="btn filled">Connexion</button>
+        </form>
+        <div class="other-actions">
+            <h2><a href="/pages/connection/sign-in">Créer un compte</a></h2>
+            <h2><a href="/pages/connection/forgot-password">Mot de passe oublié ?</a></h2>
         </div>
-        <div class="text-field">
-            <input type="password" name="" id="" placeholder="Password">
-        </div>
-        <button class="btn filled">Click me</button>
     </div>
 </body>
 </html>
