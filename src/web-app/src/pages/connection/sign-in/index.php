@@ -20,7 +20,7 @@
             <li><a href="/pages/informations">INFORMATIONS</a></li>
             <li><a href="/pages/planning">PLANNING</a></li>
             <li><a href="/pages/contact">CONTACT</a></li>
-            <li class="selected"><a href="/pages/connection">CONNEXION</a></li>
+            <li class="selected"><a href="/pages/connection/sign-in">CONNEXION</a></li>
         </ul>
         <li class="navbar-menu-opener">
             <svg width="420" height="420" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -31,14 +31,14 @@
 
     <div class="login-form">
         <h1>Connexion</h1>
-        <form action="" method="post">
+        <form action="endpoint.php" method="post" id="sign-in-form">
             <div class="text-field">
-                <input type="text" name="" id="" placeholder="Email">
+                <input type="text" name="email-field" id="email-field" placeholder="Email" form="sign-in-form">
             </div>
             <div class="text-field">
-                <input type="password" name="" id="" placeholder="Mot de passe">
+                <input type="password" name="password-field" id="password-field" placeholder="Mot de passe" form="sign-in-form">
             </div>
-            <button class="btn filled">Connexion</button>
+            <button class="btn filled" type="submit" form="sign-in-form">Connexion</button>
         </form>
         <div class="other-actions">
             <h2><a href="/pages/connection/sign-up">Créer un compte</a></h2>

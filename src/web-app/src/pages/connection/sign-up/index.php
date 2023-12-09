@@ -18,7 +18,7 @@
             <li><a href="/pages/informations">INFORMATIONS</a></li>
             <li><a href="/pages/planning">PLANNING</a></li>
             <li><a href="/pages/contact">CONTACT</a></li>
-            <li class="selected"><a href="/pages/connection">CONNEXION</a></li>
+            <li class="selected"><a href="/pages/connection/sign-in">CONNEXION</a></li>
         </ul>
         <li class="navbar-menu-opener">
             <svg width="420" height="420" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -28,12 +28,39 @@
     </ul>
     <div class="sign-up-form">
         <h1>Créer un compte</h1>
-        <form action="" method="post">
-            <div class="text-field">
-                <input type="text" name="" id="" placeholder="Email">
+        <form action="endpoint.php" method="post">
+            <div class="avatar-selector">
+                <label for="file-upload"></label>
+                <input type="file" name="avatar-field" id="file-upload" required>
+                <span></span>
             </div>
-            <div class="text-field">
-                <input type="password" name="" id="" placeholder="Mot de passe">
+            <div class="field">
+                <input type="text" name="name-field" id="" placeholder="Nom">
+            </div>
+            <div class="field">
+                <input type="text" name="surname-field" id="" placeholder="Prenom">
+            </div>
+            <div class="field">
+                <input type="date" name="birthdate-field" id="" placeholder="">
+            </div>
+            <div class="field">
+                <select name="group-field" id="">
+                    <?php
+                        require("../db_connect.php");
+                        $stmt = $con->prepare("SELECT * FROM `group`;");
+                        $stmt->execute();
+                        $res = $stmt->fetchAll();
+                        foreach($res as $cur) {
+                            echo("<option title=".$cur["descGroup"]." value=".$cur["idGroup"].">".$cur["nameGroup"]."</option>");
+                        }
+                    ?>
+                </select>
+            </div>
+            <div class="field">
+                <input type="text" name="email-field" id="" placeholder="Email">
+            </div>
+            <div class="field">
+                <input type="password" name="password-field" id="" placeholder="Mot de passe">
             </div>
             <button class="btn filled">S'inscrire</button>
         </form>

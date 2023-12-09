@@ -1,0 +1,56 @@
+@import "@Styles/base";
+
+.avatar-selector{
+    width: 5rem;
+    height: 5rem;
+    position: relative;
+    border-radius: 50%;
+    background-color: lightgray;
+    span{
+        position: absolute;
+        width: 50%;
+        height: 50%;
+        transition: background $short-anim, transform $short-anim, top $short-anim, right $short-anim;
+        justify-content: center;
+        top: 50%;
+        right: 50%;
+        transform: translateX(50%) translateY(-50%);
+        border-radius: 50%;
+        pointer-events: none;
+        background: lightgray;
+        &::before{
+            position: absolute;
+            width: 60%;
+            height: 60%;
+            transition: background $short-anim, transform $short-anim, top $short-anim, right $short-anim;
+            top: 50%;
+            right: 50%;
+            transform: translateX(50%) translateY(-50%);
+            content: "";
+            background: url("/public/symbols/plus-symbol.svg");
+            background-size: contain;
+        }
+    }
+    input:not(:invalid)~span{
+        width: 1.5rem;
+        height: 1.5rem;
+        top: -0.4rem;
+        right: -0.4rem;
+        padding: 0.25rem;
+        background: white;
+        transform: translateX(0%) translateY(0%);
+        &::before{
+            background: url("/public/symbols/pen-symbol.svg");
+        }
+    }
+    input{
+        display: none;
+    }
+    label{
+        position: absolute;
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+    }
+}

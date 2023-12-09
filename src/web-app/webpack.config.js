@@ -26,10 +26,14 @@ module.exports = {
           use: [
             // Creates `style` nodes from JS strings
             "style-loader",
-            // Translates CSS into CommonJS
-            "css-loader",
+            {
+              loader: "css-loader",
+              options: {
+                url: false,
+              }
+            },
             // Compiles Sass to CSS
-            "sass-loader",
+            "sass-loader"
           ],
         },
       ],
@@ -60,5 +64,6 @@ module.exports = {
                 { from: "src/components", to: "components"}
             ],
         }),
-      ]
+    ],
+    devtool:"source-map"
 };
