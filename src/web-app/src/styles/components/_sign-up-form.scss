@@ -1,0 +1,12 @@
+@import "@Styles/base";
+
+.sign-up-form{
+    width: 80%;
+    height: 90%;
+    // border: 0.05rem solid $accent;
+    // border-radius: $rounded-border-radius;
+    display: flex;
+    margin: 2rem auto 0 auto;
+    justify-content: flex-start;
+    align-items: flex-start;
+}

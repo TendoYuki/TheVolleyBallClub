@@ -26,7 +26,7 @@
             </svg>
         </li>
     </ul>
-    <div class="login-form">
+    <div class="sign-up-form">
         <h1>Créer un compte</h1>
         <form action="" method="post">
             <div class="text-field">
