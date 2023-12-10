@@ -21,10 +21,10 @@
     <ul class="navbar">
         <ul class="navbar-menu">
             <li><a href="/">ACCUEIL</a></li>
-            <li><a href="/pages/informations">INFORMATIONS</a></li>
-            <li><a href="/pages/planning">PLANNING</a></li>
-            <li><a href="/pages/contact">CONTACT</a></li>
-            <li class="selected"><a href="/pages/connection/sign-in">CONNEXION</a></li>
+            <li><a href="/informations">INFORMATIONS</a></li>
+            <li><a href="/planning">PLANNING</a></li>
+            <li><a href="/contact">CONTACT</a></li>
+            <li class="selected"><a href="/connection/sign-in">CONNEXION</a></li>
         </ul>
         <li class="navbar-menu-opener">
             <svg width="420" height="420" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">

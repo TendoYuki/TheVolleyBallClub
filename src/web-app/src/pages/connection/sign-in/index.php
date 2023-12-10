@@ -22,10 +22,10 @@
     <ul class="navbar">
         <ul class="navbar-menu">
             <li><a href="/">ACCUEIL</a></li>
-            <li><a href="/pages/informations">INFORMATIONS</a></li>
-            <li><a href="/pages/planning">PLANNING</a></li>
-            <li><a href="/pages/contact">CONTACT</a></li>
-            <li class="selected"><a href="/pages/connection/sign-in">CONNEXION</a></li>
+            <li><a href="/informations">INFORMATIONS</a></li>
+            <li><a href="/planning">PLANNING</a></li>
+            <li><a href="/contact">CONTACT</a></li>
+            <li class="selected"><a href="/connection/sign-in">CONNEXION</a></li>
         </ul>
         <li class="navbar-menu-opener">
             <svg width="420" height="420" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -46,8 +46,8 @@
             <button class="btn filled" type="submit" form="sign-in-form">Connexion</button>
         </form>
         <div class="other-actions">
-            <h2><a href="/pages/connection/sign-up">Créer un compte</a></h2>
-            <h2><a href="/pages/connection/forgot-password">Mot de passe oublié ?</a></h2>
+            <h2><a href="/connection/sign-up">Créer un compte</a></h2>
+            <h2><a href="/connection/forgot-password">Mot de passe oublié ?</a></h2>
         </div>
     </div>
 </body>

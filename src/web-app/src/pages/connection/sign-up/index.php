@@ -10,9 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon">
     <title>Créer un compte</title>
-    <script defer src="/components/navbar/navbar.js"></script>
-    <script defer src="/pages/connection/sign-up/sign-up-validation.js"></script>
-    <script defer src="/app.js"></script>
+    <script src="/components/navbar/navbar.js" defer></script>
+    <script src="/connection/sign-up/sign-up-validation.js" defer></script>
+    <script src="/app.js" defer></script>
 </head>
 <body>
     <?php
@@ -23,10 +23,10 @@
     <ul class="navbar">
         <ul class="navbar-menu">
             <li><a href="/">ACCUEIL</a></li>
-            <li><a href="/pages/informations">INFORMATIONS</a></li>
-            <li><a href="/pages/planning">PLANNING</a></li>
-            <li><a href="/pages/contact">CONTACT</a></li>
-            <li class="selected"><a href="/pages/connection/sign-in">CONNEXION</a></li>
+            <li><a href="/informations">INFORMATIONS</a></li>
+            <li><a href="/planning">PLANNING</a></li>
+            <li><a href="/contact">CONTACT</a></li>
+            <li class="selected"><a href="/connection/sign-in">CONNEXION</a></li>
         </ul>
         <li class="navbar-menu-opener">
             <svg width="420" height="420" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -116,7 +116,7 @@
             </div>
         </form>
         <div class="other-actions">
-            <h2><a href="/pages/connection/sign-in">Déja un compte?</a></h2>
+            <h2><a href="/connection/sign-in">Déja un compte?</a></h2>
         </div>
     </div>
     

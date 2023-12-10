@@ -12,9 +12,18 @@ const genderField = document.querySelector("#gender-field");
 const cancelBtn = document.querySelector("#cancel-btn");
 const signupBtn = document.querySelector("#sign-up-btn");
 
+const signUpForm = document.querySelector("#sign-up");
+
 const specialSymbols = ` !"#$%&'()*+,-./:;<=>?@[\\]^_\`{|}~`;
 const uppercaseSymbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const numbers = "1234567890";
+
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+
+if(urlParams.has("error")) {
+    setTimeout(() => alert(`${urlParams.get("error")}`),500);
+}
 
 /**
  * Checks whether or not the str contains any of the chars inside of the list
@@ -92,7 +101,7 @@ avatarField.addEventListener("change", (event) => {
 cancelBtn.addEventListener("click", (event) => {
     event.preventDefault();
     event.stopPropagation();
-    window.location="/pages/connection/sign-in";
+    window.location="/connection/sign-in";
 });
 
 /**  
@@ -103,16 +112,18 @@ signupBtn.addEventListener("click", (event) => {
     event.stopPropagation();
 
     // Checks if gender is valid
-    if(!(genderField.value != 1 && genderField != 0)) {
+    if(!(genderField.value != 1 && genderField.value != 0)) {
 
     } else {
-
+        alert("invalid gender");
+        return;
     }
     
-    if(!(groupField.value != 1 && groupField != 2)) {
+    if(!(groupField.value != 1 && groupField.value != 2)) {
 
     } else {
-
+        alert("invalid group");
+        return;
     }
 
     // Checks if name is valid
@@ -121,6 +132,7 @@ signupBtn.addEventListener("click", (event) => {
 
     } else {
         alert(passValidityName.err);
+        return;
     }
 
     // Checks if surname is valid
@@ -129,13 +141,15 @@ signupBtn.addEventListener("click", (event) => {
 
     } else {
         alert(passValiditySurname.err);
+        return;
     }
 
     // Checks if the email is valid
     if(verifyEmail(emailField.value)) {
 
     } else {
-        alert()
+        alert("email invalid");
+        return;
     }
 
     // Checks if age is valid
@@ -144,6 +158,7 @@ signupBtn.addEventListener("click", (event) => {
         
     } else {
         alert(passValidityAge.err);
+        return;
     }
 
     // Checks if password is valid
@@ -152,7 +167,8 @@ signupBtn.addEventListener("click", (event) => {
         
     } else {
         alert(passValidityPassword.err);
+        return;
     }
 
-
+    signUpForm.submit();
 });
