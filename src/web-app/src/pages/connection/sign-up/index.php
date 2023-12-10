@@ -9,6 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon">
     <title>Créer un compte</title>
+    <script defer src="/components/navbar/navbar.js"></script>
+    <script defer src="/pages/connection/sign-up/sign-up-validation.js"></script>
     <script defer src="/app.js"></script>
 </head>
 <body>
@@ -28,44 +30,87 @@
     </ul>
     <div class="sign-up-form">
         <h1>Créer un compte</h1>
-        <form action="endpoint.php" method="post">
-            <div class="avatar-selector">
-                <label for="file-upload"></label>
-                <input type="file" name="avatar-field" id="file-upload" required>
-                <span></span>
+        <form action="endpoint.php" method="post" id="sign-up" enctype="multipart/form-data">
+            <div class="form-section">
+                <div class="form-section-field">
+                    <label for="avatar-field">Photo d'identité</label>
+                    <div class="avatar-selector">
+                        <label for="avatar-field"></label>
+                        <input type="file" name="avatar-field" form="sign-up" id="avatar-field" accept="image/png, image/jpg, image/jpeg" required>
+                        <span></span>
+                    </div>
+                </div>
             </div>
-            <div class="field">
-                <input type="text" name="name-field" id="" placeholder="Nom">
+            <h2>Identité</h2>
+            <div class="form-section">
+                <div class="form-section-field">
+                    <label for="gender-field">Civilité</label>
+                    <div class="field">
+                        <select name="gender-field" id="gender-field" required>
+                            <option disabled selected value>--</option>
+                            <option title="" descGroup="" value="1">Mr.</option>
+                            <option title="" descGroup="" value="0">Mme.</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-section-field">
+                    <label for="name-field">Prenom</label>
+                    <div class="field">
+                        <input type="text" name="name-field" id="name-field" placeholder="Prenom" required>
+                    </div>
+                </div>
+                <div class="form-section-field">
+                    <label for="surname-field">Nom de famille</label>
+                    <div class="field">
+                        <input type="text" name="surname-field" id="surname-field" placeholder="Nom" required>
+                    </div>
+                </div>
+                <div class="form-section-field">
+                    <label for="birthdate-field">Date de naissance</label>
+                    <div class="field">
+                        <input type="date" name="birthdate-field" id="birthdate-field" placeholder="" required>
+                    </div>  
+                </div>
             </div>
-            <div class="field">
-                <input type="text" name="surname-field" id="" placeholder="Prenom">
+            <h2>Compte</h2>
+            <div class="form-section">
+                <div class="form-section-field">
+                    <label for="group-field">Groupe</label>
+                    <div class="field">
+                        <select name="group-field" id="group-field" required>
+                            <option disabled selected value>--------</option>
+                            <?php
+                                require("../db_connect.php");
+                                $stmt = $con->prepare("SELECT * FROM `group`;");
+                                $stmt->execute();
+                                $res = $stmt->fetchAll();
+                                foreach($res as $cur) {
+                                    echo("<option title=".$cur["descGroup"]." value=".$cur["idGroup"].">".$cur["nameGroup"]."</option>");
+                                }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-section-field">
+                    <label for="email-field">Email</label>
+                    <div class="field">
+                        <input type="text" name="email-field" id="email-field" placeholder="Email" required>
+                    </div>
+                </div>
+                <div class="form-section-field">
+                    <label for="password-field">Mot de passe</label>
+                    <div class="field">
+                        <input type="password" name="password-field" id="password-field" placeholder="Mot de passe" required>
+                    </div>
+                </div>
             </div>
-            <div class="field">
-                <input type="date" name="birthdate-field" id="" placeholder="">
+            <div class="btn-wrapper">
+                <button class="btn filled" id="sign-up-btn">S'inscrire</button>
+                <button class="btn" id="cancel-btn">Annuler</button>
             </div>
-            <div class="field">
-                <select name="group-field" id="">
-                    <?php
-                        require("../db_connect.php");
-                        $stmt = $con->prepare("SELECT * FROM `group`;");
-                        $stmt->execute();
-                        $res = $stmt->fetchAll();
-                        foreach($res as $cur) {
-                            echo("<option title=".$cur["descGroup"]." value=".$cur["idGroup"].">".$cur["nameGroup"]."</option>");
-                        }
-                    ?>
-                </select>
-            </div>
-            <div class="field">
-                <input type="text" name="email-field" id="" placeholder="Email">
-            </div>
-            <div class="field">
-                <input type="password" name="password-field" id="" placeholder="Mot de passe">
-            </div>
-            <button class="btn filled">S'inscrire</button>
         </form>
         <div class="other-actions">
-            <h2><a href="/pages/connection">Déja un compte?</a></h2>
+            <h2><a href="/pages/connection/sign-in">Déja un compte?</a></h2>
         </div>
     </div>
     
