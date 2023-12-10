@@ -1,3 +1,4 @@
+<?php require_once("/srv/http/endpoint/app-config.php") ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -7,6 +8,9 @@
 </head>
 <body>
     <?php
+        if(isset($_SESSION['userConnect']) || isset($_SESSION['adminConnect'])) {
+            header("Location: /"); 
+        }
         if(isset($_POST["email-field"]) && isset($_POST["password-field"]))   {
             require('../db_connect.php');
             // Verify if it's a user
@@ -21,14 +25,14 @@
             $admin = $stmt->fetch();
             
             if(isset($user['idUser'])) {
-                session_start();
                 echo("User connected");
                 $_SESSION['userConnect'] = $user['idUser']; 
+                header('Location: /pages/dashboard/user/');
             }
             else if(isset($admin['idAdmin'])) {
-                session_start();
                 echo("Admin connected");
-                $_SESSION['adminConnect'] = $admin['idAdmin']; 
+                $_SESSION['adminConnect'] = $admin['idAdmin'];
+                header('Location: /pages/dashboard/admin/');
             }
             // User not in the database
             else{

@@ -14,6 +14,11 @@
     <script src="/components/navbar/navbar.js" defer></script>
 </head>
 <body>
+    <?php
+        if(isset($_SESSION['userConnect']) || isset($_SESSION['adminConnect'])) {
+            header("Location: /"); 
+        }
+    ?>
     <ul class="navbar">
         <ul class="navbar-menu">
             <li><a href="/">ACCUEIL</a></li>

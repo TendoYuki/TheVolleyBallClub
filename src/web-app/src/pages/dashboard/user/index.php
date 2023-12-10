@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon">
-    <title>Planning</title>
+    <title>Contact</title>
     <script defer src="/app.js"></script>
     <script src="/components/navbar/navbar.js" defer></script>
 </head>
@@ -18,7 +18,7 @@
         <ul class="navbar-menu">
             <li><a href="/">ACCUEIL</a></li>
             <li><a href="/pages/informations">INFORMATIONS</a></li>
-            <li class="selected"><a href="/pages/planning">PLANNING</a></li>
+            <li><a href="/pages/planning">PLANNING</a></li>
             <li><a href="/pages/contact">CONTACT</a></li>
             <?php if (isset($_SESSION["userConnect"]) || isset($_SESSION["adminConnect"])): ?>
                 <li><a href="/pages/connection/sign-out">DECONNEXION</a></li>

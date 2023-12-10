@@ -1,3 +1,4 @@
+<?php require_once("/srv/http/endpoint/app-config.php") ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -19,7 +20,11 @@
             <li><a href="/pages/informations">INFORMATIONS</a></li>
             <li><a href="/pages/planning">PLANNING</a></li>
             <li><a href="/pages/contact">CONTACT</a></li>
-            <li><a href="/pages/connection/sign-in">CONNEXION</a></li>
+            <?php if (isset($_SESSION["userConnect"]) || isset($_SESSION["adminConnect"])): ?>
+                <li><a href="/pages/connection/sign-out">DECONNEXION</a></li>
+            <?php else: ?>
+                <li><a href="/pages/connection/sign-in">CONNEXION</a></li>
+            <?php endif ?>
         </ul>
         <li class="navbar-menu-opener">
             <svg width="420" height="420" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">

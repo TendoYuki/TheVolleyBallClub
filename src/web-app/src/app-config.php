@@ -7,4 +7,6 @@
 
     if ( !defined('PAGES') )
     define('PAGES', ABSPATH.'pages'.'/');
+
+    session_start();
 ?>

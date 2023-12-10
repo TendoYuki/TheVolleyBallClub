@@ -1,3 +1,4 @@
+<?php require_once("/srv/http/endpoint/app-config.php") ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -12,6 +13,11 @@
     <script defer src="/app.js"></script>
 </head>
 <body>
+    <?php
+        if(isset($_SESSION['userConnect']) || isset($_SESSION['adminConnect'])) {
+            header("Location: /"); 
+        }
+    ?>
     <ul class="navbar">
         <ul class="navbar-menu">
             <li><a href="/">ACCUEIL</a></li>

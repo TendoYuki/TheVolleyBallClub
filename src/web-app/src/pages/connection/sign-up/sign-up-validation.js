@@ -14,6 +14,7 @@ const signupBtn = document.querySelector("#sign-up-btn");
 
 const specialSymbols = ` !"#$%&'()*+,-./:;<=>?@[\\]^_\`{|}~`;
 const uppercaseSymbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const numbers = "1234567890";
 
 /**
  * Checks whether or not the str contains any of the chars inside of the list
@@ -34,6 +35,36 @@ const verifyPassword = (password) => {
     if(password.length < 12) return {valid: false, err: "Le mot de passe doit faire au moins 12 caractères"}
     if(!has(password, specialSymbols)) return {valid: false, err: `Le mot de passe doit contenir un ou plusieurs caractères spéciaux : ${specialSymbols}`}
     if(!has(password, uppercaseSymbols)) return {valid: false, err: `Le mot de passe doit contenir une ou plusieurs majuscules`}
+    return {valid: true};
+}
+
+/**
+ * Checks whether or not the name/surname is valid 
+ * @param {*} password 
+ * @returns 
+ */
+const verifyNotNumbers = (name,type) => {
+    if(has(name,numbers)){
+        if(type=="prenom"){
+            return {valid: false, err: "Le prenom ne doit pas contenir de chiffres"};
+        }
+        else return {valid: false, err: "Le nom ne doit pas contenir de chiffres"};
+    } 
+    return {valid: true};
+}
+
+/**
+ * Checks whether or not the user is under 15 
+ * @param {*} password 
+ * @returns 
+ */
+const verifyAge = (date) => {
+    const MILIS_YEAR = 31556952000;
+    const MIN_AGE = 15;
+    let minDate = Date.now() - (MILIS_YEAR*MIN_AGE);
+    let bd = new Date(date);
+    if(!(bd.getTime() < minDate)) return {valid: false, err: "L'age minimum requis est 15 ans"};
+    return {valid: true};
 }
 
 /**
@@ -46,6 +77,7 @@ const verifyEmail = (email) => {
         /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     );
 }
+
 
 /**
  * Handles avatar change event
@@ -63,35 +95,64 @@ cancelBtn.addEventListener("click", (event) => {
     window.location="/pages/connection/sign-in";
 });
 
-// /**  
-//  * Handles the signup event by checking the data model validity
-//  */
-// signupBtn.addEventListener("click", (event) => {
-//     event.preventDefault();
-//     event.stopPropagation();
+/**  
+ * Handles the signup event by checking the data model validity
+ */
+signupBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
 
-//     // Checks if gender is valid
-//     if(!(genderField.value != 1 && genderField != 0)) {
+    // Checks if gender is valid
+    if(!(genderField.value != 1 && genderField != 0)) {
 
-//     } else
-//     {
+    } else {
 
-//     }
+    }
+    
+    if(!(groupField.value != 1 && groupField != 2)) {
 
-//     // Checks if the email is valid
-//     if(verifyEmail(emailField.value)) {
+    } else {
 
-//     } else {
+    }
+
+    // Checks if name is valid
+    const passValidityName = verifyNotNumbers(nameField.value,"prenom");
+    if(passValidityName.valid) {
+
+    } else {
+        alert(passValidityName.err);
+    }
+
+    // Checks if surname is valid
+    const passValiditySurname = verifyNotNumbers(surnameField.value,"nom");
+    if(passValiditySurname.valid) {
+
+    } else {
+        alert(passValiditySurname.err);
+    }
+
+    // Checks if the email is valid
+    if(verifyEmail(emailField.value)) {
+
+    } else {
+        alert()
+    }
+
+    // Checks if age is valid
+    const passValidityAge =  verifyAge(birthdateField.value);
+    if(passValidityAge.valid) {
         
-//     }
+    } else {
+        alert(passValidityAge.err);
+    }
 
-//     // Checks if password is valid
-//     const passValidity = verifyPassword(emailField.value);
-//     if(passValidity.valid) {
-
-//     } else {
+    // Checks if password is valid
+    const passValidityPassword = verifyPassword(passwordField.value);
+    if(passValidityPassword.valid) {
         
-//     }
+    } else {
+        alert(passValidityPassword.err);
+    }
 
 
-// });
+});
