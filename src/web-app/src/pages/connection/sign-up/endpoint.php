@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Créer un compte</title>
     <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon">
 </head>
 <body> 
@@ -60,6 +60,12 @@
                 header('Location: /dashboard/user/');
             } catch(EmailAlreadyExistsException $e) {
                 $_SESSION["error"] = "L'email existe déjà";
+                $_SESSION["email_back"] = $_POST["email-field"];
+                $_SESSION["birthdate_back"] = $_POST["birthdate-field"];
+                $_SESSION["name_back"] = $_POST["name-field"];
+                $_SESSION["surname_back"] = $_POST["surname-field"];
+                $_SESSION["group_back"] = $_POST["group-field"];
+                $_SESSION["gender_back"] = $_POST["gender-field"];
                 header('Location: /connection/sign-up');
             }
         }   

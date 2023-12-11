@@ -17,21 +17,23 @@
         if(isset($_SESSION['userConnect']) || isset($_SESSION['adminConnect'])) {
             header("Location: /"); 
         }
+        if(isset($_SESSION['error'])) {
+            echo("<script>setTimeout(() => alert(`".$_SESSION['error']."`),500);</script>");
+            unset($_SESSION['error']);
+        }
+        require("/srv/http/endpoint/components/navbar/navbar.php");
+        (new Navbar(NavbarEntry::connection))->display();
     ?>
-    <ul class="navbar">
-        <ul class="navbar-menu">
-            <li><a href="/">ACCUEIL</a></li>
-            <li><a href="/informations">INFORMATIONS</a></li>
-            <li><a href="/planning">PLANNING</a></li>
-            <li><a href="/contact">CONTACT</a></li>
-            <li class="selected"><a href="/connection/sign-in">CONNEXION</a></li>
-        </ul>
-        <li class="navbar-menu-opener">
-            <svg width="420" height="420" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M63.0022 210L357.002 210M63 333.5L357 333.5M63.0022 87L357.002 87" stroke-width="73" stroke-linecap="round"/>
-            </svg>
-        </li>
-    </ul>
+    <div class="login-form">
+        <h1>Réinitialiser mot de passe</h1>
+        <form action="endpoint.php" method="post" id="reset-password-form">
+            <div class="text-field">
+                <input type="text" name="email-field" id="email-field" placeholder="Email" form="reset-password-form">
+            </div>
+            <button class="btn filled" type="submit" form="reset-password-form">Réinitialiser</button>
+            <button class="btn" type="submit" form="reset-password-form">Annuler</button>
+        </form>
+    </div>
     
 </body>
 </html>

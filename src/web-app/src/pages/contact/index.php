@@ -11,27 +11,12 @@
     <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon">
     <title>Contact</title>
     <script defer src="/app.js"></script>
-    <script src="/components/navbar/navbar.js" defer></script>
 </head>
 <body>
-    <ul class="navbar">
-        <ul class="navbar-menu">
-            <li><a href="/">ACCUEIL</a></li>
-            <li><a href="/informations">INFORMATIONS</a></li>
-            <li><a href="/planning">PLANNING</a></li>
-            <li class="selected"><a href="/contact">CONTACT</a></li>
-            <?php if (isset($_SESSION["userConnect"]) || isset($_SESSION["adminConnect"])): ?>
-                <li><a href="/connection/sign-out">DECONNEXION</a></li>
-            <?php else: ?>
-                <li><a href="/connection/sign-in">CONNEXION</a></li>
-            <?php endif ?>
-        </ul>
-        <li class="navbar-menu-opener">
-            <svg width="420" height="420" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M63.0022 210L357.002 210M63 333.5L357 333.5M63.0022 87L357.002 87" stroke-width="73" stroke-linecap="round"/>
-            </svg>
-        </li>
-    </ul>
+    <?php
+        require("/srv/http/endpoint/components/navbar/navbar.php");
+        (new Navbar(NavbarEntry::contact))->display();
+    ?>
 
 </body>
 </html>

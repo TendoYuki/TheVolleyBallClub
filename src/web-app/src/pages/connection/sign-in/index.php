@@ -11,7 +11,6 @@
     <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon">
     <title>Connexion</title>
     <script defer src="/app.js"></script>
-    <script src="/components/navbar/navbar.js" defer></script>
 </head>
 <body>
     <?php
@@ -22,27 +21,22 @@
             echo("<script>setTimeout(() => alert('".$_SESSION['error']."'),500);</script>");
             unset($_SESSION['error']);
         }
+        require("/srv/http/endpoint/components/navbar/navbar.php");
+        (new Navbar(NavbarEntry::connection))->display();
     ?>
-    <ul class="navbar">
-        <ul class="navbar-menu">
-            <li><a href="/">ACCUEIL</a></li>
-            <li><a href="/informations">INFORMATIONS</a></li>
-            <li><a href="/planning">PLANNING</a></li>
-            <li><a href="/contact">CONTACT</a></li>
-            <li class="selected"><a href="/connection/sign-in">CONNEXION</a></li>
-        </ul>
-        <li class="navbar-menu-opener">
-            <svg width="420" height="420" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M63.0022 210L357.002 210M63 333.5L357 333.5M63.0022 87L357.002 87" stroke-width="73" stroke-linecap="round"/>
-            </svg>
-        </li>
-    </ul>
 
     <div class="login-form">
         <h1>Connexion</h1>
         <form action="endpoint.php" method="post" id="sign-in-form">
             <div class="text-field">
-                <input type="text" name="email-field" id="email-field" placeholder="Email" form="sign-in-form">
+                <input 
+                    type="text"
+                    name="email-field"
+                    id="email-field"
+                    placeholder="Email"
+                    form="sign-in-form"
+                    value="<?php if(isset($_SESSION["email_back"])) {echo $_SESSION["email_back"]; unset($_SESSION["email_back"]);}?>"
+                >
             </div>
             <div class="text-field">
                 <input type="password" name="password-field" id="password-field" placeholder="Mot de passe" form="sign-in-form">
