@@ -10,7 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon">
     <title>Créer un compte</title>
-    <script src="/components/navbar/navbar.js" defer></script>
     <script src="/connection/sign-up/sign-up-validation.js" defer></script>
     <script src="/app.js" defer></script>
 </head>
@@ -19,21 +18,13 @@
         if(isset($_SESSION['userConnect']) || isset($_SESSION['adminConnect'])) {
             header("Location: /"); 
         }
+        if(isset($_SESSION['error'])) {
+            echo("<script>setTimeout(() => alert(`".$_SESSION['error']."`),500);</script>");
+            unset($_SESSION['error']);
+        }
+        require("/srv/http/endpoint/components/navbar/navbar.php");
+        (new Navbar(NavbarEntry::connection))->display();
     ?>
-    <ul class="navbar">
-        <ul class="navbar-menu">
-            <li><a href="/">ACCUEIL</a></li>
-            <li><a href="/informations">INFORMATIONS</a></li>
-            <li><a href="/planning">PLANNING</a></li>
-            <li><a href="/contact">CONTACT</a></li>
-            <li class="selected"><a href="/connection/sign-in">CONNEXION</a></li>
-        </ul>
-        <li class="navbar-menu-opener">
-            <svg width="420" height="420" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M63.0022 210L357.002 210M63 333.5L357 333.5M63.0022 87L357.002 87" stroke-width="73" stroke-linecap="round"/>
-            </svg>
-        </li>
-    </ul>
     <div class="sign-up-form">
         <h1>Créer un compte</h1>
         <form action="endpoint.php" method="post" id="sign-up" enctype="multipart/form-data">
@@ -42,7 +33,7 @@
                     <label for="avatar-field">Photo d'identité</label>
                     <div class="avatar-selector">
                         <label for="avatar-field"></label>
-                        <input type="file" name="avatar-field" form="sign-up" id="avatar-field" accept="image/png, image/jpg, image/jpeg" required>
+                        <input type="file" name="avatar-field" form="sign-up" id="avatar-field" accept="image/png, image/jpg, image/jpeg, image/webp" required>
                         <span></span>
                     </div>
                 </div>
@@ -54,27 +45,49 @@
                     <div class="field">
                         <select name="gender-field" id="gender-field" required>
                             <option disabled selected value>--</option>
-                            <option title="" descGroup="" value="1">Mr.</option>
-                            <option title="" descGroup="" value="0">Mme.</option>
+                            <option <?php echo((isset($_SESSION["gender_back"]) && $_SESSION["gender_back"] == 1) ? "selected" : "") ?> title="" descGroup="" value="1">Mr.</option>
+                            <option <?php echo((isset($_SESSION["gender_back"]) && $_SESSION["gender_back"] == 0) ? "selected" : "") ?> title="" descGroup="" value="0">Mme.</option>
+                            <?php if(isset($_SESSION["gender_back"])) unset($_SESSION["gender_back"]); ?>
                         </select>
                     </div>
                 </div>
                 <div class="form-section-field">
                     <label for="name-field">Prenom</label>
                     <div class="field">
-                        <input type="text" name="name-field" id="name-field" placeholder="Prenom" required>
+                        <input
+                            type="text"
+                            name="name-field"
+                            id="name-field"
+                            placeholder="Prenom"
+                            value="<?php if(isset($_SESSION["name_back"])) {echo $_SESSION["name_back"]; unset($_SESSION["name_back"]);}?>"
+                            required
+                        >
                     </div>
                 </div>
                 <div class="form-section-field">
                     <label for="surname-field">Nom de famille</label>
                     <div class="field">
-                        <input type="text" name="surname-field" id="surname-field" placeholder="Nom" required>
+                        <input
+                            type="text"
+                            name="surname-field"
+                            id="surname-field"
+                            placeholder="Nom"
+                            value="<?php if(isset($_SESSION["surname_back"])) {echo $_SESSION["surname_back"]; unset($_SESSION["surname_back"]);}?>"
+                            required
+                        >
                     </div>
                 </div>
                 <div class="form-section-field">
                     <label for="birthdate-field">Date de naissance</label>
                     <div class="field">
-                        <input type="date" name="birthdate-field" id="birthdate-field" placeholder="" required>
+                        <input
+                            type="date"
+                            name="birthdate-field"
+                            id="birthdate-field"
+                            placeholder=""
+                            value="<?php if(isset($_SESSION["birthdate_back"])) {echo $_SESSION["birthdate_back"]; unset($_SESSION["birthdate_back"]);}?>"
+                            required
+                        >
                     </div>  
                 </div>
             </div>
@@ -91,8 +104,16 @@
                                 $stmt->execute();
                                 $res = $stmt->fetchAll();
                                 foreach($res as $cur) {
-                                    echo("<option title=".$cur["descGroup"]." value=".$cur["idGroup"].">".$cur["nameGroup"]."</option>");
+                                    echo(
+                                        "<option ".
+                                        ((isset($_SESSION["group_back"]) && $_SESSION["group_back"] == $cur["idGroup"]) ? "selected" : "").
+                                        " title=".$cur["descGroup"].
+                                        " value=".$cur["idGroup"].">".
+                                        $cur["nameGroup"].
+                                        "</option>"
+                                    );
                                 }
+                                if(isset($_SESSION["group_back"])) unset($_SESSION["group_back"]);
                             ?>
                         </select>
                     </div>
@@ -100,13 +121,38 @@
                 <div class="form-section-field">
                     <label for="email-field">Email</label>
                     <div class="field">
-                        <input type="text" name="email-field" id="email-field" placeholder="Email" required>
+                        <input
+                            type="text"
+                            name="email-field"
+                            id="email-field"
+                            placeholder="Email"
+                            value="<?php if(isset($_SESSION["email_back"])) {echo $_SESSION["email_back"]; unset($_SESSION["email_back"]);}?>"
+                            required
+                        >
                     </div>
                 </div>
                 <div class="form-section-field">
                     <label for="password-field">Mot de passe</label>
                     <div class="field">
-                        <input type="password" name="password-field" id="password-field" placeholder="Mot de passe" required>
+                        <input
+                            type="password"
+                            name="password-field"
+                            id="password-field"
+                            placeholder="Mot de passe"
+                            required
+                        >
+                    </div>
+                </div>
+                <div class="form-section-field">
+                    <label for="password-field">Confirmer mot de passe</label>
+                    <div class="field">
+                        <input
+                            type="password"
+                            name="password-field"
+                            id="confirm-password-field"
+                            placeholder="Mot de passe"
+                            required
+                        >
                     </div>
                 </div>
             </div>

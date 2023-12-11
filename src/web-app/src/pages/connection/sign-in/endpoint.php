@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Connexion</title>
 </head>
 <body>
     <?php
@@ -34,8 +34,9 @@
             }
             // User not in the database
             else{
-                //TODO User not in the database or wrong password
-                echo("Wrong");
+                $_SESSION["error"] = "Email ou mot de passe incorrect";
+                $_SESSION["email_back"] = $_POST["email-field"];
+                header('Location: /connection/sign-in');
             }
         }   
     ?>

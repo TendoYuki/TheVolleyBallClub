@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Créer un compte</title>
     <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon">
 </head>
 <body> 
@@ -31,7 +31,7 @@
 
                 // Creates the new user
                 $stmt = $con->prepare(
-                    'INSERT INTO user (nameUser,surnameUser,passwordUser,emailUser,birthdateUser,registerDate,imageUser,Group_idGroup,Payment_idPayment) VALUES (?,?,?,?,?,?,?,?,?);'
+                    'INSERT INTO user (nameUser,surnameUser,passwordUser,emailUser,birthdateUser,registerDate,imageUser,Group_idGroup,Payment_idPayment, gender) VALUES (?,?,?,?,?,?,?,?,?,?);'
                 );
                 date_default_timezone_set('Europe/Paris');
                 $date = date('Y-m-d');
@@ -48,6 +48,7 @@
                 $stmt->bindValue(7, $avatar_blob);
                 $stmt->bindValue(8, $_POST['group-field']);
                 $stmt->bindValue(9, $PAYMENT_ID_TEMP);
+                $stmt->bindValue(10, $_POST['gender-field']);
                 $stmt->execute();
 
                 // Connects the newly created user
@@ -58,7 +59,14 @@
 
                 header('Location: /dashboard/user/');
             } catch(EmailAlreadyExistsException $e) {
-                header('Location: /connection/sign-up?error=L\'email existe déjà');
+                $_SESSION["error"] = "L'email existe déjà";
+                $_SESSION["email_back"] = $_POST["email-field"];
+                $_SESSION["birthdate_back"] = $_POST["birthdate-field"];
+                $_SESSION["name_back"] = $_POST["name-field"];
+                $_SESSION["surname_back"] = $_POST["surname-field"];
+                $_SESSION["group_back"] = $_POST["group-field"];
+                $_SESSION["gender_back"] = $_POST["gender-field"];
+                header('Location: /connection/sign-up');
             }
         }   
     ?>
