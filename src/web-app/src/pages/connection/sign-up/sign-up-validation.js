@@ -18,13 +18,6 @@ const specialSymbols = ` !"#$%&'()*+,-./:;<=>?@[\\]^_\`{|}~`;
 const uppercaseSymbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const numbers = "1234567890";
 
-const queryString = window.location.search;
-const urlParams = new URLSearchParams(queryString);
-
-if(urlParams.has("error")) {
-    setTimeout(() => alert(`${urlParams.get("error")}`),500);
-}
-
 /**
  * Checks whether or not the str contains any of the chars inside of the list
  * @param {*} str Str to check

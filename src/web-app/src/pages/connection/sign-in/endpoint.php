@@ -36,8 +36,8 @@
             }
             // User not in the database
             else{
-                //TODO User not in the database or wrong password
-                echo("Wrong");
+                $_SESSION["error"] = "Email ou mot de passe incorrect";
+                header('Location: /connection/sign-in');
             }
         }   
     ?>

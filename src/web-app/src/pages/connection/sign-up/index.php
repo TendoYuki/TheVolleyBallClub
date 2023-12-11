@@ -19,6 +19,10 @@
         if(isset($_SESSION['userConnect']) || isset($_SESSION['adminConnect'])) {
             header("Location: /"); 
         }
+        if(isset($_SESSION['error'])) {
+            echo("<script>setTimeout(() => alert(`".$_SESSION['error']."`),500);</script>");
+            unset($_SESSION['error']);
+        }
     ?>
     <ul class="navbar">
         <ul class="navbar-menu">
@@ -42,7 +46,7 @@
                     <label for="avatar-field">Photo d'identité</label>
                     <div class="avatar-selector">
                         <label for="avatar-field"></label>
-                        <input type="file" name="avatar-field" form="sign-up" id="avatar-field" accept="image/png, image/jpg, image/jpeg" required>
+                        <input type="file" name="avatar-field" form="sign-up" id="avatar-field" accept="image/png, image/jpg, image/jpeg, image/webp" required>
                         <span></span>
                     </div>
                 </div>

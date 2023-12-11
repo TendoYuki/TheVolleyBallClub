@@ -31,7 +31,7 @@
 
                 // Creates the new user
                 $stmt = $con->prepare(
-                    'INSERT INTO user (nameUser,surnameUser,passwordUser,emailUser,birthdateUser,registerDate,imageUser,Group_idGroup,Payment_idPayment) VALUES (?,?,?,?,?,?,?,?,?);'
+                    'INSERT INTO user (nameUser,surnameUser,passwordUser,emailUser,birthdateUser,registerDate,imageUser,Group_idGroup,Payment_idPayment, gender) VALUES (?,?,?,?,?,?,?,?,?,?);'
                 );
                 date_default_timezone_set('Europe/Paris');
                 $date = date('Y-m-d');
@@ -48,6 +48,7 @@
                 $stmt->bindValue(7, $avatar_blob);
                 $stmt->bindValue(8, $_POST['group-field']);
                 $stmt->bindValue(9, $PAYMENT_ID_TEMP);
+                $stmt->bindValue(10, $_POST['gender-field']);
                 $stmt->execute();
 
                 // Connects the newly created user
@@ -58,7 +59,8 @@
 
                 header('Location: /dashboard/user/');
             } catch(EmailAlreadyExistsException $e) {
-                header('Location: /connection/sign-up?error=L\'email existe déjà');
+                $_SESSION["error"] = "L'email existe déjà";
+                header('Location: /connection/sign-up');
             }
         }   
     ?>
