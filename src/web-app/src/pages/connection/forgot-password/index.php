@@ -11,6 +11,7 @@
     <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon">
     <title>Mot de passe oublié</title>
     <script defer src="/app.js"></script>
+    <script src="/connection/forgot-password/forgotPassword.js" defer></script>
 </head>
 <body>
     <?php
@@ -24,14 +25,14 @@
         require("/srv/http/endpoint/components/navbar/navbar.php");
         (new Navbar(NavbarEntry::connection))->display();
     ?>
-    <div class="login-form">
-        <h1>Réinitialiser mot de passe</h1>
+    <div class="forgot-password-form">
+        <h1>Réinitialiser votre mot de passe</h1>
         <form action="endpoint.php" method="post" id="reset-password-form">
             <div class="text-field">
                 <input type="text" name="email-field" id="email-field" placeholder="Email" form="reset-password-form">
             </div>
-            <button class="btn filled" type="submit" form="reset-password-form">Réinitialiser</button>
-            <button class="btn" type="submit" form="reset-password-form">Annuler</button>
+            <button class="btn filled" type="submit" form="reset-password-form" id="reset-btn">Réinitialiser</button>
+            <button class="btn" type="submit" form="reset-password-form" id="cancel-btn">Annuler</button>
         </form>
     </div>
     

@@ -144,11 +144,11 @@
                     </div>
                 </div>
                 <div class="form-section-field">
-                    <label for="password-field">Confirmer mot de passe</label>
+                    <label for="confirm-password-field">Confirmer mot de passe</label>
                     <div class="field">
                         <input
                             type="password"
-                            name="password-field"
+                            name="confirm-password-field"
                             id="confirm-password-field"
                             placeholder="Mot de passe"
                             required

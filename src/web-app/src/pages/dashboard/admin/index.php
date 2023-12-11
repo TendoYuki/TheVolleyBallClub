@@ -11,7 +11,6 @@
     <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon">
     <title>Contact</title>
     <script defer src="/app.js"></script>
-    <script src="/components/navbar/navbar.js" defer></script>
 </head>
 <body>
     <?php

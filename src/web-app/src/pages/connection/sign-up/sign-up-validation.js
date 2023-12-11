@@ -2,6 +2,7 @@ const avatarField = document.querySelector("#avatar-field");
 const avatarSelector = document.querySelector(".avatar-selector");
 
 const passwordField = document.querySelector("#password-field");
+const passwordConfirmField = document.querySelector("#confirm-password-field");
 const emailField = document.querySelector("#email-field");
 const groupField = document.querySelector("#group-field");
 const birthdateField = document.querySelector("#birthdate-field");
@@ -104,6 +105,15 @@ signupBtn.addEventListener("click", (event) => {
     event.preventDefault();
     event.stopPropagation();
 
+    if(avatarField.value) {
+
+    } else {
+        alert("Avatar cannot be null");
+        return;
+    }
+
+    if(avatarField.value) {}
+
     // Checks if gender is valid
     if(!(genderField.value != 1 && genderField.value != 0)) {
 
@@ -160,6 +170,14 @@ signupBtn.addEventListener("click", (event) => {
         
     } else {
         alert(passValidityPassword.err);
+        return;
+    }
+
+    // Checks if passwords matches
+    if(passwordConfirmField.value === passwordField.value) {
+        
+    } else {
+        alert("Les mots de passe de corréspondent pas.");
         return;
     }
 
