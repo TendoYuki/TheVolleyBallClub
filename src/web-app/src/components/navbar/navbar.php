@@ -8,6 +8,7 @@
         case planning;
         case contact;
         case connection;
+        case none;
 
     }
     class Navbar {
@@ -25,7 +26,13 @@
                         <li '.($this->active==NavbarEntry::informations ? 'class="selected"' : '').'><a href="/informations">INFORMATIONS</a></li>
                         <li '.($this->active==NavbarEntry::planning ? 'class="selected"' : '').'><a href="/planning">PLANNING</a></li>
                         <li '.($this->active==NavbarEntry::contact ? 'class="selected"' : '').'><a href="/contact">CONTACT</a></li>
-                        <li '.($this->active==NavbarEntry::connection ? 'class="selected"' : '').'><a href="/connection/sign-in">CONNEXION</a></li>
+                        '.
+                        (
+                            (isset($_SESSION["userConnect"]) || isset($_SESSION["adminConnect"])) ?
+                            '<li><a href="/connection/sign-out">DECONNEXION</a></li>' :
+                            '<li '.($this->active==NavbarEntry::connection ? 'class="selected"' : '').'><a href="/connection/sign-in">CONNEXION</a></li>'
+                        )
+                        .'
                     </ul>
                     <li class="navbar-menu-opener">
                         <svg width="420" height="420" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
