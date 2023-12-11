@@ -8,6 +8,7 @@
         case planning;
         case contact;
         case connection;
+        case dashboard;
         case none;
 
     }
@@ -26,6 +27,10 @@
                         <li '.($this->active==NavbarEntry::informations ? 'class="selected"' : '').'><a href="/informations">INFORMATIONS</a></li>
                         <li '.($this->active==NavbarEntry::planning ? 'class="selected"' : '').'><a href="/planning">PLANNING</a></li>
                         <li '.($this->active==NavbarEntry::contact ? 'class="selected"' : '').'><a href="/contact">CONTACT</a></li>
+                        '.(
+                            isset($_SESSION["userConnect"]) ? ('<li '.($this->active==NavbarEntry::dashboard ? 'class="selected"' : '').'><a href="/dashboard/user">TABLEAU DE BORD</a></li>') : (
+                            isset($_SESSION["adminConnect"]) ? ('<li '.($this->active==NavbarEntry::dashboard ? 'class="selected"' : '').'><a href="/dashboard/admin">TABLEAU DE BORD</a></li>') : '')
+                        ).'
                         '.
                         (
                             (isset($_SESSION["userConnect"]) || isset($_SESSION["adminConnect"])) ?
