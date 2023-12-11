@@ -25,12 +25,10 @@
             $admin = $stmt->fetch();
             
             if(isset($user['idUser'])) {
-                echo("User connected");
                 $_SESSION['userConnect'] = $user['idUser']; 
                 header('Location: /dashboard/user/');
             }
             else if(isset($admin['idAdmin'])) {
-                echo("Admin connected");
                 $_SESSION['adminConnect'] = $admin['idAdmin'];
                 header('Location: /dashboard/admin/');
             }
