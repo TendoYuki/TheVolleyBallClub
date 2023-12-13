@@ -51,7 +51,15 @@ ul.admin-navbar{
         &.active{
             $height: 5px;
             background-color: #e7e7e7;
-            padding-bottom: $height*2;
+            &::after{
+                content: ("");
+                background-color: #e7e7e7;
+                position: absolute;
+                bottom: -$height * 2;
+                left: 0;
+                height: $height * 2;
+                width: 100%;
+            }
             &::before{
                 content: ("");
                 background-color: #e7e7e7;

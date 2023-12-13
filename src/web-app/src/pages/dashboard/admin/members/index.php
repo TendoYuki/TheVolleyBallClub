@@ -25,10 +25,21 @@
         <h1>Membres</h1>
         <div class="search-bar">
             <h2>Recherche</h2>
-            <input type="text">
+            <input type="text" placeholder="Nom ou numéro de license">
         </div>
         <div class="result-table">
-            
+            <?php
+                require("/srv/http/endpoint/connection/db_connect.php");
+                $stmt = $con->prepare("SELECT * FROM user");
+                $stmt->execute();
+                foreach($stmt->fetchAll() as $res) {
+                    $template = file_get_contents("user_display_template.php");
+                    $template = str_replace("{user_avatar-url}", base64_encode($res["imageUser"]), $template);
+                    $template = str_replace("{user_name}", $res["nameUser"].' '.$res["surnameUser"], $template);
+                    $template = str_replace("{user_id}", $res["idUser"], $template);
+                    echo($template);
+                }
+            ?>
         </div>
     </div>
 
