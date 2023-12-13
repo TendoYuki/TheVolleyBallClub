@@ -64,6 +64,16 @@ module.exports = {
                 { from: "src/components", to: "components"}
             ],
         }),
+        new CopyPlugin({
+            patterns: [
+                { from: "src/error-pages", to: "error-pages"}
+            ],
+        }),
+        new CopyPlugin({
+            patterns: [
+                { from: "src/.htaccess"}
+            ],
+        }),
     ],
     devtool:"source-map"
 };
