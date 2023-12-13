@@ -1,0 +1,19 @@
+<svg width="420" height="420" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg" class="user-symbol">
+    <defs>
+        <style>
+            .user-symbol{
+                --symbol-color: black;
+            }
+        </style>
+    </defs>
+<g clip-path="url(#clip0_54_46)">
+<path d="M275.705 128.712C275.705 165.004 246.288 194.424 210.001 194.424C173.713 194.424 144.297 165.004 144.297 128.712C144.297 92.4204 173.713 63 210.001 63C246.288 63 275.705 92.4204 275.705 128.712Z" fill="var(--symbol-color)"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M159.885 189.591C108.475 213.174 98.5 277.42 98.5 352.978V387.987C130.81 408.271 169.035 420 210 420C252.883 420 292.764 407.146 326 385.081V352.978C326 277.262 313.158 212.905 260.294 189.444C246.645 200.763 229.117 207.567 210.001 207.567C190.967 207.567 173.509 200.822 159.885 189.591Z" fill="var(--symbol-color)"/>
+<circle cx="210" cy="210" r="206" stroke="var(--symbol-color)" stroke-width="8"/>
+</g>
+<defs>
+<clipPath id="clip0_54_46">
+<rect width="420" height="420" fill="var(--symbol-color)"/>
+</clipPath>
+</defs>
+</svg>

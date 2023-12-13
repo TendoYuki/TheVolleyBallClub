@@ -19,10 +19,17 @@
         (new Navbar(NavbarEntry::dashboard))->display();
 
         require("/srv/http/endpoint/components/navbar/admin_navbar.php");
-        (new AdminNavbar(AdminNavbarEntry::trainings))->display();
+        (new AdminNavbar(AdminNavbarEntry::members))->display();
     ?>
     <div class="dashboard">
-        <h1></h1>
+        <h1>Membres</h1>
+        <div class="search-bar">
+            <h2>Recherche</h2>
+            <input type="text">
+        </div>
+        <div class="result-table">
+            
+        </div>
     </div>
 
 </body>

@@ -1,7 +1,11 @@
 @import "@Styles/base";
 
+ul.navbar {
+    box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.11);
+}
+
 ul.navbar, ul.navbar .navbar-menu{
-    height: 5rem;
+    height: $navbar-height;
     list-style: none;
     display: flex;
     justify-content: right;

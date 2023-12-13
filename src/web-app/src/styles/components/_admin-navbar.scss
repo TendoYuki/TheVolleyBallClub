@@ -1,0 +1,70 @@
+@import "@Styles/base";
+
+ul.admin-navbar{
+    $navbar-opened-height: 15rem;
+    height: calc(100vh - $navbar-height);
+    width: $navbar-height;
+    position: fixed;
+    transition: width $medium-anim;
+    top: $navbar-height;
+    left: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    $element-color: black;
+    box-shadow: 2px 3px 5px 1px rgba(0, 0, 0, 0.11);
+    z-index: 5;
+    overflow-x: hidden;
+    background-color: white;
+    li{
+        display: flex;
+        align-items: center;
+        margin-top: 2rem;
+        cursor: pointer;
+        position: relative;
+        width: $navbar-opened-height;
+        svg{
+            --symbol-color: #{$element-color};
+            *{
+                transition: fill $short-anim, stroke, $short-anim;
+            }
+            height: 4rem;
+            width: $navbar-height;
+        }
+        a{
+            text-decoration: none;
+            font-family: $text-font;
+            font-weight: 500;
+            transition: color $short-anim;
+            color: $element-color;
+        }
+        &:hover{
+            svg{
+                --symbol-color: #{$accent};
+            }
+            a{
+                color: $accent;
+            }
+        }
+        &.active{
+            $height: 5px;
+            background-color: #e7e7e7;
+            padding-bottom: $height*2;
+            &::before{
+                content: ("");
+                background-color: #e7e7e7;
+                border-top: $height solid $accent;
+                position: absolute;
+                top: -$height * 2;
+                left: 0;
+                height: $height;
+                width: 100%;
+            }
+        }
+    }
+    &:hover{
+        width: $navbar-opened-height;
+    }
+}
