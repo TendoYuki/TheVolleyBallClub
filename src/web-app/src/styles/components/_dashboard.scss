@@ -34,6 +34,13 @@
             border-radius: $rounded-border-radius;
             box-shadow: 5px 5px 15px 1px rgba(0, 0, 0, 0.082);
         }
+        .search-inline{
+            display: flex;
+            width: 100%;
+            .btn{
+                margin-left: 1rem;
+            }
+        }
     }
     .result-table{
         box-sizing: border-box;

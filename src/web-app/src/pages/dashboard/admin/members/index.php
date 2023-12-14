@@ -9,9 +9,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon">
-    <title>Contact</title>
+    <title>Tableau de bord</title>
     <script defer src="/app.js"></script>
     <script defer src="pageControls.js"></script>
+    <script defer src="searchControls.js"></script>
 </head>
 <body>
     <?php
@@ -25,21 +26,36 @@
         <h1>Membres</h1>
         <div class="search-bar">
             <h2>Recherche</h2>
-            <input type="text" placeholder="Prénom, Nom">
+            <div class="search-inline">
+                <input id="search-field" type="text" placeholder="Prénom, Nom" value="<?php echo isset($_GET["search"]) ? $_GET["search"] : "" ?>">
+                <button id="search-btn" class="btn">Rechercher</button>
+            </div>
         </div>
         <div class="result-table">
             <?php
                 require("/srv/http/endpoint/connection/db_connect.php");
                 $DISPLAY_COUNT_PER_PAGE = 5;
+
+                // Gets the search query if exists
+                $search = "%";
+                if(isset($_GET["search"])) {
+                    $search = $search.$_GET["search"];
+                }
+                $search = $search."%";
                 
                 // Gets the total number of entries in the table
-                $stmtCount = $con->prepare("SELECT COUNT(*) AS CT FROM user;");
+                $stmtCount = $con->prepare("SELECT COUNT(*) AS CT FROM user WHERE nameUser LIKE ? OR surnameUser LIKE ? OR idUser LIKE ?;");
+                $stmtCount->bindValue(1, $search);
+                $stmtCount->bindValue(2, $search);
+                $stmtCount->bindValue(3, $search);
                 $stmtCount->execute();
                 $rowCt = $stmtCount->fetch()["CT"];
                 $TOTAL_PAGE_CT = ceil($rowCt/$DISPLAY_COUNT_PER_PAGE);
+
+
                 
                 // Gets the current page
-                $stmt = $con->prepare("SELECT * FROM user LIMIT $DISPLAY_COUNT_PER_PAGE OFFSET ?;");
+                $stmt = $con->prepare("SELECT * FROM user WHERE nameUser LIKE ? OR surnameUser LIKE ? OR idUser LIKE ? LIMIT $DISPLAY_COUNT_PER_PAGE OFFSET ? ;");
                 $page = 1;
                 if(isset($_GET["page"])) {
                     $page = $_GET["page"];
@@ -54,8 +70,15 @@
                 }
                 
                 $offset = (($page-1)*$DISPLAY_COUNT_PER_PAGE);
-                $stmt->bindValue(1, (int)$offset, PDO::PARAM_INT);
-                $stmt->execute();
+                $stmt->bindValue(1, $search);
+                $stmt->bindValue(2, $search);
+                $stmt->bindValue(3, $search);
+                $stmt->bindValue(4, (int)$offset, PDO::PARAM_INT);
+                try{
+                    $stmt->execute();
+                } catch(Exception $e) {
+                    echo $e;
+                }
 
                 // Displays the current page
                 foreach($stmt->fetchAll() as $res) {
