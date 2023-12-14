@@ -2,8 +2,9 @@
 
 ul.admin-navbar{
     $navbar-opened-height: 15rem;
-    height: calc(100vh - $navbar-height);
-    width: $navbar-height;
+    $element-height: $navbar-height;
+    height: calc(100vh - $element-height);
+    width: $element-height;
     position: fixed;
     transition: width $medium-anim;
     top: $navbar-height;
@@ -31,7 +32,7 @@ ul.admin-navbar{
                 transition: fill $short-anim, stroke, $short-anim;
             }
             height: 4rem;
-            width: $navbar-height;
+            width: $element-height;
         }
         a{
             text-decoration: none;

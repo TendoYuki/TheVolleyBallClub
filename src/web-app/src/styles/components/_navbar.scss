@@ -8,6 +8,10 @@ ul.navbar, ul.navbar .navbar-menu{
     height: $navbar-height;
     list-style: none;
     display: flex;
+    position: sticky;
+    background-color: white;
+    z-index: 10;
+    top: 0px;
     justify-content: right;
     align-items: center;
     $element-color: black;
