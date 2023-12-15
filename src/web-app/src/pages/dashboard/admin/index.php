@@ -15,6 +15,9 @@
 </head>
 <body>
     <?php
+        if(!(isset($_SESSION['adminConnect']))) {
+            header("Location: /"); 
+        }
         require("/srv/http/endpoint/components/navbar/navbar.php");
         (new Navbar(NavbarEntry::dashboard))->display();
 

@@ -13,9 +13,13 @@
     <script defer src="/app.js"></script>
     <script defer src="pageControls.js"></script>
     <script defer src="searchControls.js"></script>
+    <script defer src="userControls.js"></script>
 </head>
 <body>
     <?php
+        if(!(isset($_SESSION['adminConnect']))) {
+            header("Location: /"); 
+        }
         require("/srv/http/endpoint/components/navbar/navbar.php");
         (new Navbar(NavbarEntry::dashboard))->display();
 

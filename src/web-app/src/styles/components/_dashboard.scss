@@ -60,9 +60,11 @@
             display: flex;
             border-radius: $rounded-border-radius;
             background-color: rgb(230, 230, 230);
+            transition: background-color $medium-anim;
             width: 100%;
             height: 4rem;
             align-items: center;
+            cursor: pointer;
             margin-bottom: 1rem;
             .user-avatar{
                 height: 80%;
@@ -90,6 +92,9 @@
             }
             .user-actions{
                 display: flex;
+            }
+            &:hover{
+                background-color: $accent-light;
             }
         }
         .page-control{
