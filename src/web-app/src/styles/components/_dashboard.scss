@@ -1,11 +1,13 @@
 @import "@Styles/base";
 
+// Wraps the dashboard with its navbar
 .dashboard-wrapper{
     display: flex;
     width: 100%;
     height: calc(100vh - #{var(--navbar-height)});
     flex-direction: row;
     flex-wrap: nowrap;
+    // Mobile style
     @media (max-width: 500px) {
         flex-direction: column-reverse;
     }
@@ -50,6 +52,8 @@
             }
         }
     }
+
+    // Displays the results of a query
     .result-table{
         box-sizing: border-box;
         margin-top: 1.5rem;
@@ -63,6 +67,8 @@
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
+
+        // Displays a user
         .user-display{
             display: flex;
             border-radius: $rounded-border-radius;
@@ -104,6 +110,8 @@
                 background-color: $accent-light;
             }
         }
+
+        // Pagination controls (prev, next)
         .page-control{
             a{
                 font-family: $text-font;
@@ -118,6 +126,7 @@
         }
     }
     margin-left: var(--admin-navbar-width);
+    
     // Mobile style
     @media (max-width: 500px) {
         padding-bottom: calc(var(--admin-navbar-height) * 2);

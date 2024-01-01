@@ -8,6 +8,8 @@
     justify-content: center;
     overflow: hidden;
     position: relative;
+
+    // Carrousel controls to navigate between images
     .controls{
         height: 100%;
         width: 100%;
@@ -18,6 +20,8 @@
         .prev, .next, .selectors{
             height: 100%;
         }
+
+        // Bottom selectors to change between images
         .selectors{
             flex: 1;
             display: flex;
@@ -52,6 +56,8 @@
                 }
             }
         }
+
+        // Buttons that moves between the next and previous images 
         .prev, .next{
             width: 4rem;
             position: relative;
@@ -72,6 +78,9 @@
                 align-content: center;
             }
         }
+
+
+        // Gradient at the right and left of the carrousel
         .prev{
             background: linear-gradient(90deg, rgba(0,0,0,0.3351541300113795) 0%, rgba(0,0,0,0.1782913849133403) 34%, rgba(0,0,0,0.05) 76%, rgba(0,0,0,0) 100%);
         }
@@ -79,6 +88,7 @@
             background: linear-gradient(270deg, rgba(0,0,0,0.3351541300113795) 0%, rgba(0,0,0,0.1782913849133403) 34%, rgba(0,0,0,0.05) 76%, rgba(0,0,0,0) 100%);
         }
     }
+    
     .images-container{
         height: 100%;
         position: absolute;

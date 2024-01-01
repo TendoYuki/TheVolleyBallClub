@@ -3,8 +3,6 @@
 .sign-up-form{
     @import "./form";
     width: 80%;
-    // border: 0.05rem solid $accent;
-    // border-radius: $rounded-border-radius;
     display: flex;
     flex-direction: column;
     margin: 0rem auto 0 auto;
@@ -17,6 +15,8 @@
         margin-top: 1rem;
         margin-bottom: 2rem;
     }
+
+    // Bottom action links
     .other-actions{
         display: flex;
         justify-content: center;

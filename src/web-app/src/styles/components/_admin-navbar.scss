@@ -1,29 +1,65 @@
 @import "@Styles/base";
 
+$element-color: black;
+
+// General styling for the navabar
+ul.admin-navbar{
+    list-style: none;
+    display: flex;
+    flex-wrap: nowrap;
+    z-index: 5;
+    background-color: white;
+    li{
+        &:hover{
+            svg{
+                --symbol-color: #{$accent};
+            }
+            a{
+                color: $accent;
+            }
+        }
+        &.active{
+            background-color: #e7e7e7;
+            &::after{
+                content: ("");
+                background-color: #e7e7e7;
+                position: absolute;
+                width: 100%;
+            }
+            &::before{
+                content: ("");
+                background-color: #e7e7e7;
+                position: absolute;
+                width: 100%;
+            }
+        }
+    }
+}
+
 // Mobile style
 @media (max-width: 500px) {
+
+    // Makes the admin navbar's height available to the dashboard
     .dashboard-wrapper{
         --admin-navbar-height: 3.5rem;
     }
+
+
     ul.admin-navbar{
         --element-height: calc(var(--admin-navbar-height) - 0.75rem);
         height: var(--admin-navbar-height);
         min-height: var(--admin-navbar-height);
         width: 100%;
-        list-style: none;
-        display: flex;
         flex-direction: row;
-        flex-wrap: nowrap;
         justify-content: center;
         align-items: center;
         position: fixed;
         bottom: 0;
-        $element-color: black;
         box-shadow: 2px -3px 5px 1px rgba(61, 61, 61, 0.11);
-        z-index: 5;
-        background-color: white;
         padding: 0 1rem;
         box-sizing: border-box;
+
+        // Styling the entries of the navbar
         li{
             flex: 1;
             display: flex;
@@ -46,40 +82,24 @@
             a{
                 display: none;
             }
-            &:hover{
-                svg{
-                    --symbol-color: #{$accent};
-                }
-                a{
-                    color: $accent;
-                }
-            }
             &.active{
                 $height: 2px;
-                background-color: #e7e7e7;
                 &::after{
-                    content: ("");
-                    background-color: #e7e7e7;
-                    position: absolute;
                     bottom: -$height * 2;
                     left: 0;
                     height: $height * 2;
-                    width: 100%;
                 }
                 &::before{
-                    content: ("");
-                    background-color: #e7e7e7;
                     border-top: $height solid $accent;
                     position: absolute;
                     top: 0;
                     left: 0;
-                    width: 100%;
                 }
             }
         }
     }
 }
-
+ 
 // Desktop style
 @media (min-width: 500px) {
     :root{
@@ -95,18 +115,13 @@
         min-width: var(--admin-navbar-width);
         width: var(--admin-navbar-width);
         transition: width $medium-anim;
-        list-style: none;
-        display: flex;
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
         position: fixed;
         left: 0;
-        $element-color: black;
         box-shadow: 2px 3px 5px 1px rgba(0, 0, 0, 0.11);
-        z-index: 5;
         overflow-x: hidden;
-        background-color: white;
         li{
             display: flex;
             align-items: center;
@@ -132,35 +147,18 @@
                 color: $element-color;
                 margin-left: 1rem;
             }
-            &:hover{
-                svg{
-                    --symbol-color: #{$accent};
-                }
-                a{
-                    color: $accent;
-                }
-            }
             &.active{
                 $height: 5px;
-                background-color: #e7e7e7;
                 &::after{
-                    content: ("");
-                    background-color: #e7e7e7;
-                    position: absolute;
                     bottom: -$height * 2;
                     left: 0;
                     height: $height * 2;
-                    width: 100%;
                 }
                 &::before{
-                    content: ("");
-                    background-color: #e7e7e7;
                     border-top: $height solid $accent;
-                    position: absolute;
                     top: -$height * 2;
                     left: 0;
                     height: $height;
-                    width: 100%;
                 }
             }
         }

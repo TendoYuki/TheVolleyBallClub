@@ -1,10 +1,9 @@
 @import "@Styles/base";
 
+// Displays a single entry from the database
 .entry-display{
     @import "./form";
     width: 80%;
-    // border: 0.05rem solid $accent;
-    // border-radius: $rounded-border-radius;
     display: flex;
     flex-direction: column;
     margin: 5rem auto 5rem auto;

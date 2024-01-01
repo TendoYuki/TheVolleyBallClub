@@ -22,12 +22,16 @@
         transform: scale(0.97);
     }
     cursor: pointer;
+
+    // If the button contains an image instead of text
     &.img-container {
         img{
             height: 80%;
             aspect-ratio: 1/1;
         }
     }
+
+    // If the button has a solid background with the borders
     &.filled{
         border: 0.10rem solid $accent;
         background-color: $accent;
@@ -35,6 +39,8 @@
             background-color: $accent-shadow;
         }
     }
+
+    // If the button only has an outline (borders)
     &.outline{
         border: 0.1rem solid $accent;
         background-color: transparent;

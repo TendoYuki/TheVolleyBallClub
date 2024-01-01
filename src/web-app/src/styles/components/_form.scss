@@ -9,16 +9,21 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+
+        // Textual label of the input field
         label{
             font-family: $text-font;
             font-weight: 500;
             font-size: medium;
             margin-bottom: 0.5rem;
         }
+
         // Mobile style
         @media (max-width: 500px) {
             width: 100%;
         }
+
+        // Actual input field
         .field{
             border: 1px $accent solid;
             border-radius: $rounded-border-radius;
