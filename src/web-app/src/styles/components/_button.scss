@@ -10,6 +10,10 @@
     font-size: 1.1rem;
     color: black;
     background-color: #cfcfcf;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     &:hover, &:focus-within{
         border-color: $accent-shadow;
         box-shadow: 0px 0.2rem 0.5rem 0.025rem rgba(0, 0, 0, 0.096)
@@ -19,9 +23,6 @@
     }
     cursor: pointer;
     &.img-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
         img{
             height: 80%;
             aspect-ratio: 1/1;
