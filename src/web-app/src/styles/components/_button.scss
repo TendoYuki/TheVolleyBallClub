@@ -18,6 +18,15 @@
         transform: scale(0.97);
     }
     cursor: pointer;
+    &.img-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img{
+            height: 80%;
+            aspect-ratio: 1/1;
+        }
+    }
     &.filled{
         border: 0.10rem solid $accent;
         background-color: $accent;

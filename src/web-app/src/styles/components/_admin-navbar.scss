@@ -86,7 +86,7 @@
         --admin-navbar-width: 5rem;
         --navbar-opened-width: 20rem;
         --element-height: calc(var(--admin-navbar-width) - 0.5rem);
-        height: calc(100vh - $navbar-height);
+        height: calc(100vh - var(--navbar-height));
         min-width: var(--admin-navbar-width);
         width: var(--admin-navbar-width);
         transition: width $medium-anim;

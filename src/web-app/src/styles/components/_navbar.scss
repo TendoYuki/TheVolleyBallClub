@@ -1,11 +1,15 @@
 @import "@Styles/base";
 
+:root{
+    --navbar-height: 5rem;
+}
+
 ul.navbar {
     box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.11);
 }
 
 ul.navbar, ul.navbar .navbar-menu{
-    height: $navbar-height;
+    height: var(--navbar-height);
     list-style: none;
     display: flex;
     position: sticky;
@@ -116,4 +120,10 @@ ul.navbar .navbar-menu {
             }
         }
     }
+}
+// Mobile style
+@media (max-width: 500px) {
+    :root{
+        --navbar-height: 4rem;
+    } 
 }

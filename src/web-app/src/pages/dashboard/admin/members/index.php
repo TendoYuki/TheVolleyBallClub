@@ -33,8 +33,8 @@
             <div class="search-bar">
                 <h2>Recherche</h2>
                 <div class="search-inline">
-                    <input id="search-field" type="text" placeholder="Prénom, Nom" value="<?php echo isset($_GET["search"]) ? $_GET["search"] : "" ?>">
-                    <button id="search-btn" class="btn">Rechercher</button>
+                    <input id="search-field" type="text" placeholder="Prénom, Nom, License" value="<?php echo isset($_GET["search"]) ? $_GET["search"] : "" ?>">
+                    <button id="search-btn" class="btn img-container"><img src="/public/symbols/lens-symbol.svg" alt=""></button>
                 </div>
             </div>
             <div class="result-table">
