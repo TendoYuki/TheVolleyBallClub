@@ -1,79 +1,168 @@
 @import "@Styles/base";
 
-ul.admin-navbar{
-    $navbar-opened-height: 15rem;
-    $element-height: $navbar-height;
-    height: calc(100vh - $element-height);
-    width: $element-height;
-    position: fixed;
-    transition: width $medium-anim;
-    top: $navbar-height;
-    left: 0;
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    $element-color: black;
-    box-shadow: 2px 3px 5px 1px rgba(0, 0, 0, 0.11);
-    z-index: 5;
-    overflow-x: hidden;
-    background-color: white;
-    li{
+// Mobile style
+@media (max-width: 500px) {
+    .dashboard-wrapper{
+        --admin-navbar-height: 4rem;
+    }
+    ul.admin-navbar{
+        --element-height: calc(var(--admin-navbar-height) - 0.5rem);
+        height: var(--admin-navbar-height);
+        min-height: var(--admin-navbar-height);
+        width: 100%;
+        list-style: none;
         display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: center;
         align-items: center;
-        margin-top: 2rem;
-        cursor: pointer;
-        position: relative;
-        width: $navbar-opened-height;
-        svg{
-            --symbol-color: #{$element-color};
-            *{
-                transition: fill $short-anim, stroke, $short-anim;
-            }
-            height: 4rem;
-            width: $element-height;
-        }
-        a{
-            text-decoration: none;
-            font-family: $text-font;
-            font-weight: 500;
-            transition: color $short-anim;
-            color: $element-color;
-        }
-        &:hover{
+        position: fixed;
+        bottom: 0;
+        $element-color: black;
+        box-shadow: 2px -3px 5px 1px rgba(0, 0, 0, 0.11);
+        z-index: 5;
+        background-color: white;
+        padding: 0 1rem;
+        box-sizing: border-box;
+        li{
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+            height: 100%;
+            width: var(--admin-navbar-height);
             svg{
-                --symbol-color: #{$accent};
+                --symbol-color: #{$element-color};
+                *{
+                    transition: fill $short-anim, stroke, $short-anim;
+                }
+                height: var(--element-height);
+                width: var(--element-height);
+                aspect-ratio: 1/1;
+                margin: 0 0.25rem;
             }
             a{
-                color: $accent;
+                display: none;
             }
-        }
-        &.active{
-            $height: 5px;
-            background-color: #e7e7e7;
-            &::after{
-                content: ("");
-                background-color: #e7e7e7;
-                position: absolute;
-                bottom: -$height * 2;
-                left: 0;
-                height: $height * 2;
-                width: 100%;
+            &:hover{
+                svg{
+                    --symbol-color: #{$accent};
+                }
+                a{
+                    color: $accent;
+                }
             }
-            &::before{
-                content: ("");
+            &.active{
+                $height: 2px;
                 background-color: #e7e7e7;
-                border-top: $height solid $accent;
-                position: absolute;
-                top: -$height * 2;
-                left: 0;
-                height: $height;
-                width: 100%;
+                &::after{
+                    content: ("");
+                    background-color: #e7e7e7;
+                    position: absolute;
+                    bottom: -$height * 2;
+                    left: 0;
+                    height: $height * 2;
+                    width: 100%;
+                }
+                &::before{
+                    content: ("");
+                    background-color: #e7e7e7;
+                    border-top: $height solid $accent;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                }
             }
         }
     }
-    &:hover{
-        width: $navbar-opened-height;
+}
+
+// Desktop style
+@media (min-width: 500px) {
+    ul.admin-navbar{
+        --admin-navbar-width: 5rem;
+        --navbar-opened-width: 20rem;
+        --element-height: calc(var(--admin-navbar-width) - 0.5rem);
+        height: calc(100vh - $navbar-height);
+        min-width: var(--admin-navbar-width);
+        width: var(--admin-navbar-width);
+        transition: width $medium-anim;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        $element-color: black;
+        box-shadow: 2px 3px 5px 1px rgba(0, 0, 0, 0.11);
+        z-index: 5;
+        overflow-x: hidden;
+        background-color: white;
+        li{
+            display: flex;
+            align-items: center;
+            margin-top: 2rem;
+            cursor: pointer;
+            position: relative;
+            width: var(--navbar-opened-width);
+            svg{
+                --symbol-color: #{$element-color};
+                *{
+                    transition: fill $short-anim, stroke, $short-anim;
+                }
+                height: var(--element-height);
+                width: var(--element-height);
+                aspect-ratio: 1/1;
+                margin: 0 0.25rem;
+            }
+            a{
+                text-decoration: none;
+                font-family: $text-font;
+                font-weight: 500;
+                transition: color $short-anim;
+                color: $element-color;
+            }
+            &:hover{
+                svg{
+                    --symbol-color: #{$accent};
+                }
+                a{
+                    color: $accent;
+                }
+            }
+            &.active{
+                $height: 5px;
+                background-color: #e7e7e7;
+                &::after{
+                    content: ("");
+                    background-color: #e7e7e7;
+                    position: absolute;
+                    bottom: -$height * 2;
+                    left: 0;
+                    height: $height * 2;
+                    width: 100%;
+                }
+                &::before{
+                    content: ("");
+                    background-color: #e7e7e7;
+                    border-top: $height solid $accent;
+                    position: absolute;
+                    top: -$height * 2;
+                    left: 0;
+                    height: $height;
+                    width: 100%;
+                }
+            }
+        }
+        &:hover{
+            width: var(--navbar-opened-width);
+        }
+        @media (max-width: 950px) {
+            --admin-navbar-width: 3.5rem;
+            --navbar-opened-width: 20rem;
+            --element-height: calc(var(--admin-navbar-width) - 0.5rem);
+        }
     }
 }

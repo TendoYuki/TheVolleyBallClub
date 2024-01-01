@@ -63,3 +63,9 @@
         height: 27rem;
     }
 }
+
+@media (max-width: 700px) { 
+    .login-form{
+        border: none;
+    }
+}

@@ -1,13 +1,21 @@
 @import "@Styles/base";
 
+.dashboard-wrapper{
+    display: flex;
+    width: 100%;
+    height: calc(100vh - #{$navbar-height});
+    flex-direction: row;
+    flex-wrap: nowrap;
+    @media (max-width: 500px) {
+        flex-direction: column-reverse;
+    }
+}
 .dashboard{
     box-sizing: border-box;
-    min-width: calc(100vw - #{$navbar-height});
-    min-height: calc(100vh - #{$navbar-height});
-    position: absolute;
-    left: $navbar-height;
     background-color: $background-1;
     padding: 1.5rem;
+    flex: 1;
+    overflow-y: scroll;
     h1{
         font-family: $header-font;
         font-weight: 800;
@@ -46,7 +54,6 @@
         box-sizing: border-box;
         margin-top: 1.5rem;
         width: 100%;
-        min-height: 10rem;
         max-width: 90rem;
         box-shadow: 5px 5px 15px 1px rgba(0, 0, 0, 0.082);
         padding: 1rem;
@@ -109,5 +116,9 @@
                 }
             }
         }
+    }
+    // Mobile style
+    @media (max-width: 500px) {
+        padding-bottom: calc(var(--admin-navbar-height) * 2);
     }
 }

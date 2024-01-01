@@ -20,12 +20,15 @@
         }
         require("/srv/http/endpoint/components/navbar/navbar.php");
         (new Navbar(NavbarEntry::dashboard))->display();
-
-        require("/srv/http/endpoint/components/navbar/admin_navbar.php");
-        (new AdminNavbar(AdminNavbarEntry::trainings))->display();
     ?>
-    <div class="dashboard">
-        <h1></h1>
+    <div class="dashboard-wrapper">
+        <?php    
+            require("/srv/http/endpoint/components/navbar/admin_navbar.php");
+            (new AdminNavbar(AdminNavbarEntry::trainings))->display();
+        ?>
+        <div class="dashboard">
+            <h1></h1>
+        </div>
     </div>
 
 </body>
