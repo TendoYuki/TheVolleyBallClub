@@ -117,8 +117,10 @@
             }
         }
     }
+    margin-left: var(--admin-navbar-width);
     // Mobile style
     @media (max-width: 500px) {
         padding-bottom: calc(var(--admin-navbar-height) * 2);
+        margin-left: 0;
     }
 }

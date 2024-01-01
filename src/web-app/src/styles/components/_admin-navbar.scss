@@ -82,8 +82,13 @@
 
 // Desktop style
 @media (min-width: 500px) {
-    ul.admin-navbar{
+    :root{
         --admin-navbar-width: 5rem;
+        @media (max-width: 950px) {
+            --admin-navbar-width: 3.5rem;
+        }
+    }
+    ul.admin-navbar{
         --navbar-opened-width: 20rem;
         --element-height: calc(var(--admin-navbar-width) - 0.5rem);
         height: calc(100vh - var(--navbar-height));
@@ -95,6 +100,8 @@
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
+        position: fixed;
+        left: 0;
         $element-color: black;
         box-shadow: 2px 3px 5px 1px rgba(0, 0, 0, 0.11);
         z-index: 5;
@@ -123,6 +130,7 @@
                 font-weight: 500;
                 transition: color $short-anim;
                 color: $element-color;
+                margin-left: 1rem;
             }
             &:hover{
                 svg{
@@ -160,7 +168,6 @@
             width: var(--navbar-opened-width);
         }
         @media (max-width: 950px) {
-            --admin-navbar-width: 3.5rem;
             --navbar-opened-width: 20rem;
             --element-height: calc(var(--admin-navbar-width) - 0.5rem);
         }

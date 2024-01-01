@@ -10,7 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon">
     <title>Fiche utilisateur</title>
-    <script src="/connection/sign-up/sign-up-validation.js" defer></script>
     <script src="/app.js" defer></script>
 </head>
 <body>
@@ -23,7 +22,7 @@
 
         require("/srv/http/endpoint/connection/db_connect.php");
 
-        $stmt = $con->prepare("SELECT * FROM user WHERE idUser=?");
+        $stmt = $con->prepare("SELECT * FROM user JOIN `group` ON Group_idGroup=idGroup WHERE idUser=?");
         $stmt->bindValue(1, $_GET['user']);
         $stmt->execute();
 
@@ -43,12 +42,7 @@
                 <div class="form-section-field">
                     <label for="gender-field">Civilité</label>
                     <div class="field">
-                        <select name="gender-field" id="gender-field" required>
-                            <option disabled selected value>--</option>
-                            <option <?php echo((isset($_SESSION["gender_back"]) && $_SESSION["gender_back"] == 1) ? "selected" : "") ?> title="" descGroup="" value="1">Mr.</option>
-                            <option <?php echo((isset($_SESSION["gender_back"]) && $_SESSION["gender_back"] == 0) ? "selected" : "") ?> title="" descGroup="" value="0">Mme.</option>
-                            <?php if(isset($_SESSION["gender_back"])) unset($_SESSION["gender_back"]); ?>
-                        </select>
+                        <p><?php echo($user["gender"] == 0 ? "Mme." : "Mr.") ?></p>
                     </div>
                 </div>
                 <div class="form-section-field">
@@ -75,69 +69,18 @@
                 <div class="form-section-field">
                     <label for="group-field">Groupe</label>
                     <div class="field">
-                        <select name="group-field" id="group-field" required>
-                            <option disabled selected value>--------</option>
-                            <?php
-                                require("../db_connect.php");
-                                $stmt = $con->prepare("SELECT * FROM `group`;");
-                                $stmt->execute();
-                                $res = $stmt->fetchAll();
-                                foreach($res as $cur) {
-                                    echo(
-                                        "<option ".
-                                        ((isset($_SESSION["group_back"]) && $_SESSION["group_back"] == $cur["idGroup"]) ? "selected" : "").
-                                        " title=".$cur["descGroup"].
-                                        " value=".$cur["idGroup"].">".
-                                        $cur["nameGroup"].
-                                        "</option>"
-                                    );
-                                }
-                                if(isset($_SESSION["group_back"])) unset($_SESSION["group_back"]);
-                            ?>
-                        </select>
+                        <p><?php echo($user["nameGroup"]) ?></p>
                     </div>
                 </div>
                 <div class="form-section-field">
                     <label for="email-field">Email</label>
                     <div class="field">
-                        <input
-                            type="text"
-                            name="email-field"
-                            id="email-field"
-                            placeholder="Email"
-                            value="<?php if(isset($_SESSION["email_back"])) {echo $_SESSION["email_back"]; unset($_SESSION["email_back"]);}?>"
-                            required
-                        >
-                    </div>
-                </div>
-                <div class="form-section-field">
-                    <label for="password-field">Mot de passe</label>
-                    <div class="field">
-                        <input
-                            type="password"
-                            name="password-field"
-                            id="password-field"
-                            placeholder="Mot de passe"
-                            required
-                        >
-                    </div>
-                </div>
-                <div class="form-section-field">
-                    <label for="confirm-password-field">Confirmer mot de passe</label>
-                    <div class="field">
-                        <input
-                            type="password"
-                            name="confirm-password-field"
-                            id="confirm-password-field"
-                            placeholder="Mot de passe"
-                            required
-                        >
+                        <p><?php echo($user["emailUser"]) ?></p>
                     </div>
                 </div>
             </div>
             <div class="btn-wrapper">
-                <button class="btn filled" id="sign-up-btn">S'inscrire</button>
-                <button class="btn" id="cancel-btn">Retour</button>
+                <a class="btn" id="cancel-btn" href="/dashboard/admin/members/">Retour</a>
             </div>
         </div>
     </div>

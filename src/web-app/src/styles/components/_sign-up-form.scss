@@ -1,6 +1,7 @@
 @import "@Styles/base";
 
 .sign-up-form{
+    @import "./form";
     width: 80%;
     // border: 0.05rem solid $accent;
     // border-radius: $rounded-border-radius;
@@ -20,7 +21,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        flex-direction: column;
+        flex-direction: column; 
         margin-top: 1rem;
         h2{
             font-family: $text-font;
@@ -50,41 +51,6 @@
             font-size: 1.5rem;
             margin-top: 2rem;
             margin-bottom: 1rem;
-        }
-    }
-    .form-section{
-        display: flex;
-        justify-content: flex-start;
-        flex-wrap: wrap;
-        .form-section-field{
-            margin-top: 0.5rem;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            label{
-                font-family: $text-font;
-                font-weight: 500;
-                font-size: medium;
-                margin-bottom: 0.5rem;
-            }
-            // Mobile style
-            @media (max-width: 500px) {
-                width: 100%;
-            }
-        }
-    }
-    .field{
-        border: 1px $accent solid;
-        border-radius: $rounded-border-radius;
-        padding: 0.5rem 1rem;
-        margin-right: 1rem;
-        background-color: transparent;
-        position: relative; 
-        width: 12rem;
-        *{
-            width: 100%;
-            height: 100%;
-            background-color: transparent;
         }
     }
     .btn-wrapper{
