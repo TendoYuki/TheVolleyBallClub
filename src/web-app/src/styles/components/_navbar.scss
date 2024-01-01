@@ -22,16 +22,17 @@ ul.navbar, ul.navbar .navbar-menu{
     .navbar-menu-opener{
         display: none;
         &:hover{
-            svg{
-                stroke: $accent;
+            .arrow-left-symbol, .nav-menu-symbol{
+                --symbol-color: #{$accent};
             }
         }
         svg{
             cursor: pointer;
-            transition: stroke $short-anim;
-            stroke: $element-color;
             height: 2rem;
             width: 2rem;
+            *{
+                transition: all $short-anim;
+            }
         }
     }
     li{
@@ -92,6 +93,32 @@ ul.navbar .navbar-menu {
             z-index: 11;
             margin-right: auto;
             margin-left: 2rem;
+            position: relative;
+            svg{
+                position: absolute;
+                transition: opacity $medium-anim, transform $medium-anim;
+                top: 50%;
+                left: 50%;
+                transform: translateX(-50%) translateY(-50%);
+            }
+            .close{
+                transform: translateX(-50%) translateY(-50%) rotate(-180deg);
+                opacity: 0;
+            }
+            .open{
+                transform: translateX(-50%) translateY(-50%) rotate(0deg);
+                opacity: 1;
+            }
+            &:has(~.navbar-menu.active){
+                .close{
+                    transform: translateX(-50%) translateY(-50%) rotate(-360deg);
+                    opacity: 1;
+                }
+                .open{
+                    transform: translateX(-50%) translateY(-50%) rotate(-180deg);
+                    opacity: 0;
+                }
+            }
         }
         .navbar-menu {
             position: absolute;

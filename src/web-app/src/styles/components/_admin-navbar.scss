@@ -3,10 +3,10 @@
 // Mobile style
 @media (max-width: 500px) {
     .dashboard-wrapper{
-        --admin-navbar-height: 4rem;
+        --admin-navbar-height: 3.5rem;
     }
     ul.admin-navbar{
-        --element-height: calc(var(--admin-navbar-height) - 0.5rem);
+        --element-height: calc(var(--admin-navbar-height) - 0.75rem);
         height: var(--admin-navbar-height);
         min-height: var(--admin-navbar-height);
         width: 100%;
@@ -19,7 +19,7 @@
         position: fixed;
         bottom: 0;
         $element-color: black;
-        box-shadow: 2px -3px 5px 1px rgba(0, 0, 0, 0.11);
+        box-shadow: 2px -3px 5px 1px rgba(61, 61, 61, 0.11);
         z-index: 5;
         background-color: white;
         padding: 0 1rem;
