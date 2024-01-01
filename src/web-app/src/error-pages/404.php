@@ -11,7 +11,7 @@
     <script src="/app.js" defer></script>
     <title>Erreur 404</title>
 </head>
-<body>
+<body class="preload">
     <div class="error-page">
         <h1>ERREUR 404</h1>
         <h2>Cette page n'existe pas</h2>

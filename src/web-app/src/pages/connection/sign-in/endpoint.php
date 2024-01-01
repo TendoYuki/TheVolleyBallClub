@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
 </head>
-<body>
+<body class="preload">
     <?php
         if(isset($_SESSION['userConnect']) || isset($_SESSION['adminConnect'])) {
             header("Location: /"); 

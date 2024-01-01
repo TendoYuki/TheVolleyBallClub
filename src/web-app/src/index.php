@@ -12,7 +12,7 @@
     <script src="/app.js" defer></script>
     <title>Volleyball club</title>
 </head>
-<body>
+<body class="preload" class="preload">
     <?php 
         require("/srv/http/endpoint/components/navbar/navbar.php");
         (new Navbar(NavbarEntry::accueil))->display();

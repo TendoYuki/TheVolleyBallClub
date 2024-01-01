@@ -13,7 +13,7 @@
     <script defer src="/app.js"></script>
     <script defer src="/components/navbar/dashboard-navbar.js"></script>
 </head>
-<body>
+<body class="preload">
     <?php
         if(!(isset($_SESSION['adminConnect']))) {
             header("Location: /"); 

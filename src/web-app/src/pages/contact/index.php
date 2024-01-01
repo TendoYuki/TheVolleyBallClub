@@ -12,7 +12,7 @@
     <title>Contact</title>
     <script defer src="/app.js"></script>
 </head>
-<body>
+<body class="preload">
     <?php
         require("/srv/http/endpoint/components/navbar/navbar.php");
         (new Navbar(NavbarEntry::contact))->display();

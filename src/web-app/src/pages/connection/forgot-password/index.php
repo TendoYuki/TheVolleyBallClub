@@ -13,7 +13,7 @@
     <script defer src="/app.js"></script>
     <script src="/connection/forgot-password/forgotPassword.js" defer></script>
 </head>
-<body>
+<body class="preload">
     <?php
         if(isset($_SESSION['userConnect']) || isset($_SESSION['adminConnect'])) {
             header("Location: /"); 

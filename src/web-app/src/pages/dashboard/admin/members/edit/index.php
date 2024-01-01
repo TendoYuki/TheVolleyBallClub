@@ -13,7 +13,7 @@
     <script src="/connection/sign-up/sign-up-validation.js" defer></script>
     <script src="/app.js" defer></script>
 </head>
-<body>
+<body class="preload">
     <?php
         if(!(isset($_SESSION['adminConnect']))) {
             header("Location: /"); 

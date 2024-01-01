@@ -12,7 +12,7 @@
     <title>Connexion</title>
     <script defer src="/app.js"></script>
 </head>
-<body>
+<body class="preload">
     <?php
         if(isset($_SESSION['userConnect']) || isset($_SESSION['adminConnect'])) {
             header("Location: /"); 

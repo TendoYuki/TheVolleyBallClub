@@ -12,7 +12,7 @@
     <title>Fiche utilisateur</title>
     <script src="/app.js" defer></script>
 </head>
-<body>
+<body class="preload">
     <?php
         if(!isset($_GET['user'])) {
             header("Location: /dashboard/admin/members"); 

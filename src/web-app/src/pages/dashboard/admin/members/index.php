@@ -15,7 +15,7 @@
     <script defer src="searchControls.js"></script>
     <script defer src="userControls.js"></script>
 </head>
-<body>
+<body class="preload">
     <?php
         if(!(isset($_SESSION['adminConnect']))) {
             header("Location: /"); 

@@ -12,7 +12,7 @@
     <title>Contact</title>
     <script defer src="/app.js"></script>
 </head>
-<body>
+<body class="preload"></body>
     <?php
         if(!(isset($_SESSION['userConnect']))) {
             header("Location: /"); 
