@@ -2,7 +2,7 @@
 
 $element-color: black;
 
-// General styling for the navabar
+// General styling for the navbar
 ul.admin-navbar{
     list-style: none;
     display: flex;
@@ -103,9 +103,11 @@ ul.admin-navbar{
 // Desktop style
 @media (min-width: 500px) {
     :root{
-        --admin-navbar-width: 5rem;
+        --admin-navbar-width: 4rem;
+        --element-height: calc(var(--admin-navbar-width) - 0.5rem);
         @media (max-width: 950px) {
             --admin-navbar-width: 3.5rem;
+            --element-height: calc(var(--admin-navbar-width) - 0.5rem);
         }
     }
     ul.admin-navbar{
@@ -164,10 +166,6 @@ ul.admin-navbar{
         }
         &:hover{
             width: var(--navbar-opened-width);
-        }
-        @media (max-width: 950px) {
-            --navbar-opened-width: 20rem;
-            --element-height: calc(var(--admin-navbar-width) - 0.5rem);
         }
     }
 }

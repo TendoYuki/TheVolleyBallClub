@@ -67,7 +67,7 @@
                     transform: translateX(-50%) translateY(-50%) scale(1.1);
                 }
             }
-            img{
+            svg{
                 width: 2rem;
                 height: 2rem;
                 position: absolute;
@@ -83,9 +83,15 @@
         // Gradient at the right and left of the carrousel
         .prev{
             background: linear-gradient(90deg, rgba(0,0,0,0.3351541300113795) 0%, rgba(0,0,0,0.1782913849133403) 34%, rgba(0,0,0,0.05) 76%, rgba(0,0,0,0) 100%);
+            .arrow-left-symbol {
+                --symbol-color: #b9b9b9;
+            }
         }
         .next{
             background: linear-gradient(270deg, rgba(0,0,0,0.3351541300113795) 0%, rgba(0,0,0,0.1782913849133403) 34%, rgba(0,0,0,0.05) 76%, rgba(0,0,0,0) 100%);
+            .arrow-right-symbol {
+                --symbol-color: #b9b9b9;
+            }
         }
     }
     

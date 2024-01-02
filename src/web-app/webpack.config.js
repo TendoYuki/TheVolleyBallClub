@@ -51,6 +51,11 @@ module.exports = {
         }),
         new CopyPlugin({
             patterns: [
+                { from: "src/template.php", to: "template.php"}
+            ],
+        }),
+        new CopyPlugin({
+            patterns: [
                 { from: "src/pages"}
             ],
         }),

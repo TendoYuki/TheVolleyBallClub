@@ -21,19 +21,19 @@
                 '
                 <ul class="admin-navbar">
                     <li '.($this->active==AdminNavbarEntry::trainings ? 'class="active"' : '').'>
-                        '.file_get_contents(PUBLIC_PATH."symbols/training-symbol.svg").'
+                        '.get_public_file("symbols/training-symbol.svg").'
                         <a href="/dashboard/admin/trainings">Entrainements</a>
                     </li>
                     <li '.($this->active==AdminNavbarEntry::competitions ? 'class="active"' : '').'>
-                        '.file_get_contents(PUBLIC_PATH."symbols/competition-symbol.svg").'
+                        '.get_public_file("symbols/competition-symbol.svg").'
                         <a href="/dashboard/admin/competitions">Compétitions</a>
                     </li>
                     <li '.($this->active==AdminNavbarEntry::members ? 'class="active"' : '').'>
-                        '.file_get_contents(PUBLIC_PATH."symbols/user-symbol.svg").'
+                        '.get_public_file("symbols/user-symbol.svg").'
                         <a href="/dashboard/admin/members">Membres</a>
                     </li>
                     <li '.($this->active==AdminNavbarEntry::admins ? 'class="active"' : '').'>
-                        '.file_get_contents(PUBLIC_PATH."symbols/admin-symbol.svg").'
+                        '.get_public_file("symbols/admin-symbol.svg").'
                         <a href="/dashboard/admin/admins">Administrateurs</a>
                     </li>
                 </ul>

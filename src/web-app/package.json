@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "webpack --config webpack.dev.js",
     "prod": "webpack --config webpack.prod.js",
-    "watch": "watch 'npm run dev'",
+    "watch": "webpack --config webpack.dev.js --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -23,7 +23,5 @@
     "webpack-cli": "^5.1.4",
     "webpack-merge": "^5.10.0"
   },
-  "dependencies": {
-    "watch": "^0.13.0"
-  }
+  "dependencies": {}
 }
