@@ -5,7 +5,7 @@
 }
 
 ul.navbar {
-    box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.11);
+    // box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.11);
 }
 
 ul.navbar, ul.navbar .navbar-menu{
@@ -13,16 +13,19 @@ ul.navbar, ul.navbar .navbar-menu{
     list-style: none;
     display: flex;
     position: sticky;
-    background-color: white;
+    // background-color: white;
     z-index: 10;
     top: 0px;
     justify-content: right;
     align-items: center;
-    $element-color: black;
+    $element-color: white;
 
     // Hides the menu opener if screen big enough (by default)
     .navbar-menu-opener{
         display: none;
+        .arrow-left-symbol, .nav-menu-symbol{
+            --symbol-color: white;
+        }
     }
 
     // Navbar entries
@@ -112,22 +115,22 @@ ul.navbar .navbar-menu {
             }
 
             // If the panel is closed (by default) then transition from the close button to the open button
-            .close{
+            .arrow-left-symbol{
                 transform: translateX(-50%) translateY(-50%) rotate(-180deg);
                 opacity: 0;
             }
-            .open{
+            .nav-menu-symbol{
                 transform: translateX(-50%) translateY(-50%) rotate(0deg);
                 opacity: 1;
             }
 
             // If the panel is opened then transition from the open button to the close button
             &:has(~.navbar-menu.active){
-                .close{
+                .arrow-left-symbol{
                     transform: translateX(-50%) translateY(-50%) rotate(-360deg);
                     opacity: 1;
                 }
-                .open{
+                .nav-menu-symbol{
                     transform: translateX(-50%) translateY(-50%) rotate(-180deg);
                     opacity: 0;
                 }
@@ -147,7 +150,7 @@ ul.navbar .navbar-menu {
             align-items: flex-start;
             justify-content: flex-start;
             flex-direction: column;
-            background-color: white;
+            background-color: black;
             li:nth-of-type(1) {
                 margin: 6rem 0 0 2rem;
             }
@@ -170,7 +173,7 @@ ul.navbar .navbar-menu {
     }
     ul.navbar .navbar-menu-opener:hover{
         .arrow-left-symbol, .nav-menu-symbol{
-            --symbol-color: black;
+            --symbol-color: white;
         }
     }
 }
