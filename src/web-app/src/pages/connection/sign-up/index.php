@@ -10,8 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon">
     <title>Créer un compte</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/preload.js"></script>
     <script src="/connection/sign-up/sign-up-validation.js" defer></script>
-    <script src="/app.js" defer></script>
 </head>
 <body class="preload">
     <?php

@@ -3,11 +3,13 @@
 .sign-up-form{
     @import "./form";
     width: 80%;
+    max-width: 70rem;
     display: flex;
     flex-direction: column;
-    margin: 0rem auto 0 auto;
+    margin: 2rem auto 4rem auto;
     justify-content: flex-start;
     align-items: flex-start;
+    box-sizing: border-box;
     h1{
         font-family: $text-font;
         font-weight: 500;
@@ -37,6 +39,10 @@
                 }
             }
         }
+        // Mobile style
+        @media (max-width: 500px) {
+            width: 100%;
+        }
     }
     form{
         width: 100%;
@@ -53,16 +59,44 @@
             margin-bottom: 1rem;
         }
     }
+
+    border: 0.05rem solid #3a3a3a;
+    border-radius: $rounded-border-radius;
+    backdrop-filter: blur(5rem);
+    padding: 2rem;
+    &::before{
+        content: "";
+        z-index: -1;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: #3a3a3a;
+        opacity: 0.4;
+        border-radius: $rounded-border-radius;
+        user-select: none;
+        pointer-events: none;
+        top: 0;
+        left: 0;
+    }
+    
     .btn-wrapper{
         margin-top: 2rem;
+        display: flex;
         .btn{
             width: 8rem;
             margin-right: 0.5rem;
             margin-bottom: 0.5rem;
         }
+        // Mobile style
+        @media (max-width: 500px) {
+            width: 100%;
+            justify-content: center;
+        }
     }
     // Mobile style
     @media (max-width: 500px) {
         padding-bottom: calc(var(--admin-navbar-height) * 2);
+        width: 20rem;
     }
 }
+

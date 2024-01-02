@@ -10,7 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon">
     <title>Tableau de bord</title>
-    <script defer src="/app.js"></script>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/preload.js"></script>
     <script defer src="pageControls.js"></script>
     <script defer src="searchControls.js"></script>
     <script defer src="userControls.js"></script>
@@ -33,14 +34,17 @@
             <div class="search-bar">
                 <h2>Recherche</h2>
                 <div class="search-inline">
-                    <input id="search-field" type="text" placeholder="Prénom, Nom, License" value="<?php echo isset($_GET["search"]) ? $_GET["search"] : "" ?>">
+                    <div class="search-wrapper">
+                        <input id="search-field" type="text" placeholder="Prénom, Nom, License" value="<?php echo isset($_GET["search"]) ? $_GET["search"] : "" ?>">
+                        <span class="search-background"></span>
+                    </div>
                     <button id="search-btn" class="btn img-container"><img src="/public/symbols/lens-symbol.svg" alt=""></button>
                 </div>
             </div>
             <div class="result-table">
                 <?php
                     require("/srv/http/endpoint/connection/db_connect.php");
-                    $DISPLAY_COUNT_PER_PAGE = 5;
+                    $DISPLAY_COUNT_PER_PAGE = 8;
 
                     // Gets the search query if exists
                     $search = "%";

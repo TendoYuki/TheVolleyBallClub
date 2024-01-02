@@ -1,10 +1,11 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
     entry: {
-      app: './src/app.js',
+      style: './src/styles/index.scss',
       "components/navbar/navbar": './src/components/navbar/navbar.js',
       "components/carrousel/carrousel": './src/components/carrousel/carrousel.js'
     },
@@ -12,7 +13,9 @@ module.exports = {
       path: path.resolve(__dirname, 'dist'),
       filename: '[name].js',
     },
-  
+    stats: {
+      errorDetails: true
+    },
     resolve: {
       alias: {
         "@Styles": path.resolve(__dirname, "src/styles"),
@@ -22,23 +25,29 @@ module.exports = {
     module: {
       rules: [
         {
-          test: /\.s[ac]ss$/i,
+          test: /\.s?css$/,
           use: [
-            // Creates `style` nodes from JS strings
-            "style-loader",
+            MiniCssExtractPlugin.loader,
             {
               loader: "css-loader",
               options: {
                 url: false,
               }
             },
-            // Compiles Sass to CSS
-            "sass-loader"
-          ],
-        },
+            'sass-loader'
+          ]
+        }
       ],
     },
     plugins: [
+        new MiniCssExtractPlugin({
+          filename: "css/styles.css"
+        }),
+        new CopyPlugin({
+            patterns: [
+                { from: "src/preload.js", to: "js"}
+            ],
+        }),
         new CopyPlugin({
             patterns: [
                 { from: "src/index.php", to: "index.php"}

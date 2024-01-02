@@ -34,7 +34,8 @@
             width: 12rem;
             box-sizing: border-box;
             font-family: $text-font;
-            overflow-x: scroll;
+            overflow-x: hidden;
+            overflow-y: hidden;
             *{
                 width: 100%;
                 height: 100%;

@@ -10,7 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon">
     <title>Tableau de bord</title>
-    <script defer src="/app.js"></script>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/preload.js"></script>
     <script defer src="/components/navbar/dashboard-navbar.js"></script>
 </head>
 <body class="preload">

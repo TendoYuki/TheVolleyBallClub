@@ -10,7 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon">
     <title>Fiche utilisateur</title>
-    <script src="/app.js" defer></script>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/preload.js"></script>
 </head>
 <body class="preload">
     <?php
@@ -42,25 +43,25 @@
                 <div class="form-section-field">
                     <label for="gender-field">Civilité</label>
                     <div class="field">
-                        <p><?php echo($user["gender"] == 0 ? "Mme." : "Mr.") ?></p>
+                        <input type="text" value="<?php echo($user["gender"] == 0 ? "Mme." : "Mr.") ?>" disabled>
                     </div>
                 </div>
                 <div class="form-section-field">
                     <label for="name-field">Prenom</label>
                     <div class="field">
-                        <p><?php echo($user["nameUser"]) ?></p>
+                        <input type="text" value="<?php echo($user["nameUser"]) ?>" disabled>
                     </div>
                 </div>
                 <div class="form-section-field">
                     <label for="surname-field">Nom de famille</label>
                     <div class="field">
-                        <p><?php echo($user["surnameUser"]) ?></p>
+                        <input type="text" value="<?php echo($user["surnameUser"]) ?>" disabled>
                     </div>
                 </div>
                 <div class="form-section-field">
                     <label for="birthdate-field">Date de naissance</label>
                     <div class="field">
-                        <p><?php echo($user["birthdateUser"]) ?></p>
+                        <input type="text" value="<?php echo($user["birthdateUser"]) ?>" disabled>
                     </div>  
                 </div>
             </div>
@@ -69,13 +70,13 @@
                 <div class="form-section-field">
                     <label for="group-field">Groupe</label>
                     <div class="field">
-                        <p><?php echo($user["nameGroup"]) ?></p>
+                        <input type="text" value="<?php echo($user["nameGroup"]) ?>" disabled>
                     </div>
                 </div>
                 <div class="form-section-field">
                     <label for="email-field">Email</label>
                     <div class="field">
-                        <p><?php echo($user["emailUser"]) ?></p>
+                        <input type="text" value="<?php echo($user["emailUser"]) ?>" disabled>
                     </div>
                 </div>
             </div>
