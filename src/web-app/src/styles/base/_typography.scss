@@ -1,4 +1,5 @@
-/* All definitions concerning the website's typography */
+@import "@Styles/abstracts";
 
-$text-font:  "Montserrat", sans-serif;
-$header-font:  "Archivo", sans-serif; 
+*{
+    font-family: $text-font;
+}

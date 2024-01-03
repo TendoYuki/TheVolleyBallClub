@@ -1,36 +1,30 @@
-@import "@Styles/base";
 @import "@Styles/abstracts";
 
-// Displays a single entry from the database
+.entry-display-box {
+    margin: auto;
+    margin-top: 1rem;
+    margin-bottom: 5rem;
+    width: 80%;
+    max-width: 70rem;
+    // Mobile style
+    @include respond-to('0-to-small') {
+        width: 20rem;
+    }
+}
+
+/// Displays a single entry from the database
 .entry-display{
     @import "./form";
-    width: 80%;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    margin: 2rem auto 5rem auto;
     justify-content: flex-start;
     align-items: flex-start;
-    max-width: 70rem;
-    
-    border: 0.05rem solid #3a3a3a;
-    border-radius: $rounded-border-radius;
-    backdrop-filter: blur(5rem);
-    padding: 2rem;
-    box-sizing: border-box;
-    &::before{
-        content: "";
-        z-index: -1;
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background-color: #3a3a3a;
-        opacity: 0.4;
-        border-radius: $rounded-border-radius;
-        user-select: none;
-        pointer-events: none;
-        top: 0;
-        left: 0;
+
+    input[type="text"]{
+        cursor: text;
     }
+
     .big-title{
         font-family: $text-font;
         font-weight: 500;
@@ -86,6 +80,8 @@
     }
     // Mobile style
     @include respond-to('0-to-small') {
-        width: 20rem;
+        .ml{
+            margin-left: 0;
+        }
     }
 }

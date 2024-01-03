@@ -1,4 +1,3 @@
-@import "@Styles/base";
 @import "@Styles/abstracts";
 
 // Wraps the dashboard with its navbar
@@ -9,16 +8,32 @@
     flex-direction: row;
     flex-wrap: nowrap;
     // Mobile style
-    @media (max-width: 500px) {
+    @include respond-to('0-to-small') {
         flex-direction: column-reverse;
     }
 }
-.dashboard{
-    box-sizing: border-box;
-    // background-color: $background-1;
-    padding: 1.5rem;
+.dashboard-box{
     flex: 1;
+    padding-right: 0;
+    margin-left: calc(var(--admin-navbar-width) + 2rem);
+    margin-right: 2rem;
+    margin-top: 1rem;
+    display: flex;
+    height: 90%;
+    // Mobile style
+    @include respond-to('0-to-small') {
+        width: 90%;
+        height: 70%;
+        margin-bottom: calc(var(--admin-navbar-height) * 3);
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+.dashboard{
     overflow-y: scroll;
+    height: 100%;
+    width: 100%;
+    padding-right: 2rem;
     h1{
         font-family: $header-font;
         font-weight: 800;
@@ -41,7 +56,6 @@
         .search-wrapper{
             width: calc(100% - 1rem);
             padding: 0.5rem;
-            height: 1.5rem;
             position: relative;
             border: 0.05rem solid #3a3a3a;
             border-radius: $rounded-border-radius;
@@ -81,28 +95,10 @@
         margin-top: 1.5rem;
         width: 100%;
         max-width: 90rem;
-        box-shadow: 5px 5px 15px 1px rgba(0, 0, 0, 0.082);
-        padding: 1rem;
-        border-radius: $rounded-border-radius;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
-        backdrop-filter: blur(5rem);
-        border: 0.05rem solid #3a3a3a;
-        &::before{
-            content: "";
-            z-index: -1;
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0rem;
-            background-color: #3a3a3a;
-            opacity: 0.4;
-            border-radius: $rounded-border-radius;
-            user-select: none;
-            pointer-events: none;
-        }
 
         // Displays a user
         .user-display{
@@ -161,12 +157,5 @@
                 }
             }
         }
-    }
-    margin-left: var(--admin-navbar-width);
-    
-    // Mobile style
-    @include respond-to('0-to-small') {
-        padding-bottom: calc(var(--admin-navbar-height) * 3);
-        margin-left: 0;
     }
 }

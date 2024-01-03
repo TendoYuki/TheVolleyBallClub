@@ -10,10 +10,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon">
     <title>Connexion</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/sign-in.css">
     <script src="/js/preload.js"></script>
+    <script src="/js/glassEffect.js" defer></script>
 </head>
-<body class="preload">
+<body class="flex-body preload">
     <?php
         if(isset($_SESSION['userConnect']) || isset($_SESSION['adminConnect'])) {
             header("Location: /"); 
@@ -26,27 +28,31 @@
         (new Navbar(NavbarEntry::connection))->display();
     ?>
 
-    <div class="login-form">
-        <h1>Connexion</h1>
-        <form action="endpoint.php" method="post" id="sign-in-form">
-            <div class="text-field">
-                <input 
-                    type="text"
-                    name="email-field"
-                    id="email-field"
-                    placeholder="Email"
-                    form="sign-in-form"
-                    value="<?php if(isset($_SESSION["email_back"])) {echo $_SESSION["email_back"]; unset($_SESSION["email_back"]);}?>"
-                >
+    <div class="login-form-wrapper">
+        <div class="bento-box glassy">
+            <div class="login-form">
+                <h1>Connexion</h1>
+                <form action="endpoint.php" method="post" id="sign-in-form">
+                    <div class="text-field">
+                        <input 
+                            type="text"
+                            name="email-field"
+                            id="email-field"
+                            placeholder="Email"
+                            form="sign-in-form"
+                            value="<?php if(isset($_SESSION["email_back"])) {echo $_SESSION["email_back"]; unset($_SESSION["email_back"]);}?>"
+                        >
+                    </div>
+                    <div class="text-field">
+                        <input type="password" name="password-field" id="password-field" placeholder="Mot de passe" form="sign-in-form">
+                    </div>
+                    <button class="btn filled" type="submit" form="sign-in-form">Connexion</button>
+                </form>
+                <div class="other-actions">
+                    <h2><a href="/connection/sign-up">Créer un compte</a></h2>
+                    <h2><a href="/connection/forgot-password">Mot de passe oublié ?</a></h2>
+                </div>
             </div>
-            <div class="text-field">
-                <input type="password" name="password-field" id="password-field" placeholder="Mot de passe" form="sign-in-form">
-            </div>
-            <button class="btn filled" type="submit" form="sign-in-form">Connexion</button>
-        </form>
-        <div class="other-actions">
-            <h2><a href="/connection/sign-up">Créer un compte</a></h2>
-            <h2><a href="/connection/forgot-password">Mot de passe oublié ?</a></h2>
         </div>
     </div>
 </body>

@@ -1,4 +1,3 @@
-@import "@Styles/base";
 @import "@Styles/abstracts";
 
 $element-color: white;
@@ -17,7 +16,7 @@ ul.admin-navbar{
             }
             a{
                 color: $accent;
-            }
+            } 
         }
         &.active{
             background-color: rgb(37, 37, 37);
@@ -117,7 +116,6 @@ ul.admin-navbar{
     ul.admin-navbar{
         --navbar-opened-width: 20rem;
         --element-height: calc(var(--admin-navbar-width) - 0.7rem);
-        // height: calc(100vh - var(--navbar-height));
         min-width: var(--admin-navbar-width);
         width: var(--admin-navbar-width);
         transition: width $medium-anim;
@@ -172,7 +170,7 @@ ul.admin-navbar{
                     border-top: $height solid $accent;
                     top: -$height * 2;
                     left: 0;
-                    height: $height;
+                    height: $height * 2;
                 }
             }
         }

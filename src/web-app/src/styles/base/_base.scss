@@ -2,12 +2,22 @@
     color: white;
 }
 body{
-    width: 100vw;
+    min-width: 100%;
     min-height: 100vh;
-    background-image: url("/public/background.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    &::before{
+        content: "";
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        background-image: url("/public/background.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+
+    }
 }
 /*
     Used to prevent unwanted start transition of elements at page load

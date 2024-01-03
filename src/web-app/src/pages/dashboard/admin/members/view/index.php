@@ -10,8 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon">
     <title>Fiche utilisateur</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/style.css">
     <script src="/js/preload.js"></script>
+    <script src="/js/glassEffect.js" defer></script>
 </head>
 <body class="preload">
     <?php
@@ -29,62 +30,63 @@
 
         $user = $stmt->fetch();
     ?>
-    <div class="entry-display">
-        <div class="entry-infos-wrapper">
-            <div class="inline">
-                <img class="entry-img-display" src="data:image/png;base64,<?php echo(base64_encode($user["imageUser"])); ?>" alt="">
-                <div class="ml">
-                    <h1 class="big-title"><?php echo($user["nameUser"]." ".$user["surnameUser"]); ?></h1>
-                    <h2 class="big-subtitle"><?php echo($user["idUser"]); ?></h2>
-                </div>
-            </div>
-            <h2>Identité</h2>
-            <div class="form-section">
-                <div class="form-section-field">
-                    <label for="gender-field">Civilité</label>
-                    <div class="field">
-                        <input type="text" value="<?php echo($user["gender"] == 0 ? "Mme." : "Mr.") ?>" disabled>
+    <div class="bento-box glassy entry-display-box">
+        <div class="entry-display">
+            <div class="entry-infos-wrapper">
+                <div class="inline">
+                    <img class="entry-img-display" src="data:image/png;base64,<?php echo(base64_encode($user["imageUser"])); ?>" alt="">
+                    <div class="ml">
+                        <h1 class="big-title"><?php echo($user["nameUser"]." ".$user["surnameUser"]); ?></h1>
+                        <h2 class="big-subtitle"><?php echo($user["idUser"]); ?></h2>
                     </div>
                 </div>
-                <div class="form-section-field">
-                    <label for="name-field">Prenom</label>
-                    <div class="field">
-                        <input type="text" value="<?php echo($user["nameUser"]) ?>" disabled>
+                <h2>Identité</h2>
+                <div class="form-section">
+                    <div class="form-section-field">
+                        <label for="gender-field">Civilité</label>
+                        <div class="field">
+                            <input type="text" value="<?php echo($user["gender"] == 0 ? "Mme." : "Mr.") ?>" disabled>
+                        </div>
+                    </div>
+                    <div class="form-section-field">
+                        <label for="name-field">Prenom</label>
+                        <div class="field">
+                            <input type="text" value="<?php echo($user["nameUser"]) ?>" disabled>
+                        </div>
+                    </div>
+                    <div class="form-section-field">
+                        <label for="surname-field">Nom de famille</label>
+                        <div class="field">
+                            <input type="text" value="<?php echo($user["surnameUser"]) ?>" disabled>
+                        </div>
+                    </div>
+                    <div class="form-section-field">
+                        <label for="birthdate-field">Date de naissance</label>
+                        <div class="field">
+                            <input type="text" value="<?php echo($user["birthdateUser"]) ?>" disabled>
+                        </div>  
                     </div>
                 </div>
-                <div class="form-section-field">
-                    <label for="surname-field">Nom de famille</label>
-                    <div class="field">
-                        <input type="text" value="<?php echo($user["surnameUser"]) ?>" disabled>
+                <h2>Compte</h2>
+                <div class="form-section">
+                    <div class="form-section-field">
+                        <label for="group-field">Groupe</label>
+                        <div class="field">
+                            <input type="text" value="<?php echo($user["nameGroup"]) ?>" disabled>
+                        </div>
+                    </div>
+                    <div class="form-section-field">
+                        <label for="email-field">Email</label>
+                        <div class="field">
+                            <input type="text" value="<?php echo($user["emailUser"]) ?>" disabled>
+                        </div>
                     </div>
                 </div>
-                <div class="form-section-field">
-                    <label for="birthdate-field">Date de naissance</label>
-                    <div class="field">
-                        <input type="text" value="<?php echo($user["birthdateUser"]) ?>" disabled>
-                    </div>  
+                <div class="btn-wrapper">
+                    <a class="btn" id="cancel-btn" href="/dashboard/admin/members/">Retour</a>
                 </div>
-            </div>
-            <h2>Compte</h2>
-            <div class="form-section">
-                <div class="form-section-field">
-                    <label for="group-field">Groupe</label>
-                    <div class="field">
-                        <input type="text" value="<?php echo($user["nameGroup"]) ?>" disabled>
-                    </div>
-                </div>
-                <div class="form-section-field">
-                    <label for="email-field">Email</label>
-                    <div class="field">
-                        <input type="text" value="<?php echo($user["emailUser"]) ?>" disabled>
-                    </div>
-                </div>
-            </div>
-            <div class="btn-wrapper">
-                <a class="btn" id="cancel-btn" href="/dashboard/admin/members/">Retour</a>
             </div>
         </div>
     </div>
-    
 </body>
 </html>

@@ -8,14 +8,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon">
-    <script src="/app.js" defer></script>
+    <script src="/js/preload.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/error-page.css">
     <title>Erreur 404</title>
 </head>
 <body class="preload">
     <div class="error-page">
-        <h1>ERREUR 404</h1>
-        <h2>Cette page n'existe pas</h2>
-        <a href="/">Retour à l'accueil</a>
+        <div class="bento-box">
+            <h1>ERREUR 404</h1>
+            <h2>Cette page n'existe pas</h2>
+            <a href="/">Retour à l'accueil</a>
+        </div>
     </div>
 </body>
 </html>

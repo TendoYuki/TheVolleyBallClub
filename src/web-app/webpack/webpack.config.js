@@ -6,7 +6,12 @@ const MiniCssExtractCleanupPlugin = require("./plugins/miniCssExtractCleanupPlug
 
 module.exports = {
     entry: {
-        style: "./src/styles/style.scss"
+        "style": "./src/styles/style.scss",
+        "dashboard": "./src/styles/pages/dashboard.scss",
+        "error": "./src/styles/pages/error.scss",
+        "forgot-password": "./src/styles/pages/forgot-password.scss",
+        "sign-in": "./src/styles/pages/sign-in.scss",
+        "sign-up": "./src/styles/pages/sign-up.scss",
     },
     output: {
         path: path.resolve(__dirname, "../dist"),
@@ -43,9 +48,9 @@ module.exports = {
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: "css/styles.css",
+            filename: "css/[name].css",
         }),
-        new MiniCssExtractCleanupPlugin(["style.js"]),
+        new MiniCssExtractCleanupPlugin(["style.js", "dashboard.js", "error.js", "forgot-password.js", "sign-in.js", "sign-up.js"]),
         new CopyPlugin({
             patterns: [{ from: "src/js", to: "js" }],
         }),
@@ -66,9 +71,6 @@ module.exports = {
         }),
         new CopyPlugin({
             patterns: [{ from: "src/components", to: "components" }],
-        }),
-        new CopyPlugin({
-            patterns: [{ from: "src/error-pages", to: "error-pages" }],
         }),
         new CopyPlugin({
             patterns: [{ from: "src/.htaccess" }],
