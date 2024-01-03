@@ -6,6 +6,8 @@
     width: 100%;
     height: calc(100vh - #{var(--navbar-height)});
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
     flex-wrap: nowrap;
     // Mobile style
     @include respond-to('0-to-small') {
@@ -14,9 +16,10 @@
 }
 .dashboard-box{
     flex: 1;
+    max-width: 90rem;
     padding-right: 0;
     margin-left: calc(var(--admin-navbar-width) + 2rem);
-    margin-right: 2rem;
+    margin-right: calc(var(--admin-navbar-width) + 2rem);
     margin-top: 1rem;
     display: flex;
     height: 90%;
@@ -24,9 +27,9 @@
     @include respond-to('0-to-small') {
         width: 90%;
         height: 70%;
+        margin-left: 0;
+        margin-right: 0;
         margin-bottom: calc(var(--admin-navbar-height) * 3);
-        margin-left: auto;
-        margin-right: auto;
     }
 }
 .dashboard{
@@ -94,7 +97,6 @@
         box-sizing: border-box;
         margin-top: 1.5rem;
         width: 100%;
-        max-width: 90rem;
         display: flex;
         flex-direction: column;
         align-items: center;
