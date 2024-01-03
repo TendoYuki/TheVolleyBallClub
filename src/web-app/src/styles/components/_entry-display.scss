@@ -1,4 +1,5 @@
 @import "@Styles/base";
+@import "@Styles/abstracts";
 
 // Displays a single entry from the database
 .entry-display{
@@ -84,7 +85,7 @@
         }
     }
     // Mobile style
-    @media (max-width: 500px) {
+    @include respond-to('0-to-small') {
         width: 20rem;
     }
 }

@@ -1,11 +1,8 @@
 @import "@Styles/base";
+@import "@Styles/abstracts";
 
 :root{
     --navbar-height: 5rem;
-}
-
-ul.navbar {
-    // box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.11);
 }
 
 ul.navbar, ul.navbar .navbar-menu{
@@ -13,7 +10,6 @@ ul.navbar, ul.navbar .navbar-menu{
     list-style: none;
     display: flex;
     position: sticky;
-    // background-color: white;
     z-index: 10;
     top: 0px;
     justify-content: right;
@@ -77,10 +73,10 @@ ul.navbar .navbar-menu {
 }
 
 /** 
-    Style for small screen
+    Style for medium screen
     Navbar is shrinked to an openable side panel
 */
-@media (max-width: 950px) {
+@include respond-to('0-to-medium') {
     ul.navbar{
         li {
             display: none;
@@ -167,7 +163,7 @@ ul.navbar .navbar-menu {
     }
 }
 // Mobile style
-@media (max-width: 500px) {
+@include respond-to('0-to-small') {
     :root{
         --navbar-height: 4rem;
     }

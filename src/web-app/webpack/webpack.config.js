@@ -6,9 +6,7 @@ const MiniCssExtractCleanupPlugin = require("./plugins/miniCssExtractCleanupPlug
 
 module.exports = {
     entry: {
-        style: "./src/styles/index.scss",
-        "components/navbar/navbar": "./src/components/navbar/navbar.js",
-        "components/carrousel/carrousel": "./src/components/carrousel/carrousel.js",
+        style: "./src/styles/style.scss"
     },
     output: {
         path: path.resolve(__dirname, "../dist"),
@@ -49,7 +47,7 @@ module.exports = {
         }),
         new MiniCssExtractCleanupPlugin(["style.js"]),
         new CopyPlugin({
-            patterns: [{ from: "src/preload.js", to: "js" }],
+            patterns: [{ from: "src/js", to: "js" }],
         }),
         new CopyPlugin({
             patterns: [{ from: "src/index.php", to: "index.php" }],

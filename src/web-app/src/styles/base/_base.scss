@@ -1,0 +1,23 @@
+*{
+    color: white;
+}
+body{
+    width: 100vw;
+    min-height: 100vh;
+    background-image: url("/public/background.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+/*
+    Used to prevent unwanted start transition of elements at page load
+    Must be removed by JS on page load
+*/
+.preload * {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -ms-transition: none !important;
+    -o-transition: none !important;
+    transition: none !important;
+    opacity: 0 !important;
+}

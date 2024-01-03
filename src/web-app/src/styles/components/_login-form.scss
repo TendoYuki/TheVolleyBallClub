@@ -1,4 +1,5 @@
 @import "@Styles/base";
+@import "@Styles/abstracts";
 
 .login-form{
     width: 25rem;
@@ -74,8 +75,8 @@
     }
 }
 
-// Small screen style
-@media (max-width: 950px) { 
+// Medium screen style
+@include respond-to('0-to-medium') {
     .login-form{
         width: 20rem;
         height: 27rem;

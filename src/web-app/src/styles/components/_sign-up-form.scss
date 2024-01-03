@@ -1,4 +1,5 @@
 @import "@Styles/base";
+@import "@Styles/abstracts";
 
 .sign-up-form{
     @import "./form";
@@ -40,7 +41,7 @@
             }
         }
         // Mobile style
-        @media (max-width: 500px) {
+        @include respond-to('0-to-small') {
             width: 100%;
         }
     }
@@ -88,13 +89,13 @@
             margin-bottom: 0.5rem;
         }
         // Mobile style
-        @media (max-width: 500px) {
+        @include respond-to('0-to-small') {
             width: 100%;
             justify-content: center;
         }
     }
     // Mobile style
-    @media (max-width: 500px) {
+    @include respond-to('0-to-small') {
         padding-bottom: calc(var(--admin-navbar-height) * 2);
         width: 20rem;
     }

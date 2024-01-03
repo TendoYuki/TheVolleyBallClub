@@ -1,4 +1,5 @@
 @import "@Styles/base";
+@import "@Styles/abstracts";
 
 $element-color: white;
 
@@ -37,7 +38,7 @@ ul.admin-navbar{
 }
 
 // Mobile style
-@media (max-width: 500px) {
+@include respond-to('0-to-small') {
 
     // Makes the admin navbar's height available to the dashboard
     .dashboard-wrapper{
@@ -101,7 +102,7 @@ ul.admin-navbar{
 }
  
 // Desktop style
-@media (min-width: 500px) {
+@include respond-to('small-to-inf') {
     :root{
         --admin-navbar-width: 4rem;
         --element-height: calc(var(--admin-navbar-width) - 0.7rem);

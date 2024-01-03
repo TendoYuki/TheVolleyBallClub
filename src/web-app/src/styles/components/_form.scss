@@ -1,4 +1,5 @@
 @import "@Styles/base";
+@import "@Styles/abstracts";
 
 .form-section{
     display: flex;
@@ -42,7 +43,7 @@
                 background-color: transparent;
             }
             // Mobile style
-            @media (max-width: 500px) {
+            @include respond-to('0-to-small') {
                 width: 100%;
             }
         }

@@ -1,0 +1,33 @@
+/* Breakpoints for media queries */
+$breakpoints: (
+  '0-to-small': (max-width: 500px),
+  '0-to-medium': (max-width: 950px),
+  '0-to-big': (max-width: 950px),
+  
+  'small-to-inf': (min-width: 500px),
+  'medium-to-inf': (min-width: 950px),
+  'big-to-inf': (min-width: 950px)
+);
+
+/// Breakpoint manager for media queries
+/// @access public
+/// @param {String} $breakpoint - Breakpoint
+/// @requires $breakpoints
+@mixin respond-to($breakpoint) {
+    $rquery: map-get($breakpoints, $breakpoint);
+    @if $rquery {
+      $query: if(
+        type-of($rquery) == 'string',
+        unquote($rquery),
+        inspect($rquery)
+      );
+  
+      @media #{$query} {
+        @content;
+      }
+    }
+    @else {
+      @error 'Breakpoint `#{$breakpoint}` does not exist. ';
+    }
+  }
+  
