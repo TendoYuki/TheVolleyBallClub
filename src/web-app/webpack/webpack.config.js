@@ -2,7 +2,7 @@ const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const MiniCssExtractCleanupPlugin = require("./webpack/plugins/miniCssExtractCleanupPlugin");
+const MiniCssExtractCleanupPlugin = require("./plugins/miniCssExtractCleanupPlugin");
 
 module.exports = {
     entry: {
@@ -11,7 +11,7 @@ module.exports = {
         "components/carrousel/carrousel": "./src/components/carrousel/carrousel.js",
     },
     output: {
-        path: path.resolve(__dirname, "dist"),
+        path: path.resolve(__dirname, "../dist"),
         filename: "[name].js",
     },
     stats: {
@@ -19,8 +19,8 @@ module.exports = {
     },
     resolve: {
         alias: {
-            "@Styles": path.resolve(__dirname, "src/styles"),
-            "@Public": path.resolve(__dirname, "../../public"),
+            "@Styles": path.resolve(__dirname, "../src/styles"),
+            "@Public": path.resolve(__dirname, "../../../public"),
         },
     },
     module: {
