@@ -39,13 +39,40 @@
 
                 $avatar_blob = file_get_contents($_FILES["avatar-field"]['tmp_name']);
 
+                $avatar_size = strlen($avatar_blob) / 1024; // size in KB
+
+                // Starts conversion & compression to JPEG
+                $avatar_image = imagecreatefromstring($avatar_blob);
+                ob_start();
+
+                // If image larger than 2 MB compress it by 70%
+                if($avatar_size >= 2000) {
+                    imagejpeg($avatar_image,NULL, 30);
+                } 
+                // If image larger than 1 MB compress it by 50 %
+                else if($avatar_size >= 1000) {
+                    imagejpeg($avatar_image,NULL, 50);
+                }
+                // If image larger than 500 KB compress it by 20 %
+                else if($avatar_size >= 500) {
+                    imagejpeg($avatar_image,NULL, 80);
+                }
+                // Else dont compress, just convert to jpeg
+                else {
+                    imagejpeg($avatar_image,NULL, 100);
+                }
+
+                // Ends conversion and compression
+                $avatar_compressed_blob=ob_get_contents();
+                ob_end_clean();
+
                 $stmt->bindValue(1, $_POST['name-field']);
                 $stmt->bindValue(2, $_POST['surname-field']);
                 $stmt->bindValue(3, $hash);
                 $stmt->bindValue(4, $_POST['email-field']);
                 $stmt->bindValue(5, $_POST['birthdate-field']);
                 $stmt->bindValue(6, $date);
-                $stmt->bindValue(7, $avatar_blob);
+                $stmt->bindValue(7, $avatar_compressed_blob);
                 $stmt->bindValue(8, $_POST['group-field']);
                 $stmt->bindValue(9, $PAYMENT_ID_TEMP);
                 $stmt->bindValue(10, $_POST['gender-field']);

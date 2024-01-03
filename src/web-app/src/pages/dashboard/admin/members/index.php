@@ -95,11 +95,11 @@
 
                         // Displays the current page
                         foreach($stmt->fetchAll() as $res) {
-                            $template = file_get_contents("user_display_template.php");
-                            $template = str_replace("{user_avatar_url}", base64_encode($res["imageUser"]), $template);
-                            $template = str_replace("{user_name}", $res["nameUser"].' '.$res["surnameUser"], $template);
-                            $template = str_replace("{user_id}", $res["idUser"], $template);
-                            echo($template);
+                            $template = new Template("templates/member_template.php");
+                            $template->fill_placeholder("user_avatar_blob", base64_encode($res["imageUser"]));
+                            $template->fill_placeholder("user_name", $res["nameUser"].' '.$res["surnameUser"]);
+                            $template->fill_placeholder("user_id",  $res["idUser"]);
+                            $template->display();
                         }
                     ?>
                     <div class="page-control">
