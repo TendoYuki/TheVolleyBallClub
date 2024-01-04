@@ -1,35 +1,69 @@
-<?php require_once("/srv/http/endpoint/app-config.php") ?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="/css/style.css">
-    <script src="/js/preload.js"></script>
-    <title>Volleyball club</title>
-</head>
-<body class="preload" class="preload">
-    <?php 
-        require("/srv/http/endpoint/components/navbar/navbar.php");
-        (new Navbar(NavbarEntry::accueil))->display();
+<?php
+include_once("/srv/http/endpoint/config/config.php");
 
-        require("components/carrousel/carrousel.php");
-        (new Carrousel(["/public/1.jpg", "/public/2.jpg", "/public/3.jpg"]))->display();
-    ?>
+$request = trim(strtok($_SERVER['REQUEST_URI'], '?'));
+$views = ABSPATH . 'views/';
+$controllers = ABSPATH . 'controllers/';
 
-    <?php
-    // <div class="text-field">
-    //     <input type="text" name="" id="" placeholder="Email">
-    // </div>
-    // <div class="text-field">
-    //     <input type="text" name="" id="" placeholder="Password">
-    // </div>
-    // <button class="btn filled">Click me</button>
-    ?>
-</body>
-</html>
+include_once( $views . 'dashboard/index.php');
+
+// Routing system
+
+switch ($request) {
+    case '':
+    case '/':
+        require $views . 'home.php';
+        define('HAS_LOADED_PAGE', true);
+        break;
+
+    case '/reset-password':
+        require $views . 'connection/reset-password.php';
+        define('HAS_LOADED_PAGE', true);
+        break;
+
+    case '/sign-in':
+        require $views . 'connection/sign-in.php';
+        define('HAS_LOADED_PAGE', true);
+        break;
+
+    case '/sign-in/submit':
+        require $controllers . 'SignInController.php';
+        define('HAS_LOADED_PAGE', true);
+        break;
+
+    case '/sign-out':
+        require $controllers . 'SignOutController.php';
+        define('HAS_LOADED_PAGE', true);
+        break;
+
+    case '/sign-up':
+        require $views . 'connection/sign-up.php';
+        define('HAS_LOADED_PAGE', true);
+        break;
+
+    case '/sign-up/submit':
+        require $controllers . 'SignUpController.php';
+        define('HAS_LOADED_PAGE', true);
+        break;
+
+    case '/contact':
+        require $views . 'contact.php';
+        define('HAS_LOADED_PAGE', true);
+        break;
+
+    case '/info':
+        require $views . 'informations.php';
+        define('HAS_LOADED_PAGE', true);
+        break;
+
+    case '/planning':
+        require $views . 'planning.php';
+        define('HAS_LOADED_PAGE', true);
+        break;
+
+    default:
+        if(!defined('HAS_LOADED_PAGE'))  {
+            http_response_code(404);
+            require $views . 'error-pages/404.php';
+        }
+}

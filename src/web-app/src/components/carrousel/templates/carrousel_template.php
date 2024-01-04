@@ -1,4 +1,4 @@
-<?php require_once("/srv/http/endpoint/app-config.php") ?>
+<?php include_once("/srv/http/endpoint/config/config.php"); ?>
 <div class="carrousel-wrapper">
     <div class="controls">
         <div class="prev">

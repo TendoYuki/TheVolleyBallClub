@@ -1,5 +1,5 @@
-<?php require_once("/srv/http/endpoint/app-config.php") ?>
-<?php require_once("/srv/http/endpoint/template.php") ?>
+<?php include_once("/srv/http/endpoint/config/config.php"); ?>
+<?php include_once(TEMPLATES."template.php") ?>
 
 <script src="/components/carrousel/carrousel.js" defer></script>
 

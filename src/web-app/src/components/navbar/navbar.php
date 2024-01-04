@@ -1,5 +1,5 @@
-<?php require_once("/srv/http/endpoint/app-config.php") ?>
-<?php require_once("/srv/http/endpoint/template.php") ?>
+<?php include_once("/srv/http/endpoint/config/config.php"); ?>
+<?php include_once(TEMPLATES."template.php") ?>
 <script src="/components/navbar/navbar.js" defer></script>
 
 <?php
@@ -24,40 +24,26 @@
 
             $entries_str = '
                 <li '.($this->active==NavbarEntry::accueil ? 'class="selected"' : '').'><a href="/">ACCUEIL</a></li>
-                <li '.($this->active==NavbarEntry::informations ? 'class="selected"' : '').'><a href="/informations">INFORMATIONS</a></li>
+                <li '.($this->active==NavbarEntry::informations ? 'class="selected"' : '').'><a href="/info">INFORMATIONS</a></li>
                 <li '.($this->active==NavbarEntry::planning ? 'class="selected"' : '').'><a href="/planning">PLANNING</a></li>
                 <li '.($this->active==NavbarEntry::contact ? 'class="selected"' : '').'><a href="/contact">CONTACT</a></li>
             ';
 
             if(isset($_SESSION["userConnect"]) || isset($_SESSION["adminConnect"])) {
-
-                // If user connected then display user dashboard link
-                if(isset($_SESSION["userConnect"])) {
-                    $entries_str = $entries_str.'
-                        <li '.($this->active==NavbarEntry::dashboard ? 'class="selected"' : '').'>
-                            <a href="/dashboard/user">TABLEAU DE BORD</a>
-                        </li>';
-                }
-
-                // else if admin connected then display admin dashboard link
-                else if(isset($_SESSION["adminConnect"])) {
-                    $entries_str = $entries_str.'
-                        <li '.($this->active==NavbarEntry::dashboard ? 'class="selected"' : '').'>
-                            <a href="/dashboard/admin">TABLEAU DE BORD</a>
-                        </li>';
-                }
+                $entries_str = $entries_str.'
+                    <li '.($this->active==NavbarEntry::dashboard ? 'class="selected"' : '').'><a href="/dashboard">TABLEAU DE BORD</a></li>';
 
                 // Displays disconnect button
                 $entries_str = $entries_str.'
                     <li>
-                        <a href="/connection/sign-out">DECONNEXION</a>
+                        <a href="/sign-out">DECONNEXION</a>
                     </li>';
             }
             // If not connected then display connect button
             else {
                 $entries_str = $entries_str.'
                     <li '.($this->active==NavbarEntry::connection ? 'class="selected"' : '').'>
-                        <a href="/connection/sign-in">CONNEXION</a>
+                        <a href="/sign-in">CONNEXION</a>
                     </li>';
             }
 

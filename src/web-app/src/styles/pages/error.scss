@@ -10,23 +10,26 @@
     flex-direction: column;
     position: relative;
     overflow: hidden;
-    h1{
-        font-family: $header-font;
-        font-size: 3rem;
-        font-weight: 800;
+    img{
+        width: 100%;
+        object-position: center;
+        object-fit: contain;
+        height: 5rem;
         margin-bottom: 5rem;
-        filter: drop-shadow(2px 2px $accent) drop-shadow(-2px -2px #70F5FF);
     }
     h2{
         font-family: $text-font;
-        font-size: 2rem;
-        font-weight: 500;
-        margin-bottom: 1.2rem;
+        font-size: 1.5rem;
+        font-weight: 300;
+        margin-bottom: 3rem;
+        text-align: center;
     }
     a{
+        text-align: center;
         font-family: $text-font;
         font-size: 1.7rem;
         font-weight: 400;
+        width: fit-content;
         text-decoration: none;
         color: $accent;
         position: relative;
@@ -36,6 +39,7 @@
             width: 0%;
             height: 2px;
             position: absolute;
+            left: 0;
             transition: width $short-anim;
             border-radius: $rounded-border-radius;
             bottom: 0;
@@ -43,7 +47,24 @@
         &:hover{
             &::before{
                 width: 100%;
+                // Mobile style
+                @include respond-to('0-to-small') {
+                    width: 0%;
+                }
             }
+        }
+    }
+    .bento-box{
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        flex-direction: column;
+        padding: 5rem;
+        // Mobile style
+        @include respond-to('0-to-small') {
+            padding-left: 1rem;
+            padding-right: 1rem;
+            max-width: 90%;
         }
     }
 }

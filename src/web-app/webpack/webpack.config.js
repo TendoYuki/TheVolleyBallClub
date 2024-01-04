@@ -58,13 +58,22 @@ module.exports = {
             patterns: [{ from: "src/index.php", to: "index.php" }],
         }),
         new CopyPlugin({
-            patterns: [{ from: "src/app-config.php", to: "app-config.php" }],
+            patterns: [{ from: "src/config", to: "config" }],
         }),
         new CopyPlugin({
-            patterns: [{ from: "src/template.php", to: "template.php" }],
+            patterns: [{ from: "src/templates", to: "templates" }],
         }),
         new CopyPlugin({
-            patterns: [{ from: "src/pages" }],
+            patterns: [{ from: "src/controllers", to: "controllers" }],
+        }),
+        new CopyPlugin({
+            patterns: [{ from: "src/models", to: "models" }],
+        }),
+        new CopyPlugin({
+            patterns: [{ from: "src/views", to : "views"}],
+        }),
+        new CopyPlugin({
+            patterns: [{ from: "src/exceptions", to : "exceptions"}],
         }),
         new CopyPlugin({
             patterns: [{ from: "../../public", to: "public" }],
