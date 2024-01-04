@@ -146,6 +146,7 @@
                                     name="password-field"
                                     id="password-field"
                                     placeholder="Mot de passe"
+                                    value="<?php if($has_form_data) echo htmlspecialchars($form_data["password-field"])?>"
                                     required
                                 >
                             </div>
@@ -158,6 +159,7 @@
                                     name="confirm-password-field"
                                     id="confirm-password-field"
                                     placeholder="Mot de passe"
+                                    value="<?php if($has_form_data) echo htmlspecialchars($form_data["password-field"])?>"
                                     required
                                 >
                             </div>
