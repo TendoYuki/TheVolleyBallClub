@@ -27,5 +27,17 @@
         return file_get_contents(PUBLIC_PATH.$file);
     }
 
+    /**
+     * Parses the given URI by removing all trailing "/", all GET parameters 
+     * and returns it
+     * @param string $uri URI to parse
+     * @return string Parsed URI
+     */
+    function parse_uri($uri) {
+        $request = $uri;
+        if(substr($uri, -1) == '/') $request = substr($uri,0,-1);
+        return trim(strtok($request, '?'));
+    }
+
     session_start();
 ?>

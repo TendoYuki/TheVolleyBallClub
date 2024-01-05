@@ -131,9 +131,11 @@
             mask-size: 100%;
             -webkit-mask-size: 100%;
             overflow-x: hidden;
-            scroll-behavior: smooth;
             --mask-size: 7%;
-
+            scroll-behavior: smooth;
+            &.no-anim{
+                scroll-behavior: auto;
+            }
             &.fade-left{
                 mask-image: linear-gradient(90deg, rgba(0,0,0,0) var(--mask-size), rgba(0,0,0,1) calc(var(--mask-size) * 2));
                 -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,0) var(--mask-size), rgba(0,0,0,1) calc(var(--mask-size) * 2));

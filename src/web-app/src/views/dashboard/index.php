@@ -1,7 +1,7 @@
 <?php
 include_once("/srv/http/endpoint/config/config.php");
 
-$request = trim(strtok($_SERVER['REQUEST_URI'], '?'));
+$request = parse_uri($_SERVER['REQUEST_URI']);
 $views = ABSPATH . 'views/';
 $controllers = ABSPATH . 'controllers/';
 

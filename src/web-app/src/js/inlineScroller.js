@@ -45,6 +45,15 @@ scrollers.forEach(scroller => {
         }
         scroller.setAttribute("data-index", 1);
     }
+    
+    /**
+     * Resets the scroll position given its orientation rtl or ltr without transiton time
+     */
+    const resetScrollNoAnim = () => {
+        scrollerFade.classList.add("no-anim");
+        resetScroll();
+        scrollerFade.classList.remove("no-anim");
+    }
 
     /**
      * Displays the control to go to the left
@@ -87,39 +96,12 @@ scrollers.forEach(scroller => {
     }
 
     /**
-     * Updates the view to display the current state of the scroller
-     * Or to adapt to the scroller's new size if modified
+     * Updates the view to display the current scroller controllers
      */
-    const updateScrollView = () => {
-        let scrollIndex = scroller.getAttribute("data-index");
-        scrollIndex = parseInt(scrollIndex);
-        scroller.setAttribute("data-index", scrollIndex);
-
+    function updateScrollControls () {
         let scrollerElementWidth = scroller.getBoundingClientRect().width;
-        const scrollBoxWidth = scrollBox.getBoundingClientRect().width;
         let scrollWidth = scrollerFade.scrollWidth;
         let maxScroll = scrollWidth - scrollerElementWidth;
-
-        // Setting the scroll position given the current index
-        if(scrollIndex == 1) {
-            resetScroll();
-        }
-        else {
-            if(scrollDirectionReversed) {
-                scrollerFade.scrollTo(
-                    scrollBoxWidth - 
-                    (getScrollerBoxElementSize()*(scrollIndex-1) - getFadeEffectSize()*2) - 
-                    scrollerElementWidth
-                    , 0
-                );
-            } else {
-                scrollerFade.scrollTo(
-                    getScrollerBoxElementSize()*(scrollIndex-1) - getFadeEffectSize()*2,
-                    0
-                );
-            }
-        }
-        
         let scrollPosition = scrollerFade.scrollLeft;
         scrollPosition = clamp(scrollPosition, 0, maxScroll);
 
@@ -147,6 +129,36 @@ scrollers.forEach(scroller => {
         if(Math.abs(scrollWidth - (scrollPosition + scrollerElementWidth)) < EPSILON ) {
             hideRightScrollControl();
         }
+    }
+    const updateScrollView = () => {
+            let scrollIndex = scroller.getAttribute("data-index");
+            scrollIndex = parseInt(scrollIndex);
+            scroller.setAttribute("data-index", scrollIndex);
+    
+            let scrollerElementWidth = scroller.getBoundingClientRect().width;
+            const scrollBoxWidth = scrollBox.getBoundingClientRect().width;
+    
+            // Setting the scroll position given the current index
+            if(scrollIndex == 1) {
+                resetScroll();
+            }
+            else {
+                if(scrollDirectionReversed) {
+                    scrollerFade.scrollTo(
+                        scrollBoxWidth - 
+                        (getScrollerBoxElementSize()*(scrollIndex-1) - getFadeEffectSize()*2) - 
+                        scrollerElementWidth
+                        , 0
+                    );
+                } else {
+                    scrollerFade.scrollTo(
+                        getScrollerBoxElementSize()*(scrollIndex-1) - getFadeEffectSize()*2,
+                        0
+                    );
+                }
+            }
+            
+        updateScrollControls();
     };
 
     /**
@@ -200,12 +212,12 @@ scrollers.forEach(scroller => {
     } 
 
     // Default setup
-    resetScroll();
+    resetScrollNoAnim();
     updateScrollView();
 
     // Event setups
     scrollerRightController.addEventListener("click", scrollRight);
     scrollerLeftController.addEventListener("click", scrollLeft);
     window.addEventListener("resize", () => {updateScrollView()});
-    scrollerFade.addEventListener("scroll", updateScrollView);
+    scrollerFade.addEventListener("scroll", updateScrollControls); 
 });
