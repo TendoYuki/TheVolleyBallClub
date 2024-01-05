@@ -3,16 +3,28 @@ const CopyPlugin = require("copy-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const MiniCssExtractCleanupPlugin = require("./plugins/miniCssExtractCleanupPlugin");
+const glob = require("glob");
+
+// Regex used to extract the filename before the .scss extension
+const SCSS_FILENAME_REGEX = /(([^\/]+)\.scss)$/
+
+// Fetches all the pages's specific stylesheet and adds "./" to the path
+// for webpack to use relative and not absolute pathin when resolving entrypoints
+pages_stylesheets = glob.sync("./src/styles/pages/*.scss");
+pages_stylesheets = pages_stylesheets.map(e => `./${e}`);
+
+// Reduces the array to a map having for key the filename without the extension
+// and the path as the value
+pages_stylesheets = pages_stylesheets.reduce((a, v) => ({ ...a, [v.match(SCSS_FILENAME_REGEX)[2]]: v}), {}) 
+
+// Compile target entrypoints
+entrypoints = {
+    style: "./src/styles/style.scss",
+    ...pages_stylesheets
+}
 
 module.exports = {
-    entry: {
-        "style": "./src/styles/style.scss",
-        "dashboard": "./src/styles/pages/dashboard.scss",
-        "error": "./src/styles/pages/error.scss",
-        "forgot-password": "./src/styles/pages/forgot-password.scss",
-        "sign-in": "./src/styles/pages/sign-in.scss",
-        "sign-up": "./src/styles/pages/sign-up.scss",
-    },
+    entry: entrypoints,
     output: {
         path: path.resolve(__dirname, "../dist"),
         filename: "[name].js",
@@ -50,7 +62,8 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: "css/[name].css",
         }),
-        new MiniCssExtractCleanupPlugin(["style.js", "dashboard.js", "error.js", "forgot-password.js", "sign-in.js", "sign-up.js"]),
+        // Removes all js file associated with the scss entrypoints
+        new MiniCssExtractCleanupPlugin(Object.keys(entrypoints).map(e => `${e}.js`)),
         new CopyPlugin({
             patterns: [{ from: "src/js", to: "js" }],
         }),
