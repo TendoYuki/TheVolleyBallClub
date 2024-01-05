@@ -41,12 +41,12 @@
     .glass-effect{
         z-index: -1;
         position: absolute;
-        transition: top 50ms, left 50ms, opacity $medium-anim;
+        transition: opacity $medium-anim;
         width: 10rem;
         height: 10rem;
         opacity: .1;
         background-color: $accent;
-        filter: blur(50rem);
+        filter: blur(5rem);
         &.hidden{
             opacity: 0;
         }
