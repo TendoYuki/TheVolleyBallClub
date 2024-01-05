@@ -206,6 +206,6 @@ scrollers.forEach(scroller => {
     // Event setups
     scrollerRightController.addEventListener("click", scrollRight);
     scrollerLeftController.addEventListener("click", scrollLeft);
-    window.addEventListener("resize", () => {resetScroll(); updateScrollView()});
+    window.addEventListener("resize", () => {updateScrollView()});
     scrollerFade.addEventListener("scroll", updateScrollView);
 });
