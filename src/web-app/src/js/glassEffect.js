@@ -21,7 +21,6 @@ glassyElements.forEach(glassyElement => {
     window.addEventListener("mousemove", event => {
         const bounds = glassEffectContainer.getBoundingClientRect();
         const glassEffectBounds = glassEffect.getBoundingClientRect();
-        console.log(event.pageY);
 
         // Checks if inside the container
         if((event.clientX > bounds.x && (bounds.x + bounds.width) > event.clientX) && (event.clientY > bounds.y && (bounds.y + bounds.height) > event.clientY)) {
