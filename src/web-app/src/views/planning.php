@@ -31,7 +31,16 @@
                 </span>
                 <div class="scroller-fade fade-right">
                     <ul class="inline-scroller">
-                        <li class="bento-box glassy">1</li>
+                        <li class="bento-box glassy">
+                            <h1>10 Janvier</h1>
+                            <h2>18h00 - 20h00</h2>
+                            <a href="" class="btn outline">En savoir plus</a>
+                        </li>
+                        <li class="bento-box glassy">
+                            <h1>10 Janvier</h1>
+                            <h2>18h00 - 20h00</h2>
+                            <a href="" class="btn outline">En savoir plus</a>
+                        </li>
                         <li class="bento-box glassy">2</li>
                         <li class="bento-box glassy">3</li>
                         <li class="bento-box glassy">4</li>
