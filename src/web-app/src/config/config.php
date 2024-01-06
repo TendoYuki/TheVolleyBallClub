@@ -17,6 +17,7 @@
 
     if ( !defined('PUBLIC_PATH') )
     define('PUBLIC_PATH', ABSPATH.'public'.'/');
+    
 
     /**
      * Gets a file from the public repository
@@ -34,9 +35,44 @@
      * @return string Parsed URI
      */
     function parse_uri($uri) {
-        $request = $uri;
-        if(substr($uri, -1) == '/') $request = substr($uri,0,-1);
-        return trim(strtok($request, '?'));
+
+        /**
+         * Regex that parses the uri by either matching until :
+         * - The last '/' of the string
+         * - '/?'
+         * - '?'
+         * If up to there no match is found among the previous list of capture,
+         * returns the whole uri, meaning that it was already parsed
+         * 
+         * e.g. 
+         * Given the uris :
+         * - /planning/view?id=2/
+         * - /planning/view?id=2
+         * - /planning/view/?id=2/
+         * - /planning/view/?id=2
+         * - /planning/view/
+         * - /planning/view
+         * Will always return : /planning/view
+         */
+        $URI_PARSER_REGEX = "/(?:(.*)(?=(?:\/\?))|(.*)(?=\?)|(?:(.*)\/$)|(?:(.*)))/";
+        
+        $matches = array();
+        preg_match($URI_PARSER_REGEX, $uri, $matches);
+        $request = "";
+
+        // Extracts the first capture group from the matches
+        foreach ($matches as $i => $match) {
+            // Ignored the matched string as we only care about capture groups
+            if ($i < 1) continue;
+
+            // If the match is not empty then returns it into request and stop 
+            // processing the matches
+            if($match != "") {
+                $request = $match;
+                continue;
+            }
+        }
+        return $request;
     }
 
     session_start();
