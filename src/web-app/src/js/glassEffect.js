@@ -21,9 +21,10 @@ glassyElements.forEach(glassyElement => {
     window.addEventListener("mousemove", event => {
         const bounds = glassEffectContainer.getBoundingClientRect();
         const glassEffectBounds = glassEffect.getBoundingClientRect();
+        console.log(event.pageY);
 
         // Checks if inside the container
-        if((event.pageX > bounds.x && (bounds.x + bounds.width) > event.pageX) && (event.pageY > bounds.y && (bounds.y + bounds.height) > event.pageY)) {
+        if((event.clientX > bounds.x && (bounds.x + bounds.width) > event.clientX) && (event.clientY > bounds.y && (bounds.y + bounds.height) > event.clientY)) {
             glassEffect.classList.remove("hidden");
         }
         else {
@@ -32,8 +33,9 @@ glassyElements.forEach(glassyElement => {
         }
 
         // Calculates the x and y coordinate relative to the container
-        const x = event.pageX - (bounds.x + glassEffectBounds.width/2);
-        const y = event.pageY - (bounds.y + glassEffectBounds.height/2);
+        const x = event.clientX - (bounds.left + glassEffectBounds.width/2);
+        const y = event.clientY - (bounds.top + glassEffectBounds.height/2);
+
 
         // Applies the top and left as y and x 
         glassEffect.style.top = y + "px";
