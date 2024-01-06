@@ -34,7 +34,7 @@
                         <li class="bento-box glassy">
                             <h1>10 Janvier</h1>
                             <h2>18h00 - 20h00</h2>
-                            <a href="" class="btn outline">En savoir plus</a>
+                            <a href="/planning/view/?match_id=2" class="btn outline">En savoir plus</a>
                         </li>
                         <li class="bento-box glassy">
                             <h1>10 Janvier</h1>

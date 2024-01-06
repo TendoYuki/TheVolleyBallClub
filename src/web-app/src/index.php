@@ -6,6 +6,7 @@ $views = ABSPATH . 'views/';
 $controllers = ABSPATH . 'controllers/';
 
 include_once( $views . 'dashboard/index.php');
+include_once( $views . 'planning/index.php');
 
 // Routing system
 
@@ -53,11 +54,6 @@ switch ($request) {
 
     case '/info':
         require $views . 'informations.php';
-        define('HAS_LOADED_PAGE', true);
-        break;
-
-    case '/planning':
-        require $views . 'planning.php';
         define('HAS_LOADED_PAGE', true);
         break;
 
