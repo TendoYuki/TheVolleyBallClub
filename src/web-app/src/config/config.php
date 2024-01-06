@@ -37,11 +37,11 @@
     function parse_uri($uri) {
 
         /**
-         * Regex that parses the uri by either matching until :
-         * - The last '/' of the string
+         * Regex that parses the uri by capturing until the first match of one the following case is met :
          * - '/?'
          * - '?'
-         * If up to there no match is found among the previous list of capture,
+         * - The last character of the string is '/'
+         * If up to no match is found among the previous list of capture,
          * returns the whole uri, meaning that it was already parsed
          * 
          * e.g. 
@@ -54,24 +54,14 @@
          * - /planning/view
          * Will always return : /planning/view
          */
-        $URI_PARSER_REGEX = "/(?:(.*)(?=(?:\/\?))|(.*)(?=\?)|(?:(.*)\/$)|(?:(.*)))/";
+        $URI_PARSER_REGEX = "/((.*)(?=(?:\/\?))|(.*)(?=\?)|(?:(.*)(?=\/$))|(?:(.*)))/";
         
         $matches = array();
         preg_match($URI_PARSER_REGEX, $uri, $matches);
-        $request = "";
 
         // Extracts the first capture group from the matches
-        foreach ($matches as $i => $match) {
-            // Ignored the matched string as we only care about capture groups
-            if ($i < 1) continue;
+        $request = $matches[1];
 
-            // If the match is not empty then returns it into request and stop 
-            // processing the matches
-            if($match != "") {
-                $request = $match;
-                continue;
-            }
-        }
         return $request;
     }
 
