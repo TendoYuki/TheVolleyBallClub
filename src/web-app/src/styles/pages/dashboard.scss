@@ -33,7 +33,6 @@
     }
 }
 .dashboard{
-    overflow-y: scroll;
     height: 100%;
     width: 100%;
     padding-right: 2rem;
@@ -101,6 +100,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
+        overflow-y: scroll;
 
         // Displays a user
         .user-display{
