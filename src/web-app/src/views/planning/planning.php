@@ -24,7 +24,7 @@
     <div class="planning-page">
         <div class="planning-section left">
             <span class="top-bar"></span>
-            <h1>Prochains matchs</h1>
+            <h1>Prochaines Compétitions</h1>
             <div class="scroller-wrapper">
                 <span class="left-control">
                     <?php echo get_public_file("symbols/arrow-left-symbol.svg"); ?>
@@ -34,7 +34,7 @@
                         <li class="bento-box glassy">
                             <h1>10 Janvier</h1>
                             <h2>18h00 - 20h00</h2>
-                            <a href="/planning/view/?match_id=2" class="btn outline">En savoir plus</a>
+                            <a href="/planning/view/?match_id=1" class="btn outline">En savoir plus</a>
                         </li>
                         <li class="bento-box glassy">
                             <h1>10 Janvier</h1>
@@ -55,7 +55,7 @@
         </div>
         <div class="planning-section right">
             <span class="top-bar"></span>
-            <h1>Prochains entrainements</h1>
+            <h1>Prochains Entrainements</h1>
             <div class="scroller-wrapper rtl">
                 <span class="left-control">
                     <?php echo get_public_file("symbols/arrow-left-symbol.svg"); ?>

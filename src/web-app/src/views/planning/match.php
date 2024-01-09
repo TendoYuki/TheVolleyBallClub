@@ -20,6 +20,81 @@
     <?php
         include_once("/srv/http/endpoint/components/navbar/navbar.php");
         (new Navbar(NavbarEntry::planning))->display();
+
+        include_once(MODELS.'database.php');
+
+        $stmt = $con->prepare("SELECT idCompetition,
+            startDateTimeCompetition,
+            endDateTimeCompetition,
+            Result_idResult,
+            Location_idLocation,
+            idResult,
+            victoriesCount,
+            defeatCount,
+            ranking,
+            totalClubsCount,
+            idLocation,
+            cityLocation,
+            postCodeLocation,
+            addressLocation,
+            nameLocation,
+            maxParticipantCompetition,
+            count(User_idUser) AS `participant_ct`
+            FROM competition
+            LEFT JOIN `result`
+            ON Result_idResult=idResult
+            JOIN `location` ON Location_idLocation=idLocation
+            LEFT JOIN `user_has_competition` ON `user_has_competition`.`Competition_idCompetition`=idCompetition
+            WHERE idCompetition=?
+        ");
+        $stmt->bindValue(1, $_GET['match_id']);
+        $stmt->execute();
+
+        $competition = $stmt->fetch();
+
+        $formatter = new IntlDateFormatter(
+            'fr_FR',
+            IntlDateFormatter::LONG,
+            IntlDateFormatter::NONE,
+            'Europe/Paris'
+        );
+
+        $s_time = strtotime($competition["startDateTimeCompetition"]);
+
+        $e_time = strtotime($competition["endDateTimeCompetition"]);
+
+        // Formats the competition date to dd/MM/yyyy
+        $competition_date_str = $formatter->format($s_time);
+
+        $competition_s_date_str = date("H:m", $s_time);
+        $competition_e_date_str = date("H:m", $e_time);
+
+        $remaining_places = $competition["maxParticipantCompetition"]-$competition["participant_ct"];
     ?>
+
+    <div class="planning-page">
+        <div class="planning-section left">
+            <span class="top-bar"></span>
+            <h1>Match du <?php echo $competition_date_str?></h1>
+            <div class="address">
+                <?php echo get_public_file("symbols/map-point-symbol.svg")?>
+                <div>
+                    <h2><?php echo $competition["nameLocation"]?></h2>
+                    <h2><?php echo $competition["addressLocation"]?></h2>
+                    <h2><?php echo $competition["postCodeLocation"].' '.$competition["cityLocation"]?></h2>
+                </div>
+            </div>
+            <div class="time">
+                <?php echo get_public_file("symbols/clock-symbol.svg")?>
+                <h2><?php echo $competition_s_date_str.' - '.$competition_e_date_str?></h2>
+            </div>
+            <div class="participate">
+                <h2><?php echo $competition["participant_ct"]?> Participants - <?php echo (($remaining_places <= 0) ? "Aucune" : $remaining_places) ?> Place(s) restantes </h2>
+                <?php if($remaining_places>0) : ?>
+                    <a href="" class="btn filled">Je participe</a>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

@@ -59,4 +59,43 @@
             font-size: 1.7rem;
         }
     }
+    div.address, div.time {
+        display: flex;
+        align-items: center;
+        div{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        svg{
+            height: 2.8rem;
+            max-width: 2.8rem;
+            margin-right: 1.5rem;
+            --symbol-color:white;
+        }
+        margin-bottom: 2rem;
+        :last-child{
+            margin-bottom: 0;
+        }
+        h2{
+            font-family: $text-font;
+            margin-bottom: 0.2rem;
+            font-size: 1.2rem;
+            font-weight: normal;
+            color: darkgray;
+            // Medium screen style
+            @include respond-to('0-to-medium') {
+                font-size: 3rem;
+            }
+            // Mobile style
+            @include respond-to('0-to-small') {
+                font-size: 1.7rem;
+            }
+        }
+    }
+    div.participate{
+        .btn{
+            margin-top: 1rem;
+        }
+    }
 }
