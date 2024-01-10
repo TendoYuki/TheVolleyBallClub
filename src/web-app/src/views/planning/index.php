@@ -13,7 +13,12 @@ switch ($request) {
         break;
 
     case '/planning/view':
-            require $views . 'planning/view.php';
-            define('HAS_LOADED_PAGE', true);
-            break;
+        require $views . 'planning/view.php';
+        define('HAS_LOADED_PAGE', true);
+        break;
+    case '/planning/participate': 
+        require $controllers . 'ParticipateController.php';
+        define('HAS_LOADED_PAGE', true);
+        break;
+        
 }

@@ -50,7 +50,7 @@
         $stmt->bindValue(1, $_GET['match_id']);
         $stmt->execute();
 
-        $competition = $stmt->fetch();
+        $res = $stmt->fetch();
 
         $formatter = new IntlDateFormatter(
             'fr_FR',
@@ -59,9 +59,9 @@
             'Europe/Paris'
         );
 
-        $s_time = strtotime($competition["startDateTimeCompetition"]);
+        $s_time = strtotime($res["startDateTimeCompetition"]);
 
-        $e_time = strtotime($competition["endDateTimeCompetition"]);
+        $e_time = strtotime($res["endDateTimeCompetition"]);
 
         // Formats the competition date to dd/MM/yyyy
         $competition_date_str = $formatter->format($s_time);
@@ -69,29 +69,66 @@
         $competition_s_date_str = date("H:m", $s_time);
         $competition_e_date_str = date("H:m", $e_time);
 
-        $remaining_places = $competition["maxParticipantCompetition"]-$competition["participant_ct"];
+        $remaining_places = $res["maxParticipantCompetition"]-$res["participant_ct"];
+
+        $can_unsubscribe = false; 
+        $can_subscribe = false;
+        if(isset($_SESSION['userConnect'])) {
+            $stmt = $con->prepare("SELECT User_idUser, Competition_idCompetition
+                FROM user_has_competition
+                WHERE Competition_idCompetition=? AND User_idUser=?
+            ");
+    
+            $stmt->bindValue(1, $_GET['match_id']);
+            $stmt->bindValue(2, $_SESSION['userConnect']);
+            $stmt->execute();
+    
+            $res1 = $stmt->fetch();
+            if($s_time > time()) {
+                $can_subscribe = true;
+            } 
+            if($s_time > time() && isset($res1["User_idUser"])) {
+                $can_unsubscribe = true;
+            }
+        }
     ?>
 
     <div class="planning-page">
         <div class="planning-section left">
             <span class="top-bar"></span>
             <h1>Match du <?php echo $competition_date_str?></h1>
-            <div class="address">
-                <?php echo get_public_file("symbols/map-point-symbol.svg")?>
-                <div>
-                    <h2><?php echo $competition["nameLocation"]?></h2>
-                    <h2><?php echo $competition["addressLocation"]?></h2>
-                    <h2><?php echo $competition["postCodeLocation"].' '.$competition["cityLocation"]?></h2>
+            <div class="inline">
+                <div class="address">
+                    <?php echo get_public_file("symbols/map-point-symbol.svg")?>
+                    <div>
+                        <h2><?php echo $res["nameLocation"]?></h2>
+                        <h2><?php echo $res["addressLocation"]?></h2>
+                        <h2><?php echo $res["postCodeLocation"].' '.$res["cityLocation"]?></h2>
+                    </div>
+                </div>
+                <div class="time">
+                    <?php echo get_public_file("symbols/clock-symbol.svg")?>
+                    <h2><?php echo $competition_s_date_str.' - '.$competition_e_date_str?></h2>
                 </div>
             </div>
-            <div class="time">
-                <?php echo get_public_file("symbols/clock-symbol.svg")?>
-                <h2><?php echo $competition_s_date_str.' - '.$competition_e_date_str?></h2>
-            </div>
             <div class="participate">
-                <h2><?php echo $competition["participant_ct"]?> Participants - <?php echo (($remaining_places <= 0) ? "Aucune" : $remaining_places) ?> Place(s) restantes </h2>
-                <?php if($remaining_places>0) : ?>
-                    <a href="" class="btn filled">Je participe</a>
+                <h2><?php echo $res["participant_ct"]?> Participants - <?php echo (($remaining_places <= 0) ? "Aucune" : $remaining_places) ?> Place(s) restantes </h2>
+                <?php if($remaining_places>0 && isset($_SESSION['userConnect'])) : ?>
+                    <?php if($can_subscribe && !$can_unsubscribe): ?>
+                        <form action="/planning/participate" method="post">
+                            <input type="hidden" name="type" value="competition">
+                            <input type="hidden" name="id" value="<?php echo $res["idCompetition"]?>">
+                        <input type="hidden" name="action" value="participate">
+                            <button type="sumbit" class="btn filled">Je participe</button>
+                        </form>
+                    <?php endif; ?>
+                <?php elseif ($can_unsubscribe): ?>
+                    <form action="/planning/participate" method="post">
+                        <input type="hidden" name="type" value="competition">
+                        <input type="hidden" name="id" value="<?php echo $res["idCompetition"]?>">
+                        <input type="hidden" name="action" value="stop_participate">
+                        <button type="sumbit" class="btn filled">Se desinscrire</button>
+                    </form>
                 <?php endif; ?>
             </div>
         </div>
