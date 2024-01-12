@@ -14,11 +14,6 @@ if(isset($_SESSION['userConnect'])) {
             require $views . 'dashboard/user/user-dashboard.php';
             define('HAS_LOADED_PAGE', true);
             break;
-
-        case '/dashboard/admins':
-            require $views . 'dashboard/admins/dashboard.php';
-            define('HAS_LOADED_PAGE', true);
-            break;
     }
 }
 

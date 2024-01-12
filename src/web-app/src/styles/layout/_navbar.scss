@@ -68,6 +68,9 @@ ul.navbar, ul.navbar .navbar-menu{
         }
     }
 }
+ul.navbar{
+    background-color: black;
+}
 ul.navbar .navbar-menu {
     transition: left $medium-anim;
 }
@@ -78,6 +81,7 @@ ul.navbar .navbar-menu {
 */
 @include respond-to('0-to-medium') {
     ul.navbar{
+        background-color: transparent;
         li {
             display: none;
         }

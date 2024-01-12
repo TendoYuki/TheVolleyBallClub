@@ -43,7 +43,7 @@ switch ($request) {
         break;
 
     case '/sign-up/submit':
-        require $controllers . 'SignUpController.php';
+        require $controllers . 'UserController.php';
         define('HAS_LOADED_PAGE', true);
         break;
 

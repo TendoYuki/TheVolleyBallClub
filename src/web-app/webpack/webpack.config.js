@@ -83,6 +83,9 @@ module.exports = {
             patterns: [{ from: "src/templates", to: "templates" }],
         }),
         new CopyPlugin({
+            patterns: [{ from: "src/src", to: "src" }],
+        }),
+        new CopyPlugin({
             patterns: [{ from: "src/controllers", to: "controllers" }],
         }),
         new CopyPlugin({

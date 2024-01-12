@@ -103,10 +103,7 @@ function handleParticipate() {
                     $stmt->execute();
 
                     $res1 = $stmt->fetch();
-                    $can_unsubscribe = false; 
-                    if(isset($res1["User_idUser"])) {
-                        $can_unsubscribe = true;
-                    } else {
+                    if(!isset($res1["User_idUser"])) {
                         back_redirect();
                         return;
                     }

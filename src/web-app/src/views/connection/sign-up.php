@@ -37,6 +37,7 @@
             <div class="sign-up-form">
                 <h1>Créer un compte</h1>
                 <form action="/sign-up/submit" method="post" id="sign-up" enctype="multipart/form-data">
+                    <input type="hidden" name="action" value="create">
                     <div class="form-section">
                         <div class="form-section-field">
                             <label for="avatar-field">Photo d'identité</label>

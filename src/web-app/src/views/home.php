@@ -16,6 +16,9 @@
     <?php
         include_once("/srv/http/endpoint/components/navbar/navbar.php");
         (new Navbar(NavbarEntry::accueil))->display();
+        require("components/carrousel/carrousel.php");
+        (new Carrousel(["/public/1.png", "/public/2.png", "/public/3.png"]))->display();
+
     ?>
 
 </body>
