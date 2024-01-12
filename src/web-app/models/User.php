@@ -106,7 +106,7 @@ class User extends AbstractModel{
         return $this->image_user;
     }
     public function setImageUser(string $image_user) {
-        $this->image_user = $image_user;
+        $this->image_user = ImageCompressor::compress($image_user);
         return $this;
     }
 

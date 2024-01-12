@@ -8,5 +8,5 @@ namespace Controllers;
 abstract class AbstractController {
     abstract public static function new();
     abstract public static function delete();
-    abstract public static function edit();
+    abstract public static function update();
 }

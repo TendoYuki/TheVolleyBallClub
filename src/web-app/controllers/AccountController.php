@@ -9,6 +9,7 @@ use Exceptions\InvalidAvatarTypeException;
 use Exceptions\InvalidAvatarSizeException;
 use Exceptions\InvalidBirthdateException;
 use Exceptions\InvalidGenderException;
+use Exceptions\InvalidGroupException;
 use Exceptions\InvalidNameException;
 use Exceptions\InvalidSurnameException;
 use Exceptions\WeakPasswordException;
@@ -139,5 +140,14 @@ class AccountController {
     public static function checkValidSurname(string $surname) {
         if(AccountController::has($surname,AccountController::$specialSymbols)) throw new InvalidSurnameException();
         if(AccountController::has($surname,AccountController::$numbers)) throw new InvalidSurnameException();
+    }
+
+    /**
+     * Verifies that the group is valid
+     * @param int $groupid Group to check
+     * @throws InvalidGroupException If group invalid
+     */
+    public static function checkValidGroup(int $groupid) {
+        if($groupid !=1 && $groupid != 0) throw new InvalidGroupException();
     }
 }
