@@ -1,0 +1,27 @@
+{
+    "name": "thevolleballclub/web-app",
+    "description": "web app for thevolleyballclub",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Models\\": "./models",
+            "Cryptography\\": "./src/cryptography",
+            "Optimizations\\": "./src/optimizations",
+            "Controllers\\": "./controllers",
+            "Exceptions\\": "./src/exceptions"
+        }
+    },
+    "authors": [
+        {
+            "name": "Diego RIVIERE--JOMBART"
+        },
+        {
+            "name": "Lobsang RIGARD",
+            "email": "nocymer.dev@outlook.com"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^10.5"
+    }
+}

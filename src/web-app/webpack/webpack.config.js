@@ -11,7 +11,7 @@ const SCSS_FILENAME_REGEX = /(([^\/]+)\.scss)$/
 
 // Fetches all the pages's specific stylesheet and adds "./" to the path
 // for webpack to use relative and not absolute pathin when resolving entrypoints
-pages_stylesheets = glob.sync("./src/styles/pages/*.scss");
+pages_stylesheets = glob.sync("./styles/pages/*.scss");
 pages_stylesheets = pages_stylesheets.map(e => `./${e}`);
 
 // Reduces the array to a map having for key the filename without the extension
@@ -20,7 +20,7 @@ pages_stylesheets = pages_stylesheets.reduce((a, v) => ({ ...a, [v.match(SCSS_FI
 
 // Compile target entrypoints
 entrypoints = {
-    style: "./src/styles/style.scss",
+    style: "./styles/style.scss",
     ...pages_stylesheets
 }
 
@@ -35,7 +35,7 @@ module.exports = {
     },
     resolve: {
         alias: {
-            "@Styles": path.resolve(__dirname, "../src/styles"),
+            "@Styles": path.resolve(__dirname, "../styles"),
             "@Public": path.resolve(__dirname, "../../../public"),
         },
     },
@@ -71,40 +71,40 @@ module.exports = {
         // Removes all js file associated with the scss entrypoints
         new MiniCssExtractCleanupPlugin(Object.keys(entrypoints).map(e => `${e}.js`)),
         new CopyPlugin({
-            patterns: [{ from: "src/js", to: "js" }],
+            patterns: [{ from: "js", to: "js" }],
         }),
         new CopyPlugin({
-            patterns: [{ from: "src/index.php", to: "index.php" }],
+            patterns: [{ from: "index.php", to: "index.php" }],
         }),
         new CopyPlugin({
-            patterns: [{ from: "src/config", to: "config" }],
+            patterns: [{ from: "config", to: "config" }],
         }),
         new CopyPlugin({
-            patterns: [{ from: "src/templates", to: "templates" }],
+            patterns: [{ from: "templates", to: "templates" }],
         }),
         new CopyPlugin({
-            patterns: [{ from: "src/src", to: "src" }],
+            patterns: [{ from: "src", to: "src" }],
         }),
         new CopyPlugin({
-            patterns: [{ from: "src/controllers", to: "controllers" }],
+            patterns: [{ from: "controllers", to: "controllers" }],
         }),
         new CopyPlugin({
-            patterns: [{ from: "src/models", to: "models" }],
+            patterns: [{ from: "models", to: "models" }],
         }),
         new CopyPlugin({
-            patterns: [{ from: "src/views", to : "views"}],
-        }),
-        new CopyPlugin({
-            patterns: [{ from: "src/exceptions", to : "exceptions"}],
+            patterns: [{ from: "views", to : "views"}],
         }),
         new CopyPlugin({
             patterns: [{ from: "../../public", to: "public" }],
         }),
         new CopyPlugin({
-            patterns: [{ from: "src/components", to: "components" }],
+            patterns: [{ from: "components", to: "components" }],
         }),
         new CopyPlugin({
-            patterns: [{ from: "src/.htaccess" }],
+            patterns: [{ from: ".htaccess" }],
+        }),
+        new CopyPlugin({
+            patterns: [{ from: "vendor", to: "vendor" }],
         }),
     ],
     devtool: "source-map",

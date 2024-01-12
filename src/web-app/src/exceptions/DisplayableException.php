@@ -1,7 +1,9 @@
 <?php
 
-abstract class DisplayableException extends Exception {
-    private $error_code = 'email-already-exist';
+namespace Exceptions;
+
+abstract class DisplayableException extends \Exception {
+    private $error_code = '';
     public function __construct($error_code){
         parent::__construct("");
         $this->error_code = $error_code;
@@ -13,6 +15,6 @@ abstract class DisplayableException extends Exception {
      * @return string Error code
      */
     public function getErrorCode() {
-        return DisplayableException::$error_code;
+        return $this->error_code;
     }
 }

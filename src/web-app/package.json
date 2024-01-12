@@ -4,10 +4,11 @@
   "description": "Website for a volleyball club",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --config webpack/webpack.dev.js",
-    "prod": "webpack --config webpack/webpack.prod.js",
-    "watch": "webpack --config webpack/webpack.dev.js --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "npm run refresh-namespaces && webpack --config webpack/webpack.dev.js",
+    "prod": "npm run refresh-namespaces && webpack --config webpack/webpack.prod.js",
+    "watch": "npm run refresh-namespaces && webpack --config webpack/webpack.dev.js --watch",
+    "refresh-namespaces": "composer dump-autoload",
+    "test": "vendor/bin/phpunit tests"
   },
   "author": "",
   "license": "MIT",

@@ -1,5 +1,6 @@
 <?php
-include_once(EXCEPTIONS.'DisplayableException.php');
+
+namespace Exceptions;
 
 class EmailAlreadyExistsException extends DisplayableException {
     public function __construct(){
