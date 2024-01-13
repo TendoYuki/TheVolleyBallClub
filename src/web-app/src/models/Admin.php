@@ -8,7 +8,7 @@ class Admin extends AbstractModel{
     private string $password;
     private string $login;
 
-    public function __construct($id){
+    private function __construct($id){
         parent::__construct();
         $this->id = $id;
         $stmt = $this->getConnection()->prepare('SELECT * FROM admin WHERE idAdmin=?');
@@ -18,6 +18,10 @@ class Admin extends AbstractModel{
 
         $this->login = $admin["loginAdmin"];
         $this->password = $admin["passwordAdmin"];
+    }
+
+    public static function fetch($id): Admin{
+        return new Admin($id);
     }
 
     public function getId() {

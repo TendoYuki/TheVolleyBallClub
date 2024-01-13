@@ -59,7 +59,7 @@ class UserController extends AbstractController{
 
     public static function update() {
         try {
-            $user = new User($_POST['id-field']);
+            $user = User::fetch($_POST['id-field']);
             if(isset($_POST['email-field'])) {
                 AccountController::checkEmailUnicity($_POST['email-field']);
                 AccountController::checkEmailFormat($_POST['email-field']);
@@ -110,18 +110,13 @@ class UserController extends AbstractController{
 
 switch($_POST["action"]) {
     case 'create':
-        // If an admin or a user is connected then redirect 
-        // Else start creation process 
-        if(isset($_SESSION['userConnect']) || isset($_SESSION['adminConnect'])) {
-            header("Location: /"); 
-        } else UserController::new();
-
+        UserController::new();
         break;
     case 'delete':
         // Delete only if the user requesting the deletion is the one connected
         // Or if the admin is connected
         if(
-            (isset($_SESSION['userConnect']) && $_SESSION['userConnect']==$_POST['id-field']) ||
+            ($_SESSION['userConnect']==$_POST['id-field']) ||
             (isset($_SESSION['adminConnect']))
         ) UserController::delete();
 
@@ -130,7 +125,7 @@ switch($_POST["action"]) {
         // Edit only if the user requesting the edition is the one connected
         // Or if the admin is connected
         if(
-            (isset($_SESSION['userConnect']) && $_SESSION['userConnect']==$_POST['id-field']) ||
+            ($_SESSION['userConnect']==$_POST['id-field']) ||
             (isset($_SESSION['adminConnect']))
         ) UserController::update();
 

@@ -17,8 +17,10 @@ class User extends AbstractModel{
     private int $group_id;
     private int $payment_id;
     private string $image_user;
+    private array $competitions = array();
+    private array $trainings = array();
 
-    public function __construct($id){
+    private function __construct($id){
         parent::__construct();
         $this->id = $id;
         $stmt = $this->getConnection()->prepare('SELECT * FROM user WHERE idUser=?');
@@ -36,6 +38,24 @@ class User extends AbstractModel{
         $this->group_id = $user["Group_idGroup"];
         $this->payment_id = $user["payment_idPayment"];
         $this->image_user = $user["imageUser"];
+
+        // Fetches all the competitions the user is subscribed to
+        $stmt = $this->getConnection()->prepare('SELECT * FROM user_has_competition WHERE User_idUser=?');
+        $stmt->bindValue(1, $id);
+        $stmt->execute();
+        $competitions = $stmt->fetchAll();
+        foreach($competitions as $competition) array_push($this->competitions, $competition["Competition_idCompetition"]);
+
+        // Fetches all the training the user is subscribed to
+        $stmt = $this->getConnection()->prepare('SELECT * FROM user_has_training WHERE User_idUser=?');
+        $stmt->bindValue(1, $id);
+        $stmt->execute();
+        $trainings = $stmt->fetchAll();
+        foreach($trainings as $training) array_push($this->competitions, $training["Training_idTraining"]);
+    }
+
+    public static function fetch($id): User{
+        return new User($id);
     }
 
     public function getId() {
@@ -125,6 +145,40 @@ class User extends AbstractModel{
     public function setPaymentID(int $payment_id) {
         $this->payment_id = $payment_id;
         return $this;
+    }
+
+    /**
+     * Returns the list of competitions the user is currently subscribed to
+     * @return array List of competition the user is subscribed to
+     */
+    public function getCompetitions(): array {
+        return $this->competitions;
+    }
+
+    /**
+     * Returns the list of trainings the user is currently subscribed to
+     * @return array List of trainings the user is subscribed to
+     */
+    public function getTrainings(): array {
+        return $this->trainings;
+    }
+
+    /**
+     * Checks if the user is participating to the given competition
+     * @param $competitionId Id of the competition to check
+     * @return bool True if the user participates to the competition
+     */
+    public function isParticipatingToCompetition(int $competitionId): bool {
+        return in_array($competitionId, $this->competitions);
+    }
+
+    /**
+     * Checks if the user is participating to the given training
+     * @param $trainingId Id of the training to check
+     * @return bool True if the user participates to the training
+     */
+    public function isParticipatingToTraining(int $trainingId): bool {
+        return in_array($trainingId, $this->trainings);
     }
 
     public function updateDatabase() {

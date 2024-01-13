@@ -32,7 +32,7 @@
             <div class="dashboard">
                 <?php
                     use Models\User;
-                    $user = new User($_SESSION['userConnect']);
+                    $user = User::fetch($_SESSION['userConnect']);
                     echo $user->getName().' '.$user->getSurname();
                 ?>
             </div>

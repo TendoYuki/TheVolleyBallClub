@@ -40,7 +40,7 @@ class AdminController extends AbstractController{
 
     public static function update() {
         try {
-            $admin = new Admin($_POST['id-field']);
+            $admin = Admin::fetch($_POST['id-field']);
             if(isset($_POST['login-field'])) {
                 AccountController::checkEmailUnicity($_POST['login-field']);
                 $admin->setLogin($_POST['login-field']);
@@ -64,23 +64,18 @@ class AdminController extends AbstractController{
 
 switch($_POST["action"]) {
     case 'create':
-        // If not admin then redirect
-        // Else start creation process 
-        if(!isset($_SESSION['adminConnect'])) {
-            header("Location: /"); 
-        } else AdminController::new();
-
+        AdminController::new();
         break;
     case 'delete':
         // Delete only if the admin the deletion is the one connected
-        if(!(isset($_SESSION['adminConnect']) && $_SESSION['adminConnect'] == $_POST['id-field']))  {
+        if(!($_SESSION['adminConnect'] == $_POST['id-field']))  {
             header("Location: /"); 
         } AdminController::delete();
 
         break;
     case 'update':
         // Edit only if the admin requesting the edition is the one connected
-        if(!(isset($_SESSION['adminConnect']) && $_SESSION['adminConnect'] == $_POST['id-field']))  {
+        if(!($_SESSION['adminConnect'] == $_POST['id-field']))  {
             header("Location: /"); 
         } AdminController::update();
 
