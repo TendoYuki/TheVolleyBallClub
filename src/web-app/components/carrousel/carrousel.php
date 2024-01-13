@@ -1,16 +1,14 @@
-<?php include_once("/srv/http/endpoint/config/config.php"); ?>
-<?php include_once(TEMPLATES."template.php") ?>
-
 <script src="/components/carrousel/carrousel.js" defer></script>
 
 <?php
+    use Templates\Template;
     class Carrousel{
         private $images;
         public function __construct($images) {
             $this->images = $images;
         }
         public function display() {
-            $template = new Template(COMPONENTS."carrousel/templates/carrousel_template.php");
+            $template = new Template("carrousel/carrousel.template.php");
 
             $span_str = "";
             foreach($this->images as $image) $span_str.="<span></span>";

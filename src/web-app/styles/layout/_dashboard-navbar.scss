@@ -3,7 +3,7 @@
 $element-color: white;
 
 // General styling for the navbar
-ul.admin-navbar{
+ul.dashboard-navbar{
     list-style: none;
     display: flex;
     flex-wrap: nowrap;
@@ -41,14 +41,14 @@ ul.admin-navbar{
 
     // Makes the admin navbar's height available to the dashboard
     .dashboard-wrapper{
-        --admin-navbar-height: 3.5rem;
+        --dashboard-navbar-height: 3.5rem;
     }
 
 
-    ul.admin-navbar{
-        --element-height: calc(var(--admin-navbar-height) - 0.75rem);
-        height: var(--admin-navbar-height);
-        min-height: var(--admin-navbar-height);
+    ul.dashboard-navbar{
+        --element-height: calc(var(--dashboard-navbar-height) - 0.75rem);
+        height: var(--dashboard-navbar-height);
+        min-height: var(--dashboard-navbar-height);
         width: 100%;
         flex-direction: row;
         justify-content: center;
@@ -68,7 +68,7 @@ ul.admin-navbar{
             cursor: pointer;
             position: relative;
             height: 100%;
-            width: var(--admin-navbar-height);
+            width: var(--dashboard-navbar-height);
             svg{
                 --symbol-color: #{$element-color};
                 *{
@@ -103,21 +103,21 @@ ul.admin-navbar{
 // Desktop style
 @include respond-to('small-to-inf') {
     :root{
-        --admin-navbar-width: 4rem;
-        --element-height: calc(var(--admin-navbar-width) - 0.7rem);
+        --dashboard-navbar-width: 4rem;
+        --element-height: calc(var(--dashboard-navbar-width) - 0.7rem);
         @media (max-width: 950px) {
-            --admin-navbar-width: 3.5rem;
-            --element-height: calc(var(--admin-navbar-width) - 0.7rem);
+            --dashboard-navbar-width: 3.5rem;
+            --element-height: calc(var(--dashboard-navbar-width) - 0.7rem);
         }
     }
     .dashboard-wrapper{
         overflow-y: visible;
     }
-    ul.admin-navbar{
+    ul.dashboard-navbar{
         --navbar-opened-width: 20rem;
-        --element-height: calc(var(--admin-navbar-width) - 0.7rem);
-        min-width: var(--admin-navbar-width);
-        width: var(--admin-navbar-width);
+        --element-height: calc(var(--dashboard-navbar-width) - 0.7rem);
+        min-width: var(--dashboard-navbar-width);
+        width: var(--dashboard-navbar-width);
         transition: width $medium-anim;
         flex-direction: column;
         justify-content: flex-start;

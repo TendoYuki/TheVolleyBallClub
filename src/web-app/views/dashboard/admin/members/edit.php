@@ -16,9 +16,6 @@
 </head>
 <body class="preload">
     <?php
-        if(!(isset($_SESSION['adminConnect']))) {
-            header("Location: /"); 
-        }
         if(isset($_SESSION['error'])) {
             echo("<script>setTimeout(() => alert(`".$_SESSION['error']."`),500);</script>");
             unset($_SESSION['error']);

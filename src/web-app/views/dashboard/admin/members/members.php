@@ -20,15 +20,14 @@
 </head>
 <body class="preload">
     <?php
-        if(!(isset($_SESSION['adminConnect']))) {
-            header("Location: /"); 
-        }
         include_once("/srv/http/endpoint/components/navbar/navbar.php");
         (new Navbar(NavbarEntry::dashboard))->display();
     ?>
     <div class="dashboard-wrapper">
         <?php    
-            include_once("/srv/http/endpoint/components/navbar/admin_navbar.php");
+            use Components\Navbar\AdminNavbar;
+            use Components\Navbar\AdminNavbarEntry;
+            
             (new AdminNavbar(AdminNavbarEntry::members))->display();
         ?>
         <div class="bento-box glassy dashboard-box">
@@ -47,10 +46,10 @@
                 <div class="result-table">
                     <?php
                         use Database\DatabaseConnection;
+                        use Templates\Template;
 
                         $connection = new DatabaseConnection();
 
-                        include_once(TEMPLATES."template.php");
                         $DISPLAY_COUNT_PER_PAGE = 6;
 
                         // Gets the search query if exists
@@ -99,7 +98,7 @@
 
                         // Displays the current page
                         foreach($stmt->fetchAll() as $res) {
-                            $template = new Template(TEMPLATES."member_template.php");
+                            $template = new Template("member.template.php");
                             $template->fill_placeholder("user_avatar_blob", base64_encode($res["imageUser"]));
                             $template->fill_placeholder("user_name", $res["nameUser"].' '.$res["surnameUser"]);
                             $template->fill_placeholder("user_id",  $res["idUser"]);

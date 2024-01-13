@@ -20,11 +20,13 @@
 </head>
 <body class="preload">
     <?php
-        if(!(isset($_SESSION['userConnect']))) {
-            header("Location: /"); 
-        }
         include_once("/srv/http/endpoint/components/navbar/navbar.php");
         (new Navbar(NavbarEntry::dashboard))->display();
+
+        use Components\Navbar\UserNavbar;
+        use Components\Navbar\UserNavbarEntry;
+        
+        (new UserNavbar(UserNavbarEntry::profile))->display();
     ?>
     <div class="dashboard-wrapper">
         <div class="bento-box glassy dashboard-box">

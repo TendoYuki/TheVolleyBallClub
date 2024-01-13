@@ -14,7 +14,7 @@ abstract class AbstractRouter{
 
     public function __construct() {
         $this->newAlias("@Views", ABSPATH . 'views');
-        $this->newAlias("@Controllers", ABSPATH . 'controllers');
+        $this->newAlias("@Controllers", ABSPATH . 'src/controllers');
     }
 
     /**

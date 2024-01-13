@@ -18,8 +18,8 @@
     flex: 1;
     max-width: 90rem;
     padding-right: 0;
-    margin-left: calc(var(--admin-navbar-width) + 2rem);
-    margin-right: calc(var(--admin-navbar-width) + 2rem);
+    margin-left: calc(var(--dashboard-navbar-width) + 2rem);
+    margin-right: calc(var(--dashboard-navbar-width) + 2rem);
     margin-top: 1rem;
     display: flex;
     height: 90%;
@@ -29,7 +29,7 @@
         height: 70%;
         margin-left: 0;
         margin-right: 0;
-        margin-bottom: calc(var(--admin-navbar-height) * 3);
+        margin-bottom: calc(var(--dashboard-navbar-height) * 3);
     }
 }
 .dashboard{

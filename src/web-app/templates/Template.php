@@ -1,4 +1,6 @@
 <?php
+    namespace Templates;
+
     /**
      * Template construction's behaviour 
      */
@@ -21,6 +23,8 @@
         /** Template contained */
         private $template;
 
+        private static $template_dir = TEMPLATES;
+
         /**
          * Creates a template
          * @param string $template Either the path to the template or the template itself (path by default)
@@ -29,6 +33,12 @@
         public function __construct($template, $template_behaviour = TemplateBehaviour::Fetch) {
             switch ($template_behaviour) {
                 case TemplateBehaviour::Fetch:
+
+                    // If the templates's path is not present
+                    // Then adds it
+                    if(!str_contains($template, Template::$template_dir))
+                        $template = Template::$template_dir.$template;
+
                     $this->template = file_get_contents($template);
                     break;
                 case TemplateBehaviour::Provide:

@@ -1,8 +1,8 @@
-<?php include_once("/srv/http/endpoint/config/config.php"); ?>
-<?php include_once(TEMPLATES."template.php") ?>
 <script src="/components/navbar/navbar.js" defer></script>
 
 <?php
+    use Templates\Template;
+
     enum NavbarEntry{
         case accueil;
         case informations;
@@ -20,7 +20,7 @@
         }
 
         public function display() {
-            $template = new Template(COMPONENTS."navbar/templates/navbar_template.php");
+            $template = new Template("navbar/navbar.template.php");
 
             $entries_str = '
                 <li '.($this->active==NavbarEntry::accueil ? 'class="selected"' : '').'><a href="/">ACCUEIL</a></li>

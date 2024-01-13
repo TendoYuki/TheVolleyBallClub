@@ -1,4 +1,3 @@
-<?php include_once("/srv/http/endpoint/config/config.php"); ?>
 <ul class="navbar">
     <li class="navbar-menu-opener">
         <?php echo get_public_file("symbols/nav-menu-symbol.svg"); ?>
