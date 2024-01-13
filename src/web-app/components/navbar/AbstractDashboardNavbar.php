@@ -43,7 +43,7 @@
             $template->fill_placeholder("dashboard-navbar-entries", $entries_str);
 
             $template->display();
-            echo('<script src="/components/navbar/dashboard-navbar.js" defer></script>');
+            echo('<script src="/components/navbar/dashboardNavbar.js" defer></script>');
         }
     }
 ?>
