@@ -18,9 +18,6 @@
 </head>
 <body class="flex-body preload">
     <?php
-        if(isset($_SESSION['userConnect']) || isset($_SESSION['adminConnect'])) {
-            header("Location: /"); 
-        }
         if(isset($_SESSION['error'])) {
             echo("<script>setTimeout(() => alert(`".$_SESSION['error']."`),500);</script>");
             unset($_SESSION['error']);
@@ -108,7 +105,7 @@
                                 <select name="group-field" id="group-field" required>
                                     <option disabled selected value>--------</option>
                                     <?php
-                                        use Models\DatabaseConnection;
+                                        use Database\DatabaseConnection;
 
                                         $connection = new DatabaseConnection();
                                         $stmt = $connection->getConnection()->prepare("SELECT * FROM `group`;");

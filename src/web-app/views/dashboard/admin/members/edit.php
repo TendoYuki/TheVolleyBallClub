@@ -100,7 +100,7 @@
                         <select name="group-field" id="group-field" required>
                             <option disabled selected value>--------</option>
                             <?php
-                                use Models\DatabaseConnection;
+                                use Database\DatabaseConnection;
 
                                 $connection = new DatabaseConnection();
                                 $stmt = $connection->getConnection()->prepare("SELECT * FROM `group`;");

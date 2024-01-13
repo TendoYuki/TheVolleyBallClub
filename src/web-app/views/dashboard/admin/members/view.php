@@ -22,7 +22,7 @@
         include_once("/srv/http/endpoint/components/navbar/navbar.php");
         (new Navbar(NavbarEntry::connection))->display();
 
-        use Models\DatabaseConnection;
+        use Database\DatabaseConnection;
 
         $connection = new DatabaseConnection();
 

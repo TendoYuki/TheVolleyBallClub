@@ -86,12 +86,6 @@ module.exports = {
             patterns: [{ from: "src", to: "src" }],
         }),
         new CopyPlugin({
-            patterns: [{ from: "controllers", to: "controllers" }],
-        }),
-        new CopyPlugin({
-            patterns: [{ from: "models", to: "models" }],
-        }),
-        new CopyPlugin({
             patterns: [{ from: "views", to : "views"}],
         }),
         new CopyPlugin({

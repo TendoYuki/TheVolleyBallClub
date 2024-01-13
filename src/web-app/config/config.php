@@ -9,13 +9,13 @@
     define('PAGES', ABSPATH.'pages'.'/');
 
     if ( !defined('MODELS') )
-    define('MODELS', ABSPATH.'models'.'/');
+    define('MODELS', ABSPATH.'src/models'.'/');
 
     if ( !defined('EXCEPTIONS') )
     define('EXCEPTIONS', ABSPATH.'exceptions'.'/');
 
     if ( !defined('CONTROLLERS') )
-    define('CONTROLLERS', ABSPATH.'controllers'.'/');
+    define('CONTROLLERS', ABSPATH.'src/controllers'.'/');
 
     if ( !defined('TEMPLATES') )
     define('TEMPLATES', ABSPATH.'templates'.'/');

@@ -46,7 +46,7 @@
                 </div>
                 <div class="result-table">
                     <?php
-                        use Models\DatabaseConnection;
+                        use Database\DatabaseConnection;
 
                         $connection = new DatabaseConnection();
 

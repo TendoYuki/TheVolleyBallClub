@@ -1,6 +1,6 @@
 <?php
 
-namespace Models;
+namespace Database;
 
 class DatabaseConnection {
     private static $serverName = "localhost";

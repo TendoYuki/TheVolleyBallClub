@@ -14,7 +14,7 @@ use Exceptions\InvalidNameException;
 use Exceptions\InvalidSurnameException;
 use Exceptions\WeakPasswordException;
 
-use Models\DatabaseConnection;
+use Database\DatabaseConnection;
 
 class AccountController {
     private static $valid_img_types = ["image/png", "image/jpeg", "image/webp", "image/jpg"];

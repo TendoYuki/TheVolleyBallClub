@@ -2,7 +2,7 @@
 
 namespace Controllers;
 
-use Models\DatabaseConnection;
+use Database\DatabaseConnection;
 
 function back_redirect() {
     $id = $_POST["id"];
