@@ -1,5 +1,5 @@
 <?php
-    namespace Components\Navbar;
+    namespace Components\Navigation\Dashboard;
 
     enum UserNavbarEntry: int{
         case documents = 1;

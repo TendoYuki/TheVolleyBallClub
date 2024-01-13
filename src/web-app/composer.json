@@ -15,7 +15,8 @@
             "Optimizations\\": "./src/optimizations",
             "Exceptions\\": "./src/exceptions",
             "Components\\": "./components/",
-            "Components\\Navbar\\": "./components/navbar",
+            "Components\\Navigation\\Dashboard\\": "./components/navigation/dashboard",
+            "Components\\Navigation\\Navbar\\": "./components/navigation/navbar",
             "Components\\Carrousel\\": "./components/carrousel"
         }
     },

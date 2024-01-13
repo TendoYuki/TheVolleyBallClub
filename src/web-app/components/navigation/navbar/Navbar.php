@@ -1,10 +1,9 @@
-<script src="/components/navbar/navbar.js" defer></script>
-
 <?php
+    namespace Components\Navigation\Navbar;
     use Templates\Template;
 
     enum NavbarEntry{
-        case accueil;
+        case home;
         case informations;
         case planning;
         case contact;
@@ -23,7 +22,7 @@
             $template = new Template("navbar/navbar.template.php");
 
             $entries_str = '
-                <li '.($this->active==NavbarEntry::accueil ? 'class="selected"' : '').'><a href="/">ACCUEIL</a></li>
+                <li '.($this->active==NavbarEntry::home ? 'class="selected"' : '').'><a href="/">ACCUEIL</a></li>
                 <li '.($this->active==NavbarEntry::informations ? 'class="selected"' : '').'><a href="/info">INFORMATIONS</a></li>
                 <li '.($this->active==NavbarEntry::planning ? 'class="selected"' : '').'><a href="/planning">PLANNING</a></li>
                 <li '.($this->active==NavbarEntry::contact ? 'class="selected"' : '').'><a href="/contact">CONTACT</a></li>
@@ -50,6 +49,8 @@
             $template->fill_placeholder("navbar_entries_str", $entries_str);
 
             $template->display();
+
+            echo('<script src="/components/navigation/navbar/navbar.js" defer></script>');
         }
     }
 ?>

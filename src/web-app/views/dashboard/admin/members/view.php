@@ -16,13 +16,15 @@
 </head>
 <body class="preload">
     <?php
+        use Components\Navigation\Navbar\Navbar;
+        use Components\Navigation\Navbar\NavbarEntry;
+        use Database\DatabaseConnection;
+        
+        (new Navbar(NavbarEntry::dashboard))->display();
+
         if(!isset($_GET['user'])) {
             header("Location: /dashboard/members"); 
         }
-        include_once("/srv/http/endpoint/components/navbar/navbar.php");
-        (new Navbar(NavbarEntry::connection))->display();
-
-        use Database\DatabaseConnection;
 
         $connection = new DatabaseConnection();
 

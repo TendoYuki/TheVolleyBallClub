@@ -14,9 +14,11 @@
 </head>
 <body class="preload">
     <?php
-        include_once("/srv/http/endpoint/components/navbar/navbar.php");
-        (new Navbar(NavbarEntry::accueil))->display();
-        require("components/carrousel/carrousel.php");
+        use Components\Navigation\Navbar\Navbar;
+        use Components\Navigation\Navbar\NavbarEntry;
+        use Components\Carrousel\Carrousel;
+
+        (new Navbar(NavbarEntry::home))->display();
         (new Carrousel(["/public/1.png", "/public/2.png", "/public/3.png"]))->display();
 
     ?>

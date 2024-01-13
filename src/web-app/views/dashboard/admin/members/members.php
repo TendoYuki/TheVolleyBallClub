@@ -20,13 +20,15 @@
 </head>
 <body class="preload">
     <?php
-        include_once("/srv/http/endpoint/components/navbar/navbar.php");
+        use Components\Navigation\Navbar\Navbar;
+        use Components\Navigation\Navbar\NavbarEntry;
+        
         (new Navbar(NavbarEntry::dashboard))->display();
     ?>
     <div class="dashboard-wrapper">
         <?php    
-            use Components\Navbar\AdminNavbar;
-            use Components\Navbar\AdminNavbarEntry;
+            use Components\Navigation\Dashboard\AdminNavbar;
+            use Components\Navigation\Dashboard\AdminNavbarEntry;
             
             (new AdminNavbar(AdminNavbarEntry::members))->display();
         ?>

@@ -18,12 +18,14 @@
 </head>
 <body class="flex-body preload">
     <?php        
+        use Components\Navigation\Navbar\Navbar;
+        use Components\Navigation\Navbar\NavbarEntry;
+        
+        (new Navbar(NavbarEntry::connection))->display();
         if(isset($_SESSION['error'])) {
             echo("<script>setTimeout(() => alert(`".$_SESSION['error']."`),500);</script>");
             unset($_SESSION['error']);
         }
-        include_once("/srv/http/endpoint/components/navbar/navbar.php");
-        (new Navbar(NavbarEntry::connection))->display();
     ?>
     <div class="forgot-password-form-wrapper">
         <div class="bento-box glassy">

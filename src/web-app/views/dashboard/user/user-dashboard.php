@@ -20,15 +20,15 @@
 </head>
 <body class="preload">
     <?php
-        include_once("/srv/http/endpoint/components/navbar/navbar.php");
-        (new Navbar(NavbarEntry::dashboard))->display();
-
-        use Components\Navbar\UserNavbar;
-        use Components\Navbar\UserNavbarEntry;
+        use Components\Navigation\Navbar\Navbar;
+        use Components\Navigation\Navbar\NavbarEntry;
+        use Components\Navigation\Dashboard\UserNavbar;
+        use Components\Navigation\Dashboard\UserNavbarEntry;
         
-        (new UserNavbar(UserNavbarEntry::profile))->display();
+        (new Navbar(NavbarEntry::dashboard))->display();
     ?>
     <div class="dashboard-wrapper">
+        <?php (new UserNavbar(UserNavbarEntry::profile))->display(); ?>
         <div class="bento-box glassy dashboard-box">
             <div class="dashboard">
                 <?php

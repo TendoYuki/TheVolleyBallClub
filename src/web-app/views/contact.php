@@ -14,7 +14,9 @@
 </head>
 <body class="preload">
     <?php
-        include_once("/srv/http/endpoint/components/navbar/navbar.php");
+        use Components\Navigation\Navbar\Navbar;
+        use Components\Navigation\Navbar\NavbarEntry;
+        
         (new Navbar(NavbarEntry::contact))->display();
     ?>
 

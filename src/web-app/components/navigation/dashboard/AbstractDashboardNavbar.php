@@ -1,5 +1,5 @@
 <?php
-    namespace Components\Navbar;
+    namespace Components\Navigation\Dashboard;
 
     use Templates\Template;
     abstract class AbstractDashboardNavbar {
@@ -43,7 +43,7 @@
             $template->fill_placeholder("dashboard-navbar-entries", $entries_str);
 
             $template->display();
-            echo('<script src="/components/navbar/dashboardNavbar.js" defer></script>');
+            echo('<script src="/components/navigation/dashboard/dashboardNavbar.js" defer></script>');
         }
     }
 ?>

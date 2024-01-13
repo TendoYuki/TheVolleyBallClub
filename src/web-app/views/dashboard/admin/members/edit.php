@@ -16,12 +16,15 @@
 </head>
 <body class="preload">
     <?php
+        use Components\Navigation\Navbar\Navbar;
+        use Components\Navigation\Navbar\NavbarEntry;
+        
+        (new Navbar(NavbarEntry::dashboard))->display();
+
         if(isset($_SESSION['error'])) {
             echo("<script>setTimeout(() => alert(`".$_SESSION['error']."`),500);</script>");
             unset($_SESSION['error']);
         }
-        include_once("/srv/http/endpoint/components/navbar/navbar.php");
-        (new Navbar(NavbarEntry::connection))->display();
     ?>
     <div class="sign-up-form">
         <h1>Créer un compte</h1>

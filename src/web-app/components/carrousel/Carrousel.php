@@ -1,6 +1,6 @@
-<script src="/components/carrousel/carrousel.js" defer></script>
-
 <?php
+    namespace Components\Carrousel;
+
     use Templates\Template;
     class Carrousel{
         private $images;
@@ -19,6 +19,8 @@
             $template->fill_placeholder("images_span_el_str", $span_str);
             $template->fill_placeholder("images_el_str", $imgs_str);
             $template->display();
+            
+            echo('<script src="/components/carrousel/carrousel.js" defer></script>');
         }
     }
 ?>

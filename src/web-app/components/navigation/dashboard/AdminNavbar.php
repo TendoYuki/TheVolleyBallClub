@@ -1,15 +1,21 @@
 <?php
-    namespace Components\Navbar;
+    namespace Components\Navigation\Dashboard;
     enum AdminNavbarEntry: int{
-        case members = 1;
-        case admins = 2;
-        case competitions = 3;
-        case trainings = 4;
+        case profile = 1;
+        case members = 2;
+        case admins = 3;
+        case competitions = 4;
+        case trainings = 5;
 
     }
     class AdminNavbar extends AbstractDashboardNavbar{
         public function __construct(AdminNavbarEntry $active) {
             parent::__construct($active, array(
+                AdminNavbarEntry::profile->value => array(
+                    "symbol" => get_public_file("symbols/user-symbol.svg"),
+                    "link" => "/dashboard/profile",
+                    "link_text" => "Mon profil"
+                ),
                 AdminNavbarEntry::trainings->value => array(
                     "symbol" => get_public_file("symbols/training-symbol.svg"),
                     "link" => "/dashboard/trainings",
