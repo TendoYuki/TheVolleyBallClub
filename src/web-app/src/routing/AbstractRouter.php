@@ -44,7 +44,7 @@ abstract class AbstractRouter{
      * Creates a new handler for 404 errors
      * @param string $target Target page for when a 404 error is encountered
      */
-    public function new404Handler(string $target): void {
+    protected function new404Handler(string $target): void {
         $this->error_404_url = $this->resolveAliases($target);
     }
 
