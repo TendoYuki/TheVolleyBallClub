@@ -2,7 +2,6 @@
 
 namespace Controllers;
 
-include_once("/srv/http/endpoint/config/config.php");
 use Exceptions\EmailAlreadyExistsException;
 use Exceptions\EmailFormatException;
 use Exceptions\InvalidAvatarTypeException;

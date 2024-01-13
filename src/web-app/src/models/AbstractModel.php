@@ -4,8 +4,6 @@ namespace Models;
 
 use Database\DatabaseConnection;
 
-include_once("/srv/http/endpoint/config/config.php");
-
 abstract class AbstractModel {
     private $connection;
 

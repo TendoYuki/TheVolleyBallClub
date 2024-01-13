@@ -1,20 +1,19 @@
 <?php
-include_once("/srv/http/endpoint/config/config.php");
-
-include_once(CONTROLLERS.'AccountController.php');
-include_once(EXCEPTIONS.'EmailAlreadyExistsException.php');
-include_once(EXCEPTIONS.'EmailFormatException.php');
-include_once(EXCEPTIONS.'InvalidAvatarTypeException.php');
-include_once(EXCEPTIONS.'InvalidAvatarSizeException.php');
-include_once(EXCEPTIONS.'InvalidBirthdateException.php');
-include_once(EXCEPTIONS.'InvalidGenderException.php');
-include_once(EXCEPTIONS.'InvalidNameException.php');
-include_once(EXCEPTIONS.'InvalidSurnameException.php');
-include_once(EXCEPTIONS.'WeakPasswordException.php');
 
 use PHPUnit\Framework\TestCase;
 
+use Exceptions\EmailAlreadyExistsException;
+use Exceptions\EmailFormatException;
+use Exceptions\InvalidAvatarTypeException;
+use Exceptions\InvalidAvatarSizeException;
+use Exceptions\InvalidBirthdateException;
+use Exceptions\InvalidGenderException;
+use Exceptions\InvalidNameException;
+use Exceptions\InvalidSurnameException;
+use Exceptions\WeakPasswordException;
+
 use Controllers\AbstractController;
+use Controllers\AccountController;
 
 final class AccountControllerTest extends TestCase {
     public function testCheckValidAvatarSize() {

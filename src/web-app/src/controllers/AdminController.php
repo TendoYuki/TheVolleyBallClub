@@ -2,8 +2,6 @@
 
 namespace Controllers;
 
-include_once("/srv/http/endpoint/config/config.php");
-
 use Models\Admin;
 use Exceptions\DisplayableException;
 use Cryptography\PasswordManager;

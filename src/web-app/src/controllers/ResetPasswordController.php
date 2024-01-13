@@ -2,8 +2,6 @@
 
 namespace Controllers;
 
-include_once("/srv/http/endpoint/config/config.php");
-
 use Database\DatabaseConnection;
 
 if(isset($_SESSION['userConnect']) || isset($_SESSION['adminConnect'])) {

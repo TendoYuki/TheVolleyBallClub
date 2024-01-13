@@ -1,5 +1,7 @@
 <?php
+
     namespace Components\Navigation\Navbar;
+
     use Templates\Template;
 
     enum NavbarEntry{

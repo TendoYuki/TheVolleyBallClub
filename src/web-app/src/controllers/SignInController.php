@@ -2,8 +2,6 @@
 
 namespace Controllers;
 
-include_once("/srv/http/endpoint/config/config.php");
-
 use Cryptography\PasswordManager;
 use Database\DatabaseConnection;
 

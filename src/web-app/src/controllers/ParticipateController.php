@@ -16,7 +16,7 @@ function back_redirect() {
     }
 }
 
-include_once("/srv/http/endpoint/config/config.php");
+
 
 if(!(isset($_SESSION['userConnect']) || isset($_SESSION['adminConnect']))) {
     header("Location: /"); 

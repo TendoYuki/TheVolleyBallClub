@@ -1,4 +1,3 @@
-<?php include_once("/srv/http/endpoint/config/config.php"); ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -22,7 +21,7 @@
         use Components\Navigation\Navbar\NavbarEntry;
         
         (new Navbar(NavbarEntry::connection))->display();
-        
+
         if(isset($_SESSION['error'])) {
             echo("<script>setTimeout(() => alert(`".$_SESSION['error']."`),500);</script>");
             unset($_SESSION['error']);

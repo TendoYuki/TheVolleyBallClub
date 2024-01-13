@@ -2,9 +2,8 @@
 
 namespace Models;
 
-include_once("/srv/http/endpoint/config/config.php");
-
 use Optimizations\ImageCompressor;
+use Database\DatabaseConnection;
 
 class User extends AbstractModel{
     private int $id;

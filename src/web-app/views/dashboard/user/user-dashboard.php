@@ -1,4 +1,3 @@
-<?php include_once("/srv/http/endpoint/config/config.php"); ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>

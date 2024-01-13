@@ -1,5 +1,7 @@
 <?php
+
 namespace Routing;
+
 use Authorization\AuthorizationLevel;
 
 class PlanningRouter extends AbstractRouter{

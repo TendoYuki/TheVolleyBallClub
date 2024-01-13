@@ -1,8 +1,7 @@
 <?php
 
 namespace Models;
-
-include_once("/srv/http/endpoint/config/config.php");
+use Database\DatabaseConnection;
 
 class Admin extends AbstractModel{
     private int $id;

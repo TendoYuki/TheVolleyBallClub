@@ -1,7 +1,6 @@
 <?php
-namespace Routing;
 
-include_once("/srv/http/endpoint/config/config.php");
+namespace Routing;
 
 use Authorization\AuthorizationLevel;
 use Authorization\AuthorizationManager;
