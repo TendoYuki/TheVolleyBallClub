@@ -7,7 +7,7 @@ class Location extends AbstractModel{
     private int $id;
     private string $name;
     private string $city;
-    private int $post_code;
+    private string $post_code;
     private string $address; 	
 
     private function __construct($id){
@@ -35,7 +35,7 @@ class Location extends AbstractModel{
     public function getName() {
         return $this->name;
     }
-    public function setName(string $name) {
+    public function setName(string $name): Location {
         $this->name = $name;
         return $this;
     }
@@ -43,7 +43,7 @@ class Location extends AbstractModel{
     public function getCity() {
         return $this->city;
     }
-    public function setCity(string $city) {
+    public function setCity(string $city): Location {
         $this->city = $city;
         return $this;
     }
@@ -51,7 +51,7 @@ class Location extends AbstractModel{
     public function getAddress() {
         return $this->address;
     }
-    public function setAddress(string $address) {
+    public function setAddress(string $address): Location {
         $this->address = $address;
         return $this;
     }
@@ -59,7 +59,7 @@ class Location extends AbstractModel{
     public function getPostCode() {
         return $this->post_code;
     }
-    public function setPostCode(int $post_code) {
+    public function setPostCode(string $post_code): Location {
         $this->post_code = $post_code;
         return $this;
     }
@@ -87,7 +87,7 @@ class Location extends AbstractModel{
      */
     public static function new(
         string $city,
-        int $post_code,
+        string $post_code,
         string $address,
         string $name
     ) {

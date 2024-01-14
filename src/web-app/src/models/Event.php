@@ -32,10 +32,14 @@ class Event extends AbstractModel{
         foreach($images as $image) $this->images[$image["idEventImage"]] = $image["blobImage"];
     }
 
+    public function getId() {
+        return $this->id;
+    }
+
     public function getName() {
         return $this->name;
     }
-    public function setName(string $name) {
+    public function setName(string $name): Event {
         $this->name = $name;
         return $this;
     }
@@ -43,8 +47,24 @@ class Event extends AbstractModel{
     public function getDescription() {
         return $this->description;
     }
-    public function setDescription(string $description) {
+    public function setDescription(string $description): Event {
         $this->description = $description;
+        return $this;
+    }
+
+    public function getEndDateTime() {
+        return $this->end_date_time;
+    }
+    public function setEndDateTime(string $end_date_time): Event {
+        $this->end_date_time = $end_date_time;
+        return $this;
+    }
+
+    public function getStartDateTime() {
+        return $this->start_date_time;
+    }
+    public function setStartDateTime(string $start_date_time): Event {
+        $this->start_date_time = $start_date_time;
         return $this;
     }
 

@@ -33,7 +33,7 @@ class Partner extends AbstractModel{
     public function getName() {
         return $this->name;
     }
-    public function setName(string $name) {
+    public function setName(string $name): Partner {
         $this->name = $name;
         return $this;
     }
@@ -41,7 +41,7 @@ class Partner extends AbstractModel{
     public function getLogo() {
         return $this->logo;
     }
-    public function setLogo(string $logo) {
+    public function setLogo(string $logo): Partner {
         $this->logo = $logo;
         return $this;
     }
@@ -49,7 +49,7 @@ class Partner extends AbstractModel{
     public function getWebpage() {
         return $this->webpage;
     }
-    public function setWebpage(string $webpage) {
+    public function setWebpage(string $webpage): Partner {
         $this->webpage = $webpage;
         return $this;
     }

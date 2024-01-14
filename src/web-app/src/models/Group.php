@@ -31,7 +31,7 @@ class Group extends AbstractModel{
     public function getName() {
         return $this->name;
     }
-    public function setName(string $name) {
+    public function setName(string $name): Group {
         $this->name = $name;
         return $this;
     }
@@ -39,7 +39,7 @@ class Group extends AbstractModel{
     public function getDescription() {
         return $this->description;
     }
-    public function setDescription(string $description) {
+    public function setDescription(string $description): Group {
         $this->description = $description;
         return $this;
     }

@@ -65,7 +65,7 @@ class User extends AbstractModel{
     public function getName() {
         return $this->name;
     }
-    public function setName(string $name) {
+    public function setName(string $name): User {
         $this->name = $name;
         return $this;
     }
@@ -74,7 +74,7 @@ class User extends AbstractModel{
     public function getSurname() {
         return $this->surname;
     }
-    public function setSurname(string $surname) {
+    public function setSurname(string $surname): User {
         $this->surname = $surname;
         return $this;
     }
@@ -83,7 +83,7 @@ class User extends AbstractModel{
     public function getPassword() {
         return $this->password;
     }
-    public function setPassword(string $password) {
+    public function setPassword(string $password): User {
         $this->password = $password;
         return $this;
     }
@@ -92,7 +92,7 @@ class User extends AbstractModel{
     public function getEmail() {
         return $this->email;
     }
-    public function setEmail(string $email) {
+    public function setEmail(string $email): User {
         $this->email = $email;
         return $this;
     }
@@ -101,7 +101,7 @@ class User extends AbstractModel{
     public function getGender() {
         return $this->gender;
     }
-    public function setGender(int $gender) {
+    public function setGender(int $gender): User {
         $this->gender = $gender;
         return $this;
     }
@@ -115,7 +115,7 @@ class User extends AbstractModel{
     public function getBirthdate() {
         return $this->birthdate;
     }
-    public function setBirthdate(string $birthdate) {
+    public function setBirthdate(string $birthdate): User {
         $this->birthdate = $birthdate;
         return $this;
     }
@@ -124,7 +124,7 @@ class User extends AbstractModel{
     public function getImageUser() {
         return $this->image_user;
     }
-    public function setImageUser(string $image_user) {
+    public function setImageUser(string $image_user): User {
         $this->image_user = ImageCompressor::compress($image_user);
         return $this;
     }
@@ -133,7 +133,7 @@ class User extends AbstractModel{
     public function getGroupID() {
         return $this->group_id;
     }
-    public function setGroupID(int $group_id) {
+    public function setGroupID(int $group_id): User {
         $this->group_id = $group_id;
         return $this;
     }
@@ -142,7 +142,7 @@ class User extends AbstractModel{
     public function getPaymentID() {
         return $this->payment_id;
     }
-    public function setPaymentID(int $payment_id) {
+    public function setPaymentID(int $payment_id): User {
         $this->payment_id = $payment_id;
         return $this;
     }

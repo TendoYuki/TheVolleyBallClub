@@ -31,7 +31,7 @@ class Admin extends AbstractModel{
     public function getPassword() {
         return $this->password;
     }
-    public function setPassword(string $password) {
+    public function setPassword(string $password): Admin {
         $this->password = $password;
         return $this;
     }
@@ -40,7 +40,7 @@ class Admin extends AbstractModel{
     public function getLogin() {
         return $this->login;
     }
-    public function setLogin(string $login) {
+    public function setLogin(string $login): Admin {
         $this->login = $login;
         return $this;
     }

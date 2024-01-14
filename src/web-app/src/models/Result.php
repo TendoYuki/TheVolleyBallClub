@@ -35,7 +35,7 @@ class Result extends AbstractModel{
     public function getVictoriesCount() {
         return $this->victories_count;
     }
-    public function setVictoriesCount(int $victoriescount) {
+    public function setVictoriesCount(int $victoriescount): Result {
         $this->victories_count = $victoriescount;
         return $this;
     }
@@ -43,7 +43,7 @@ class Result extends AbstractModel{
     public function getDefeatCount() {
         return $this->defeat_count;
     }
-    public function setDefeatCount(int $defeatcount) {
+    public function setDefeatCount(int $defeatcount): Result {
         $this->defeat_count = $defeatcount;
         return $this;
     }
@@ -51,7 +51,7 @@ class Result extends AbstractModel{
     public function getRanking() {
         return $this->ranking;
     }
-    public function setRanking(int $ranking) {
+    public function setRanking(int $ranking): Result {
         $this->ranking = $ranking;
         return $this;
     }
@@ -59,7 +59,7 @@ class Result extends AbstractModel{
     public function getTotal_clubs_count() {
         return $this->total_clubs_count;
     }
-    public function setTotal_clubs_count(int $total_clubs_count) {
+    public function setTotal_clubs_count(int $total_clubs_count): Result {
         $this->total_clubs_count = $total_clubs_count;
         return $this;
     }

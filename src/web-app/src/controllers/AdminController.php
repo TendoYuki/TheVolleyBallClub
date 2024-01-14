@@ -7,12 +7,15 @@ use Exceptions\DisplayableException;
 use Cryptography\PasswordManager;
 use Controllers\AbstractController;
 
-class AdminController extends AbstractController{
+class AdminController extends AbstractController implements IRequestHandler{
+    protected static function validate() {
+        AccountValidator::checkEmailUnicity($_POST['login-field']);
+        AccountValidator::checkPasswordStrength($_POST['password-field']);
+    }
 
     public static function new() {
         try {
-            AccountController::checkEmailUnicity($_POST['login-field']);
-            AccountController::checkPasswordStrength($_POST['password-field']);
+            AdminController::validate();
         
             // Creates a new admin in the database
             $id = Admin::new(
@@ -40,16 +43,13 @@ class AdminController extends AbstractController{
 
     public static function update() {
         try {
-            $admin = Admin::fetch($_POST['id-field']);
-            if(isset($_POST['login-field'])) {
-                AccountController::checkEmailUnicity($_POST['login-field']);
-                $admin->setLogin($_POST['login-field']);
-            }
-            if(isset($_POST['password-field'])) {
-                AccountController::checkPasswordStrength($_POST['password-field']);
-                $admin->setPassword(PasswordManager::hash($_POST['password-field']));
-            }
-            $admin->updateDatabase();
+            AdminController::validate();
+            
+            Admin::fetch($_POST['id-field'])
+                ->setLogin($_POST['login-field'])
+                ->setPassword(PasswordManager::hash($_POST['password-field']))
+                ->updateDatabase();
+                
         } catch(DisplayableException $e) {
             $_SESSION["error"] = $e->getErrorCode();
     
@@ -60,24 +60,30 @@ class AdminController extends AbstractController{
             header('Location: /sign-up');
         }
     }
+    public static function handleRequest(): void {
+        switch($_POST["action"]) {
+            case 'create':
+                AdminController::new();
+                break;
+            case 'delete':
+                // Delete only if the admin the deletion is the one connected
+                if(!($_SESSION['adminConnect'] == $_POST['id-field']))  {
+                    header("Location: /"); 
+                } AdminController::delete();
+        
+                break;
+            case 'update':
+                // Edit only if the admin requesting the edition is the one connected
+                if(!($_SESSION['adminConnect'] == $_POST['id-field']))  {
+                    header("Location: /"); 
+                } AdminController::update();
+        
+                break;
+        }
+    }
+    public static function redirect() {
+    }
 }
 
-switch($_POST["action"]) {
-    case 'create':
-        AdminController::new();
-        break;
-    case 'delete':
-        // Delete only if the admin the deletion is the one connected
-        if(!($_SESSION['adminConnect'] == $_POST['id-field']))  {
-            header("Location: /"); 
-        } AdminController::delete();
-
-        break;
-    case 'update':
-        // Edit only if the admin requesting the edition is the one connected
-        if(!($_SESSION['adminConnect'] == $_POST['id-field']))  {
-            header("Location: /"); 
-        } AdminController::update();
-
-        break;
-}
+AdminController::handleRequest();
+AdminController::redirect();

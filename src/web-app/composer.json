@@ -14,6 +14,7 @@
             "Cryptography\\": "./src/cryptography",
             "Optimizations\\": "./src/optimizations",
             "Exceptions\\": "./src/exceptions",
+            "Validation\\": "./src/validation",
             "Components\\": "./components/",
             "Components\\Navigation\\Dashboard\\": "./components/navigation/dashboard",
             "Components\\Navigation\\Navbar\\": "./components/navigation/navbar",

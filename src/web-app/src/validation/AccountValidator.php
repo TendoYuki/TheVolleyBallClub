@@ -1,10 +1,10 @@
 <?php
 
-namespace Controllers;
+namespace Validation;
 
 use Exceptions\EmailAlreadyExistsException;
 use Exceptions\EmailFormatException;
-use Exceptions\InvalidAvatarTypeException;
+use Exceptions\InvalidImageTypeException;
 use Exceptions\InvalidAvatarSizeException;
 use Exceptions\InvalidBirthdateException;
 use Exceptions\InvalidGenderException;
@@ -15,7 +15,7 @@ use Exceptions\WeakPasswordException;
 
 use Database\DatabaseConnection;
 
-class AccountController {
+class AccountValidator {
     private static $valid_img_types = ["image/png", "image/jpeg", "image/webp", "image/jpg"];
     private static $specialSymbols = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
     private static $uppercaseSymbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -50,7 +50,11 @@ class AccountController {
      * @throws EmailFormatException If email is invalid
      */
     public static function checkEmailFormat($email) {
-        if(preg_match(AccountController::$email_regex,$email) != 1) throw new EmailFormatException();
+        switch(preg_match(AccountValidator::$email_regex,$email)) {
+            case 0:
+            case false:
+                throw new EmailFormatException();
+        }
     }
 
     /**
@@ -70,9 +74,9 @@ class AccountController {
      */
     public static function checkPasswordStrength($password) {
         if(strlen($password) < 12) throw new WeakPasswordException();
-        if(!AccountController::has($password,AccountController::$specialSymbols)) throw new WeakPasswordException();
-        if(!AccountController::has($password,AccountController::$uppercaseSymbols)) throw new WeakPasswordException();
-        if(!AccountController::has($password,AccountController::$numbers)) throw new WeakPasswordException();
+        if(!AccountValidator::has($password,AccountValidator::$specialSymbols)) throw new WeakPasswordException();
+        if(!AccountValidator::has($password,AccountValidator::$uppercaseSymbols)) throw new WeakPasswordException();
+        if(!AccountValidator::has($password,AccountValidator::$numbers)) throw new WeakPasswordException();
     }
     
     /**
@@ -87,11 +91,10 @@ class AccountController {
     /**
      * Verifies that the avatar is an image and is valid
      * @param string $avatar_type type of the image
-     * @throws InvalidAvatarTypeException If avatar is invalid
+     * @throws InvalidImageTypeException If avatar is invalid
      */
     public static function checkAvatarType(string $avatar_type) {
-        foreach(AccountController::$valid_img_types as $valid_img_type) if($valid_img_type == $avatar_type) return;
-        throw new InvalidAvatarTypeException();
+        ImageValidator::checkImageType($avatar_type);
     }
     
     /**
@@ -127,8 +130,8 @@ class AccountController {
      * @throws InvalidNameException If name invalid
      */
     public static function checkValidName(string $name) {
-        if(AccountController::has($name,AccountController::$specialSymbols)) throw new InvalidNameException();
-        if(AccountController::has($name,AccountController::$numbers)) throw new InvalidNameException();
+        if(AccountValidator::has($name,AccountValidator::$specialSymbols)) throw new InvalidNameException();
+        if(AccountValidator::has($name,AccountValidator::$numbers)) throw new InvalidNameException();
     }
     
     /**
@@ -137,8 +140,8 @@ class AccountController {
      * @throws InvalidSurnameException If surname invalid
      */
     public static function checkValidSurname(string $surname) {
-        if(AccountController::has($surname,AccountController::$specialSymbols)) throw new InvalidSurnameException();
-        if(AccountController::has($surname,AccountController::$numbers)) throw new InvalidSurnameException();
+        if(AccountValidator::has($surname,AccountValidator::$specialSymbols)) throw new InvalidSurnameException();
+        if(AccountValidator::has($surname,AccountValidator::$numbers)) throw new InvalidSurnameException();
     }
 
     /**

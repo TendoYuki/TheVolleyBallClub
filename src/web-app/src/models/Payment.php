@@ -31,7 +31,7 @@ class Payment extends AbstractModel{
     public function getMean() {
         return $this->mean;
     }
-    public function setMean(string $mean) {
+    public function setMean(string $mean): Payment {
         $this->mean = $mean;
         return $this;
     }
@@ -39,7 +39,7 @@ class Payment extends AbstractModel{
     public function getAmount() {
         return $this->amount;
     }
-    public function setAmount(int $amount) {
+    public function setAmount(int $amount): Payment {
         $this->amount = $amount;
         return $this;
     }

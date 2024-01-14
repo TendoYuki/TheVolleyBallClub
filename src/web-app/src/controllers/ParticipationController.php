@@ -5,7 +5,7 @@ namespace Controllers;
 use Models\Competition;
 use Models\Training;
 
-class ParticipationController {
+class ParticipationController implements IRequestHandler{
     public static function ParticipateToTraining($user_id, $training_id): bool {
         $training = Training::fetch($training_id);
         return $training->addParticipant($user_id);
