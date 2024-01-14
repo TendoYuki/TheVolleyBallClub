@@ -38,6 +38,8 @@ class Competition extends AbstractModel{
 
     /**
      * Adds the given participant to the event if it is possible
+     * NOTE : does not require to call updateDatabase() 
+     * As it instantly modifies the database
      * @param int $id Id of the participant to add
      * @return bool True if the addition was successful, else false
      */
@@ -60,6 +62,8 @@ class Competition extends AbstractModel{
 
     /**
      * Removes the given participant to the event if it is possible
+     * NOTE : does not require to call updateDatabase() 
+     * As it instantly modifies the database
      * @param int $id Id of the participant to remove
      * @return bool True if the removal was successful, else false
      */

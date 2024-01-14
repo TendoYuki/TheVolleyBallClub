@@ -54,7 +54,7 @@ class Admin extends AbstractModel{
         );
         $stmt->bindValue(1, $this->login);
         $stmt->bindValue(2, $this->password);
-        $stmt->bindValue(10, $this->id);
+        $stmt->bindValue(3, $this->id);
         $stmt->execute();
     }
 
