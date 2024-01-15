@@ -39,7 +39,7 @@ final class AccountValidatorTest extends TestCase {
     public function testHasFalse(){
         $this->assertFalse(AccountValidator::has("Hello","1234567890"));
     }
-    public function testCheckPasswordStrength(){
+    public function testCheckPasswordStrengthValid(){
         $this->expectNotToPerformAssertions();
         AccountValidator::checkPasswordStrength("azertyuiop!A1");
     }
