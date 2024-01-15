@@ -5,7 +5,6 @@ use PHPUnit\Framework\TestCase;
 
 use Exceptions\InvalidPostCodeException;
 
-use Controllers\AbstractController;
 use Validation\AddressValidator;
 
 final class AddressValidatorTest extends TestCase {

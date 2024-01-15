@@ -5,6 +5,10 @@ namespace Cryptography;
 class PasswordManager {
     private static $salt = "jefYY3Hkd73H";
 
+    public static function getSalt() {
+        return PasswordManager::$salt;
+    }
+
     /**
      * Hashes the given password with salted sha256 encryption
      * @param string $password Password to hash

@@ -5,7 +5,6 @@ use PHPUnit\Framework\TestCase;
 
 use Exceptions\InvalidImageTypeException;
 
-use Controllers\AbstractController;
 use Validation\ImageValidator;
 
 final class ImageValidatorTest extends TestCase {

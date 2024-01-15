@@ -13,7 +13,6 @@ use Exceptions\InvalidNameException;
 use Exceptions\InvalidSurnameException;
 use Exceptions\WeakPasswordException;
 
-use Controllers\AbstractController;
 use PharIo\Manifest\InvalidEmailException;
 use Validation\AccountValidator;
 
