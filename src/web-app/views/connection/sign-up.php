@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/css/sign-up.css">
     <script src="/js/preload.js"></script>
     <script src="/js/glassEffect.js" defer></script>
+    <script src="/js/avatarField.js" defer></script>
     <script src="/js/signUpValidation.js" defer></script>
 </head>
 <body class="flex-body preload">
@@ -37,10 +38,13 @@
                 <h1>Créer un compte</h1>
                 <form action="/sign-up/submit" method="post" id="sign-up" enctype="multipart/form-data">
                     <input type="hidden" name="action" value="create">
+                        <input type="hidden" name="redirect-success" value="/dashboard">
+                        <input type="hidden" name="redirect-error" value="/sign-up">
                     <div class="form-section">
                         <div class="form-section-field">
                             <label for="avatar-field">Photo d'identité</label>
                             <div class="avatar-selector">
+                                <img class="display" alt="">
                                 <label for="avatar-field"></label>
                                 <input type="file" name="avatar-field" form="sign-up" id="avatar-field" accept="image/png, image/jpg, image/jpeg, image/webp" required>
                                 <span></span>
@@ -173,9 +177,23 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-section">
+                        <div class="form-section-field">
+                            <div class="field policies-field">
+                                <label for="policies-field">Je confirme avoir lu et accepté les <a href="/eula">CGUs</a> ainsi que notre <a href="/privacy">Politique de confidentialité</a></label>
+                                <input
+                                    type="checkbox"
+                                    name="policies-field"
+                                    id="policies-field"
+                                    value="false"
+                                    required
+                                >
+                            </div>
+                        </div>
+                    </div>
                     <div class="btn-wrapper">
-                        <button class="btn filled" id="sign-up-btn">S'inscrire</button>
-                        <button class="btn outline" id="cancel-btn">Annuler</button>
+                        <button class="btn filled" id="sign-up-btn" form="sign-up">S'inscrire</button>
+                        <a class="btn outline" id="cancel-btn" href="/sign-in">Annuler</a>
                     </div>
                 </form>
                 <div class="other-actions">

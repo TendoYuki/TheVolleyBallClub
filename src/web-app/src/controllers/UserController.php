@@ -11,20 +11,20 @@ use Validation\AccountValidator;
 
 class UserController extends AbstractController implements IRequestHandler{
     protected static function validate() {
-        AccountValidator::checkEmailUnicity($_POST['email-field']);
         AccountValidator::checkEmailFormat($_POST['email-field']);
-        AccountValidator::checkPasswordStrength($_POST['password-field']);
         AccountValidator::checkValidName($_POST['name-field']);
         AccountValidator::checkValidSurname($_POST['surname-field']);
         AccountValidator::checkValidGender($_POST['gender-field']);
         AccountValidator::checkValidGroup($_POST['group-field']);
         AccountValidator::checkValidBirthdate($_POST['birthdate-field']);
-        AccountValidator::checkAvatarType($_FILES["avatar-field"]['type']);
-        AccountValidator::checkAvatarSize($_FILES["avatar-field"]['size']);
     }
 
     public static function new() {
         try {
+            AccountValidator::checkPasswordStrength($_POST['password-field']);
+            AccountValidator::checkEmailUnicity($_POST['email-field']);
+            AccountValidator::checkAvatarType($_FILES["avatar-field"]['type']);
+            AccountValidator::checkAvatarSize($_FILES["avatar-field"]['size']);
             UserController::validate();
     
             // Temporary payment id
@@ -117,18 +117,30 @@ class UserController extends AbstractController implements IRequestHandler{
 
     public static function update() {
         try {
+            $user = User::fetch($_POST['id-field']);
+            AccountValidator::checkEmailUnicity($_POST['email-field'], $user->getEmail());
+
+            $has_new_avatar = (strlen($_FILES["avatar-field"]["name"]) > 0);
+
+            if($has_new_avatar) {
+                AccountValidator::checkAvatarType($_FILES["avatar-field"]['type']);
+                AccountValidator::checkAvatarSize($_FILES["avatar-field"]['size']);
+            }
+
             UserController::validate();
 
-            User::fetch($_POST['id-field'])
+            $user 
                 ->setEmail($_POST['email-field'])
-                ->setPassword(PasswordManager::hash($_POST['password-field']))
                 ->setName($_POST['name-field'])
                 ->setSurname($_POST['surname-field'])
                 ->setGender($_POST['gender-field'])
                 ->setGroupID($_POST['group-field'])
-                ->setBirthdate($_POST['birthdate-field'])
-                ->setImageUser(file_get_contents($_FILES["avatar-field"]['tmp_name']))
-                ->updateDatabase();
+                ->setBirthdate($_POST['birthdate-field']);
+
+            if($has_new_avatar)
+                $user->setImageUser(file_get_contents($_FILES["avatar-field"]['tmp_name']));
+
+            $user->updateDatabase();
 
         } catch(DisplayableException $e) {
             $_SESSION["error"] = $e->getErrorCode();
@@ -186,8 +198,14 @@ class UserController extends AbstractController implements IRequestHandler{
     }
     public static function redirect() {
         if(isset($_SESSION["error"])) {
-            // TODO : Change this location to point to admin edit page
-            header('Location: /sign-up');
+            if(isset($_POST["redirect-error"])) {
+                header('Location: '.$_POST["redirect-error"]);
+            } else {
+                header('Location: /');
+            }
+        }
+        else if (isset($_POST["redirect-success"])) {
+            header('Location: '.$_POST["redirect-success"]);
         }
         else header('Location: /');
     }

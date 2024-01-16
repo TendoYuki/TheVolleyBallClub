@@ -284,8 +284,8 @@ class User extends AbstractModel{
             gender=?,
             imageUser=?,
             Group_idGroup=?,
-            payment_idPayment=?
-            medicalCertificate_id=?
+            payment_idPayment=?,
+            medicalCertificate_id=?,
             idCard_id=?
             WHERE idUser=?'
         );

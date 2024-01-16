@@ -10,7 +10,23 @@
     background-repeat: no-repeat;
     background-position: center;
     transition: filter $short-anim;
+    img.display{
+        display: none;
+    }
+    img[src].display{
+       display: block;
+    }
     
+    img.display{
+        border-radius: 50%;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-position: center;
+        object-fit: cover;
+        pointer-events: none;
+        user-select: none;
+    }
     // Background of the selector
     span{
         position: absolute;
@@ -45,11 +61,11 @@
             background-size: contain;
         }
     }
-    &:has(input:not(:invalid)) {
+    &:has(input:not(:invalid)),&.pseudo-active {
         background-color: transparent;
     }
     // If there is an image, display the pen instead of add symbol
-    input:not(:invalid)~span{
+    input:not(:invalid)~span ,&.pseudo-active input~span{
         width: 1.5rem;
         height: 1.5rem;
         top: -0.4rem;

@@ -27,7 +27,7 @@
         (new Navbar(NavbarEntry::dashboard))->display();
     ?>
     <div class="dashboard-wrapper">
-        <?php (new UserNavbar(UserNavbarEntry::profile))->display(); ?>
+        <?php (new UserNavbar(UserNavbarEntry::trainings))->display(); ?>
         <div class="bento-box glassy dashboard-box">
             <div class="dashboard">
                 <?php

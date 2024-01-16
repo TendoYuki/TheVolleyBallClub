@@ -17,30 +17,21 @@
     <?php
         use Components\Navigation\Navbar\Navbar;
         use Components\Navigation\Navbar\NavbarEntry;
-        use Database\DatabaseConnection;
-        
+        use Models\Group;
+        use Models\User;
+
         (new Navbar(NavbarEntry::dashboard))->display();
 
-        if(!isset($_GET['user'])) {
-            header("Location: /dashboard/members"); 
-        }
-
-        $connection = new DatabaseConnection();
-
-        $stmt = $connection->getConnection()->prepare("SELECT * FROM user JOIN `group` ON Group_idGroup=idGroup WHERE idUser=?");
-        $stmt->bindValue(1, $_GET['user']);
-        $stmt->execute();
-
-        $user = $stmt->fetch();
+        $user = User::fetch($_GET['user']);
     ?>
     <div class="bento-box glassy entry-display-box">
         <div class="entry-display">
             <div class="entry-infos-wrapper">
                 <div class="inline">
-                    <img class="entry-img-display" src="data:image/png;base64,<?php echo(base64_encode($user["imageUser"])); ?>" alt="">
+                    <img class="entry-img-display" src="data:image/png;base64,<?php echo(base64_encode($user->getImageUser())); ?>" alt="">
                     <div class="ml">
-                        <h1 class="big-title"><?php echo($user["nameUser"]." ".$user["surnameUser"]); ?></h1>
-                        <h2 class="big-subtitle"><?php echo($user["idUser"]); ?></h2>
+                        <h1 class="big-title"><?php echo($user->getName()." ".$user->getSurname()); ?></h1>
+                        <h2 class="big-subtitle"><?php echo($user->getId()); ?></h2>
                     </div>
                 </div>
                 <h2>Identité</h2>
@@ -48,25 +39,25 @@
                     <div class="form-section-field">
                         <label for="gender-field">Civilité</label>
                         <div class="field">
-                            <input type="text" value="<?php echo($user["gender"] == 0 ? "Mme." : "Mr.") ?>" disabled>
+                            <input type="text" value="<?php echo($user->getGender() == 0 ? "Mme." : "Mr.") ?>" disabled>
                         </div>
                     </div>
                     <div class="form-section-field">
                         <label for="name-field">Prenom</label>
                         <div class="field">
-                            <input type="text" value="<?php echo($user["nameUser"]) ?>" disabled>
+                            <input type="text" value="<?php echo($user->getName()) ?>" disabled>
                         </div>
                     </div>
                     <div class="form-section-field">
                         <label for="surname-field">Nom de famille</label>
                         <div class="field">
-                            <input type="text" value="<?php echo($user["surnameUser"]) ?>" disabled>
+                            <input type="text" value="<?php echo($user->getSurname()) ?>" disabled>
                         </div>
                     </div>
                     <div class="form-section-field">
                         <label for="birthdate-field">Date de naissance</label>
                         <div class="field">
-                            <input type="text" value="<?php echo($user["birthdateUser"]) ?>" disabled>
+                            <input type="text" value="<?php echo($user->getBirthdate()) ?>" disabled>
                         </div>  
                     </div>
                 </div>
@@ -75,13 +66,13 @@
                     <div class="form-section-field">
                         <label for="group-field">Groupe</label>
                         <div class="field">
-                            <input type="text" value="<?php echo($user["nameGroup"]) ?>" disabled>
+                            <input type="text" value="<?php echo(Group::fetch($user->getGroupID())->getName()) ?>" disabled>
                         </div>
                     </div>
                     <div class="form-section-field">
                         <label for="email-field">Email</label>
                         <div class="field">
-                            <input type="text" value="<?php echo($user["emailUser"]) ?>" disabled>
+                            <input type="text" value="<?php echo($user->getEmail()) ?>" disabled>
                         </div>
                     </div>
                 </div>

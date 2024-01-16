@@ -20,6 +20,7 @@ use Database\DatabaseConnection;
 class AccountValidator {
     private static $valid_img_types = ["image/png", "image/jpeg", "image/webp", "image/jpg"];
     private static $specialSymbols = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+    private static $invalidNameSymbols = "!\"#$%&'()*+,./:;<=>?@[\\]^`{|}~";
     private static $uppercaseSymbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static $numbers = "1234567890";
     private static $email_regex = "/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/";
@@ -27,18 +28,19 @@ class AccountValidator {
     /**
      * Verifies that the email does not already exist in admin or user table
      * @param string $email Email to check
+     * @param string $exclude email string to ignore
      * @throws EmailAlreadyExistsException If email not unique
      */
-    public static function checkEmailUnicity($email) {
+    public static function checkEmailUnicity($email, $exclude = "") {
         /** Connection to the database */
         $connection = new DatabaseConnection();
         //Verify if the email already exists as admin or user
         $stmt = $connection->getConnection()->prepare(
-            'SELECT idUser FROM user WHERE emailUser=?
+            'SELECT idUser FROM user WHERE emailUser=? AND NOT emailUser=?
             UNION
-            SELECT idAdmin FROM admin WHERE loginAdmin=?'
+            SELECT idAdmin FROM admin WHERE loginAdmin=? AND NOT loginAdmin=?'
         );
-        $stmt->execute([$email,$email]);
+        $stmt->execute([$email, $exclude, $email, $exclude]);
         $user = $stmt->fetch();
 
         if(
@@ -132,7 +134,7 @@ class AccountValidator {
      * @throws InvalidNameException If name invalid
      */
     public static function checkValidName(string $name) {
-        if(AccountValidator::has($name,AccountValidator::$specialSymbols)) throw new InvalidNameException();
+        if(AccountValidator::has($name,AccountValidator::$invalidNameSymbols)) throw new InvalidNameException();
         if(AccountValidator::has($name,AccountValidator::$numbers)) throw new InvalidNameException();
     }
     
@@ -142,7 +144,7 @@ class AccountValidator {
      * @throws InvalidSurnameException If surname invalid
      */
     public static function checkValidSurname(string $surname) {
-        if(AccountValidator::has($surname,AccountValidator::$specialSymbols)) throw new InvalidSurnameException();
+        if(AccountValidator::has($surname,AccountValidator::$invalidNameSymbols)) throw new InvalidSurnameException();
         if(AccountValidator::has($surname,AccountValidator::$numbers)) throw new InvalidSurnameException();
     }
 
