@@ -29,7 +29,7 @@
             use Components\Navigation\Dashboard\AdminNavbar;
             use Components\Navigation\Dashboard\AdminNavbarEntry;
             
-            (new AdminNavbar(AdminNavbarEntry::members))->display();
+            (new AdminNavbar(AdminNavbarEntry::accounts))->display();
         ?>
         <div class="bento-box glassy dashboard-box">
             <div class="dashboard">
@@ -41,7 +41,7 @@
                             <input id="search-field" type="text" placeholder="Prénom, Nom, License" value="<?php echo isset($_GET["search"]) ? $_GET["search"] : "" ?>">
                             <span class="search-background"></span>
                         </div>
-                        <button id="search-btn" class="btn img-container"><img src="/public/symbols/lens-symbol.svg" alt=""></button>
+                        <button id="search-btn" class="btn img-container filled"><img src="/public/symbols/lens-symbol.svg" alt=""></button>
                     </div>
                 </div>
                 <div class="result-table">

@@ -4,11 +4,11 @@ namespace Components\Navigation\Dashboard;
 
 enum AdminNavbarEntry: int{
     case profile = 1;
-    case members = 2;
-    case admins = 3;
-    case competitions = 4;
-    case trainings = 5;
-
+    case accounts = 2;
+    case competitions = 3;
+    case partner = 4;
+    case events = 5;
+    case location = 6;
 }
 class AdminNavbar extends AbstractDashboardNavbar{
     public function __construct(AdminNavbarEntry $active) {
@@ -18,26 +18,31 @@ class AdminNavbar extends AbstractDashboardNavbar{
                 "link" => "/dashboard/profile",
                 "link_text" => "Mon profil"
             ),
-            AdminNavbarEntry::trainings->value => array(
-                "symbol" => get_public_file("symbols/training-symbol.svg"),
-                "link" => "/dashboard/trainings",
-                "link_text" => "Entrainements"
+            AdminNavbarEntry::partner->value => array(
+                "symbol" => get_public_file("symbols/partner-symbol.svg"),
+                "link" => "/dashboard/partners",
+                "link_text" => "Partenaires"
+            ),
+            AdminNavbarEntry::events->value => array(
+                "symbol" => get_public_file("symbols/event-symbol.svg"),
+                "link" => "/dashboard/events",
+                "link_text" => "Evénements"
+            ),
+            AdminNavbarEntry::location->value => array(
+                "symbol" => get_public_file("symbols/location-symbol.svg"),
+                "link" => "/dashboard/locations",
+                "link_text" => "Gymnases"
             ),
             AdminNavbarEntry::competitions->value => array(
                 "symbol" => get_public_file("symbols/competition-symbol.svg"),
                 "link" => "/dashboard/competitions",
-                "link_text" => "Competitions"
+                "link_text" => "Compétitions"
             ),
-            AdminNavbarEntry::members->value => array(
-                "symbol" => get_public_file("symbols/user-symbol.svg"),
-                "link" => "/dashboard/members",
-                "link_text" => "Membres"
+            AdminNavbarEntry::accounts->value => array(
+                "symbol" => get_public_file("symbols/account-symbol.svg"),
+                "link" => "/dashboard/accounts",
+                "link_text" => "Comptes"
             ),
-            AdminNavbarEntry::admins->value => array(
-                "symbol" => get_public_file("symbols/admin-symbol.svg"),
-                "link" => "/dashboard/admins",
-                "link_text" => "Administrateurs"
-            )
         ));
     }
 }

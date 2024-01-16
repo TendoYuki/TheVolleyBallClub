@@ -5,29 +5,38 @@
     height: 5rem;
     position: relative;
     border-radius: 50%;
-    background: lightgray;
+    background-color: $accent;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+    transition: filter $short-anim;
     
     // Background of the selector
     span{
         position: absolute;
         width: 50%;
         height: 50%;
-        transition: background $short-anim, transform $short-anim, top $short-anim, right $short-anim;
+        transition:
+            background $short-anim,
+            transform $short-anim,
+            top $short-anim, 
+            right $short-anim;
         justify-content: center;
         top: 50%;
         right: 50%;
         transform: translateX(50%) translateY(-50%);
         border-radius: 50%;
         pointer-events: none;
-        background: lightgray;
+        background: transparent;
         &::before{
             position: absolute;
             width: 60%;
             height: 60%;
-            transition: background $short-anim, transform $short-anim, top $short-anim, right $short-anim;
+            transition:
+                background $short-anim,
+                transform $short-anim,
+                top $short-anim,
+                right $short-anim;
             top: 50%;
             right: 50%;
             transform: translateX(50%) translateY(-50%);
@@ -36,7 +45,9 @@
             background-size: contain;
         }
     }
-
+    &:has(input:not(:invalid)) {
+        background-color: transparent;
+    }
     // If there is an image, display the pen instead of add symbol
     input:not(:invalid)~span{
         width: 1.5rem;
@@ -44,7 +55,8 @@
         top: -0.4rem;
         right: -0.4rem;
         padding: 0.25rem;
-        background: white;
+        background: $accent;
+        border: 1px solid $accent;
         transform: translateX(0%) translateY(0%);
         &::before{
             background: url("/public/symbols/pen-symbol.svg");
@@ -65,11 +77,13 @@
         span::before{
             transform: translateX(50%) translateY(-50%) scale(1.15);
         }
+        filter: brightness(0.7);
     }
     // Shrinks back to normal the plus sign when clicked
     &:active{
         span::before{
             transform: translateX(50%) translateY(-50%) scale(1);
         }
+        filter: brightness(0.7);
     }
 }

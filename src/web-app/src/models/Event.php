@@ -53,7 +53,7 @@ class Event extends AbstractModel{
     }
 
     public function getEndDateTime() {
-        return $this->end_date_time;
+        return strtotime($this->end_date_time);
     }
     public function setEndDateTime(string $end_date_time): Event {
         $this->end_date_time = $end_date_time;
@@ -61,7 +61,7 @@ class Event extends AbstractModel{
     }
 
     public function getStartDateTime() {
-        return $this->start_date_time;
+        return strtotime($this->start_date_time);
     }
     public function setStartDateTime(string $start_date_time): Event {
         $this->start_date_time = $start_date_time;
@@ -120,6 +120,16 @@ class Event extends AbstractModel{
 
     public static function fetch($id): Event{
         return new Event($id);
+    }
+
+    public static function fetchAll(): array {
+        $events = array();
+        $connection = new DatabaseConnection();
+        $stmt = $connection->getConnection()->prepare("SELECT idEvent FROM event");
+        $stmt->execute();
+        foreach($stmt->fetchAll() as $res)
+            array_push($events, new Event($res["idEvent"]));
+        return $events;
     }
 
     /**

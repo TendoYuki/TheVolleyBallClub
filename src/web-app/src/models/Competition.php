@@ -44,7 +44,7 @@ class Competition extends AbstractModel{
      * @return bool True if the addition was successful, else false
      */
     public function addParticipant(int $id): bool {
-        if($this->placesLeft() <= 0 || $this->hasExpired()) return false;
+        if($this->getPlacesLeft() <= 0 || $this->hasExpired()) return false;
 
         $stmt = $this->getConnection()->prepare(
             'INSERT INTO user_has_competition 
@@ -87,7 +87,7 @@ class Competition extends AbstractModel{
      * Returns the number of places left in the competition
      * @return int Places left in the competition
      */
-    public function placesLeft(): int {
+    public function getPlacesLeft(): int {
         return $this->max_participant_competition - count($this->participants);
     }
 
@@ -99,8 +99,39 @@ class Competition extends AbstractModel{
         return time() > (strtotime($this->start_date_time) - Competition::$MAX_TIME_BEFORE_INSCRIPTION);
     }
 
+    public function getId() {
+        return $this->id;
+    }
+
+    public function getStartDateTime(): int {
+        return strtotime($this->start_date_time);
+    }
+
+    public function getEndDateTime(): int {
+        return strtotime($this->end_date_time);
+    }
+
+    public function getLocationId():int {
+        return $this->location_id;
+    }
+
+    public function getParticipantsCount(): int {
+        return count($this->participants);
+    }
+
+
     public static function fetch($id): Competition{
         return new Competition($id);
+    }
+
+    public static function fetchAll(): array {
+        $competitions = array();
+        $connection = new DatabaseConnection();
+        $stmt = $connection->getConnection()->prepare("SELECT idCompetition FROM competition");
+        $stmt->execute();
+        foreach($stmt->fetchAll() as $res)
+            array_push($competitions, new Competition($res["idCompetition"]));
+        return $competitions;
     }
 
     /**

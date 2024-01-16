@@ -6,19 +6,19 @@ use Models\Competition;
 use Models\Training;
 
 class ParticipationController implements IRequestHandler{
-    public static function ParticipateToTraining($user_id, $training_id): bool {
+    public static function ParticipateToTraining(int $user_id, int $training_id): bool {
         $training = Training::fetch($training_id);
         return $training->addParticipant($user_id);
     }
-    public static function WithdrawFromTraining($user_id, $training_id): bool {
+    public static function WithdrawFromTraining(int $user_id, int $training_id): bool {
         $training = Training::fetch($training_id);
         return $training->removeParticipant($user_id);
     }
-    public static function ParticipateToCompetition($user_id, $competition_id): bool {
+    public static function ParticipateToCompetition(int $user_id, int $competition_id): bool {
         $competition = Competition::fetch($competition_id);
         return $competition->addParticipant($user_id);
     }
-    public static function WithdrawFromCompetition($user_id, $competition_id): bool {
+    public static function WithdrawFromCompetition(int $user_id, int $competition_id): bool {
         $competition = Competition::fetch($competition_id);
         return $competition->removeParticipant($user_id);
     }
@@ -49,11 +49,10 @@ class ParticipationController implements IRequestHandler{
                 header("Location: /planning/view/?training_id=$id"); 
                 break;
             case 'competition':
-                header("Location: /planning/view/?match_id=$id"); 
+                header("Location: /planning/view/?competition_id=$id"); 
                 break;
         }
     }
 }
-
 ParticipationController::handleRequest();
 ParticipationController::redirect();

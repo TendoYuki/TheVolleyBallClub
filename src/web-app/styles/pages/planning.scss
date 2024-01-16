@@ -49,7 +49,7 @@
         font-size: 4rem;
         font-weight: 900;
         font-family: $header-font;
-        width: 13ch;
+        width: 15ch;
         // Medium screen style
         @include respond-to('0-to-medium') {
             font-size: 3rem;

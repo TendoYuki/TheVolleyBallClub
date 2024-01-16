@@ -17,6 +17,8 @@ class User extends AbstractModel{
     private int $group_id;
     private int $payment_id;
     private string $image_user;
+    private int | null $id_card_id;
+    private int | null $medical_certificate_id;
     private array $competitions = array();
     private array $trainings = array();
 
@@ -38,7 +40,10 @@ class User extends AbstractModel{
         $this->group_id = $user["Group_idGroup"];
         $this->payment_id = $user["payment_idPayment"];
         $this->image_user = $user["imageUser"];
+        $this->medical_certificate_id = $user["medicalCertificate_id"];
+        $this->id_card_id = $user["idCard_id"];
 
+        
         // Fetches all the competitions the user is subscribed to
         $stmt = $this->getConnection()->prepare('SELECT * FROM user_has_competition WHERE User_idUser=?');
         $stmt->bindValue(1, $id);
@@ -51,11 +56,98 @@ class User extends AbstractModel{
         $stmt->bindValue(1, $id);
         $stmt->execute();
         $trainings = $stmt->fetchAll();
-        foreach($trainings as $training) array_push($this->competitions, $training["Training_idTraining"]);
+        foreach($trainings as $training) array_push($this->trainings, $training["Training_idTraining"]);
     }
 
     public static function fetch($id): User{
         return new User($id);
+    }
+
+    public function getIdCardId() {
+        return $this->id_card_id;
+    }
+
+    public function addIdCard($blob) {
+        $this->id_card_id = IdCard::new($blob);
+
+        $stmt = $this->getConnection()->prepare(
+            'UPDATE user
+            SET idCard_id=?
+            WHERE idUser=?'
+        );
+        $stmt->bindValue(1, $this->id_card_id);
+        $stmt->bindValue(2, $this->id);
+        $stmt->execute();
+    }
+    public function removeIdCard() {
+        IdCard::delete($this->id_card_id);
+
+        $stmt = $this->getConnection()->prepare(
+            'UPDATE user
+            SET idCard_id=NULL
+            WHERE idUser=?'
+        );
+        $stmt->bindValue(1, $this->id);
+        $stmt->execute();
+    }
+
+    public function getMedicalCertificateId() {
+        return $this->medical_certificate_id;
+    }
+
+    public function addMedicalCertificate($blob) {
+        $this->medical_certificate_id = MedicalCertificate::new($blob);
+
+        $stmt = $this->getConnection()->prepare(
+            'UPDATE user
+            SET medicalCertificate_id=?
+            WHERE idUser=?'
+        );
+        $stmt->bindValue(1, $this->medical_certificate_id);
+        $stmt->bindValue(2, $this->id);
+        $stmt->execute();
+        
+    }
+    public function removeMedicalCertificate() {
+        MedicalCertificate::delete($this->medical_certificate_id);
+
+        $stmt = $this->getConnection()->prepare(
+            'UPDATE user
+            SET medicalCertificate_id=NULL
+            WHERE idUser=?'
+        );
+        $stmt->bindValue(1, $this->id);
+        $stmt->execute();
+    }
+
+
+    /**
+     * Changes the validation state of the user's medical
+     * certificatie
+     * @param integer $user_id
+     * @param bool $validation_state true for valid false for invalid 
+     * @return void
+     */
+    public function setValidationStateMedicalCertificate(bool $validation_state) {
+        $medical_certificate = MedicalCertificate::fetch(
+            $this->medical_certificate_id
+        );
+        $medical_certificate->setIsValid($validation_state);
+        $medical_certificate->updateDatabase();
+    }
+
+    /**
+     * Changes the validation state of the user's id card
+     * @param integer $user_id
+     * @param bool $validation_state true for valid false for invalid 
+     * @return void
+     */
+    public function setValidationStateIdCard(bool $validation_state) {
+        $id_card = IdCard::fetch(
+            $this->id_card_id
+        );
+        $id_card->setIsValid($validation_state);
+        $id_card->updateDatabase();
     }
 
     public function getId() {
@@ -193,6 +285,8 @@ class User extends AbstractModel{
             imageUser=?,
             Group_idGroup=?,
             payment_idPayment=?
+            medicalCertificate_id=?
+            idCard_id=?
             WHERE idUser=?'
         );
         $stmt->bindValue(1, $this->name);
@@ -204,7 +298,9 @@ class User extends AbstractModel{
         $stmt->bindValue(7, $this->image_user);
         $stmt->bindValue(8, $this->group_id);
         $stmt->bindValue(9, $this->payment_id);
-        $stmt->bindValue(10, $this->id);
+        $stmt->bindValue(10, $this->medical_certificate_id);
+        $stmt->bindValue(11, $this->id_card_id);
+        $stmt->bindValue(12, $this->id);
         $stmt->execute();
     }
 

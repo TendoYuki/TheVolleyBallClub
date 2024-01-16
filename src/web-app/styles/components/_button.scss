@@ -3,7 +3,12 @@
 .btn{
     width: 10rem;
     height: 2.5rem;
-    transition: transform $short-anim, background-color $short-anim, color $short-anim, box-shadow $short-anim;
+    transition: 
+        transform $short-anim,
+        background-color $short-anim,
+        color $short-anim,
+        filter $short-anim,
+        box-shadow $short-anim;
     border-radius: $rounded-border-radius;
     font-family: $text-font;
     font-weight: 500;
@@ -36,7 +41,7 @@
         border: 0.10rem solid $accent;
         background-color: $accent;
         &:hover, &:focus-within{
-            background-color: $accent-shadow;
+            filter: brightness(0.8);
         }
     }
 
@@ -44,8 +49,9 @@
     &.outline{
         border: 0.1rem solid $accent;
         background-color: transparent;
+        color: $accent;
         &:hover, &:focus-within{
-            background-color: transparent;
+            filter: brightness(0.7);
         }
     }
 }

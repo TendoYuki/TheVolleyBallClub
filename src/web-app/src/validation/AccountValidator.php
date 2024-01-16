@@ -5,6 +5,8 @@ namespace Validation;
 use Exceptions\EmailAlreadyExistsException;
 use Exceptions\EmailFormatException;
 use Exceptions\InvalidImageTypeException;
+use Exceptions\InvalidDocumentTypeException;
+use Exceptions\InvalidDocumentSizeException;
 use Exceptions\InvalidAvatarSizeException;
 use Exceptions\InvalidBirthdateException;
 use Exceptions\InvalidGenderException;
@@ -150,6 +152,25 @@ class AccountValidator {
      * @throws InvalidGroupException If group invalid
      */
     public static function checkValidGroup(int $groupid) {
-        if($groupid !=1 && $groupid != 0) throw new InvalidGroupException();
+        if($groupid !=1 && $groupid != 2) throw new InvalidGroupException();
     }
+
+    /**
+     * Verifies that the document is valid
+     * @param string $document_type type of the document
+     * @throws InvalidDocumentTypeException If document is invalid
+     */
+    public static function checkDocumentType(string $document_type){
+        DocumentValidator::checkDocumentType($document_type);
+    }
+
+    /**
+     * Verifies that the document size does not exeeds 3MB
+     * @param int $document_size Size of the avatar
+     * @throws InvalidDocumentSizeException
+     */
+    public static function checkDocumentSize(int $document_size){
+        if($document_size > 3145728) throw new InvalidDocumentSizeException();
+    }
+
 }

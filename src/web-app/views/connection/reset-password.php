@@ -35,7 +35,7 @@
                         <input type="text" name="email-field" id="email-field" placeholder="Email" form="reset-password-form">
                     </div>
                     <button class="btn filled" type="submit" form="reset-password-form" id="reset-btn">Réinitialiser</button>
-                    <button class="btn" type="submit" form="reset-password-form" id="cancel-btn">Annuler</button>
+                    <button class="btn outline" type="submit" form="reset-password-form" id="cancel-btn">Annuler</button>
                 </form>
             </div>
         </div>

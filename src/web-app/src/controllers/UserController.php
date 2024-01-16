@@ -6,6 +6,7 @@ use Models\User;
 use Exceptions\DisplayableException;
 use Cryptography\PasswordManager;
 use Controllers\AbstractController;
+use Models\IdCard;
 use Validation\AccountValidator;
 
 class UserController extends AbstractController implements IRequestHandler{
@@ -61,6 +62,59 @@ class UserController extends AbstractController implements IRequestHandler{
         User::delete($_POST['id-field']);
     }
 
+    public static function handleMedicalCertificateUpload() {
+        // AccountValidator::checkDocumentType($_FILES["medical-certificate-field"]['type']);
+        // AccountValidator::checkDocumentSize($_FILES["medical-certificate-field"]['size']);
+        $user = User::fetch($_POST['id-field']);
+        if($user->getMedicalCertificateId()) {
+            $medical_certificate = IdCard::fetch($user->getMedicalCertificateId());
+            if($medical_certificate->getIsValid()) {
+                return;
+            } else {
+                $user->removeMedicalCertificate();
+            }
+        }
+
+        $user->addMedicalCertificate(
+            file_get_contents($_FILES["medical-certificate-field"]['tmp_name'])
+        );
+    }
+    public static function handleIdCardUpload() {
+        // AccountValidator::checkDocumentType($_FILES["id-card-field"]['type']);
+        // AccountValidator::checkDocumentSize($_FILES["id-card-field"]['size']);
+        $user = User::fetch($_POST['id-field']);
+        if($user->getIdCardId()) {
+            $id_card = IdCard::fetch($user->getIdCardId());
+            if($id_card->getIsValid()) {
+                return;
+            } else {
+                $user->removeIdCard();
+            }
+        }
+
+        $user->addIdCard(
+            file_get_contents($_FILES["id-card-field"]['tmp_name'])
+        );
+    }
+
+    public static function handleMedicalCertificateDeletion() {
+        User::fetch($_POST['id-field'])->removeMedicalCertificate();
+    }
+    public static function handleIdCardDeletion() {
+        User::fetch($_POST['id-field'])->removeIdCard();
+    }
+
+    public static function handleMedicalCertificateValidation() {
+        User::fetch($_POST['id-field'])->setValidationStateMedicalCertificate(
+            $_POST['medical-certificate-validation-state-field']
+        );
+    }
+    public static function handleIdCardValidation() {
+        User::fetch($_POST['id-field'])->setValidationStateIdCard(
+            $_POST['id-card-validation-state-field']
+        );
+    }
+
     public static function update() {
         try {
             UserController::validate();
@@ -95,7 +149,6 @@ class UserController extends AbstractController implements IRequestHandler{
                     ($_SESSION['userConnect']==$_POST['id-field']) ||
                     (isset($_SESSION['adminConnect']))
                 ) UserController::delete();
-        
                 break;
             case 'update':
                 // Edit only if the user requesting the edition is the one connected
@@ -103,8 +156,31 @@ class UserController extends AbstractController implements IRequestHandler{
                 if(
                     ($_SESSION['userConnect']==$_POST['id-field']) ||
                     (isset($_SESSION['adminConnect']))
-                ) UserController::update();
-        
+                ) UserController::update();        
+                break;
+            case 'upload-medical-certificate':
+                // Upload only if the user requesting the edition is the one connected
+                if(
+                    ($_SESSION['userConnect']==$_POST['id-field'])
+                ) UserController::handleMedicalCertificateUpload();     
+                break;
+            case 'upload-id-card':
+                // Upload only if the user requesting the edition is the one connected
+                if(
+                    ($_SESSION['userConnect']==$_POST['id-field'])
+                ) UserController::handleIdCardUpload();     
+                break;
+            case 'validate-medical-certificate':
+                // Validate only if the user requesting the edition is the admin
+                if(
+                    isset($_SESSION['adminConnect'])
+                ) UserController::handleMedicalCertificateValidation();    
+                break;
+            case 'validate-id-card':
+                // Validate only if the user requesting the edition is the admin
+                if(
+                    isset($_SESSION['adminConnect'])
+                ) UserController::handleIdCardValidation();    
                 break;
         }
     }

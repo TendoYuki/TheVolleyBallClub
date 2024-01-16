@@ -19,14 +19,14 @@
     <?php
         use Components\Navigation\Navbar\Navbar;
         use Components\Navigation\Navbar\NavbarEntry;
-        use Models\Training;
+        use Models\Competition;
         use Models\Location;
         use Models\User;
 
         (new Navbar(NavbarEntry::planning))->display();
 
-        $training = Training::fetch($_GET['training_id']);
-        $location = Location::fetch($training->getLocationId());
+        $competition = Competition::fetch($_GET['competition_id']);
+        $location = Location::fetch($competition->getLocationId());
         $user = isset($_SESSION['userConnect']) ? User::fetch($_SESSION['userConnect']) : null;
 
         $formatter = new IntlDateFormatter(
@@ -35,19 +35,19 @@
             IntlDateFormatter::NONE,
             'Europe/Paris'
         );
-        $training->hasExpired();
+        $competition->hasExpired();
 
-        // Formats the training date to dd/MM/yyyy
-        $date_str = $formatter->format($training->getStartDateTime());
+        // Formats the competition date to dd/MM/yyyy
+        $date_str = $formatter->format($competition->getStartDateTime());
 
-        $s_date_str = date("H:i", $training->getStartDateTime());
-        $e_date_str = date("H:i", $training->getEndDateTime());
+        $s_date_str = date("H:i", $competition->getStartDateTime());
+        $e_date_str = date("H:i", $competition->getEndDateTime());
     ?>
 
     <div class="planning-page">
         <div class="planning-section left">
             <span class="top-bar"></span>
-            <h1>Entrainemant du <?php echo $date_str?></h1>
+            <h1>Compétition du <?php echo $date_str?></h1>
             <div class="inline">
                 <div class="address">
                     <?php echo get_public_file("symbols/map-point-symbol.svg")?>
@@ -63,19 +63,19 @@
                 </div>
             </div>
             <div class="participate">
-                <h2><?php echo $training->getParticipantsCount()?> Participants - <?php echo (($training->getPlacesLeft() <= 0) ? "Aucune" : $training->getPlacesLeft()) ?> Place(s) restantes </h2>
+                <h2><?php echo $competition->getParticipantsCount()?> Participants - <?php echo (($competition->getPlacesLeft() <= 0) ? "Aucune" : $competition->getPlacesLeft()) ?> Place(s) restantes </h2>
                 <?php if(isset($_SESSION['userConnect'])) : ?>
-                    <?php if(!$training->hasExpired() && !$user->isParticipatingToTraining($training->getId()) && $training->getPlacesLeft()>0): ?>
+                    <?php if(!$competition->hasExpired() && !$user->isParticipatingToCompetition($competition->getId()) && $competition->getPlacesLeft()>0): ?>
                         <form action="/planning/participate" method="post">
-                            <input type="hidden" name="type" value="training">
-                            <input type="hidden" name="id" value="<?php echo $training->getId()?>">
+                            <input type="hidden" name="type" value="competition">
+                            <input type="hidden" name="id" value="<?php echo $competition->getId()?>">
                         <input type="hidden" name="action" value="participate">
                             <button type="sumbit" class="btn filled">Je participe</button>
                         </form>
-                    <?php elseif (!$training->hasExpired() && $user->isParticipatingToTraining($training->getId())): ?>
+                    <?php elseif (!$competition->hasExpired() && $user->isParticipatingToCompetition($competition->getId())): ?>
                         <form action="/planning/participate" method="post">
-                            <input type="hidden" name="type" value="training">
-                            <input type="hidden" name="id" value="<?php echo $training->getId()?>">
+                            <input type="hidden" name="type" value="competition">
+                            <input type="hidden" name="id" value="<?php echo $competition->getId()?>">
                             <input type="hidden" name="action" value="stop_participate">
                             <button type="sumbit" class="btn filled">Se desinscrire</button>
                         </form>

@@ -19,6 +19,9 @@
     <?php
         use Components\Navigation\Navbar\Navbar;
         use Components\Navigation\Navbar\NavbarEntry;
+use Models\Competition;
+use Models\Event;
+use Models\Training;
 
         (new Navbar(NavbarEntry::planning))->display();
     ?>
@@ -32,21 +35,25 @@
                 </span>
                 <div class="scroller-fade fade-right">
                     <ul class="inline-scroller">
-                        <li class="bento-box glassy">
-                            <h1>10 Janvier</h1>
-                            <h2>18h00 - 20h00</h2>
-                            <a href="/planning/view/?match_id=1" class="btn outline">En savoir plus</a>
-                        </li>
-                        <li class="bento-box glassy">
-                            <h1>10 Janvier</h1>
-                            <h2>18h00 - 20h00</h2>
-                            <a href="" class="btn outline">En savoir plus</a>
-                        </li>
-                        <li class="bento-box glassy">2</li>
-                        <li class="bento-box glassy">3</li>
-                        <li class="bento-box glassy">4</li>
-                        <li class="bento-box glassy">5</li>
-                        <li class="bento-box glassy">6</li>
+                        <?php
+                            $competitions = Competition::fetchAll();
+                            foreach ($competitions as $competition) {
+                                $s_date_time = new DateTime("@".$competition->getStartDateTime());
+                                $e_date_time = new DateTime("@".$competition->getEndDateTime());
+                                $day = $s_date_time->format('j F');
+                                $start_h = $s_date_time->format('H\hi');
+                                $end_h = $e_date_time->format('H\hi');
+                                $id = $competition->getId();
+                                echo "
+                                    <li class=\"bento-box glassy\">
+                                        <h1>$day</h1>
+                                        <h2>$start_h - $end_h</h2>
+                                        <a href=\"/planning/view/?competition_id=$id\" class=\"btn outline\">En savoir plus</a>
+                                    </li>
+                                ";
+                            }
+                            
+                        ?>
                     </ul>
                 </div>
                 <span class="right-control">
@@ -63,12 +70,61 @@
                 </span>
                 <div class="scroller-fade fade-right">
                     <ul class="inline-scroller">
-                        <li class="bento-box glassy">1</li>
-                        <li class="bento-box glassy">2</li>
-                        <li class="bento-box glassy">3</li>
-                        <li class="bento-box glassy">4</li>
-                        <li class="bento-box glassy">5</li>
-                        <li class="bento-box glassy">6</li>
+                        <?php
+                            $trainings = Training::fetchAll();
+                            foreach ($trainings as $training) {
+                                $s_date_time = new DateTime("@".$training->getStartDateTime());
+                                $e_date_time = new DateTime("@".$training->getEndDateTime());
+                                $day = $s_date_time->format('j F');
+                                $start_h = $s_date_time->format('H\hi');
+                                $end_h = $e_date_time->format('H\hi');
+                                $id = $training->getId();
+                                echo "
+                                    <li class=\"bento-box glassy\">
+                                        <h1>$day</h1>
+                                        <h2>$start_h - $end_h</h2>
+                                        <a href=\"/planning/view/?training_id=$id\" class=\"btn outline\">En savoir plus</a>
+                                    </li>
+                                ";
+                            }
+                            
+                        ?>
+                    </ul>
+                </div>
+                <span class="right-control">
+                    <?php echo get_public_file("symbols/arrow-right-symbol.svg"); ?>
+                </span>
+            </div>
+        </div>
+        <div class="planning-section left">
+            <span class="top-bar"></span>
+            <h1>Prochains Evénements</h1>
+            <div class="scroller-wrapper">
+                <span class="left-control">
+                    <?php echo get_public_file("symbols/arrow-left-symbol.svg"); ?>
+                </span>
+                <div class="scroller-fade fade-right">
+                    <ul class="inline-scroller">
+                        <?php
+                            $events = Event::fetchAll();
+                            foreach ($events as $event) {
+                                $s_date_time = new DateTime("@".$event->getStartDateTime());
+                                $e_date_time = new DateTime("@".$event->getEndDateTime());
+                                $day = $s_date_time->format('j F');
+                                $start_h = $s_date_time->format('H\hi');
+                                $end_h = $e_date_time->format('H\hi');
+                                $id = $event->getId();
+                                $name = $event->getName();
+                                echo "
+                                    <li class=\"bento-box glassy\">
+                                        <h1>$name</h1>
+                                        <h2>$day $start_h - $end_h</h2>
+                                        <a href=\"/planning/view/?event_id=$id\" class=\"btn outline\">En savoir plus</a>
+                                    </li>
+                                ";
+                            }
+                            
+                        ?> 
                     </ul>
                 </div>
                 <span class="right-control">

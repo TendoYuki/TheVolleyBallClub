@@ -86,7 +86,7 @@
                     </div>
                 </div>
                 <div class="btn-wrapper">
-                    <a class="btn" id="cancel-btn" href="/dashboard/members">Retour</a>
+                    <a class="btn filled" id="cancel-btn" href="/dashboard/members">Retour</a>
                 </div>
             </div>
         </div>

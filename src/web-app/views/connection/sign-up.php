@@ -52,11 +52,14 @@
                         <div class="form-section-field">
                             <label for="gender-field">Civilité</label>
                             <div class="field">
-                                <select name="gender-field" id="gender-field" required>
-                                    <option disabled selected value>--</option>
-                                    <option <?php echo(($has_form_data && $form_data["gender-field"] == 1) ? "selected" : "") ?> title="" descGroup="" value="1">Mr.</option>
-                                    <option <?php echo(($has_form_data && $form_data["gender-field"] == 0) ? "selected" : "") ?> title="" descGroup="" value="0">Mme.</option>
-                                </select>
+                                <div class="select-field">
+                                    <select name="gender-field" id="gender-field" required>
+                                        <option disabled selected value>--</option>
+                                        <option <?php echo(($has_form_data && $form_data["gender-field"] == 1) ? "selected" : "") ?> title="" descGroup="" value="1">Mr.</option>
+                                        <option <?php echo(($has_form_data && $form_data["gender-field"] == 0) ? "selected" : "") ?> title="" descGroup="" value="0">Mme.</option>
+                                    </select>
+                                    <?php echo get_public_file("symbols/arrow-right-symbol.svg") ?>
+                                </div>
                             </div>
                         </div>
                         <div class="form-section-field">
@@ -104,27 +107,30 @@
                         <div class="form-section-field">
                             <label for="group-field">Groupe</label>
                             <div class="field">
-                                <select name="group-field" id="group-field" required>
-                                    <option disabled selected value>--------</option>
-                                    <?php
-                                        use Database\DatabaseConnection;
+                                <div class="select-field">
+                                    <select name="group-field" id="group-field" required>
+                                        <option disabled selected value>--------</option>
+                                        <?php
+                                            use Database\DatabaseConnection;
 
-                                        $connection = new DatabaseConnection();
-                                        $stmt = $connection->getConnection()->prepare("SELECT * FROM `group`;");
-                                        $stmt->execute();
-                                        $res = $stmt->fetchAll();
-                                        foreach($res as $cur) {
-                                            echo(
-                                                "<option ".
-                                                (($has_form_data && $form_data["group-field"] == $cur["idGroup"]) ? "selected" : "").
-                                                " title=".$cur["descGroup"].
-                                                " value=".$cur["idGroup"].">".
-                                                $cur["nameGroup"].
-                                                "</option>"
-                                            );
-                                        }
-                                    ?>
-                                </select>
+                                            $connection = new DatabaseConnection();
+                                            $stmt = $connection->getConnection()->prepare("SELECT * FROM `group`;");
+                                            $stmt->execute();
+                                            $res = $stmt->fetchAll();
+                                            foreach($res as $cur) {
+                                                echo(
+                                                    "<option ".
+                                                    (($has_form_data && $form_data["group-field"] == $cur["idGroup"]) ? "selected" : "").
+                                                    " title=".$cur["descGroup"].
+                                                    " value=".$cur["idGroup"].">".
+                                                    $cur["nameGroup"].
+                                                    "</option>"
+                                                );
+                                            }
+                                        ?>
+                                    </select>
+                                    <?php echo get_public_file("symbols/arrow-right-symbol.svg") ?>
+                                </div>
                             </div>
                         </div>
                         <div class="form-section-field">
@@ -169,7 +175,7 @@
                     </div>
                     <div class="btn-wrapper">
                         <button class="btn filled" id="sign-up-btn">S'inscrire</button>
-                        <button class="btn" id="cancel-btn">Annuler</button>
+                        <button class="btn outline" id="cancel-btn">Annuler</button>
                     </div>
                 </form>
                 <div class="other-actions">

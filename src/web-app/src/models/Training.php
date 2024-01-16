@@ -42,7 +42,7 @@ class Training extends AbstractModel{
      * @return bool True if the addition was successful, else false
      */
     public function addParticipant(int $id): bool {
-        if($this->placesLeft() <= 0 || $this->hasExpired()) return false;
+        if($this->getPlacesLeft() <= 0 || $this->hasExpired()) return false;
 
         $stmt = $this->getConnection()->prepare(
             'INSERT INTO user_has_training 
@@ -85,7 +85,7 @@ class Training extends AbstractModel{
      * Returns the number of places left in the training
      * @return int Places left in the training
      */
-    public function placesLeft(): int {
+    public function getPlacesLeft(): int {
         return $this->max_participant_training - count($this->participants);
     }
 
@@ -97,8 +97,38 @@ class Training extends AbstractModel{
         return time() > (strtotime($this->start_date_time) - Training::$MAX_TIME_BEFORE_INSCRIPTION);
     }
 
+    public function getId() {
+        return $this->id;
+    }
+
+    public function getStartDateTime(): int {
+        return strtotime($this->start_date_time);
+    }
+
+    public function getEndDateTime(): int {
+        return strtotime($this->end_date_time);
+    }
+
+    public function getLocationId():int {
+        return $this->location_id;
+    }
+
+    public function getParticipantsCount(): int {
+        return count($this->participants);
+    }
+
     public static function fetch($id): Training{
         return new Training($id);
+    }
+
+    public static function fetchAll(): array {
+        $trainings = array();
+        $connection = new DatabaseConnection();
+        $stmt = $connection->getConnection()->prepare("SELECT idTraining FROM training");
+        $stmt->execute();
+        foreach($stmt->fetchAll() as $res)
+            array_push($trainings, new Training($res["idTraining"]));
+        return $trainings;
     }
 
     /**

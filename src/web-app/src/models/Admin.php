@@ -36,7 +36,6 @@ class Admin extends AbstractModel{
         return $this;
     }
 
-
     public function getLogin() {
         return $this->login;
     }

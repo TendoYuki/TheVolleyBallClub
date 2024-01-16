@@ -5,6 +5,7 @@ use PHPUnit\Framework\TestCase;
 use Exceptions\EmailAlreadyExistsException;
 use Exceptions\EmailFormatException;
 use Exceptions\InvalidImageTypeException;
+use Exceptions\InvalidDocumentSizeException;
 use Exceptions\InvalidAvatarSizeException;
 use Exceptions\InvalidBirthdateException;
 use Exceptions\InvalidGenderException;
@@ -24,6 +25,14 @@ final class AccountValidatorTest extends TestCase {
     public function testCheckInvalidAvatarSize() {
         $this->expectException(InvalidAvatarSizeException::class);
         AccountValidator::checkAvatarSize(3000000);
+    }
+    public function testCheckValidDocumentSize() {
+        $this->expectNotToPerformAssertions();
+        AccountValidator::checkDocumentSize(3024000); 
+    }
+    public function testCheckInvalidDocumentSize() {
+        $this->expectException(InvalidDocumentSizeException::class);
+        AccountValidator::checkDocumentSize(4000000);
     }
     public function testCheckEmailFormat(){
         $this->expectNotToPerformAssertions();

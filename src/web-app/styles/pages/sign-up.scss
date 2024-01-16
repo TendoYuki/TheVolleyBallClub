@@ -54,21 +54,6 @@
             width: 100%;
         }
     }
-    form{
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-        h2{
-            font-family: $text-font;
-            font-weight: 500;
-            font-size: 1.5rem;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-        }
-    }
     
     .btn-wrapper{
         margin-top: 2rem;

@@ -18,19 +18,19 @@ class UserNavbar extends AbstractDashboardNavbar{
                 "link_text" => "Mon profil"
             ),
             UserNavbarEntry::documents->value => array(
-                "symbol" => get_public_file("symbols/user-symbol.svg"),
+                "symbol" => get_public_file("symbols/document-symbol.svg"),
                 "link" => "/dashboard/documents",
                 "link_text" => "Mes documents"
             ),
             UserNavbarEntry::trainings->value => array(
                 "symbol" => get_public_file("symbols/training-symbol.svg"),
                 "link" => "/dashboard/trainings",
-                "link_text" => "Mes Entrainements"
+                "link_text" => "Mes entrainements"
             ),
             UserNavbarEntry::competitions->value => array(
                 "symbol" => get_public_file("symbols/competition-symbol.svg"),
                 "link" => "/dashboard/competitions",
-                "link_text" => "Mes Competitions"
+                "link_text" => "Mes compétitions"
             )
         ));
     }
