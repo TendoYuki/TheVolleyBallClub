@@ -31,6 +31,7 @@ class DashboardRouter extends AbstractRouter{
         $this->newRoute('/profile/edit/submit', '@Controllers/AdminController.php', AuthorizationLevel::Admin);
         $this->newRoute('/profile/edit-password', '@Views/dashboard/admin/edit-password.php', AuthorizationLevel::Admin);
         $this->newRoute('/profile/edit-password/submit', '@Controllers/AdminController.php', AuthorizationLevel::Admin);
+        $this->newRoute('/documents/validate', '@Controllers/UserController.php', AuthorizationLevel::Admin);
         $this->newRoute('/members', '@Views/dashboard/admin/members/members.php', AuthorizationLevel::Admin);
         $this->newRoute('/members/view', '@Views/dashboard/admin/members/view.php', AuthorizationLevel::Admin);
         $this->newRoute('/members/edit', '@Views/dashboard/admin/members/edit.php', AuthorizationLevel::Admin);

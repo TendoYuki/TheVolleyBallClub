@@ -4,7 +4,7 @@
     margin: auto;
     margin-top: 1rem;
     margin-bottom: 5rem;
-    width: 80%;
+    width: 90%;
     max-width: 70rem;
     // Mobile style
     @include respond-to('0-to-small') {
@@ -64,13 +64,7 @@
             text-align: left;
         }
     }
-    .entry-img-display{
-        height: 7rem;
-        aspect-ratio: 1/1;
-        border-radius: 50%;
-        object-fit: cover;
-    }
-    .btn-wrapper{
+    >.btn-wrapper, form > .btn-wrapper, .entry-infos-wrapper > .btn-wrapper{
         margin-top: 2rem;
         .btn{
             min-width: 6rem;
@@ -87,6 +81,12 @@
         @include respond-to('0-to-small') {
             width: 100%
         }
+    }
+    .entry-img-display{
+        height: 7rem;
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+        object-fit: cover;
     }
     // Mobile style
     @include respond-to('0-to-small') {

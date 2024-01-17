@@ -70,13 +70,13 @@ class IdCard extends AbstractModel{
             SET `idCard`=?,
             `type`=?,
             `fileName`=?,
-            `valid`=?
+            `valid`=b?
             WHERE idCardId=?'
         );
         $stmt->bindValue(1, $this->blob);
         $stmt->bindValue(2, $this->type);
         $stmt->bindValue(3, $this->file_name);
-        $stmt->bindValue(4, $this->is_valid);
+        $stmt->bindValue(4, boolval($this->is_valid));
         $stmt->bindValue(5, $this->id);
         $stmt->execute();
     }

@@ -70,7 +70,7 @@ class MedicalCertificate extends AbstractModel{
             SET medicalCertificate=?,
             `type`=?,
             `fileName`=?,
-            `valid`=?
+            `valid`=b?
             WHERE medicalCertificateId=?'
         );
         $stmt->bindValue(1, $this->blob);

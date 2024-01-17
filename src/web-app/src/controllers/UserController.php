@@ -128,13 +128,13 @@ class UserController extends AbstractController implements IRequestHandler{
     }
 
     public static function handleMedicalCertificateValidation() {
-        User::fetch($_POST['id-field'])->setValidationStateMedicalCertificate(
-            $_POST['medical-certificate-validation-state-field']
+        User::fetch($_GET['user'])->setValidationStateMedicalCertificate(
+            $_GET['action'] == "validate" ? true : ($_GET['action'] == "invalidate" ? false : null)
         );
     }
     public static function handleIdCardValidation() {
-        User::fetch($_POST['id-field'])->setValidationStateIdCard(
-            $_POST['id-card-validation-state-field']
+        User::fetch($_GET['user'])->setValidationStateIdCard(
+            $_GET['action'] == "validate" ? true : ($_GET['action'] == "invalidate" ? false : null)
         );
     }
 
@@ -229,24 +229,30 @@ class UserController extends AbstractController implements IRequestHandler{
                     ($_SESSION['userConnect']==$_POST['id-field'])
                 ) UserController::handleIdCardUpload();     
                 break;
-            case 'validate-medical-certificate':
-                // Validate only if the user requesting the edition is the admin
-                if(
-                    isset($_SESSION['adminConnect'])
-                ) UserController::handleMedicalCertificateValidation();    
-                break;
-            case 'validate-id-card':
-                // Validate only if the user requesting the edition is the admin
-                if(
-                    isset($_SESSION['adminConnect'])
-                ) UserController::handleIdCardValidation();    
-                break;
             case 'change-password':
                 // Edit only if the admin requesting the edition is the one connected
                 if(!($_SESSION['userConnect'] == $_POST['id-field']))  {
                     header("Location: /"); 
                 } UserController::changePassword();
                 break;
+        }
+        switch($_GET["action"]){
+            case 'invalidate':
+            case 'validate':
+                switch($_GET["document"]){
+                    case 'medicalCertificate':
+                        // Validate only if the user requesting the edition is the admin
+                        if(
+                            isset($_SESSION['adminConnect'])
+                        ) UserController::handleMedicalCertificateValidation();    
+                        break;
+                    case 'idCard':
+                        // Validate only if the user requesting the edition is the admin
+                        if(
+                            isset($_SESSION['adminConnect'])
+                        ) UserController::handleIdCardValidation();    
+                        break;
+                }   
         }
     }
     public static function redirect() {
@@ -262,6 +268,9 @@ class UserController extends AbstractController implements IRequestHandler{
         }
         else if (isset($_POST["redirect-success"])) {
             header('Location: '.$_POST["redirect-success"]);
+        }
+        else if (isset($_GET["redirect"])) {
+            header('Location: '.$_GET["redirect"]);
         }
         else header('Location: /');
     }
