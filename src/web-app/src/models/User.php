@@ -175,9 +175,17 @@ class User extends AbstractModel{
     public function getPassword() {
         return $this->password;
     }
-    public function setPassword(string $password): User {
+
+    public function changePassword(string $password) {
         $this->password = $password;
-        return $this;
+        $stmt = $this->getConnection()->prepare(
+            'UPDATE `user`
+            SET passwordUser=?
+            WHERE idUser=?'
+        );
+        $stmt->bindValue(1, $this->password);
+        $stmt->bindValue(2, $this->id);
+        $stmt->execute();
     }
 
 
@@ -278,7 +286,6 @@ class User extends AbstractModel{
             'UPDATE user
             SET nameUser=?,
             surnameUser=?,
-            passwordUser=?,
             emailUser=?,
             birthdateUser=?,
             gender=?,
@@ -291,16 +298,15 @@ class User extends AbstractModel{
         );
         $stmt->bindValue(1, $this->name);
         $stmt->bindValue(2, $this->surname);
-        $stmt->bindValue(3, $this->password);
-        $stmt->bindValue(4, $this->email);
-        $stmt->bindValue(5, $this->birthdate);
-        $stmt->bindValue(6, $this->gender);
-        $stmt->bindValue(7, $this->image_user);
-        $stmt->bindValue(8, $this->group_id);
-        $stmt->bindValue(9, $this->payment_id);
-        $stmt->bindValue(10, $this->medical_certificate_id);
-        $stmt->bindValue(11, $this->id_card_id);
-        $stmt->bindValue(12, $this->id);
+        $stmt->bindValue(3, $this->email);
+        $stmt->bindValue(4, $this->birthdate);
+        $stmt->bindValue(5, $this->gender);
+        $stmt->bindValue(6, $this->image_user);
+        $stmt->bindValue(7, $this->group_id);
+        $stmt->bindValue(8, $this->payment_id);
+        $stmt->bindValue(9, $this->medical_certificate_id);
+        $stmt->bindValue(10, $this->id_card_id);
+        $stmt->bindValue(11, $this->id);
         $stmt->execute();
     }
 

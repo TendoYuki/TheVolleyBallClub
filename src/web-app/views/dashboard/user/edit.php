@@ -13,8 +13,6 @@
     <link rel="stylesheet" href="/css/dashboard.css">
     <script src="/js/glassEffect.js" defer></script>
     <script src="/js/preload.js"></script>
-    <script defer src="/js/pageControls.js"></script>
-    <script defer src="/js/searchControls.js"></script>
     <script defer src="/js/userControls.js"></script>
     <script defer src="/js/avatarField.js"></script>
 </head>

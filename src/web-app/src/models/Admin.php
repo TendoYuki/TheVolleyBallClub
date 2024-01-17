@@ -31,9 +31,16 @@ class Admin extends AbstractModel{
     public function getPassword() {
         return $this->password;
     }
-    public function setPassword(string $password): Admin {
+    public function changePassword(string $password) {
         $this->password = $password;
-        return $this;
+        $stmt = $this->getConnection()->prepare(
+            'UPDATE admin
+            SET passwordAdmin=?
+            WHERE idAdmin=?'
+        );
+        $stmt->bindValue(1, $this->password);
+        $stmt->bindValue(2, $this->id);
+        $stmt->execute();
     }
 
     public function getLogin() {
@@ -46,14 +53,12 @@ class Admin extends AbstractModel{
 
     public function updateDatabase() {
         $stmt = $this->getConnection()->prepare(
-            'UPDATE user
-            SET loginAdmin=?,
-            passwordAdmin=?,
-            WHERE idUser=?'
+            'UPDATE admin
+            SET loginAdmin=?
+            WHERE idAdmin=?'
         );
         $stmt->bindValue(1, $this->login);
-        $stmt->bindValue(2, $this->password);
-        $stmt->bindValue(3, $this->id);
+        $stmt->bindValue(2, $this->id);
         $stmt->execute();
     }
 
@@ -67,7 +72,7 @@ class Admin extends AbstractModel{
     ) {
         $connection = new DatabaseConnection();
         $stmt = $connection->getConnection()->prepare(
-            'INSERT INTO user (
+            'INSERT INTO admin (
                 loginAdmin,
                 passwordAdmin 	
             ) 

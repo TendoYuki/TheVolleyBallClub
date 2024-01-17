@@ -21,16 +21,13 @@
     <?php
         use Components\Navigation\Navbar\Navbar;
         use Components\Navigation\Navbar\NavbarEntry;
+        use Components\Navigation\Dashboard\AdminNavbar;
+        use Components\Navigation\Dashboard\AdminNavbarEntry;
         
         (new Navbar(NavbarEntry::dashboard))->display();
     ?>
     <div class="dashboard-wrapper">
-        <?php    
-            use Components\Navigation\Dashboard\AdminNavbar;
-            use Components\Navigation\Dashboard\AdminNavbarEntry;
-            
-            (new AdminNavbar(AdminNavbarEntry::accounts))->display();
-        ?>
+        <?php (new AdminNavbar(AdminNavbarEntry::accounts))->display(); ?>
         <div class="bento-box glassy dashboard-box">
             <div class="dashboard">
                 <h1>Membres</h1>

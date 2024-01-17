@@ -17,6 +17,8 @@
     <?php
         use Components\Navigation\Navbar\Navbar;
         use Components\Navigation\Navbar\NavbarEntry;
+        use Components\Navigation\Dashboard\AdminNavbar;
+        use Components\Navigation\Dashboard\AdminNavbarEntry;
         use Models\Group;
         use Models\User;
 
@@ -25,6 +27,7 @@
         $user = User::fetch($_GET['user']);
     ?>
     <div class="bento-box glassy entry-display-box">
+        <?php (new AdminNavbar(AdminNavbarEntry::accounts))->display(); ?>
         <div class="entry-display">
             <div class="entry-infos-wrapper">
                 <div class="inline">
@@ -76,8 +79,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="btn-wrapper">
-                    <a class="btn filled" id="cancel-btn" href="/dashboard/members">Retour</a>
+                <div class="btn-wrapper inline">
+                    <a class="btn filled" id="edit-btn" href="/dashboard/members/edit/?user=<?php echo ($user->getId());?>">Editer</a>
+                    <a class="btn outline" id="cancel-btn" href="/dashboard/members">Retour</a>
                 </div>
             </div>
         </div>

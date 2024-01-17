@@ -2,10 +2,13 @@
 
 namespace Controllers;
 
+use Authorization\Authenticator;
+use Authorization\AuthorizationLevel;
 use Models\User;
 use Exceptions\DisplayableException;
 use Cryptography\PasswordManager;
 use Controllers\AbstractController;
+use Exceptions\InvalidPasswordException;
 use Models\IdCard;
 use Validation\AccountValidator;
 
@@ -149,6 +152,30 @@ class UserController extends AbstractController implements IRequestHandler{
             $_SESSION['form-data'] = $_POST;            
         }
     }
+
+    public static function changePassword() {
+        try {
+            $user = User::fetch($_POST['id-field']);
+            
+            switch(Authenticator::authenticate($user->getEmail(), PasswordManager::hash($_POST['old-password-field']))) {
+                case AuthorizationLevel::User:
+                    break;
+                default:
+                    throw new InvalidPasswordException();
+            }
+
+            AccountValidator::checkPasswordStrength($_POST['password-field']);
+            
+            $user
+                ->changePassword(PasswordManager::hash($_POST['password-field']));
+                
+        } catch(DisplayableException $e) {
+            $_SESSION["error"] = $e->getErrorCode();
+    
+            // Sends back the form's data to refill the form
+            $_SESSION['form-data'] = $_POST;
+        }
+    }
     public static function handleRequest(): void {
         switch($_POST["action"]) {
             case 'create':
@@ -194,6 +221,12 @@ class UserController extends AbstractController implements IRequestHandler{
                     isset($_SESSION['adminConnect'])
                 ) UserController::handleIdCardValidation();    
                 break;
+            case 'change-password':
+                // Edit only if the admin requesting the edition is the one connected
+                if(!($_SESSION['userConnect'] == $_POST['id-field']))  {
+                    header("Location: /"); 
+                } UserController::changePassword();
+                break;
         }
     }
     public static function redirect() {
@@ -204,12 +237,14 @@ class UserController extends AbstractController implements IRequestHandler{
                 header('Location: /');
             }
         }
+        else if (isset($_POST["redirect-delete"]) && $_POST["action"]=='delete') {
+            header('Location: '.$_POST["redirect-delete"]);
+        }
         else if (isset($_POST["redirect-success"])) {
             header('Location: '.$_POST["redirect-success"]);
         }
         else header('Location: /');
     }
 }
-
 UserController::handleRequest();
 UserController::redirect();

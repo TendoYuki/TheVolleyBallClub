@@ -86,8 +86,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="btn-wrapper">
+                    <div class="btn-wrapper inline">
                         <a class="btn filled" id="edit-btn" href="/dashboard/profile/edit">Editer</a>
+                        <a class="btn outline" id="change-password-btn" href="/dashboard/profile/edit-password">Changer mot de passe</a>
                     </div>
                 </div>
             </div>
