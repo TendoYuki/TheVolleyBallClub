@@ -66,6 +66,23 @@ class LocationController extends AbstractController implements IRequestHandler{
         }
     }
     public static function redirect() {
+        if(isset($_SESSION["error"])) {
+            if(isset($_POST["redirect-error"])) {
+                header('Location: '.$_POST["redirect-error"]);
+            } else {
+                header('Location: /');
+            }
+        }
+        else if (isset($_POST["redirect-delete"]) && $_POST["action"]=='delete') {
+            header('Location: '.$_POST["redirect-delete"]);
+        }
+        else if (isset($_POST["redirect-success"])) {
+            header('Location: '.$_POST["redirect-success"]);
+        }
+        else if (isset($_GET["redirect"])) {
+            header('Location: '.$_GET["redirect"]);
+        }
+        else header('Location: /');
     }
 }
 

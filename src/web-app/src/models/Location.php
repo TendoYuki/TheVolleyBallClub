@@ -71,7 +71,7 @@ class Location extends AbstractModel{
             postCodeLocation=?,
             addressLocation=?,
             nameLocation=? 	
-            WHERE idPartner=?'
+            WHERE idLocation=?'
         );
         $stmt->bindValue(1, $this->city);
         $stmt->bindValue(2, $this->post_code);

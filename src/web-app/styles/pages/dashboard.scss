@@ -120,34 +120,38 @@
             border: var(--small-border) solid #3a3a3a;
             transition: background-color $medium-anim;
             width: 100%;
-            height: 4rem;
+            min-height: 4rem;
             align-items: center;
             cursor: pointer;
             margin-bottom: 1rem;
+            padding: 1rem;
             flex-direction: row;
             .entry-image{
-                height: 80%;
+                height: 3rem;
                 aspect-ratio: 1/1;
                 border-radius: 50%;
-                margin-left: 0.5rem;
+                margin-right: 1rem;
                 object-fit: cover;
             }
             .entry-infos{
                 display: flex;
                 flex-direction: column;
-                margin: 0px auto 0px 1.5rem;
+                // margin: 0px 1.5rem 0px 1.5rem;
+                overflow-x: hidden;
                 h1{
                     font-family: $text-font;
                     font-weight: 500;
                     font-size: 1.2rem;
                     margin: 0;
                     margin-bottom: 0.1rem;
+                    width: 100%;
                 }
                 h2{
                     font-family: $text-font;
                     font-weight: 400;
                     font-size: 0.8rem;
                     margin: 0;
+                    width: 100%;
                 }
             }
             .user-actions{
@@ -156,8 +160,11 @@
             &:hover{
                 background-color: $accent;
             }
+    
         }
-
+        .location-display{
+            min-height: 7rem;
+        }
         // Pagination controls (prev, next)
         .page-control{
             a{

@@ -43,5 +43,12 @@ class DashboardRouter extends AbstractRouter{
         $this->newRoute('/partners/view', '@Views/dashboard/admin/partners/view.php', AuthorizationLevel::Admin);
         $this->newRoute('/partners/edit', '@Views/dashboard/admin/partners/edit.php', AuthorizationLevel::Admin);
         $this->newRoute('/partners/edit/submit', '@Controllers/PartnerController.php', AuthorizationLevel::Admin);
+
+        $this->newRoute('/locations', '@Views/dashboard/admin/locations/locations.php', AuthorizationLevel::Admin);
+        $this->newRoute('/locations/create', '@Views/dashboard/admin/locations/create.php', AuthorizationLevel::Admin);
+        $this->newRoute('/locations/create/submit', '@Controllers/LocationController.php', AuthorizationLevel::Admin);
+        $this->newRoute('/locations/view', '@Views/dashboard/admin/locations/view.php', AuthorizationLevel::Admin);
+        $this->newRoute('/locations/edit', '@Views/dashboard/admin/locations/edit.php', AuthorizationLevel::Admin);
+        $this->newRoute('/locations/edit/submit', '@Controllers/LocationController.php', AuthorizationLevel::Admin);
     }
 }
