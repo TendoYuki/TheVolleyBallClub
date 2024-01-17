@@ -19,6 +19,11 @@ body{
 
     }
 }
+
+:root{
+    --small-border: 1px;
+}
+
 /*
     Used to prevent unwanted start transition of elements at page load
     Must be removed by JS on page load
@@ -30,4 +35,18 @@ body{
     -o-transition: none !important;
     transition: none !important;
     opacity: 0 !important;
+}
+
+@media (min-width: 2000px) {
+    :root{
+        --small-border: 2px;
+        font-size: 20px;
+    }
+}
+
+@media (min-width: 3000px) {
+    :root{
+        --small-border: 3px;
+        font-size: 30px;
+    }
 }

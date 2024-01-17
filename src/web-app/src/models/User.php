@@ -67,8 +67,8 @@ class User extends AbstractModel{
         return $this->id_card_id;
     }
 
-    public function addIdCard($blob) {
-        $this->id_card_id = IdCard::new($blob);
+    public function addIdCard($blob, $type, $file_name) {
+        $this->id_card_id = IdCard::new($blob, $type, $file_name);
 
         $stmt = $this->getConnection()->prepare(
             'UPDATE user
@@ -80,8 +80,6 @@ class User extends AbstractModel{
         $stmt->execute();
     }
     public function removeIdCard() {
-        IdCard::delete($this->id_card_id);
-
         $stmt = $this->getConnection()->prepare(
             'UPDATE user
             SET idCard_id=NULL
@@ -89,14 +87,17 @@ class User extends AbstractModel{
         );
         $stmt->bindValue(1, $this->id);
         $stmt->execute();
+
+        IdCard::delete($this->id_card_id);
+        $this->id_card_id = null;
     }
 
     public function getMedicalCertificateId() {
         return $this->medical_certificate_id;
     }
 
-    public function addMedicalCertificate($blob) {
-        $this->medical_certificate_id = MedicalCertificate::new($blob);
+    public function addMedicalCertificate($blob, $type, $file_name) {
+        $this->medical_certificate_id = MedicalCertificate::new($blob, $type, $file_name);
 
         $stmt = $this->getConnection()->prepare(
             'UPDATE user
@@ -109,8 +110,6 @@ class User extends AbstractModel{
         
     }
     public function removeMedicalCertificate() {
-        MedicalCertificate::delete($this->medical_certificate_id);
-
         $stmt = $this->getConnection()->prepare(
             'UPDATE user
             SET medicalCertificate_id=NULL
@@ -118,6 +117,9 @@ class User extends AbstractModel{
         );
         $stmt->bindValue(1, $this->id);
         $stmt->execute();
+
+        MedicalCertificate::delete($this->medical_certificate_id);
+        $this->medical_certificate_id = null;
     }
 
 

@@ -6,7 +6,25 @@ use Database\DatabaseConnection;
 class MedicalCertificate extends AbstractModel{
     private int $id;
     private string $blob;
-    private bool $is_valid;
+    private bool | null $is_valid;
+    private string $type;
+    private string $file_name;
+
+    public function getType() {
+        return $this->type;
+    }
+    public function setType($type) {
+        $this->type = $type;
+        return $this;
+    }
+
+    public function getFileName() {
+        return $this->file_name;
+    }
+    public function setFileName($file_name) {
+        $this->file_name = $file_name;
+        return $this;
+    }
 
     private function __construct($id){
         parent::__construct();
@@ -17,6 +35,8 @@ class MedicalCertificate extends AbstractModel{
         $medical_certificate = $stmt->fetch();
 
         $this->blob = $medical_certificate["medicalCertificate"];
+        $this->type = $medical_certificate["type"];
+        $this->file_name = $medical_certificate["fileName"];
         $this->is_valid = $medical_certificate["valid"];
     }
 
@@ -36,7 +56,7 @@ class MedicalCertificate extends AbstractModel{
         return $this;
     }
 
-    public function getIsValid() {
+    public function getIsValid(): bool | null  {
         return $this->is_valid;
     }
     public function setIsValid(bool $is_valid): MedicalCertificate {
@@ -48,12 +68,16 @@ class MedicalCertificate extends AbstractModel{
         $stmt = $this->getConnection()->prepare(
             'UPDATE medicalCertificate
             SET medicalCertificate=?,
-            valid=?
+            `type`=?,
+            `fileName`=?,
+            `valid`=?
             WHERE medicalCertificateId=?'
         );
         $stmt->bindValue(1, $this->blob);
-        $stmt->bindValue(2, $this->is_valid);
-        $stmt->bindValue(3, $this->id);
+        $stmt->bindValue(2, $this->type);
+        $stmt->bindValue(3, $this->file_name);
+        $stmt->bindValue(4, $this->is_valid);
+        $stmt->bindValue(5, $this->id);
         $stmt->execute();
     }
 
@@ -62,17 +86,23 @@ class MedicalCertificate extends AbstractModel{
      * @return int id of the new entry
      */
     public static function new(
-        string $blob
+        string $blob,
+        string $type,
+        string $file_name
     ) {
         $connection = new DatabaseConnection();
         $stmt = $connection->getConnection()->prepare(
             'INSERT INTO medicalCertificate (
                 medicalCertificate,
+                `type`,
+                `fileName`,
                 valid
             ) 
-            VALUES (?,NULL)'
+            VALUES (?,?,?,NULL)'
         );
         $stmt->bindValue(1, $blob);
+        $stmt->bindValue(2, $type);
+        $stmt->bindValue(3, $file_name);
 
         $stmt->execute();
         return $connection->getConnection()->lastInsertId();

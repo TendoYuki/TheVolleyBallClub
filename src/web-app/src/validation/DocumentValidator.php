@@ -5,7 +5,7 @@ namespace Validation;
 use Exceptions\InvalidDocumentTypeException;
 
 class DocumentValidator {
-    private static $valid_doc_types = ["application/pdf image/jpeg image/jpg image/png image/jpeg"];
+    private static $valid_doc_types = ["application/pdf", "image/jpeg", "image/jpg", "image/png", "image/jpeg"];
     
     /**
      * Verifies that the document type is valid

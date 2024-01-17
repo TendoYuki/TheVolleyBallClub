@@ -10,6 +10,7 @@ use Cryptography\PasswordManager;
 use Controllers\AbstractController;
 use Exceptions\InvalidPasswordException;
 use Models\IdCard;
+use Models\MedicalCertificate;
 use Validation\AccountValidator;
 
 class UserController extends AbstractController implements IRequestHandler{
@@ -66,38 +67,57 @@ class UserController extends AbstractController implements IRequestHandler{
     }
 
     public static function handleMedicalCertificateUpload() {
-        // AccountValidator::checkDocumentType($_FILES["medical-certificate-field"]['type']);
-        // AccountValidator::checkDocumentSize($_FILES["medical-certificate-field"]['size']);
-        $user = User::fetch($_POST['id-field']);
-        if($user->getMedicalCertificateId()) {
-            $medical_certificate = IdCard::fetch($user->getMedicalCertificateId());
-            if($medical_certificate->getIsValid()) {
-                return;
-            } else {
-                $user->removeMedicalCertificate();
+        try {
+            AccountValidator::checkDocumentType($_FILES["medical-certificate-field"]['type']);
+            AccountValidator::checkDocumentSize($_FILES["medical-certificate-field"]['size']);
+            $user = User::fetch($_POST['id-field']);
+            if(!is_null($user->getMedicalCertificateId())) {
+                $medical_certificate = MedicalCertificate::fetch($user->getMedicalCertificateId());
+                if($medical_certificate->getIsValid()) {
+                    return;
+                } else {
+                    $user->removeMedicalCertificate();
+                }
             }
-        }
 
-        $user->addMedicalCertificate(
-            file_get_contents($_FILES["medical-certificate-field"]['tmp_name'])
-        );
+            $user->addMedicalCertificate(
+                file_get_contents($_FILES["medical-certificate-field"]['tmp_name']),
+                $_FILES["medical-certificate-field"]['type'],
+                $_FILES["medical-certificate-field"]['name']
+            );
+        } catch(DisplayableException $e) {
+            $_SESSION["error"] = $e->getErrorCode();
+
+            // Sends back the form's data to refill the form
+            $_SESSION['form-data'] = $_POST;            
+        }
     }
     public static function handleIdCardUpload() {
-        // AccountValidator::checkDocumentType($_FILES["id-card-field"]['type']);
-        // AccountValidator::checkDocumentSize($_FILES["id-card-field"]['size']);
-        $user = User::fetch($_POST['id-field']);
-        if($user->getIdCardId()) {
-            $id_card = IdCard::fetch($user->getIdCardId());
-            if($id_card->getIsValid()) {
-                return;
-            } else {
-                $user->removeIdCard();
+        try {
+            var_dump($_FILES["id-card-field"]);
+            AccountValidator::checkDocumentType($_FILES["id-card-field"]['type']);
+            AccountValidator::checkDocumentSize($_FILES["id-card-field"]['size']);
+            $user = User::fetch($_POST['id-field']);
+            if(!is_null($user->getIdCardId())) {
+                $id_card = IdCard::fetch($user->getIdCardId());
+                if($id_card->getIsValid()) {
+                    return;
+                } else {
+                    $user->removeIdCard();
+                }
             }
-        }
 
-        $user->addIdCard(
-            file_get_contents($_FILES["id-card-field"]['tmp_name'])
-        );
+            $user->addIdCard(
+                file_get_contents($_FILES["id-card-field"]['tmp_name']),
+                $_FILES["id-card-field"]['type'],
+               $_FILES["id-card-field"]['name']
+            );
+        } catch(DisplayableException $e) {
+            $_SESSION["error"] = $e->getErrorCode();
+    
+            // Sends back the form's data to refill the form
+            $_SESSION['form-data'] = $_POST;            
+        }
     }
 
     public static function handleMedicalCertificateDeletion() {

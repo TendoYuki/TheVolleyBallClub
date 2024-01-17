@@ -1,0 +1,182 @@
+@import "@Styles/abstracts";
+
+.document-table{
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 5rem;
+    overflow: hidden;
+    // Small screen
+    @include respond-to('0-to-medium') {
+        flex-direction: row;
+    }
+    thead{
+        width: 100%;
+        // Small screen
+        @include respond-to('0-to-medium') {
+            width: 50%;
+        }
+    }
+    tr{
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-direction: row;
+        // Small screen
+        @include respond-to('0-to-medium') {
+            flex-direction: column;
+        }
+    }
+    tbody{
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-direction: column;
+        // Small screen
+        @include respond-to('0-to-medium') {
+            flex-direction: row;
+        }
+        // Small screen
+        @include respond-to('0-to-medium') {
+            width: 50%;
+        }
+    }
+    td{
+        // Small screen
+        @include respond-to('0-to-medium') {
+            height: unset;
+        }
+    }
+    td,th{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        height: 4.5rem;
+        padding: 1rem;
+        border: calc(var(--small-border)*1.5) solid white;
+        // Small screen
+        @include respond-to('0-to-medium') {
+            width: 100%;
+        }
+    }
+    td{
+        overflow: hidden;
+        // Small screen
+        @include respond-to('medium-to-inf') {
+            height: 12rem;
+        }
+    }
+    th{
+        text-align: center;
+        font-weight: 800;
+        font-size: 1.2rem;
+        font-family: $header-font;
+        // Small screen
+        @include respond-to('0-to-medium') {
+            overflow-wrap: break-word;
+        }
+    }
+    .name{
+        min-width: 14rem;
+        // Small screen
+        @include respond-to('0-to-medium') {
+            min-width: unset;
+        }
+    }
+    .document{
+        min-width: 9rem;
+        max-width: 9rem;
+        overflow-x: hidden;
+        justify-content: flex-start;
+        &th{
+            justify-content: center;
+        }
+        a{
+            max-width: 9rem;
+            overflow-x: hidden;
+        }
+        // Small screen
+        @include respond-to('0-to-medium') {
+            max-width: unset;
+            min-width: unset;
+        }
+    }
+
+    th.document{
+        justify-content: center;
+    }
+    .size{
+        min-width: 8rem;
+        // Small screen
+        @include respond-to('0-to-medium') {
+            min-width: unset;
+        }
+    }
+    .validation{
+        min-width: 10rem;
+        // Small screen
+        @include respond-to('0-to-medium') {
+            min-width: unset;
+        }
+    }
+    .actions{
+        min-width: 15rem;
+        flex: 1;
+        // Small screen
+        @include respond-to('0-to-medium') {
+            flex: unset;
+            min-width: unset;
+            padding: 0.5rem;
+            height: 9rem;
+        }
+    }
+    .btn-wrapper.inline, .btn-wrapper.inline form{
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        justify-content: space-around;
+        .btn{
+            flex: 1;
+            margin: 0.5rem 1rem;
+            padding: 0.5rem 0.5rem;
+            width: unset;
+            // Small screen
+            @include respond-to('0-to-medium') {
+                margin: 0 0 0.5rem 0;
+                font-size: 0.9rem;
+                padding: 0.5rem 0.5rem;
+                width: 100%;
+                &:last-child{
+                    margin: 0rem;
+                }
+            }
+        }
+        // Small screen
+        @include respond-to('0-to-medium') {
+            flex-direction: column;
+            flex-wrap: nowrap;
+        }
+    }
+    &:has(~.document-table){
+        // Small screen
+        @include respond-to('medium-to-inf') {
+            margin-bottom: 0rem;
+        }
+    }
+    &~.document-table{
+        thead{
+            // Small screen
+            @include respond-to('medium-to-inf') {
+                display: none;
+            }
+        }
+    }
+}

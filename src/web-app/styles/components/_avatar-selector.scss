@@ -72,7 +72,7 @@
         right: -0.4rem;
         padding: 0.25rem;
         background: $accent;
-        border: 1px solid $accent;
+        border: var(--small-border) solid $accent;
         transform: translateX(0%) translateY(0%);
         &::before{
             background: url("/public/symbols/pen-symbol.svg");

@@ -63,7 +63,7 @@
             width: calc(100% - 1rem);
             padding: 0.5rem;
             position: relative;
-            border: 0.05rem solid #3a3a3a;
+            border: var(--small-border) solid #3a3a3a;
             border-radius: $rounded-border-radius;
             input{
                 width: 100%;
@@ -111,7 +111,7 @@
             display: flex;
             border-radius: $rounded-border-radius;
             // background-color: rgb(230, 230, 230);
-            border: 0.05rem solid #3a3a3a;
+            border: var(--small-border) solid #3a3a3a;
             transition: background-color $medium-anim;
             width: 100%;
             height: 4rem;

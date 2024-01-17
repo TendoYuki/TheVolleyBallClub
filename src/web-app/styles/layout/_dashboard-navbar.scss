@@ -127,9 +127,9 @@ ul.dashboard-navbar{
         top: 50%;
         transform: translateY(-50%);
         box-shadow: 2px 0px 10px 5px rgba(255, 255, 255, 0.11);
-        border-top: 1px solid white;
-        border-right: 1px solid white;
-        border-bottom: 1px solid white;
+        border-top: var(--small-border) solid white;
+        border-right: var(--small-border) solid white;
+        border-bottom: var(--small-border) solid white;
         overflow-x: hidden;
         border-top-right-radius: $rounded-border-radius;
         border-bottom-right-radius: $rounded-border-radius;

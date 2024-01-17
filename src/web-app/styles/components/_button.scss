@@ -38,7 +38,7 @@
 
     // If the button has a solid background with the borders
     &.filled{
-        border: 0.10rem solid $accent;
+        border: var(--small-border) solid $accent;
         background-color: $accent;
         &:hover, &:focus-within{
             filter: brightness(0.8);
@@ -47,11 +47,24 @@
 
     // If the button only has an outline (borders)
     &.outline{
-        border: 0.1rem solid $accent;
+        border: var(--small-border) solid $accent;
         background-color: transparent;
         color: $accent;
         &:hover, &:focus-within{
             filter: brightness(0.7);
+        }
+    }
+    &.upload{
+        label{
+            color: black;
+        }
+        &.outline{
+            label{
+                color: $accent;
+            }
+        }
+        input{
+            display: none;
         }
     }
 }
