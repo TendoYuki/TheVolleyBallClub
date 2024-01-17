@@ -7,8 +7,7 @@ enum AdminNavbarEntry: int{
     case accounts = 2;
     case competitions = 3;
     case partner = 4;
-    case events = 5;
-    case location = 6;
+    case location = 5;
 }
 class AdminNavbar extends AbstractDashboardNavbar{
     public function __construct(AdminNavbarEntry $active) {
@@ -22,11 +21,6 @@ class AdminNavbar extends AbstractDashboardNavbar{
                 "symbol" => get_public_file("symbols/partner-symbol.svg"),
                 "link" => "/dashboard/partners",
                 "link_text" => "Partenaires"
-            ),
-            AdminNavbarEntry::events->value => array(
-                "symbol" => get_public_file("symbols/event-symbol.svg"),
-                "link" => "/dashboard/events",
-                "link_text" => "Evénements"
             ),
             AdminNavbarEntry::location->value => array(
                 "symbol" => get_public_file("symbols/location-symbol.svg"),

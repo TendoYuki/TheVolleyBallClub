@@ -59,7 +59,7 @@ class Partner extends AbstractModel{
             'UPDATE partner
             SET namePartner=?,
             logoPartner=?,
-            webpagePartner=?,
+            webpagePartner=?
             WHERE idPartner=?'
         );
         $stmt->bindValue(1, $this->name);

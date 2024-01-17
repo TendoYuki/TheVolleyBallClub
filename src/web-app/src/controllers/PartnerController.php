@@ -9,17 +9,18 @@ use Validation\ImageValidator;
 
 class PartnerController extends AbstractController implements IRequestHandler{
     protected static function validate() {
-        ImageValidator::checkImageType($_FILES["logo-partner-field"]['type']);
+        return true;
     }
 
     public static function new() {
         try {
             PartnerController::validate();
+            ImageValidator::checkImageType($_FILES["logo-field"]['type']);
 
             Partner::new(
                 $_POST["name-field"],
-                file_get_contents($_FILES["logo-partner-field"]["tmp_name"]),
-                $_POST["website-field"]
+                file_get_contents($_FILES["logo-field"]["tmp_name"]),
+                $_POST["link-field"]
             );
         } catch(DisplayableException $e) {
             $_SESSION["error"] = $e->getErrorCode();
@@ -36,12 +37,17 @@ class PartnerController extends AbstractController implements IRequestHandler{
     public static function update() {
         try {
             PartnerController::validate();
-
-            Partner::fetch($_POST["id-field"])
+            $partner = Partner::fetch($_POST["id-field"]);
+            $partner
                 ->setName($_POST["name-field"])
-                ->setWebpage($_POST["website-field"])
-                ->setLogo(file_get_contents($_FILES["logo-partner-field"]["tmp_name"]))
+                ->setWebpage($_POST["link-field"])
                 ->updateDatabase();
+            if(strlen($_FILES["logo-field"]["name"])>0) {
+                ImageValidator::checkImageType($_FILES["logo-field"]['type']);
+                $partner
+                    ->setLogo(file_get_contents($_FILES["logo-field"]["tmp_name"]))
+                    ->updateDatabase();
+            }
         } catch(DisplayableException $e) {
             $_SESSION["error"] = $e->getErrorCode();
     
@@ -64,16 +70,25 @@ class PartnerController extends AbstractController implements IRequestHandler{
         }
     }
     public static function redirect() {
+        if(isset($_SESSION["error"])) {
+            if(isset($_POST["redirect-error"])) {
+                header('Location: '.$_POST["redirect-error"]);
+            } else {
+                header('Location: /');
+            }
+        }
+        else if (isset($_POST["redirect-delete"]) && $_POST["action"]=='delete') {
+            header('Location: '.$_POST["redirect-delete"]);
+        }
+        else if (isset($_POST["redirect-success"])) {
+            header('Location: '.$_POST["redirect-success"]);
+        }
+        else if (isset($_GET["redirect"])) {
+            header('Location: '.$_GET["redirect"]);
+        }
+        else header('Location: /');
     }
 }
 
 PartnerController::handleRequest();
 PartnerController::redirect();
-
-/**
- * Fields -> [
- *  "name" : string
- *  "logo-partner" : image
- *  "webpage" : string
- * ]
- */

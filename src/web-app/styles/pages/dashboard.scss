@@ -40,11 +40,17 @@
     height: 100%;
     width: 100%;
     padding-right: 2rem;
-    h1{
+    >h1{
         font-family: $header-font;
         font-weight: 800;
         font-size: 3rem;
         margin-bottom: 2rem;
+    }
+    >h2{
+        font-family: $text-font;
+        font-weight: 500;
+        margin-bottom: 0.3rem;
+        margin-top: 1rem;
     }
     display: flex;
     justify-content: flex-start;
@@ -106,8 +112,8 @@
         justify-content: flex-start;
         overflow-y: scroll;
 
-        // Displays a user
-        .user-display{
+        // Displays a entry
+        .entry-display{
             display: flex;
             border-radius: $rounded-border-radius;
             // background-color: rgb(230, 230, 230);
@@ -118,14 +124,15 @@
             align-items: center;
             cursor: pointer;
             margin-bottom: 1rem;
-            .user-avatar{
+            flex-direction: row;
+            .entry-image{
                 height: 80%;
                 aspect-ratio: 1/1;
                 border-radius: 50%;
                 margin-left: 0.5rem;
                 object-fit: cover;
             }
-            .user-infos{
+            .entry-infos{
                 display: flex;
                 flex-direction: column;
                 margin: 0px auto 0px 1.5rem;

@@ -84,7 +84,7 @@
                                     <form action="/dashboard/documents/submit" class="file-form" method="post" id="submit-medical-certificate" enctype="multipart/form-data">
                                         <?php 
                                             
-                                            if($id_card == null) {
+                                            if($medical_certificate == null) {
                                                 echo ("
                                                     <input form=\"submit-medical-certificate\" type=\"hidden\" name=\"action\" value=\"upload-medical-certificate\">
                                                     <input form=\"submit-medical-certificate\" type=\"hidden\" name=\"redirect-success\" value=\"/dashboard/documents/\">
@@ -96,7 +96,7 @@
                                                     </label>
                                                 ");
                                             } 
-                                            else if (!$id_card->getIsValid()) {
+                                            else if (!$medical_certificate->getIsValid()) {
                                                 echo ("
                                                     <input form=\"submit-medical-certificate\" type=\"hidden\" name=\"action\" value=\"upload-medical-certificate\">
                                                     <input form=\"submit-medical-certificate\" type=\"hidden\" name=\"redirect-success\" value=\"/dashboard/documents/\">
