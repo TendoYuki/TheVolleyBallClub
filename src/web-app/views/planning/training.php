@@ -47,7 +47,7 @@
     <div class="planning-page">
         <div class="planning-section left">
             <span class="top-bar"></span>
-            <h1>Entrainemant du <?php echo $date_str?></h1>
+            <h1>Entrainement du <?php echo $date_str?></h1>
             <div class="inline">
                 <div class="address">
                     <?php echo get_public_file("symbols/map-point-symbol.svg")?>

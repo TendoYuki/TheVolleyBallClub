@@ -97,6 +97,14 @@ class Training extends AbstractModel{
         return time() > (strtotime($this->start_date_time) - Training::$MAX_TIME_BEFORE_INSCRIPTION);
     }
 
+    /**
+     * Checks if the training has passsed (start date)
+     * @return bool True if has passsed, else false
+     */
+    public function hasPassed(): bool {
+        return time() > strtotime($this->start_date_time);
+    }
+
     public function getId() {
         return $this->id;
     }
@@ -121,6 +129,10 @@ class Training extends AbstractModel{
         return new Training($id);
     }
 
+    /**
+     * Returns all existing trainings
+     * @return Training[] existing trainings
+     */
     public static function fetchAll(): array {
         $trainings = array();
         $connection = new DatabaseConnection();

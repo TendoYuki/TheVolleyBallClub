@@ -24,6 +24,10 @@
     display: flex;
     height: 90%;
     // Mobile style
+    @include respond-to('0-to-medium') {
+        max-width: 90%;
+    }
+    // Mobile style
     @include respond-to('0-to-small') {
         width: 90%;
         height: 70%;
@@ -156,6 +160,21 @@
                 cursor: pointer;
                 &:hover{
                     color: $accent;
+                }
+            }
+        }
+    }
+    .planning-page{
+        width: 100%;
+        margin-top: 0;
+        .planning-section {
+            width: 100%;
+            margin-left: 0;
+            margin-right: 0;
+            >h1{
+                // Mobile style
+                @include respond-to('0-to-small') {
+                    font-size: 2rem;
                 }
             }
         }

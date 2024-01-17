@@ -92,11 +92,19 @@ class Competition extends AbstractModel{
     }
 
     /**
-     * Checks if the competition has expired (start date passed)
+     * Checks if the competition has expired (start date - $MAX_TIME_BEFORE_INSCRIPTION passed)
      * @return bool True if has expired, else false
      */
     public function hasExpired(): bool {
         return time() > (strtotime($this->start_date_time) - Competition::$MAX_TIME_BEFORE_INSCRIPTION);
+    }
+
+    /**
+     * Checks if the competition has passsed (start date)
+     * @return bool True if has passsed, else false
+     */
+    public function hasPassed(): bool {
+        return time() > strtotime($this->start_date_time);
     }
 
     public function getId() {
@@ -124,6 +132,10 @@ class Competition extends AbstractModel{
         return new Competition($id);
     }
 
+    /**
+     * Returns all existing competitions
+     * @return Competition[] existing competitions
+     */
     public static function fetchAll(): array {
         $competitions = array();
         $connection = new DatabaseConnection();

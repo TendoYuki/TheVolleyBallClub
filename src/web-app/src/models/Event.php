@@ -118,10 +118,22 @@ class Event extends AbstractModel{
         return time() > strtotime($this->start_date_time);
     }
 
+    /**
+     * Checks if the event has passsed (start date)
+     * @return bool True if has passsed, else false
+     */
+    public function hasPassed(): bool {
+        return time() > strtotime($this->start_date_time);
+    }
+
     public static function fetch($id): Event{
         return new Event($id);
     }
 
+    /**
+     * Returns all existing events
+     * @return Event[] existing events
+     */
     public static function fetchAll(): array {
         $events = array();
         $connection = new DatabaseConnection();

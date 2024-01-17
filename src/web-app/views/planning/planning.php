@@ -19,9 +19,9 @@
     <?php
         use Components\Navigation\Navbar\Navbar;
         use Components\Navigation\Navbar\NavbarEntry;
-use Models\Competition;
-use Models\Event;
-use Models\Training;
+        use Models\Competition;
+        use Models\Event;
+        use Models\Training;
 
         (new Navbar(NavbarEntry::planning))->display();
     ?>
@@ -38,6 +38,8 @@ use Models\Training;
                         <?php
                             $competitions = Competition::fetchAll();
                             foreach ($competitions as $competition) {
+                                if($competition->hasPassed())
+                                    continue;
                                 $s_date_time = new DateTime("@".$competition->getStartDateTime());
                                 $e_date_time = new DateTime("@".$competition->getEndDateTime());
                                 $day = $s_date_time->format('j F');
@@ -73,6 +75,8 @@ use Models\Training;
                         <?php
                             $trainings = Training::fetchAll();
                             foreach ($trainings as $training) {
+                                if($training->hasPassed())
+                                    continue;
                                 $s_date_time = new DateTime("@".$training->getStartDateTime());
                                 $e_date_time = new DateTime("@".$training->getEndDateTime());
                                 $day = $s_date_time->format('j F');
@@ -108,6 +112,8 @@ use Models\Training;
                         <?php
                             $events = Event::fetchAll();
                             foreach ($events as $event) {
+                                if($event->hasPassed())
+                                    continue;
                                 $s_date_time = new DateTime("@".$event->getStartDateTime());
                                 $e_date_time = new DateTime("@".$event->getEndDateTime());
                                 $day = $s_date_time->format('j F');
