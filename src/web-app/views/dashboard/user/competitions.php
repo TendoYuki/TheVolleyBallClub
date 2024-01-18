@@ -26,7 +26,7 @@
         use Components\Navigation\Dashboard\UserNavbar;
         use Components\Navigation\Dashboard\UserNavbarEntry;
         use Models\Competition;
-use Models\User;
+        use Models\User;
 
         (new Navbar(NavbarEntry::dashboard))->display();
 
