@@ -1,11 +1,9 @@
-package com.volleyball.club.pages.trainings;
+package com.volleyball.club.pages.events;
 
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
@@ -15,31 +13,30 @@ import com.volleyball.club.database.DBConnectionManager;
 import com.volleyball.club.datetime.DateTime;
 import com.volleyball.club.elements.editor.EditorActions;
 import com.volleyball.club.elements.editor.EditorSectionDateTime;
-import com.volleyball.club.elements.editor.EditorSectionDropDown;
-import com.volleyball.club.elements.editor.EditorSectionNumberField;
-import com.volleyball.club.models.LocationModel;
+import com.volleyball.club.elements.editor.EditorSectionTextArea;
+import com.volleyball.club.elements.editor.EditorSectionTextField;
 import com.volleyball.club.observation.Observable;
 import com.volleyball.club.pages.EditPage;
 
-/** Edition page of the trainings */
-public class TrainingEditPage extends EditPage{
+/** Edition page of the events */
+public class EventEditPage extends EditPage{
 
-    /** Editor section of the start time of the training */
+    /** Editor section of the start time of the event */
     private EditorSectionDateTime startTimeEditorSection;
-    /** Editor section of the start end of the training */
+    /** Editor section of the start end of the event */
     private EditorSectionDateTime endTimeEditorSection;
-    /** Editor section of the maxParticipants of the training */
-    private EditorSectionNumberField maxParticipantEditorSection;
-    /** Editor section of the location of the training */
-    private EditorSectionDropDown locationEditorSection;
+    /** Editor section of the maxParticipants of the event */
+    private EditorSectionTextField nameEditorSection;
+    /** Editor section of the maxParticipants of the event */
+    private EditorSectionTextArea descriptionEditorSection;
 
     /**
-     * Creates a new training edition page
-     * @param trainingPage Linked training page 
+     * Creates a new event edition page
+     * @param eventPage Linked event page 
      * @param model Model to edit
      * @param backupModel Backup of the model to edit before edition
      */
-    public TrainingEditPage(TrainingPage trainingPage, TrainingModel model, TrainingModel backupModel) {
+    public EventEditPage(EventPage eventPage, EventModel model, EventModel backupModel) {
         super();
 
         setBorder(new EmptyBorder(new Insets(0, 20, 0, 20)));
@@ -49,14 +46,14 @@ public class TrainingEditPage extends EditPage{
 
         startTimeEditorSection = new EditorSectionDateTime(
             "Start Date Time",
-            "Select the training's starting date and time",
+            "Select the event's starting date and time",
             null,
             model.getEndDateTime()
         ) {
             @Override
             public void update(Observable observable) {
-                setMaximumDateTime(((TrainingModel)observable).getEndDateTime());
-                setValue(((TrainingModel)observable).getStartDateTime());
+                setMaximumDateTime(((EventModel)observable).getEndDateTime());
+                setValue(((EventModel)observable).getStartDateTime());
             }
         };
         startTimeEditorSection.addModifyListener(arg0 -> {
@@ -72,14 +69,14 @@ public class TrainingEditPage extends EditPage{
 
         endTimeEditorSection = new EditorSectionDateTime(
             "End Date Time",
-            "Select the training's ending date and time",
+            "Select the event's ending date and time",
             model.getStartDateTime(),
             null
         ) {
             @Override
             public void update(Observable observable) {
-                setMinimumDateTime(((TrainingModel)observable).getStartDateTime());
-                setValue(((TrainingModel)observable).getEndDateTime());
+                setMinimumDateTime(((EventModel)observable).getStartDateTime());
+                setValue(((EventModel)observable).getEndDateTime());
             }
         };
         endTimeEditorSection.addModifyListener(arg0 -> {
@@ -94,70 +91,44 @@ public class TrainingEditPage extends EditPage{
         gbc.weighty = 0;
         add(endTimeEditorSection, gbc);
 
-        maxParticipantEditorSection = new EditorSectionNumberField(
-            "Max participants count",
-            "Select the training's max participants count",
-            6,
-            32,
-            1, 
-            6
+        nameEditorSection = new EditorSectionTextField(
+            "Name",
+            "Name of the event"
         ) {
             @Override
             public void update(Observable observable) {
-                setValue(((TrainingModel)observable).getMaxParticipant());
+                setValue(((EventModel)observable).getName());
             }
         };
-        maxParticipantEditorSection.addModifyListener(arg0 -> {
-            model.setMaxParticipant((int)maxParticipantEditorSection.getValue());
+
+        nameEditorSection.addModifyListener(arg0 -> {
+            model.setName((String)nameEditorSection.getValue());
+            model.updateObservers();
+        });
+
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.weighty = 0;
+        add(nameEditorSection, gbc);
+
+        descriptionEditorSection = new EditorSectionTextArea(
+            "Description",
+            "A small description of the even"
+        ) {
+            @Override
+            public void update(Observable observable) {
+                setValue(((EventModel)observable).getDescription());
+            }
+        };
+        descriptionEditorSection.addModifyListener(arg0 -> {
+            model.setDescription((String)descriptionEditorSection.getValue());
             model.updateObservers();
         });
         
         gbc.gridx = 0;
-        gbc.gridy = 2;
-        gbc.weighty = 0;
-        add(maxParticipantEditorSection, gbc);
-
-        ArrayList<String> locationsList = new ArrayList<String>();
-
-        Connection con = DBConnectionManager.getConnection();
-
-        try{
-            PreparedStatement stmt = con.prepareStatement("SELECT nameLocation FROM location;");
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next())
-                locationsList.add(rs.getString("nameLocation"));
-        }catch(Exception e){
-            System.out.println(e);
-        }
-
-        locationEditorSection = new EditorSectionDropDown(
-            "Location",
-            "Select the training's location",
-            locationsList.toArray(new String[0])
-        ) {
-            @Override
-            public void update(Observable observable) {
-                setValue(((TrainingModel)observable).getLocation());
-            }
-        };
-
-        locationEditorSection.addModifyListener(arg0 -> {
-            try{
-                PreparedStatement stmt = con.prepareStatement("SELECT * FROM location WHERE nameLocation=?;");
-                stmt.setString(1, (String)locationEditorSection.getValue());
-                ResultSet rs = stmt.executeQuery();
-                if(rs.next())
-                    model.setLocation(rs.getString("nameLocation"));
-            }catch(Exception e){
-                System.out.println(e);
-            }
-            model.updateObservers();
-        });
-
-        gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.weighty = 0;
-        add(locationEditorSection, gbc);
+        add(descriptionEditorSection, gbc);
 
         EditorActions ea = new EditorActions();
         gbc.gridx = 0;
@@ -174,8 +145,8 @@ public class TrainingEditPage extends EditPage{
                 model.setID(backupModel.getID());
                 model.setStartDateTime(backupModel.getStartDateTime());
                 model.setEndDateTime(backupModel.getEndDateTime());
-                model.setMaxParticipant(backupModel.getMaxParticipant());
-                model.setLocation(backupModel.getLocation());
+                model.setName(backupModel.getName());
+                model.setDescription(backupModel.getDescription());
                 model.updateObservers();
             }
             @Override
@@ -190,11 +161,11 @@ public class TrainingEditPage extends EditPage{
                 if(res == JOptionPane.YES_OPTION){
                     Connection con = DBConnectionManager.getConnection();
                     try{
-                        PreparedStatement stmt = con.prepareStatement("DELETE FROM training WHERE idTraining=?;");
+                        PreparedStatement stmt = con.prepareStatement("DELETE FROM event WHERE idEvent=?;");
                         stmt.setInt(1, model.getID());
                         stmt.execute();
                         model.resetDefaultValues();
-                        trainingPage.loadResults();
+                        eventPage.loadResults();
                     }catch(Exception e){
                         System.out.println(e);
                     }
@@ -205,26 +176,21 @@ public class TrainingEditPage extends EditPage{
             public void onSave() {
                 Connection con = DBConnectionManager.getConnection();
                 try{
-                    int locationId = LocationModel.getLocationIdFromName((String)locationEditorSection.getValue());
                     PreparedStatement stmt = con.prepareStatement(
-                        "UPDATE training SET "+
-                        "startDateTimeTraining=? ,"+
-                        "endDateTimeTraining=?, "+
-                        "maxParticipantTraining=?,"+
-                        "Location_idLocation=? "+
-                        "WHERE idTraining=?;"
+                        "UPDATE event SET "+
+                        "startDateTimeEvent=? ,"+
+                        "endDateTimeEvent=?, "+
+                        "nameEvent=?,"+
+                        "descEvent=? "+
+                        "WHERE idEvent=?;"
                     );
                     stmt.setString(1, startTimeEditorSection.getValue().toString());
                     stmt.setString(2, endTimeEditorSection.getValue().toString());
-                    stmt.setInt(3, (int)maxParticipantEditorSection.getValue());
-                    if (locationId == -1) {
-                        stmt.setNull(4, java.sql.Types.INTEGER);
-                    } else {
-                        stmt.setInt(4, locationId);
-                    }
+                    stmt.setString(3, (String)nameEditorSection.getValue());
+                    stmt.setString(4, (String)descriptionEditorSection.getValue());
                     stmt.setInt(5, model.getID());
                     stmt.execute();
-                    trainingPage.loadResults();
+                    eventPage.loadResults();
                 }catch(Exception e){
                     System.out.println(e);
                 }
@@ -233,15 +199,15 @@ public class TrainingEditPage extends EditPage{
 
         model.addObserver(startTimeEditorSection);
         model.addObserver(endTimeEditorSection);
-        model.addObserver(locationEditorSection);
-        model.addObserver(maxParticipantEditorSection);
+        model.addObserver(nameEditorSection);
+        model.addObserver(descriptionEditorSection);
     }
 
     @Override
     public void clear() {
         startTimeEditorSection.clear();
         endTimeEditorSection.clear();
-        locationEditorSection.clear();
-        maxParticipantEditorSection.clear();
+        nameEditorSection.clear();
+        descriptionEditorSection.clear();
     }
 }

@@ -4,6 +4,8 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -11,9 +13,12 @@ import javax.swing.border.EmptyBorder;
 
 import com.volleyball.club.controllers.EditorActionController;
 import com.volleyball.club.database.DBConnectionManager;
+import com.volleyball.club.models.LocationModel;
 import com.volleyball.club.datetime.DateTime;
 import com.volleyball.club.elements.editor.EditorActions;
 import com.volleyball.club.elements.editor.EditorSectionDateTime;
+import com.volleyball.club.elements.editor.EditorSectionDropDown;
+import com.volleyball.club.elements.editor.EditorSectionNumberField;
 import com.volleyball.club.observation.Observable;
 import com.volleyball.club.observation.Observer;
 import com.volleyball.club.pages.EditPage;
@@ -26,6 +31,10 @@ public class CompetitionEditPage extends EditPage{
     private EditorSectionDateTime startTimeEditorSection;
     /** Editor section of the start end of the competition */
     private EditorSectionDateTime endTimeEditorSection;
+    /** Editor section of the maxParticipants of the competition */
+    private EditorSectionNumberField maxParticipantEditorSection;
+    /** Editor section of the location of the competition */
+    private EditorSectionDropDown locationEditorSection;
 
     /**
      * Creates a new competition edition page
@@ -88,9 +97,74 @@ public class CompetitionEditPage extends EditPage{
         gbc.weighty = 0;
         add(endTimeEditorSection, gbc);
 
-        EditorActions ea = new EditorActions();
+        maxParticipantEditorSection = new EditorSectionNumberField(
+            "Max participants count",
+            "Select the competition's max participants count",
+            6,
+            32,
+            1, 
+            6
+        ) {
+            @Override
+            public void update(Observable observable) {
+                setValue(((CompetitionModel)observable).getMaxParticipant());
+            }
+        };
+        maxParticipantEditorSection.addModifyListener(arg0 -> {
+            model.setMaxParticipant((int)maxParticipantEditorSection.getValue());
+            model.updateObservers();
+        });
+        
         gbc.gridx = 0;
         gbc.gridy = 2;
+        gbc.weighty = 0;
+        add(maxParticipantEditorSection, gbc);
+
+        ArrayList<String> locationsList = new ArrayList<String>();
+
+        Connection con = DBConnectionManager.getConnection();
+
+        try{
+            PreparedStatement stmt = con.prepareStatement("SELECT nameLocation FROM location;");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next())
+                locationsList.add(rs.getString("nameLocation"));
+        }catch(Exception e){
+            System.out.println(e);
+        }
+
+        locationEditorSection = new EditorSectionDropDown(
+            "Location",
+            "Select the competition's location",
+            locationsList.toArray(new String[0])
+        ) {
+            @Override
+            public void update(Observable observable) {
+                setValue(((CompetitionModel)observable).getLocation());
+            }
+        };
+
+        locationEditorSection.addModifyListener(arg0 -> {
+            try{
+                PreparedStatement stmt = con.prepareStatement("SELECT * FROM location WHERE nameLocation=?;");
+                stmt.setString(1, (String)locationEditorSection.getValue());
+                ResultSet rs = stmt.executeQuery();
+                if(rs.next())
+                    model.setLocation(rs.getString("nameLocation"));
+            }catch(Exception e){
+                System.out.println(e);
+            }
+            model.updateObservers();
+        });
+
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.weighty = 0;
+        add(locationEditorSection, gbc);
+
+        EditorActions ea = new EditorActions();
+        gbc.gridx = 0;
+        gbc.gridy = 4;
         gbc.weighty = 0;
         gbc.weightx = 1;
         add(ea, gbc);
@@ -102,6 +176,8 @@ public class CompetitionEditPage extends EditPage{
                 model.setID(backupModel.getID());
                 model.setStartDateTime(backupModel.getStartDateTime());
                 model.setEndDateTime(backupModel.getEndDateTime());
+                model.setMaxParticipant(backupModel.getMaxParticipant());
+                model.setLocation(backupModel.getLocation());
                 model.updateObservers();
             }
             @Override
@@ -131,15 +207,24 @@ public class CompetitionEditPage extends EditPage{
             public void onSave() {
                 Connection con = DBConnectionManager.getConnection();
                 try{
+                    int locationId = LocationModel.getLocationIdFromName((String)locationEditorSection.getValue());
                     PreparedStatement stmt = con.prepareStatement(
                         "UPDATE competition SET "+
-                        "startDateTimeCompetition=? ,"+
-                        "endDateTimeCompetition=? "+
+                        "startDateTimeCompetition=?,"+
+                        "endDateTimeCompetition=?,"+
+                        "maxParticipantCompetition=?,"+
+                        "Location_idLocation=? "+
                         "WHERE idCompetition=?;"
                     );
                     stmt.setString(1, startTimeEditorSection.getValue().toString());
                     stmt.setString(2, endTimeEditorSection.getValue().toString());
-                    stmt.setInt(3, model.getID());
+                    stmt.setInt(3, (int)maxParticipantEditorSection.getValue());
+                    if (locationId == -1) {
+                        stmt.setNull(4, java.sql.Types.INTEGER);
+                    } else {
+                        stmt.setInt(4, locationId);
+                    }
+                    stmt.setInt(5, model.getID());
                     stmt.execute();
                     competitionPage.loadResults();
                 }catch(Exception e){
@@ -161,7 +246,7 @@ public class CompetitionEditPage extends EditPage{
 
         gbc.insets = btnBorders;
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy = 5;
         gbc.weighty = 1;
         gbc.weightx = 1;
         if(!model.hasResult()) {
@@ -180,7 +265,7 @@ public class CompetitionEditPage extends EditPage{
             public void update(Observable observable) {
                 gbc.insets = btnBorders;
                 gbc.gridx = 0;
-                gbc.gridy = 3;
+                gbc.gridy = 5;
                 gbc.weighty = 1;
                 gbc.weightx = 1;
                 CompetitionModel model = (CompetitionModel)observable;
@@ -199,11 +284,15 @@ public class CompetitionEditPage extends EditPage{
 
         model.addObserver(startTimeEditorSection);
         model.addObserver(endTimeEditorSection);
+        model.addObserver(locationEditorSection);
+        model.addObserver(maxParticipantEditorSection);
     }
 
     @Override
     public void clear() {
         startTimeEditorSection.clear();
         endTimeEditorSection.clear();
+        locationEditorSection.clear();
+        maxParticipantEditorSection.clear();
     }
 }

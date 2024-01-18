@@ -21,6 +21,10 @@ import com.volleyball.club.pages.competitions.CompetitionCreatePage;
 import com.volleyball.club.pages.competitions.CompetitionCreatePageController;
 import com.volleyball.club.pages.competitions.CompetitionPage;
 import com.volleyball.club.pages.competitions.CompetitionPageController;
+import com.volleyball.club.pages.events.EventCreatePage;
+import com.volleyball.club.pages.events.EventCreatePageController;
+import com.volleyball.club.pages.events.EventPage;
+import com.volleyball.club.pages.events.EventPageController;
 import com.volleyball.club.pages.homepage.HomePage;
 import com.volleyball.club.pages.homepage.HomePageController;
 import com.volleyball.club.pages.login.LoginPage;
@@ -104,6 +108,19 @@ public class GUI extends JFrame{
         trainingMenuViewBTN.addActionListener(new TrainingPageController(trainingPage, this));
         trainingMenuNewBTN.addActionListener(new TrainingCreatePageController(trainingCreatePage, this));
 
+        /** ----------- EVENT PAGE ----------- */
+
+        JMenu eventMenu = new JMenu("Events");
+        JMenuItem eventMenuViewBTN = new JMenuItem("View");
+        JMenuItem eventMenuNewBTN = new JMenuItem("New");
+        EventPage eventPage = new EventPage();
+        EventCreatePage eventCreatePage = new EventCreatePage();
+
+        eventMenu.add(eventMenuViewBTN);
+        eventMenu.add(eventMenuNewBTN);
+        eventMenuViewBTN.addActionListener(new EventPageController(eventPage, this));
+        eventMenuNewBTN.addActionListener(new EventCreatePageController(eventCreatePage, this));
+
         /** ----------- CHANGING APP ICON ----------- */
 
         String filePath = new File("").getAbsolutePath();
@@ -120,12 +137,14 @@ public class GUI extends JFrame{
                     switchActivePage(homePage);
                     navModel.addMenu(competitionMenu);
                     navModel.addMenu(trainingMenu);
+                    navModel.addMenu(eventMenu);
 
                 }
                 else{
                     navModel.replaceMenu(logoutMenuBarBTN, loginMenuBarBTN);
                     navModel.removeMenu(competitionMenu);
                     navModel.removeMenu(trainingMenu);
+                    navModel.addMenu(eventMenu);
                 }
             }
         });

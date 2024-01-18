@@ -1,4 +1,4 @@
-package com.volleyball.club.pages.trainings;
+package com.volleyball.club.pages.events;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -18,15 +18,14 @@ import java.lang.Integer;
 import com.volleyball.club.database.DBConnectionManager;
 import com.volleyball.club.datetime.DateTime;
 import com.volleyball.club.datetime.exceptions.InvalidDateTimeFormatException;
-import com.volleyball.club.models.LocationModel;
 import com.volleyball.club.pages.Page;
 
 /**
- * Training page displaying all trainings 
+ * Event page displaying all events 
  */
-public class TrainingPage extends Page{
-    /** Model of the table containing all trainings */
-    private static DefaultTableModel defaultTable = new DefaultTableModel(new String[]{"ID","Start","End", "MaxParticipants", "Location"},0){
+public class EventPage extends Page{
+    /** Model of the table containing all events */
+    private static DefaultTableModel defaultTable = new DefaultTableModel(new String[]{"ID","Start","End", "Name", "Description"},0){
         @Override
         public boolean isCellEditable(int row, int column) {
             // Make all cells non-editable
@@ -37,14 +36,14 @@ public class TrainingPage extends Page{
     /** Table to display the model */
     private static JTable table;
     /** Model of the currently selected row */
-    private TrainingModel trainingModel = new TrainingModel();
+    private EventModel eventModel = new EventModel();
     /** Backup model of the currently selected row, used for cancel logic */
-    private TrainingModel backupModel = new TrainingModel();
-    /** Edition page of the trainings */
-    private TrainingEditPage trainingEditPage;
+    private EventModel backupModel = new EventModel();
+    /** Edition page of the events */
+    private EventEditPage eventEditPage;
 
-    /** Creates a new training page */
-    public TrainingPage(){
+    /** Creates a new event page */
+    public EventPage(){
         super();
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -58,12 +57,12 @@ public class TrainingPage extends Page{
         gbc.weightx = 1;
         gbc.gridx = 0;
         gbc.gridy = 0;
-        add(new JLabel("Training Page", SwingConstants.CENTER), gbc);
+        add(new JLabel("Event Page", SwingConstants.CENTER), gbc);
         
         setBorder(new EmptyBorder(new Insets(10, 10, 10, 10)));
         table = new JTable(defaultTable);
 
-        trainingEditPage = new TrainingEditPage(this, trainingModel, backupModel);
+        eventEditPage = new EventEditPage(this, eventModel, backupModel);
 
         table.addMouseListener(new MouseAdapter() {
             @Override
@@ -71,23 +70,23 @@ public class TrainingPage extends Page{
                 int id = Integer.valueOf((String)defaultTable.getValueAt(table.getSelectedRow(), 0));
                 String startDateTime = (String)defaultTable.getValueAt(table.getSelectedRow(), 1);
                 String endDateTime = (String)defaultTable.getValueAt(table.getSelectedRow(), 2);
-                int maxParticipants = Integer.valueOf((String)defaultTable.getValueAt(table.getSelectedRow(), 3));
-                String locationNameStr = (String)defaultTable.getValueAt(table.getSelectedRow(), 4);
+                String name = (String)defaultTable.getValueAt(table.getSelectedRow(), 3);
+                String description = (String)defaultTable.getValueAt(table.getSelectedRow(), 4);
 
                 try {
                     // Changes the model with the new current one and notifies the view to update
-                    trainingModel.setEndDateTime(new DateTime(endDateTime));
-                    trainingModel.setStartDateTime(new DateTime(startDateTime));
-                    trainingModel.setMaxParticipant(maxParticipants);
-                    trainingModel.setLocation(locationNameStr);
-                    trainingModel.setID(id);
-                    trainingModel.updateObservers();
+                    eventModel.setEndDateTime(new DateTime(endDateTime));
+                    eventModel.setStartDateTime(new DateTime(startDateTime));
+                    eventModel.setDescription(description);
+                    eventModel.setName(name);
+                    eventModel.setID(id);
+                    eventModel.updateObservers();
 
                     // Changes the backup model with the new current one
                     backupModel.setEndDateTime(new DateTime(endDateTime));
                     backupModel.setStartDateTime(new DateTime(startDateTime));
-                    backupModel.setMaxParticipant(maxParticipants);
-                    backupModel.setLocation(locationNameStr);
+                    backupModel.setDescription(description);
+                    backupModel.setName(name);
                     backupModel.setID(id);
                 } catch (InvalidDateTimeFormatException e) {
                     System.out.println(e);
@@ -109,7 +108,7 @@ public class TrainingPage extends Page{
         gbc.gridwidth=1;
         gbc.gridx = 1;
         gbc.gridy = 1;
-        add(trainingEditPage,gbc);
+        add(eventEditPage,gbc);
     }
     
     /** Loads the database inside of the table model */
@@ -117,18 +116,18 @@ public class TrainingPage extends Page{
         Connection con = DBConnectionManager.getConnection();
         try {
             PreparedStatement stmt = con.prepareStatement(
-                "SELECT * FROM training ORDER BY startDateTimeTraining;"
+                "SELECT * FROM event ORDER BY startDateTimeEvent;"
             );
             ResultSet resSet = stmt.executeQuery();
             defaultTable.setRowCount(0);
-            String start="",end="", id="", location="", maxParticipants="";
+            String start="",end="", id="", description="", name="";
             while(resSet.next()){   
-                start = resSet.getString("startDateTimeTraining");
-                end = resSet.getString("endDateTimeTraining");
-                location = LocationModel.getLocationNameFromId(resSet.getInt("Location_idLocation")); 
-                maxParticipants = resSet.getString("maxParticipantTraining"); 
-                id = resSet.getString("idTraining"); 
-                defaultTable.addRow(new String[]{id,start,end,maxParticipants,location});
+                start = resSet.getString("startDateTimeEvent");
+                end = resSet.getString("endDateTimeEvent");
+                description = resSet.getString("descEvent"); 
+                name = resSet.getString("nameEvent"); 
+                id = resSet.getString("idEvent"); 
+                defaultTable.addRow(new String[]{id,start,end,name,description});
             }
         } catch(Exception e) {
             System.out.println(e);
@@ -140,6 +139,6 @@ public class TrainingPage extends Page{
      * Clears the editor's fields
      */
     public void clearEditor() {
-        trainingEditPage.clear();
+        eventEditPage.clear();
     }
 }

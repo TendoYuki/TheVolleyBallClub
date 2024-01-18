@@ -18,6 +18,7 @@ import java.lang.Integer;
 import com.volleyball.club.database.DBConnectionManager;
 import com.volleyball.club.datetime.DateTime;
 import com.volleyball.club.datetime.exceptions.InvalidDateTimeFormatException;
+import com.volleyball.club.models.LocationModel;
 import com.volleyball.club.pages.GUI;
 import com.volleyball.club.pages.Page;
 
@@ -26,7 +27,7 @@ import com.volleyball.club.pages.Page;
  */
 public class CompetitionPage extends Page{
     /** Model of the table containing all competitions */
-    private static DefaultTableModel defaultTable = new DefaultTableModel(new String[]{"ID","Start","End", "ResultId"},0){
+    private static DefaultTableModel defaultTable = new DefaultTableModel(new String[]{"ID","Start","End", "ResultId", "MaxParticipants", "Location"},0){
         @Override
         public boolean isCellEditable(int row, int column) {
             // Make all cells non-editable
@@ -74,12 +75,17 @@ public class CompetitionPage extends Page{
                 String startDateTime = (String)defaultTable.getValueAt(table.getSelectedRow(), 1);
                 String endDateTime = (String)defaultTable.getValueAt(table.getSelectedRow(), 2);
                 String idResultStr = (String)defaultTable.getValueAt(table.getSelectedRow(), 3);
+                int maxParticipants = Integer.valueOf((String)defaultTable.getValueAt(table.getSelectedRow(), 4));
+                String locationNameStr = (String)defaultTable.getValueAt(table.getSelectedRow(), 5);
 
                 try {
                     // Changes the model with the new current one and notifies the view to update
                     competitionModel.resetDefaultValues();
                     competitionModel.setEndDateTime(new DateTime(endDateTime));
                     competitionModel.setStartDateTime(new DateTime(startDateTime));
+                    competitionModel.setMaxParticipant(maxParticipants);
+                    competitionModel.setLocation(locationNameStr);
+                    competitionModel.setResultModel(competitionResultModel);
                     competitionModel.setID(id);
 
                     if(idResultStr != null)  {
@@ -112,6 +118,9 @@ public class CompetitionPage extends Page{
                     // Changes the backup model with the new current one
                     backupModel.setEndDateTime(new DateTime(endDateTime));
                     backupModel.setStartDateTime(new DateTime(startDateTime));
+                    backupModel.setMaxParticipant(maxParticipants);
+                    backupModel.setLocation(locationNameStr);
+                    backupModel.setResultModel(competitionResultModel);
                     backupModel.setID(id);
                 } catch (InvalidDateTimeFormatException e) {
                     System.out.println(e);
@@ -145,13 +154,15 @@ public class CompetitionPage extends Page{
             );
             ResultSet resSet = stmt.executeQuery();
             defaultTable.setRowCount(0);
-            String start="",end="", id="", idResult="";
+            String start="",end="", id="", idResult="", location="", maxParticipants="";
             while(resSet.next()){   
                 start = resSet.getString("startDateTimeCompetition");
                 end = resSet.getString("endDateTimeCompetition");
                 id = resSet.getString("idCompetition"); 
+                maxParticipants = resSet.getString("maxParticipantCompetition"); 
+                location = LocationModel.getLocationNameFromId(resSet.getInt("Location_idLocation")); 
                 idResult = resSet.getString("Result_idResult"); 
-                defaultTable.addRow(new String[]{id,start,end,idResult});
+                defaultTable.addRow(new String[]{id,start,end,idResult,maxParticipants,location});
             }
         } catch(Exception e) {
             System.out.println(e);

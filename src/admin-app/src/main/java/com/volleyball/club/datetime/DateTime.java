@@ -59,10 +59,9 @@ public class DateTime implements Comparable<DateTime>{
      */
     public DateTime(DateTime dateTime) {
         this.ld = LocalDate.parse(dateTime.getLocalDate().toString());
-        if(lt != null)
-            this.lt = LocalTime.parse(
-                dateTime.getLocalTime().toString()
-            ).truncatedTo(ChronoUnit.SECONDS);
+        this.lt = LocalTime.parse(
+            dateTime.getLocalTime().toString()
+        ).truncatedTo(ChronoUnit.SECONDS);
     }
 
     /**
@@ -115,7 +114,18 @@ public class DateTime implements Comparable<DateTime>{
     @Override
     public int compareTo(DateTime other) {
         int date = ld.compareTo(other.ld);
-        if(lt != null) return date != 0 ? date : lt.compareTo(other.lt) ;
+        if(date<0) date = -1;
+        else if(date>0) date = 1;
+        else date = 0;
+
+        if(lt != null) {
+            int time = lt.compareTo(other.lt);
+            if(time<0) time = -1;
+            else if(time>0) time = 1;
+            else time = 0;
+
+            return date != 0 ? date : time;
+        }
         else return date;
     }
     

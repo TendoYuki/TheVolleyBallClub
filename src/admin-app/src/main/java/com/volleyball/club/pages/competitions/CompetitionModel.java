@@ -13,6 +13,10 @@ public class CompetitionModel extends Observable{
     private DateTime endDateTime;
     /** Model of the competition's results*/
     private CompetitionResultModel resultModel;
+    /** Model of the competition's location*/
+    private String location;
+    /** Max participants */
+    private int maxParticipant;
 
     /**
      * Creates a new competition model
@@ -20,11 +24,23 @@ public class CompetitionModel extends Observable{
      * @param startDateTime Start datetime of the competition
      * @param endDateTime End datetime of the competition
      */
-    public CompetitionModel(int ID, DateTime startDateTime, DateTime endDateTime, CompetitionResultModel resultModel) {
+    public CompetitionModel(int ID, DateTime startDateTime, DateTime endDateTime, CompetitionResultModel resultModel,int maxParticipant, String location) {
         this.resultModel = resultModel;
         this.ID = ID;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
+        this.location = location;
+        this.maxParticipant = maxParticipant;
+    }
+
+    /**
+     * Creates a new competition model
+     * @param ID ID of the competition
+     * @param startDateTime Start datetime of the competition
+     * @param endDateTime End datetime of the competition
+     */
+    public CompetitionModel(int ID, DateTime startDateTime, DateTime endDateTime, CompetitionResultModel resultModel, int maxParticipant) {
+        this(ID, startDateTime, endDateTime, resultModel, maxParticipant, null);
     }
 
     /**
@@ -35,6 +51,9 @@ public class CompetitionModel extends Observable{
         this.ID = model.ID;
         this.startDateTime = new DateTime(model.startDateTime);
         this.endDateTime = new DateTime(model.endDateTime);
+        this.resultModel = model.resultModel;
+        this.maxParticipant = model.maxParticipant;
+        this.location = model.location;
     }
 
     /** Creates an empty competition model */
@@ -96,6 +115,9 @@ public class CompetitionModel extends Observable{
         this.ID = -1;
         this.startDateTime = null;
         this.endDateTime = null;
+        this.resultModel = null;
+        this.location = null;
+        this.maxParticipant = -1;
     }
 
     /**
@@ -107,6 +129,8 @@ public class CompetitionModel extends Observable{
     }
 
     public boolean hasResult() {
+        if(resultModel == null) 
+            return false;
         return resultModel.getID() != -1;
     }
 
@@ -117,4 +141,29 @@ public class CompetitionModel extends Observable{
     public void setResultModel(CompetitionResultModel resultModel) {
         this.resultModel = resultModel;
     }
+
+    /**
+     * Gets the location
+     * @return location
+     */
+    public String getLocation() {
+        return location;
+    }
+    /**
+     * Changes the location
+     * @param location new location
+     */
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public int getMaxParticipant() {
+        return maxParticipant;
+    }
+
+    public void setMaxParticipant(int maxParticipant) {
+        this.maxParticipant = maxParticipant;
+    }
+
+    
 }

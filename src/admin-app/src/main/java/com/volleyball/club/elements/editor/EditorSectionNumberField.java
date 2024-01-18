@@ -6,6 +6,7 @@ import javax.swing.event.ChangeListener;
 import javax.swing.SpinnerNumberModel;
 
 import java.awt.GridBagConstraints;
+import java.awt.Insets;
 import java.awt.event.ActionListener;
 
 /**
@@ -16,6 +17,8 @@ public abstract class EditorSectionNumberField extends EditorSection {
     private JSpinner editorComponent;
     /** Spinner model */
     private SpinnerNumberModel spinnerModel;
+    /** Initial value of the field */
+    private int initialValue;
 
     /**
      * Creates a new editor section with number field
@@ -28,6 +31,7 @@ public abstract class EditorSectionNumberField extends EditorSection {
      */
     public EditorSectionNumberField(String name, String description, int min, int max, int step, int initialValue) {
         super(name, description);
+        this.initialValue = initialValue; 
         spinnerModel = new SpinnerNumberModel(
             initialValue,
             min,
@@ -44,6 +48,7 @@ public abstract class EditorSectionNumberField extends EditorSection {
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.anchor = GridBagConstraints.WEST;
+        gbc.insets = new Insets(5, 5, 20, 0);
         add(editorComponent, gbc);
     }
 
@@ -73,6 +78,6 @@ public abstract class EditorSectionNumberField extends EditorSection {
 
     @Override
     public void clear() {
-        spinnerModel.setValue(0);
+        spinnerModel.setValue(initialValue);
     }
 }

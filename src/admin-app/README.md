@@ -1,5 +1,21 @@
 # Admin App
 
+## Install dpendencies
+
+Note : Maven must be installed
+
+```java
+mvn install
+```
+
+## Testing
+
+Note : Maven must be installed before testing
+
+```java
+mvn test
+```
+
 ## Building
 
 Note : Maven must be installed before compiling

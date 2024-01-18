@@ -11,6 +11,10 @@ public class TrainingModel extends Observable{
     private DateTime startDateTime;
     /** End datetime of the training */
     private DateTime endDateTime;
+    /** Model of the competition's location*/
+    private String location;
+    /** Max participants */
+    private int maxParticipant;
 
     /**
      * Creates a new training model
@@ -18,10 +22,22 @@ public class TrainingModel extends Observable{
      * @param startDateTime Start datetime of the training
      * @param endDateTime End datetime of the training
      */
-    public TrainingModel(int ID, DateTime startDateTime, DateTime endDateTime) {
+    public TrainingModel(int ID, DateTime startDateTime, DateTime endDateTime, int maxParticipant, String location) {
         this.ID = ID;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
+        this.location = location;
+        this.maxParticipant = maxParticipant;
+    }
+
+    /**
+     * Creates a new training model
+     * @param ID ID of the training
+     * @param startDateTime Start datetime of the training
+     * @param endDateTime End datetime of the training
+     */
+    public TrainingModel(int ID, DateTime startDateTime, DateTime endDateTime, int maxParticipant) {
+        this(ID, startDateTime, endDateTime, maxParticipant, null);
     }
 
     /**
@@ -32,13 +48,13 @@ public class TrainingModel extends Observable{
         this.ID = model.ID;
         this.startDateTime = new DateTime(model.startDateTime);
         this.endDateTime = new DateTime(model.endDateTime);
+        this.location = model.location;
+        this.maxParticipant = model.maxParticipant;
     }
 
     /** Creates an empty training model */
     public TrainingModel() {
-        this.ID = -1;
-        this.startDateTime = null;
-        this.endDateTime = null;
+        resetDefaultValues();
     }
 
     /**
@@ -94,5 +110,30 @@ public class TrainingModel extends Observable{
         this.ID = -1;
         this.startDateTime = null;
         this.endDateTime = null;
+        this.location = null;
+        this.maxParticipant = -1;
+    }
+
+    /**
+     * Gets the location
+     * @return location
+     */
+    public String getLocation() {
+        return location;
+    }
+    /**
+     * Changes the location
+     * @param location new location 
+     */
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public int getMaxParticipant() {
+        return maxParticipant;
+    }
+
+    public void setMaxParticipant(int maxParticipant) {
+        this.maxParticipant = maxParticipant;
     }
 }
