@@ -1,5 +1,12 @@
 # Volley-SAE
 
+## Site web
+
+Le site web est fonctionnel et sera disponible à cette addresse
+
+[thevolleyballclub.ddns.net](http://thevolleyballclub.ddns.net)
+
+
 ## Structure
 
 Le projet est séparé en deux modules disctincs
