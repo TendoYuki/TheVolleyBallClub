@@ -185,7 +185,7 @@ class Competition extends AbstractModel{
     public static function fetchAll(): array {
         $competitions = array();
         $connection = new DatabaseConnection();
-        $stmt = $connection->getConnection()->prepare("SELECT idCompetition FROM competition");
+        $stmt = $connection->getConnection()->prepare("SELECT idCompetition FROM competition ORDER BY startDateTimeCompetition ASC");
         $stmt->execute();
         foreach($stmt->fetchAll() as $res)
             array_push($competitions, new Competition($res["idCompetition"]));

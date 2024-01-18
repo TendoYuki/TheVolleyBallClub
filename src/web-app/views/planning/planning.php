@@ -24,6 +24,18 @@
         use Models\Training;
 
         (new Navbar(NavbarEntry::planning))->display();
+        function dateToDayAndMonth($date) {
+            $formatter = new IntlDateFormatter(
+                'fr_FR',
+                IntlDateFormatter::LONG,
+                IntlDateFormatter::NONE,
+                'Europe/Paris'
+            );
+            $date_f = $formatter->format($date);
+            $date_formatted = substr($date_f,0, strlen($date_f)-4);
+            $parts = explode(" ", $date_formatted);
+            return $parts[0]." ".ucfirst($parts[1]);
+        }
     ?>
     <div class="planning-page">
         <div class="planning-section left">
@@ -42,7 +54,7 @@
                                     continue;
                                 $s_date_time = new DateTime("@".$competition->getStartDateTime());
                                 $e_date_time = new DateTime("@".$competition->getEndDateTime());
-                                $day = $s_date_time->format('j F');
+                                $day = dateToDayAndMonth($s_date_time);
                                 $start_h = $s_date_time->format('H\hi');
                                 $end_h = $e_date_time->format('H\hi');
                                 $id = $competition->getId();
@@ -79,7 +91,7 @@
                                     continue;
                                 $s_date_time = new DateTime("@".$training->getStartDateTime());
                                 $e_date_time = new DateTime("@".$training->getEndDateTime());
-                                $day = $s_date_time->format('j F');
+                                $day = dateToDayAndMonth($s_date_time);
                                 $start_h = $s_date_time->format('H\hi');
                                 $end_h = $e_date_time->format('H\hi');
                                 $id = $training->getId();
@@ -116,7 +128,7 @@
                                     continue;
                                 $s_date_time = new DateTime("@".$event->getStartDateTime());
                                 $e_date_time = new DateTime("@".$event->getEndDateTime());
-                                $day = $s_date_time->format('j F');
+                                $day = dateToDayAndMonth($s_date_time);
                                 $start_h = $s_date_time->format('H\hi');
                                 $end_h = $e_date_time->format('H\hi');
                                 $id = $event->getId();

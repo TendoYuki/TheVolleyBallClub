@@ -25,6 +25,18 @@ class Partner extends AbstractModel{
     public static function fetch($id): Partner{
         return new Partner($id);
     }
+    /**
+     * @return Partner[] List of all partners
+     */
+    public static function fetchAll(): array{
+        $partners = array();
+        $connection = new DatabaseConnection();
+        $stmt = $connection->getConnection()->prepare("SELECT idPartner FROM partner");
+        $stmt->execute();
+        foreach($stmt->fetchAll() as $res)
+            array_push($partners, new Partner($res["idPartner"]));
+        return $partners;
+    }
 
     public function getId() {
         return $this->id;

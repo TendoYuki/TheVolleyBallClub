@@ -180,7 +180,7 @@
                     <div class="form-section">
                         <div class="form-section-field">
                             <div class="field policies-field">
-                                <label for="policies-field">Je confirme avoir lu et accepté les <a href="/eula">CGUs</a> ainsi que notre <a href="/privacy">Politique de confidentialité</a></label>
+                                <label for="policies-field">Je confirme avoir lu et accepté les <a href="/eula" target="_blank">CGUs</a> ainsi que notre <a href="/privacy" target="_blank">Politique de confidentialité</a></label>
                                 <input
                                     type="checkbox"
                                     name="policies-field"

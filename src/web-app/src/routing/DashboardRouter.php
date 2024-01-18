@@ -34,6 +34,7 @@ class DashboardRouter extends AbstractRouter{
         $this->newRoute('/profile/edit-password/submit', '@Controllers/AdminController.php', AuthorizationLevel::Admin);
 
         $this->newRoute('/documents/validate', '@Controllers/UserController.php', AuthorizationLevel::Admin);
+        $this->newRoute('/documents/download', '@Views/dashboard/user/download.php', AuthorizationLevel::Admin);
         $this->newRoute('/competitions', '@Views/dashboard/admin/competitions/competitions.php', AuthorizationLevel::Admin);
         $this->newRoute('/competitions/validate', '@Controllers/UserController.php', AuthorizationLevel::Admin);
 

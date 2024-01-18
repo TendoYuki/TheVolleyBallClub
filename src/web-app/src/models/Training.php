@@ -136,7 +136,7 @@ class Training extends AbstractModel{
     public static function fetchAll(): array {
         $trainings = array();
         $connection = new DatabaseConnection();
-        $stmt = $connection->getConnection()->prepare("SELECT idTraining FROM training");
+        $stmt = $connection->getConnection()->prepare("SELECT idTraining FROM training ORDER BY startDateTimeTraining ASC");
         $stmt->execute();
         foreach($stmt->fetchAll() as $res)
             array_push($trainings, new Training($res["idTraining"]));

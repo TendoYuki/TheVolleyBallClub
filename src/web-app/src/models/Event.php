@@ -137,7 +137,7 @@ class Event extends AbstractModel{
     public static function fetchAll(): array {
         $events = array();
         $connection = new DatabaseConnection();
-        $stmt = $connection->getConnection()->prepare("SELECT idEvent FROM event");
+        $stmt = $connection->getConnection()->prepare("SELECT idEvent FROM event ORDER BY startDateTimeEvent ASC");
         $stmt->execute();
         foreach($stmt->fetchAll() as $res)
             array_push($events, new Event($res["idEvent"]));
