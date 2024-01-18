@@ -47,6 +47,12 @@
                     color: white;
                 }
             }
+            textarea {
+                color: grey;
+                &:not(:invalid) {
+                    color: white;
+                }
+            }
             &.policies-field {
                 display: flex;
                 flex-direction: column;

@@ -1,0 +1,35 @@
+@import "@Styles/abstracts";
+
+.contact-page{
+    width: 100%;
+    padding: 2rem;
+    >.bento-box{
+        margin: 0 auto;
+        max-width: 50rem;
+    }
+}
+
+.contact-form{
+    @import "@Styles/components/form";
+    display: flex;
+    flex-direction: column;
+    h2{
+        margin-top: 2rem;
+        margin-bottom: 0.5rem;
+    }
+    .form-section{
+        display: flex;
+        justify-content: flex-start;
+        .form-section-field:has(textarea), #message-field {
+            width: 100%;
+            min-height: 10rem;
+            textarea{
+                width: 100%;
+            }
+        }
+    }
+}
+
+#send-action-wrapper{
+    margin-top: 1rem;
+}
