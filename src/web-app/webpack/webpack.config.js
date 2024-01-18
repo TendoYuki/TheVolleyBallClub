@@ -58,7 +58,9 @@ module.exports = {
     },
     optimization: {
         minimizer: [
-            new CssMinimizerPlugin(),
+            new CssMinimizerPlugin({
+                exclude: /vendor/,
+            }),
             new TerserPlugin({
                 test: /\.js(\?.*)?$/i,
             })
