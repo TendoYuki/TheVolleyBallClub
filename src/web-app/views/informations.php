@@ -24,7 +24,7 @@
     <div class="info-page">
         <div class="image-with-text">
             <div class="img-wrapper">
-                <img src="public/img1.jpg" alt="">
+                <img src="public/4.jpg" alt="">
             </div>
             <h1>Notre Histoire</h1>
         </div>
@@ -50,7 +50,7 @@
 
         <div class="image-with-text left">
             <div class="img-wrapper">
-                <img src="public/2.png" alt="">
+                <img src="public/2.jpg" alt="">
             </div>
             <h1>Legal</h1>
         </div>

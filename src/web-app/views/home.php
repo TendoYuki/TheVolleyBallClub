@@ -19,7 +19,7 @@
         use Components\Carrousel\Carrousel;
 
         (new Navbar(NavbarEntry::home))->display();
-        (new Carrousel(["/public/1.png", "/public/2.png", "/public/3.png"]))->display();
+        (new Carrousel(["/public/1.jpg", "/public/2.jpg", "/public/3.jpg"]))->display();
 
     ?>
 
