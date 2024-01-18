@@ -1,5 +1,17 @@
 # Web app for volleyball club
 
+## Installing dependencies
+
+```bash
+composer install
+```
+
+## Testing
+
+```bash
+npm run test
+```
+
 ## Building
 
 Install necessary packages

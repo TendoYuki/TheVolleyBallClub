@@ -4,8 +4,8 @@
 
 Le projet est séparé en deux modules disctincs
 
-- (1) Administrateur
-- (2) Site web.
+- [(1) Administrateur](./src/admin-app/README.md)
+- [(2) Site web.](./src/web-app/README.md)
 
 Le code source ainsi que les tests sont trouvables dans le sous dossier "src" des deux modules respectifs.
 
