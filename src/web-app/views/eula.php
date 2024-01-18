@@ -18,7 +18,7 @@
         use Components\Navigation\Navbar\Navbar;
         use Components\Navigation\Navbar\NavbarEntry;
 
-        (new Navbar(NavbarEntry::home))->display();
+        (new Navbar(NavbarEntry::informations))->display();
 
     ?>
     <div class="text-page">
