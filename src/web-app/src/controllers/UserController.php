@@ -9,6 +9,7 @@ use Exceptions\DisplayableException;
 use Cryptography\PasswordManager;
 use Controllers\AbstractController;
 use Exceptions\InvalidPasswordException;
+use Models\Competition;
 use Models\IdCard;
 use Models\MedicalCertificate;
 use Validation\AccountValidator;
@@ -138,6 +139,13 @@ class UserController extends AbstractController implements IRequestHandler{
         );
     }
 
+    public static function handleParticipationValidation() {
+        Competition::fetch($_GET['competition'])->setParticipationValidation(
+            $_GET['user'],
+            $_GET['action'] == "validateParticipation" ? true : ($_GET['action'] == "invalidateParticipation" ? false : null)
+        );
+    }
+
     public static function update() {
         try {
             $user = User::fetch($_POST['id-field']);
@@ -253,6 +261,15 @@ class UserController extends AbstractController implements IRequestHandler{
                         ) UserController::handleIdCardValidation();    
                         break;
                 }   
+                break;
+            case 'validateParticipation':
+            case 'invalidateParticipation':
+                // Validate only if the user requesting the edition is the admin
+                if(
+                    isset($_SESSION['adminConnect'])
+                ) UserController::handleParticipationValidation();    
+                break;
+
         }
     }
     public static function redirect() {

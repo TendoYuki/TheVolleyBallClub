@@ -29,7 +29,7 @@ class Competition extends AbstractModel{
         $this->max_participant_competition = $competition["maxParticipantCompetition"];
 
         // Fetches all the users participating to the competition
-        $stmt = $this->getConnection()->prepare('SELECT * FROM user_has_competition WHERE Competition_idCompetition=?');
+        $stmt = $this->getConnection()->prepare('SELECT * FROM user_has_competition WHERE Competition_idCompetition=? AND validation="1"');
         $stmt->bindValue(1, $id);
         $stmt->execute();
         $participants = $stmt->fetchAll();
@@ -55,9 +55,55 @@ class Competition extends AbstractModel{
         $stmt->bindValue(2, $this->id);
         $stmt->execute();
 
+        return true;
+    }
+
+    /**
+     * Sets if the given user's application was either validated or invalidated
+     * @param bool $validation If true, application is valid, else false
+     * @param int $id Id of the user
+     */
+    public function setParticipationValidation(int $id, bool $validation) {
+        if($this->hasExpired()) return false;
+
+        $stmt = $this->getConnection()->prepare(
+            'UPDATE user_has_competition 
+            SET `validation`=b?
+            WHERE User_idUser=? AND Competition_idCompetition=?'
+        );
+        $stmt->bindValue(1, $validation);
+        $stmt->bindValue(2, $id);
+        $stmt->bindValue(3, $this->id);
+        $stmt->execute();
+
         // Adds the participant to the participants array
         array_push($this->participants, $id);
-        return true;
+    }
+
+    /**
+     * Returns a list of user'ids that want to participate
+     * to the competition but the application wasn't reviewed yet
+     * @return int[] Array of user id
+     */
+    public function getAllUnreviewedApplications() {
+        if($this->hasExpired()) return array();
+
+        $stmt = $this->getConnection()->prepare(
+            'SELECT User_idUser FROM user_has_competition WHERE validation IS NULL AND Competition_idCompetition=?'
+        );
+        $stmt->bindParam(1, $this->id);
+        $stmt->execute();
+        $ret = array();
+        foreach($stmt->fetchAll() as $entry) array_push($ret, $entry["User_idUser"]);
+        return $ret;
+    }
+
+    /**
+     * Returns all ids of the participants
+     * @return int[]
+     */
+    public function getParticipantsIds() {
+        return $this->participants;
     }
 
     /**

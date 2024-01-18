@@ -49,7 +49,11 @@ use Models\User;
                                         $competitions = Competition::fetchAll();
                                         $has_displayed = false;
                                         foreach ($competitions as $competition) {
-                                            if($competition->hasPassed() || !$user->isParticipatingToCompetition($competition->getId()))
+                                            if(
+                                                $competition->hasPassed() ||
+                                                !$user->isParticipatingToCompetition($competition->getId()) ||
+                                                !in_array($user->getId(), $competition->getParticipantsIds())
+                                            )
                                                 continue;
 
                                             $has_displayed = true;
