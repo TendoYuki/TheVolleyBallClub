@@ -2,7 +2,7 @@
 
 ## Site web
 
-Le site web est fonctionnel et sera disponible à cette addresse
+Le site web est fonctionnel et sera disponible à cette addresse à partir du 20/01/2023
 
 [thevolleyballclub.ddns.net](http://thevolleyballclub.ddns.net)
 
